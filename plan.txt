@@ -1,0 +1,49 @@
+# structure
+Perhaps this's project structure should look like this 
+
+/forum-website
+│
+├── /public
+│   ├── index.php            # Main entry point
+│   ├── login.php            # User login page
+│   ├── register.php         # User registration page
+│   ├── post.php             # View individual post
+│   ├── create_post.php      # Create new post
+│   └── /assets              # CSS, JS, images
+│       ├── style.css
+│       └── script.js
+│
+├── /controllers
+│   ├── UserController.php   # Handles user login, registration
+│   ├── PostController.php   # Handles creating, editing, viewing posts
+│   └── CommentController.php# Handles comments on posts
+│
+├── /models
+│   ├── User.php             # User model
+│   ├── Post.php             # Post model
+│   └── Comment.php          # Comment model
+│
+├── /views
+│   ├── header.php           # Common header
+│   ├── footer.php           # Common footer
+│   ├── home.php             # Home page view
+│   ├── login.php            # Login form
+│   ├── register.php         # Registration form
+│   ├── post_view.php        # View a post with comments
+│   └── create_post.php      # Form to create new post
+│
+├── /includes
+│   ├── config.php           # Database configuration
+│   └── functions.php        # Helper functions
+│
+├── /database
+│   ├── db.php               # Database connection file
+│   └── migrations.sql       # SQL file to create tables
+│
+└── /uploads                 # User-uploaded files (e.g., images)
+
+Futher more I need to create a well designed database.
+
+1. User
+2. 
+
