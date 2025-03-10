@@ -51,3 +51,14 @@ CREATE TABLE Votes (
     FOREIGN KEY (comment_id) REFERENCES Comments(comment_id),
     CHECK ((post_id IS NOT NULL AND comment_id IS NULL) OR (post_id IS NULL AND comment_id IS NOT NULL))
 );
+
+INSERT INTO Modules (module_name) VALUES ('General');
+
+INSERT INTO Users (username, email, password) VALUES ('firstuser', 'firstuser@example.com', 'password123');
+
+INSERT INTO Posts (user_id, module_id, title, content) VALUES (
+    (SELECT user_id FROM Users WHERE username = 'firstuser'),
+    (SELECT module_id FROM Modules WHERE module_name = 'General'),
+    'Testing',
+    'This is a test post.'
+);
