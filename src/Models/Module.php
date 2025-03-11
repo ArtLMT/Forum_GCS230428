@@ -1,42 +1,45 @@
 <?php
-// class Module {
-//     private $pdo;
+class Module {
+    private $moduleId;
+    private $moduleName;
+    private $moduleDescription;
 
-//     public function __construct($pdo) {
-//         $this->pdo = $pdo;
-//     }
+    public function __construct($moduleId, $moduleName, $moduleDescription)
+    {
+        $this->moduleId = $moduleId;
+        $this->moduleName = $moduleName;
+        $this->moduleDescription = $moduleDescription;
+    }
 
-//     // Thêm module mới
-//     public function addModule($module_name) {
-//         $sql = "INSERT INTO Modules (module_name) VALUES (:module_name)";
-//         $stmt = $this->pdo->prepare($sql);
-//         $stmt->bindParam(':module_name', $module_name);
-//         return $stmt->execute();
-//     }
+    public function getModuleId()
+    {
+        return $this->moduleId;
+    }
 
-//     // Lấy danh sách tất cả modules
-//     public function getAllModules() {
-//         $sql = "SELECT * FROM Modules";
-//         $stmt = $this->pdo->query($sql);
-//         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-//     }
+    public function setModuleId($moduleId)
+    {
+        $this->moduleId = $moduleId;
+    }
 
-//     // Lấy module theo ID
-//     public function getModuleById($module_id) {
-//         $sql = "SELECT * FROM Modules WHERE module_id = :module_id";
-//         $stmt = $this->pdo->prepare($sql);
-//         $stmt->bindParam(':module_id', $module_id);
-//         $stmt->execute();
-//         return $stmt->fetch(PDO::FETCH_ASSOC);
-//     }
+    public function getModuleName()
+    {
+        return $this->moduleName;
+    }
 
-//     // Xóa module
-//     public function deleteModule($module_id) {
-//         $sql = "DELETE FROM Modules WHERE module_id = :module_id";
-//         $stmt = $this->pdo->prepare($sql);
-//         $stmt->bindParam(':module_id', $module_id);
-//         return $stmt->execute();
-//     }
-// }
+    public function setModuleName($moduleName)
+    {
+        $this->moduleName = $moduleName;
+    }
+
+    public function getModuleDescription()
+    {
+        return $this->moduleDescription;
+    }
+
+    public function setModuleDescription($moduleDescription)
+    {
+        $this->moduleDescription = $moduleDescription;
+    }
+}
 
 ?>

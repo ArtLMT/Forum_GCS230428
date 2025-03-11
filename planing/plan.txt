@@ -1,3 +1,8 @@
+# Introduction
+I have implemented 2 design pattens into this project:
+- MVC for visualbility
+- DAO for better CRUD control structure
+
 # structure
 Perhaps this's project structure should look like this 
 
@@ -31,16 +36,15 @@ Perhaps this's project structure should look like this
 │   │   │   ├── PostDAOImpl.php   # Implementation of PostDAO
 │   │   │   ├── CommentDAOImpl.php # Implementation of CommentDAO
 │   │   │   ├── VoteDAOImpl.php   # Implementation of VoteDAO
-│   │── index.php           # Entry point
+│   ├── /views
+│       ├── 
+│   ├── index.php           # Entry point
 ├── /config
 │   ├── Database.php    # Handles PDO connection
 │   ├── queries.sql     # Store SQL queries
 
 
-Futher more I need to create a well designed database.
 
-1. User
-2. 
 
 
 

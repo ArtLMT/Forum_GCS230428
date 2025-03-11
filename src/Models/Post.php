@@ -1,54 +1,107 @@
 <?php
-// require_once __DIR__ . "/Database.php";
+class Post {
 
-// class Post {
-//     private $pdo;
+    // Atributes
+    private $pdo;
+    private $postId;
+    private $title;
+    private $content;
+    private $voteScore;
+    private $userId;
+    private $moduleId;
+    private $timestamp;
+    private $updatedTimestamp;
 
-//     public function __construct() {
-//         $this->conn = Database::getInstance()->getConnection();
-//     }
+    // Methods
 
-//     public function createPost($userId, $moduleId, $title, $content) {
-//         $sql = "INSERT INTO Posts (user_id, module_id, title, content) VALUES (:user_id, :module_id, :title, :content)";
-//         $stmt = $this->conn->prepare($sql);
-//         return $stmt->execute([
-//             'user_id' => $userId, 
-//             'module_id' => $moduleId, 
-//             'title' => $title, 
-//             'content' => $content
-//         ]);
-//     }
+    // Constructor
+    public function __construct($postId, $title, $content, $voteScore, $userId, $moduleId, $timestamp, $updatedTimestamp) 
+    {
+        $this->postId = $postId;
+        $this->title = $title;
+        $this->content = $content;
+        $this->voteScore = $voteScore;
+        $this->userId = $userId;
+        $this->moduleId = $moduleId;
+        $this->timestamp = $timestamp;
+        $this->updatedTimestamp = $updatedTimestamp;
+    }
 
-//     public function getAllPosts() {
-//         $sql = "SELECT * FROM Posts ORDER BY create_date DESC";
-//         $stmt = $this->conn->query($sql);
-//         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-//     }
+    // Getters and Setters
 
-//     public function getPostById($postId) {
-//         $sql = "SELECT * FROM Posts WHERE post_id = :post_id";
-//         $stmt = $this->conn->prepare($sql);
-//         $stmt->execute(['post_id' => $postId]);
-//         return $stmt->fetch(PDO::FETCH_ASSOC);
-//     }
-// }
+    public function getPostId() 
+    {
+        return $this->postId;
+    }
 
-try {
-    include '../Database/dataBaseConnection.php';
+    public function setPostId($postId) 
+    {
+        $this->postId = $postId;
+    }
 
-    $sql = 'SELECT post_id, title, content, create_date FROM posts';
+    public function getTitle() 
+    {
+        return $this->title;
+    }
 
-    $posts = $pdo->query($sql);
-    $title = 'Post list';
+    public function setContent($content) 
+    {
+        $this->content = $content;
+    }
 
-    ob_start();
-    include '../Views/postList.html.php';
-    $output = ob_get_clean();
-} catch (PDOExepction $e) {
-    $title = 'An error has occured';
-    $output = 'Database Eror: ' . $e->getMessage();
+    public function getContent() 
+    {
+        return $this->content;
+    }
 
+    public function getVoteScore() 
+    {
+        return $this->voteScore;
+    }
+
+    public function setVoteScore($voteScore) 
+    {
+        $this->voteScore = $voteScore;
+    }
+
+    public function getUserId() 
+    {
+        return $this->userId;
+    }
+
+    public function setUserId($userId) 
+    {
+        $this->userId = $userId;
+    }
+
+    public function getModuleId() 
+    {
+        return $this->moduleId;
+    }
+
+    public function setModuleId($moduleId) 
+    {
+        $this->moduleId = $moduleId;
+    }
+
+    public function getTimestamp() 
+    {
+        return $this->timestamp;
+    }
+
+    public function setTimestamp($timestamp) 
+    {
+        $this->timestamp = $timestamp;
+    }
+
+    public function getUpdatedTimestamp() 
+    {
+        return $this->updatedTimestamp;
+    }
+
+    public function setUpdatedTimestamp($updatedTimestamp) 
+    {
+        $this->updatedTimestamp = $updatedTimestamp;
+    }
 }
-
-include '../Views/layout.html.php';
 ?>

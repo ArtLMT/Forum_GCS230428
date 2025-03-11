@@ -52,6 +52,8 @@ CREATE TABLE Votes (
     CHECK ((post_id IS NOT NULL AND comment_id IS NULL) OR (post_id IS NULL AND comment_id IS NOT NULL))
 );
 
+
+-- Add some data to test
 INSERT INTO Modules (module_name) VALUES ('General');
 
 INSERT INTO Users (username, email, password) VALUES ('firstuser', 'firstuser@example.com', 'password123');
