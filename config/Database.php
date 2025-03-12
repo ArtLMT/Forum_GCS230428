@@ -1,4 +1,6 @@
 <?php
+namespace config;
+
 class Database {
     private $host = "localhost";
     private $db_name = "forum";

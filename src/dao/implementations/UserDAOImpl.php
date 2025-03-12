@@ -1,4 +1,6 @@
 <?php
+namespace src\dao\implementations;
+
 require_once __DIR__ . "/../../config/Database.php";
 require_once __DIR__ . "/../interfaces/UserDAO.php";
 require_once __DIR__ . "/../../models/User.php";
@@ -10,7 +12,7 @@ class UserDAOImpl implements UserDAO {
         $this->pdo = Database::getConnection(); // Use Database connection
     }
 
-    public function createUser(User $user) 
+    public function createUser($username, $password, $email) 
     {
 
     }
@@ -25,7 +27,7 @@ class UserDAOImpl implements UserDAO {
 
     }
 
-    public function updateUser(User $user) 
+    public function updateUser($userId, $username, $password, $email) 
     {
 
     }

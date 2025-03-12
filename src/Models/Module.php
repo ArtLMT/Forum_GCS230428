@@ -1,4 +1,6 @@
 <?php
+namespace src\models;
+
 class Module {
     private $moduleId;
     private $moduleName;

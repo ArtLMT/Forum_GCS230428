@@ -1,4 +1,6 @@
 <?php
+namespace src\models;
+
 class Post {
 
     // Atributes

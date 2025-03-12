@@ -6,45 +6,42 @@ I have implemented 2 design pattens into this project:
 # structure
 Perhaps this's project structure should look like this 
 
-/forum-website 
-├── /public
-│   ├── /assets
-│   │   ├── /css
-│   │   │   ├── style.css
-│   │   ├── /js
-│   │       ├── script.js
-│   │       ├── validation.js
-├── /src
-│   ├── /controllers
-│   │   ├── PostController
-│   │   ├── CommentController
-│   │   ├── ModuleController
-│   │   ├── AuthController
-│   ├── /models
-│   │   ├── User.php        # User model
-│   │   ├── Post.php        # Post model
-│   │   ├── Comment.php     # Comment model
-│   │   ├── Vote.php        # Vote model
-│   ├── /dao
-│   │   ├── /interfaces
-│   │   │   ├── UserDAO.php       # Interface for User DAO
-│   │   │   ├── PostDAO.php       # Interface for Post DAO
-│   │   │   ├── CommentDAO.php    # Interface for Comment DAO
-│   │   │   ├── VoteDAO.php       # Interface for Vote DAO
-│   │   ├── /implementations
-│   │   │   ├── UserDAOImpl.php   # Implementation of UserDAO
-│   │   │   ├── PostDAOImpl.php   # Implementation of PostDAO
-│   │   │   ├── CommentDAOImpl.php # Implementation of CommentDAO
-│   │   │   ├── VoteDAOImpl.php   # Implementation of VoteDAO
-│   ├── /views
-│       ├── 
-│   ├── index.php           # Entry point
-├── /config
-│   ├── Database.php    # Handles PDO connection
-│   ├── queries.sql     # Store SQL queries
+    /forum-website 
+    ├── /public
+    │   ├── /assets
+    │   │   ├── /css
+    │   │   │   ├── style.css
+    │   │   ├── /js
+    │   │       ├── script.js
+    │   │       ├── validation.js
+    │   ├── index.php
+    ├── /src
+    │   ├── /controllers
+    │   │   ├── PostController
+    │   │   ├── CommentController
+    │   │   ├── ModuleController
+    │   │   ├── AuthController
+    │   ├── /models
+    │   │   ├── User.php        # User model
+    │   │   ├── Post.php        # Post model
+    │   │   ├── Comment.php     # Comment model
+    │   │   ├── Vote.php        # Vote model
+    │   ├── /dao
+    │   │   ├── /interfaces
+    │   │   │   ├── UserDAO.php       # Interface for User DAO
+    │   │   │   ├── PostDAO.php       # Interface for Post DAO
+    │   │   │   ├── CommentDAO.php    # Interface for Comment DAO
+    │   │   │   ├── VoteDAO.php       # Interface for Vote DAO
+    │   │   ├── /implementations
+    │   │   │   ├── UserDAOImpl.php   # Implementation of UserDAO
+    │   │   │   ├── PostDAOImpl.php   # Implementation of PostDAO
+    │   │   │   ├── CommentDAOImpl.php # Implementation of CommentDAO
+    │   │   │   ├── VoteDAOImpl.php   # Implementation of VoteDAO
+    │   ├── /views
+    │       ├── homepage.html.php
+    ├── /config
+    │   ├── Database.php    # Handles PDO connection
+    │   ├── queries.sql     # Store SQL queries
 
 
-
-
-
-
+There's some changes needed in the DB, such as module's description

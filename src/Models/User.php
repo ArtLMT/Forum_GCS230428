@@ -1,4 +1,7 @@
 <?php
+namespace src\models;
+
+
 class User {
     private $pdo;
     private $userId;
