@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum Test</title>
+    <title>Forum</title>
     <!-- Update the path to your actual CSS file -->
     <link rel="stylesheet" href="/Forum/public/assets/style.css">
 </head>
@@ -16,7 +16,7 @@
                 <li><a href="/Forum/public/">Home</a></li>
                 <!-- Link to create a new post -->
                 <li><a href="/Forum/public/create">Create Post</a></li>
-                <!-- Optionally, add more links as needed -->
+
             </ul>
         </nav>
     </header>

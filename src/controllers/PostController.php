@@ -70,7 +70,7 @@ class PostController {
             // Create the post (pass the image path as an extra parameter if needed)
             $this->postDAO->createPost($title, $content, $userId, $moduleId, $imagePath);
     
-            header("Location: /ForumTest/public/");
+            header("Location: /Forum/public/");
             exit();
         } else {
             require_once __DIR__ . '/../views/createPost.html.php';
@@ -132,7 +132,7 @@ class PostController {
             $this->postDAO->updatePost($postId, $title, $content, $moduleId, $imagePath);
     
             // Redirect to home after update
-            header("Location: /ForumTest/public/");
+            header("Location: /Forum/public/");
             exit();
         } else {
             $postId = $_GET['id'] ?? null;
@@ -149,7 +149,7 @@ class PostController {
         $postId = $_GET['id'] ?? null;
         if ($postId) {
             $this->postDAO->deletePost($postId);
-            header("Location: /ForumTest/public/");
+            header("Location: /Forum/public/");
             exit();
         } else {
             echo "Post ID not provided.";

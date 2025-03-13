@@ -76,20 +76,12 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
     {
         $query = "SELECT * FROM posts WHERE post_id = :post_id";
         $stmt = $this->executeQuery($query, [':post_id' => $postId]);
-        // $this->query = "SELECT * FROM posts WHERE post_id = :post_id";
-        // $stmt = $this->pdo->prepare($this->query);
-        // $stmt->bindParam(':post_id', $postId);
-        // $stmt->execute();
         $data = $stmt->fetch(\PDO::FETCH_ASSOC); // array
         return $data ? $this->mapToPost($data) : null; // return object
     }
 
     public function getPostByTitle($title) : array
     {
-        // $this->query = 'SELECT * FROM posts WHERE title = :title';
-        // $stmt = $this->pdo->prepare($this->query);
-        // $stmt->bindParam(':title', $title);
-        // $stmt->execute();
         $query = "SELECT * FROM posts WHERE title = :title";
         $stmt = $this->executeQuery($query, [':title' => $title]);
         $data = $stmt->fetch(\PDO::FETCH_ASSOC); // array
@@ -98,8 +90,6 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
 
     public function deletePost($postId) 
     {
-        // $this->query = "DELETE FROM posts WHERE post_id = :post_id";
-        // $stmt = $this->pdo->prepare($this->query);
         $query = "DELETE FROM posts WHERE post_id = :post_id";
         $stmt = $this->executeQuery($query, [':post_id' => $postId]);
         $stmt->bindParam(':post_id', $postId);
@@ -108,9 +98,6 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
 
     public function getAllPosts() : array
     {
-        // $this->query = "SELECT * FROM posts";
-        // $stmt = $this->pdo->prepare($this->query);
-        // $stmt->execute();
         $query = "SELECT * FROM posts";
         $stmt = $this->executeQuery($query);
 
