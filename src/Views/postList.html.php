@@ -1,9 +1,32 @@
-<?php foreach ($posts as $post): ?>
-    <blockquote>
-        <?=htmlspecialchars($post['content'], ENT_QUOTES, 'UTF-8') ?>
-        At 
-        <?=htmlspecialchars($post['create_date'], ENT_QUOTES,'UTF-8') ?>
+<?php
+ob_start(); // Start output buffering
+?>
 
-    </blockquote>
+<h2>Post List</h2>
 
-<?php endforeach;?>
+<?php if (!empty($posts)) : ?>
+    <ul>
+        <?php foreach ($posts as $post) : ?>
+            <li>
+                <h3><?= htmlspecialchars($post->getTitle()) ?></h3>
+                <p><?= htmlspecialchars($post->getContent()) ?></p>
+                <?php if ($post->getImage()) : ?>
+                    <img src="/Forum/public/<?= htmlspecialchars($post->getImage()) ?>" alt="Post Image" style="max-width:200px;">
+                <?php endif; ?>
+                <br>
+                <small>Posted by User: <?= htmlspecialchars($post->username) ?></small>
+                <a href="/Forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>">Edit</a>
+                <a href="/Forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');">Delete</a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+
+
+<?php else : ?>
+    <p>No posts available.</p>
+<?php endif; ?>
+
+<?php
+$content = ob_get_clean(); // Store the buffered output into $content
+include 'layout.html.php'; // Include the layout
+?>

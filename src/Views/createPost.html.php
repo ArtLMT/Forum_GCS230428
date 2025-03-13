@@ -4,7 +4,7 @@ ob_start(); // Start output buffering
 
 <h2>Create Post</h2>
 
-<form action="/ForumTest/public/create" method="post">
+<form action="/Forum/public/create" method="post" enctype="multipart/form-data">
     <label>Title:</label>
     <input type="text" name="title" required><br>
     
@@ -16,6 +16,9 @@ ob_start(); // Start output buffering
     
     <label>Module ID:</label>
     <input type="number" name="module_id" required><br>
+    
+    <label>Image:</label>
+    <input type="file" name="image"><br>
     
     <input type="submit" value="Create Post">
 </form>

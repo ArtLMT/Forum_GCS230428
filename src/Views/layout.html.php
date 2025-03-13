@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?=$title?></title>
+    <title>Forum Test</title>
+    <!-- Update the path to your actual CSS file -->
+    <link rel="stylesheet" href="/Forum/public/assets/style.css">
 </head>
 <body>
-    <header><h1>Greenwich's forum</h1></header>
-    <nav>
-        <ul>
-            <li><a href="homepage.html.php">Greenwich's forum</a></li>
-            <li>
-                <a href="src/Models/Post.php">List of Posts</a>
-            </li>
-        </ul>
-    </nav>
+    <header>
+        <h1>Welcome to Forum Test</h1>
+        <nav>
+            <ul>
+                <!-- Link to the home route (which shows the post list) -->
+                <li><a href="/Forum/public/">Home</a></li>
+                <!-- Link to create a new post -->
+                <li><a href="/Forum/public/create">Create Post</a></li>
+                <!-- Optionally, add more links as needed -->
+            </ul>
+        </nav>
+    </header>
     <main>
-        <?=$output?>
+        <?php echo $content; ?>
     </main>
     <footer>
-        &copy; IJDB 2023
+        <p>&copy; <?php echo date("Y"); ?> Forum Test. All rights reserved.</p>
     </footer>
 </body>
 </html>

@@ -11,8 +11,14 @@ class User {
     private $timestamp;
     private $updatedTimestamp;
     
-    public function __construct($userId, $username, $password, $email, $timestamp, $updatedTimestamp) 
-    {
+    public function __construct(
+        $userId = null, 
+        $username,  // Required
+        $password,  // Required
+        $email,  // Required
+        $timestamp = null,
+        $updatedTimestamp = null
+    ) {
         $this->userId = $userId;
         $this->username = $username;
         $this->password = $password;
