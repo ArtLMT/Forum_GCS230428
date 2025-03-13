@@ -45,3 +45,16 @@ Perhaps this's project structure should look like this
 
 
 There's some changes needed in the DB, such as module's description
+
+This project will use DAO design pattens to help in CRUD
+The work flow shall be like this
+
+Router -> receive request and locate it to the method in controllers
+Controllers -> Act like the middleman between the Views and DAO (db logic)
+DAOImpl -> Interact with the database  to fetch and modify database
+Model -> represent a object, holding the data retrieved from the database
+
+
+fetch(PDO::FETCH_ASSOC); // Returns associative array (column names as keys)
+fetch(PDO::FETCH_OBJ);   // Returns an object (column names as properties)
+fetch(PDO::FETCH_NUM);   // Returns a numeric array (column indexes as keys)

@@ -1,5 +1,5 @@
 <?php
-namespace src\dao\interfaces;
+namespace src\dal\interfaces;
 
 interface UserDAO {
     public function createUser(user $user); // This function is more flexible than the one below, as it accepts a user object as a parameter

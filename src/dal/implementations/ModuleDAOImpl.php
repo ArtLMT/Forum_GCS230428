@@ -1,9 +1,9 @@
 <?php
-namespace src\dao\implementations;
+namespace src\dal\implementations;
 
-require_once __DIR__ . "/../../config/Database.php";
-require_once __DIR__ . "/../interfaces/ModuleDAO.php";
-require_once __DIR__ . "/../../models/Module.php";
+use src\config\Database;
+use src\dal\interfaces\ModuleDAO;
+use src\models\Module;
 
 class ModuleDAOImpl implements ModuleDAO {
     private $pdo;

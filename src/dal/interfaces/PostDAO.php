@@ -1,5 +1,5 @@
 <?php
-namespace src\dao\interfaces;
+namespace src\dal\interfaces;
 
 interface PostDAO {
     public function createPost($title, $content, $userId, $moduleId);

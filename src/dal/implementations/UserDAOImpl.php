@@ -1,9 +1,9 @@
 <?php
-namespace src\dao\implementations;
+namespace src\dal\implementations;
 
-require_once __DIR__ . "/../../config/Database.php";
-require_once __DIR__ . "/../interfaces/UserDAO.php";
-require_once __DIR__ . "/../../models/User.php";
+use src\dal\interfaces\UserDAO;
+use src\config\Database;
+use src\models\User;
 
 class UserDAOImpl implements UserDAO {
     private $pdo;

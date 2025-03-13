@@ -1,5 +1,5 @@
 <?php
-namespace src\dao\interfaces;
+namespace src\dal\interfaces;
 
 interface ModuleDAO {
     public function createModule($moduleName, $moduleDescription);

@@ -1,5 +1,5 @@
 <?php
-namespace src\dao\interfaces;
+namespace src\dal\interfaces;
 
 class CommentDAO {
     public function createComment($content, $userId, $postId);

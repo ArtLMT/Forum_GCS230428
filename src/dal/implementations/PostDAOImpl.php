@@ -9,6 +9,7 @@ class PostDAOImpl implements PostDAO {
     private $pdo;
     private $post;
 
+
     public function __construct() {
         $this->pdo = Database::getConnection();
         $this->post = new Post();
