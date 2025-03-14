@@ -75,8 +75,7 @@ class PostController {
         } else {
             require_once __DIR__ . '/../views/createPost.html.php';
         }
-    }
-    
+    }  
 
     // Show a form for updating a post and handle submission.
     public function update() {

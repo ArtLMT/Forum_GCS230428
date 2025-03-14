@@ -14,11 +14,13 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
 
     public function createUser($username, $password, $email) 
     {
+        // Hash the password before storing it using password_hash() with standard crypt()
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $query = "INSERT INTO users (username, password, email) 
                 VALUES (:username, :password, :email)";
         $params = [
             ':username' => $username,
-            ':password' => $password,
+            ':password' => $hasedPassword,
             ':email'    => $email,
         ];
         $this->executeQuery($query, $params);
@@ -46,6 +48,7 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
 
     public function updateUser($userId, $username, $password, $email) 
     {
+        $hasedPassword = password_hash($password, PASSWORD_BCRYPT);
         $query = "UPDATE users
                   SET username = :username,
                       password = :password,
@@ -53,7 +56,7 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
                   WHERE user_id = :user_id";
         $params = [
             ':username' => $username,
-            ':password' => $password,
+            ':password' => $hasdPassword,
             ':email'    => $email,
             ':user_id'  => $userId,
         ];
@@ -74,6 +77,27 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         $stmt = $this->executeQuery($query, $params);
         $username = $stmt->fetch();
         return $username['username'];
+    }
+
+    public function getPassword($userId) : string
+    {
+        $query = "SELECT password FROM users WHERE user_id = :user_id";
+        $params = [':user_id' => $userId];
+        $stmt = $this->executeQuery($query, $params);
+        $password = $stmt->fetch();
+        return $password['password']; // Return hasded password
+    }
+
+    public function getAllUsers() : array
+    {
+        $query = "SELECT * FROM users";
+        $stmt = $this->executeQuery($query);
+        $rows = $stmt->fetchAll();
+        $users = [];
+        foreach ($rows as $row) {
+            $users[] = new User($row['user_id'], $row['username'], $row['password'], $row['email']);
+        }
+        return $users;
     }
 }
 ?>
