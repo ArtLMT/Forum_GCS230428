@@ -22,11 +22,11 @@ class Router {
         // Get the request URI and trim leading/trailing slashes.
         $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
     
-        // For example, if REQUEST_URI is "/ForumTest/public/index.php",
-        // after trim() it becomes "ForumTest/public/index.php"
+        // For example, if REQUEST_URI is "/forum/public/index.php",
+        // after trim() it becomes "forum/public/index.php"
     
         // Define the base path (adjust if necessary)
-        $basePath = 'Forum/public';
+        $basePath = 'forum/public';
         
         // If the URI starts with the base path, remove it.
         if (strpos($uri, $basePath) === 0) {
@@ -39,8 +39,8 @@ class Router {
              $uri = '';
         }
         
-        // // Debug output: show the final computed URI.
-        // echo "<pre>Dispatching URI: '$uri'</pre>";
+        // Debug output: show the final computed URI.
+        echo "<pre>Dispatching URI: '$uri'</pre>";
     
         // Look up the route based on method and URI.
         if (isset($this->routes[$method][$uri])) {
@@ -61,8 +61,4 @@ class Router {
              echo "404 Not Found - URI: '$uri'";
         }
     }
-    
-    
-    
-    
 }

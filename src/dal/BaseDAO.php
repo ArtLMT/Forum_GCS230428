@@ -17,6 +17,5 @@ abstract class BaseDAO {
         $stmt->execute($params);
         return $stmt;
     }
-
 }
 ?>

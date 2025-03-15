@@ -2,7 +2,7 @@
 ob_start();
 ?>
 <h2>Update Post</h2>
-<form action="/Forum/public/update" method="post" enctype="multipart/form-data">
+<form action="/forum/public/update" method="post" enctype="multipart/form-data">
     <!-- Hidden field for post ID -->
     <input type="hidden" name="post_id" value="<?= htmlspecialchars($post->getPostId()) ?>">
 
@@ -18,7 +18,7 @@ ob_start();
     <!-- Display current image (if exists) -->
     <?php if ($post->getImage()) : ?>
         <p>Current Image:</p>
-        <img src="/Forum/public/<?= htmlspecialchars($post->getImage()) ?>" alt="Current Image" style="max-width:200px;"><br>
+        <img src="/forum/public/<?= htmlspecialchars($post->getImage()) ?>" alt="Current Image" style="max-width:200px;"><br>
         <!-- Option to remove image -->
         <label>
             <input type="checkbox" name="remove_image" value="1">

@@ -6,9 +6,9 @@ use src\dal\implementations\PostDAOImpl;
 use src\dal\implementations\ModuleDAOImpl;
 
 class Validation {
-    private static ?UserDAOImpl $userDAO = null;
-    private static ?PostDAOImpl $postDAO = null;
-    private static ?ModuleDAOImpl $moduleDAO = null;
+    private static ?UserDAOImpl $userDAO = null; // nullable type
+    private static ?PostDAOImpl $postDAO = null; // nullable type
+    private static ?ModuleDAOImpl $moduleDAO = null; // nullable type
 
     private static function init()
     {

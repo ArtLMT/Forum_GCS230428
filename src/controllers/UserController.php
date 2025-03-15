@@ -13,6 +13,7 @@ class UserController {
 
     public function listUsers() {
         $users = $this->userDAO->getAllUsers();
+        // Note 1: The views haven;t been created yet, so this will throw an error.
         require_once __DIR__ . '/../views/userList.html.php';
     }
 
@@ -24,7 +25,7 @@ class UserController {
             $this->userDAO->createUser($username, $password, $email);
             header("Location: /Forum/public/");
         } else {
-            // Need to change
+            // Note 1: The views haven;t been created yet, so this will throw an error.
             require_once __DIR__ . '/../views/userForm.html.php';
         }
     }
@@ -40,6 +41,7 @@ class UserController {
         } else {
             $userId = $_GET['user_id'];
             $user = $this->userDAO->getUserById($userId);
+            // Note 1: The views haven;t been created yet, so this will throw an error.
             require_once __DIR__ . '/../views/userForm.html.php';
         }
     }
@@ -63,6 +65,7 @@ class UserController {
                 echo "Invalid username or password.";
             }
         } else {
+            // Note 1: The views haven;t been created yet, so this will throw an error.
             require_once __DIR__ . '/../views/loginForm.html.php';
         }
     }
