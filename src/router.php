@@ -40,7 +40,7 @@ class Router {
         }
         
         // Debug output: show the final computed URI.
-        echo "<pre>Dispatching URI: '$uri'</pre>";
+        // echo "<pre>Dispatching URI: '$uri'</pre>";
     
         // Look up the route based on method and URI.
         if (isset($this->routes[$method][$uri])) {

@@ -94,6 +94,7 @@ class PostController {
             $content  = $_POST['content'];
             $moduleId = $_POST['module_id'];
 
+            // Avoid nesting if statements
             if (!Validation::checkPostById($postId)) {
                 echo "Error: Invalid Post ID.";
                 return;

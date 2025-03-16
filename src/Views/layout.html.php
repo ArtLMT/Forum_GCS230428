@@ -4,32 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forum</title>
-    <!-- Update the path to your actual CSS file -->
-    <link rel="stylesheet" href="/Forum/public/assets/style.css">
+    <link rel="stylesheet" href="/forum/public/assets/css/reset.css">
+    <link rel="stylesheet" href="/forum/public/assets/css/style.css">
 </head>
 <body>
     <header>
-        <nav>
-            <!-- <a class = "nav-home" href="/Forum/public/">Home</a> -->
-            <ul>
-                <!-- Link to the home route (which shows the post list) -->
-                <li><a href="/Forum/public/">Home</a></li>
-                <!-- Link to create a new post -->
-                <li><a href="/Forum/public/create">Create Post</a></li>
-            </ul>
+        <nav> 
+            <a class = "nav-home" href="/forum/public/">Nerds For Nerds</a>
+
+             <p>Search bar</p>
+             <a href="/forum/public/create">Add post</a>
+             <a href="">Modules</a>
+             <a href="">Messages</a>
+             <a href="">Profile</a>
         </form>
         </nav>
         <h1>Welcome to Forum Test</h1>
-
     </header>
     <main>
         <!-- side menu -->
-        <div>
-
+        <div class="side-menu">
+        <p>This is the side menu</p>
+        <a href="" class = "side-menu-content">option_1</a>
+        <a href="" class = "side-menu-content">option_2</a>
+        <a href="" class = "side-menu-content">Feedback</a>
+        <a href="" class = "side-menu-content logout">Logout</a>   
         </div>
         <!-- main content -->
-        <div>
-            <?php echo $content; ?>
+        <div class="content">
+            <div class="post-area">
+                <?php echo $content; ?>
+            </div>
         </div>
     </main>
     <footer>
