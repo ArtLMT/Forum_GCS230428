@@ -59,5 +59,26 @@ class Validation {
         return self::$moduleDAO->getModuleByName($moduleName) ? true : false;
     }
 
+    public static function validateNotEmpty($input) 
+    {
+        return isset($input) && trim($input) !== '';
+    }
+
+    // NOTE 2: Needed explanation for this function
+    public static function validatePassword($password) 
+    {
+        return strlen($password) >= 8 &&
+               preg_match('/[A-Z]/', $password) &&  // At least one uppercase letter
+               preg_match('/[a-z]/', $password) &&  // At least one lowercase letter
+               preg_match('/[0-9]/', $password) &&  // At least one number
+               preg_match('/[\W]/', $password);    // At least one special character
+    }
+    
+    // NOTE 2: Needed explanation for this function
+    public static function sanitizeInput($input) 
+    {
+        return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
+    }
+    
 }
 ?>

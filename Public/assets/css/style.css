@@ -2,11 +2,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
+
 }
 
 html {
     font-size: 62.5%;
     overflow: hidden; /* prevent scroll bar */
+    box-sizing: border-box;
+
 }
 
 /* main navigate bar */
@@ -22,6 +26,8 @@ header nav {
 }
 
 header nav a {
+    border: #ff0000 2px solid;
+    text-align: center;
     height: 80px;
     width: 120px;
     padding: 20px 20px;
@@ -67,7 +73,7 @@ main .side-menu {
 
     font-size: 2rem;
 
-    border: #ff0000 2px solid;
+
 
     background-color: #333;
     color: #fff;
@@ -98,6 +104,8 @@ main .content {
     flex-grow:1;
     display: flex;
     justify-content: center;
+
+    border: #ff0000 2px solid;
 }
 
 main .content .post-area {
@@ -108,7 +116,7 @@ main .content .post-area {
     height: 100%;
     overflow: auto;
     /* padding: 2rem; */
-    border: #ff0000 2px solid;
+
 
 }
 
@@ -127,10 +135,20 @@ main .content .post-area .post {
 }
 
 .post-header {
+    font-size: 1rem;
     display: flex;
+    padding: 1rem;
     flex-direction: row;
     /* width: 100%; */
     margin-bottom: 2rem;
+}
+
+.post-header * {
+    margin-right: 10px;
+}
+
+.post-header h2 {
+    font-size: 3rem;
 }
 
 .post .post-content {
@@ -138,4 +156,5 @@ main .content .post-area .post {
     flex-direction: column;
     text-align: left;
     align-items: center;
+    font-size: 1.5rem;
 }

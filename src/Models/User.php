@@ -10,6 +10,7 @@ class User {
     private $email;
     private $timestamp;
     private $updatedTimestamp;
+    private $image_path;
     
     public function __construct(
         $userId = null, 
@@ -17,7 +18,8 @@ class User {
         $password,  // Required
         $email,  // Required
         $timestamp = null,
-        $updatedTimestamp = null
+        $updatedTimestamp = null,
+        $image_path = null
     ) {
         $this->userId = $userId;
         $this->username = $username;
@@ -25,6 +27,7 @@ class User {
         $this->email = $email;
         $this->timestamp = $timestamp;
         $this->updatedTimestamp = $updatedTimestamp;
+        $this->image_path = $image_path;
     }
 
     public function getUserId() 
@@ -80,6 +83,21 @@ class User {
     public function getUpdatedTimeStamp() 
     {
         return $this->updatedTimestamp;
+    }
+
+    public function setUpdatedTimeStamp($updatedTimestamp) 
+    {
+        $this->updatedTimestamp = $updatedTimestamp;
+    }
+
+    public function getImagePath() 
+    {
+        return $this->image_path;
+    }
+
+    public function setImagePath($image_path) 
+    {
+        $this->image_path = $image_path;
     }
 }
 ?>

@@ -20,11 +20,25 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
                 VALUES (:username, :password, :email)";
         $params = [
             ':username' => $username,
-            ':password' => $hasedPassword,
+            ':password' => $hashedPassword,
             ':email'    => $email,
         ];
         $this->executeQuery($query, $params);
     }
+
+    public function verifyUser($username, $password) : ?User
+    {
+        $query = "SELECT * FROM users WHERE username = :username";
+        $params = [':username' => $username];
+        $stmt = $this->executeQuery($query, $params);
+        $user = $stmt->fetch();
+
+        if ($user && password_verify($password, $user['password'])) {
+            return new User($user['user_id'], $user['username'], $user['password'], $user['email']);
+        }
+        return null; // Return null if authentication fails
+    }
+
 
     // Need to do: Validate and handle if there isn't a user with the given id
     public function getUserById($userId) : User
@@ -99,5 +113,17 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         }
         return $users;
     }
+
+    public function updatePassword($userId, $newPassword) 
+    {
+        $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+        $query = "UPDATE users SET password = :password WHERE user_id = :user_id";
+        $params = [
+            ':password' => $hashedPassword,
+            ':user_id'  => $userId
+        ];
+        $this->executeQuery($query, $params);
+    }
+
 }
 ?>

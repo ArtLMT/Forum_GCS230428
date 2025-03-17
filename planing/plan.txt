@@ -14,19 +14,23 @@ Perhaps this's project structure should look like this
     │   │   ├── /js
     │   │       ├── script.js
     │   │       ├── validation.js
-    │   ├── index.php
+    │   ├── index.php # everything start here
+    │   ├── / utils
+    │       ├── Validation.php # Store validate method, currently only have validate if exits
     ├── /src
+    │   ├── Router.php
     │   ├── /controllers
     │   │   ├── PostController
     │   │   ├── CommentController
     │   │   ├── ModuleController
     │   │   ├── AuthController
-    │   ├── /models
+    │   │   ├── UserController
+    │   ├── /models # only contain getter and setter
     │   │   ├── User.php        # User model
     │   │   ├── Post.php        # Post model
     │   │   ├── Comment.php     # Comment model
     │   │   ├── Vote.php        # Vote model
-    │   ├── /dao
+    │   ├── /dal
     │   │   ├── /interfaces
     │   │   │   ├── UserDAO.php       # Interface for User DAO
     │   │   │   ├── PostDAO.php       # Interface for Post DAO
@@ -37,11 +41,17 @@ Perhaps this's project structure should look like this
     │   │   │   ├── PostDAOImpl.php   # Implementation of PostDAO
     │   │   │   ├── CommentDAOImpl.php # Implementation of CommentDAO
     │   │   │   ├── VoteDAOImpl.php   # Implementation of VoteDAO
+    │   │   ├── BaseDAO.php # Store function to execute sql
     │   ├── /views
-    │       ├── homepage.html.php
+    │       ├── layout.html.php # Layout of the website, have a container for other view file
+    │       ├── postList.html.php # Part of they layout, display all post as default
+    │       ├── updatePost.html.php # UI to edit a post
+    │       ├── loginFrom.html.php # Login page
+    │       ├── signIn.html.php # login page Thí and loginFrom should be similar
     ├── /config
     │   ├── Database.php    # Handles PDO connection
     │   ├── queries.sql     # Store SQL queries
+    ├── autoload.php
 
 
 There's some changes needed in the DB, such as module's description
