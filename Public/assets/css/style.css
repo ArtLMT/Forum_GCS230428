@@ -12,6 +12,11 @@ html {
 
 }
 
+/* Delete this */
+main {
+    font-size: 2rem;
+}
+
 /* main navigate bar */
 header nav {
     position:fixed;

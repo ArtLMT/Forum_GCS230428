@@ -11,8 +11,9 @@
     <header>
         <nav> 
             <a class = "nav-home" href="/forum/public/">Nerds For Nerds</a>
+
              <p>Search bar</p>
-             <a href="/forum/public/create">Add post</a>
+             <a href="/forum/public/createPost">Add post</a>
              <a href="/forum/public/moduleLists">Modules</a>
              <a href="">Messages</a>
              <a href="">Profile</a>

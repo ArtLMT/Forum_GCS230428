@@ -79,7 +79,7 @@ class PostController {
             //  Create the post
             $this->postDAO->createPost($title, $content, $userId, $moduleId, $imagePath);
 
-            header("Location: /Forum/public/");
+            header("Location: /forum/public/");
             exit();
         } else {
             require_once __DIR__ . '/../views/createPost.html.php';
@@ -143,7 +143,7 @@ class PostController {
 
             $this->postDAO->updatePost($postId, $title, $content, $moduleId, $imagePath);
 
-            header("Location: /Forum/public/");
+            header("Location: /forum/public/");
             exit();
         } else {
             $postId = $_GET['id'] ?? null;
@@ -166,7 +166,7 @@ class PostController {
         }
 
         $this->postDAO->deletePost($postId);
-        header("Location: /Forum/public/");
+        header("Location: /forum/public/");
         exit();
     }
 }

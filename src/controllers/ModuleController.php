@@ -43,4 +43,61 @@ class ModuleController {
 
         require_once __DIR__ . '/../views/moduleLists.html.php';
     }
+
+    public function store()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $moduleName = $_POST['module_name'];
+            $moduleDescription = $_POST['module_description'];
+
+            $this->createModule($moduleName, $moduleDescription);
+            header('Location: /forum/public/moduleLists');
+            exit();
+        }
+
+        require_once __DIR__ . '/../views/createModule.html.php';
+    }
+
+    public function delete ()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $moduleId = $_POST['module_id'];
+            $this->moduleDAO->deleteModule($moduleId);
+            
+            header("Location: /forum/public/");
+            exit();
+        }
+
+        // require_once __DIR__ . '/../views/deleteModule.html.php';
+    }
+
+    // public function update()
+    // {
+    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //         $moduleId = $_POST['module_id'];
+    //         $moduleName = $_POST['module_name'];
+    //         $moduleDescription = $_POST['module_description'];
+
+    //         $moduleDAO->updateModule($moduleId, $moduleName, $moduleDescription);
+    //     }
+    // }
+    public function update()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $moduleId = $_POST['module_id'];
+            $moduleName = $_POST['module_name'];
+            $moduleDescription = $_POST['module_description'];
+
+            // Corrected line: Use $this->moduleDAO instead of $moduleDAO
+            $this->moduleDAO->updateModule($moduleId, $moduleName, $moduleDescription);
+
+            // Redirect after update
+            header("Location: /forum/public/moduleLists");
+            exit();
+        }
+
+        // Optionally, load the update form if needed
+        // require_once __DIR__ . '/../views/updateModule.html.php';
+    }
+
 }

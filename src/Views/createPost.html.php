@@ -4,7 +4,7 @@ ob_start(); // Start output buffering
 
 <h2>Create Post</h2>
 
-<form action="/Forum/public/create" method="post" enctype="multipart/form-data">
+<form action="/forum/public/createPost" method="post" enctype="multipart/form-data">
     <label>Title:</label>
     <input type="text" name="title" required><br>
     

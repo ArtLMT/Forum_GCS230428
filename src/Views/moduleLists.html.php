@@ -4,6 +4,7 @@ ob_start(); // Start output buffering
 
 <?php if(!empty($modules)) : ?>
     <div>
+        <a href="/forum/public/createModule">Create Module</a>
         <?php foreach($modules as $module) : ?>
             <div class="module">
                 <div class="module-header">
