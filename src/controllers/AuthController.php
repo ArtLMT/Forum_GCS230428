@@ -24,7 +24,8 @@ class AuthController {
 
             $user = $userDAO->getUserByUsername($username);
 
-            if ($user && password_verify($password, $user->getPassword())) {
+            if ($password === $user->getPassword()) {
+                session_start(); // Why?
                 $_SESSION['user_id'] = $user->geUsertId();
                 $_SESSION['username'] = $user->getUsername();
                 header("Location: http://localhost/forum/public/index.php");

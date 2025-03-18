@@ -16,7 +16,7 @@
              <a href="/forum/public/create">Add post</a>
              <a href="">Modules</a>
              <a href="">Messages</a>
-             <a href="/forum/public/profile">Profile</a>
+             <a href="">Profile</a>
         </form>
         </nav>
         <h1>Welcome to Forum Test</h1>
