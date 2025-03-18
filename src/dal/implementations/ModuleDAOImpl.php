@@ -40,17 +40,29 @@ class ModuleDAOImpl extends BaseDAO implements ModuleDAO {
         $this->executeQuery($query, $params);
     }
     
-    public function getModuleById($moduleId)
+    // public function getModuleById($moduleId)
+    // {
+    //     $query = "SELECT * FROM modules WHERE module_ida = :module_id";
+    //     $stmt = $this->pdo->prepare($query);
+    //     $stmt->bindParam(':module_id', $moduleId, \PDO::PARAM_INT);
+    //     $stmt->execute();
+    
+    //     return $stmt->fetch(\PDO::FETCH_ASSOC); 
+    // }
+    public function getModuleById($moduleId) 
     {
         $query = "SELECT * FROM modules WHERE module_id = :module_id";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':module_id', $moduleId, \PDO::PARAM_INT);
-        $stmt->execute();
+        $params = [':module_id' => $moduleId];
+        
+        $stmt = $this->executeQuery($query, $params);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
     
-        return $stmt->fetch(\PDO::FETCH_ASSOC); 
-    }
+        if (!$result) {
+            return null; // Return null if no module is found
+        }
     
-    
+        return new Module($result['module_id'], $result['module_name'], $result['module_description']);
+    }    
 
     public function getAllModules(): array
     {
@@ -77,16 +89,23 @@ class ModuleDAOImpl extends BaseDAO implements ModuleDAO {
     {
         $query = "SELECT module_name FROM modules WHERE module_id = :module_id";
         $params = [':module_id' => $moduleId];
-        $result = $this->fetch($query, $params);
-        return $result['module_name'];
+        
+        $stmt = $this->executeQuery($query, $params);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        
+        return $result ? $result['module_name'] : null;
     }
-
-    public function getDescription ($moduleId)
+    
+    public function getDescription($moduleId)
     {
         $query = "SELECT module_description FROM modules WHERE module_id = :module_id";
         $params = [':module_id' => $moduleId];
-        $result = $this->fetch($query, $params);
-        return $result['module_description'];
+        
+        $stmt = $this->executeQuery($query, $params);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        
+        return $result ? $result['module_description'] : null;
     }
+    
 }
 ?>

@@ -4,7 +4,7 @@ namespace src\controllers;
 use src\dal\implementations\ModuleDAOImpl;
 use src\dal\implementations\UserDAOImpl;
 use src\dal\implementations\PostDAOImpl;
-
+use src\utils\Validation;
 
 
 class ModuleController {
@@ -71,33 +71,40 @@ class ModuleController {
         // require_once __DIR__ . '/../views/deleteModule.html.php';
     }
 
-    // public function update()
-    // {
-    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //         $moduleId = $_POST['module_id'];
-    //         $moduleName = $_POST['module_name'];
-    //         $moduleDescription = $_POST['module_description'];
-
-    //         $moduleDAO->updateModule($moduleId, $moduleName, $moduleDescription);
-    //     }
-    // }
-    public function update()
-    {
+    public function update() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $moduleId = $_POST['module_id'];
             $moduleName = $_POST['module_name'];
             $moduleDescription = $_POST['module_description'];
-
-            // Corrected line: Use $this->moduleDAO instead of $moduleDAO
-            $this->moduleDAO->updateModule($moduleId, $moduleName, $moduleDescription);
-
-            // Redirect after update
+    
+            $moduleDAO = new ModuleDAOImpl();
+    
+            if (!Validation::checkModuleById($moduleId)) {
+                echo "Error: Invalid Module ID.";
+                return;
+            }
+    
+            $moduleDAO->updateModule($moduleId, $moduleName, $moduleDescription);
             header("Location: /forum/public/moduleLists");
             exit();
+        } else {
+            $moduleId = $_GET['id'] ?? null;
+    
+            if (!$moduleId) {
+                echo "Error: Module ID is missing.";
+                return;
+            }
+    
+            $moduleDAO = new ModuleDAOImpl();
+            $module = $moduleDAO->getModuleById($moduleId);
+    
+            if (!$module) {
+                echo "Error: Module not found.";
+                return;
+            }
+    
+            require_once __DIR__ . '/../views/updateModule.html.php';
         }
-
-        // Optionally, load the update form if needed
-        // require_once __DIR__ . '/../views/updateModule.html.php';
     }
-
+    
 }
