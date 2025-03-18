@@ -2,8 +2,6 @@
 ob_start(); // Start output buffering
 ?>
 
-<!-- <h2>Post List</h2> -->
-
 <?php if (!empty($posts)) : ?>
     <div>
         <?php foreach ($posts as $post) : ?>

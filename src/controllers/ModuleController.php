@@ -8,9 +8,9 @@ use src\dal\implementations\PostDAOImpl;
 
 
 class ModuleController {
-    $private $moduleDAO;
-    $private $userDAO;
-    $private $postDAO;
+    private $moduleDAO;
+    private $userDAO;
+    private $postDAO;
 
     public function __construct() {
         $this->moduleDAO = new ModuleDAOImpl();
@@ -37,6 +37,10 @@ class ModuleController {
     public function listModules() 
     {
         $modules = $this->moduleDAO->getAllModules();
-        return $modules;
+        foreach($modules as $module) {
+            $moduleId = $module->getModuleId();
+        }
+
+        require_once __DIR__ . '/../views/moduleLists.html.php';
     }
 }

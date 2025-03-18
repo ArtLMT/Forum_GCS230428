@@ -13,7 +13,12 @@ $router->post('update', 'PostController@update');
 $router->get('update', 'PostController@update');
 $router->post('delete', 'PostController@delete');
 $router->get('delete', 'PostController@delete');
-$router->get('profile', 'UserController@profile');
+$router->get('moduleLists', 'ModuleController@listModules');
+$router->post('moduleLists', 'ModuleController@listModules');
+
+
+
+// $router->get('profile', 'UserController@profile');
 
 $router->dispatch();
 ?>

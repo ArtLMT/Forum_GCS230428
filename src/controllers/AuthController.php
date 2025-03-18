@@ -5,10 +5,16 @@ use src\utils\Validation;
 use src\dal\implementations\UserDAOImpl;
 
 class AuthController {
+    /**
+     * Display the login form.
+     */
     public function loginPage() {
         require_once __DIR__ . '/../views/loginForm.html.php'; // Correct path
     }
 
+    /**
+     * Process the login form.
+     */
     public function login() {
 
         $userDAO = new UserDAOImpl(); // Make sure this class exists!
