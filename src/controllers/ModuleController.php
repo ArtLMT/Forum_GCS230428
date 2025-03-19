@@ -41,7 +41,7 @@ class ModuleController {
             $moduleId = $module->getModuleId();
         }
 
-        require_once __DIR__ . '/../views/moduleLists.html.php';
+        require_once __DIR__ . '/../views/modules/moduleLists.html.php';
     }
 
     public function store()
@@ -55,7 +55,7 @@ class ModuleController {
             exit();
         }
 
-        require_once __DIR__ . '/../views/createModule.html.php';
+        require_once __DIR__ . '/../views/modules/createModule.html.php';
     }
 
     public function delete()
@@ -107,7 +107,7 @@ class ModuleController {
                 return;
             }
     
-            require_once __DIR__ . '/../views/updateModule.html.php';
+            require_once __DIR__ . '/../views/modules/updateModule.html.php';
         }
     }
     

@@ -34,5 +34,5 @@ ob_start();
 </form>
 <?php
 $content = ob_get_clean();
-include 'layout.html.php';
+include __DIR__ . '/../layouts/layout.html.php';
 ?>

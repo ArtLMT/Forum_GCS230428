@@ -43,7 +43,10 @@ Perhaps this's project structure should look like this
     │   │   │   ├── VoteDAOImpl.php   # Implementation of VoteDAO
     │   │   ├── BaseDAO.php # Store function to execute sql
     │   ├── /views
-    │       ├── layout.html.php # Layout of the website, have a container for other view file
+    │       ├── /layout
+    │       │   ├── layout.html.php # Layout of the website, have a container for other view file
+    │       │   ├──
+    │       ├── 
     │       ├── postList.html.php # Part of they layout, display all post as default
     │       ├── updatePost.html.php # UI to edit a post
     │       ├── loginFrom.html.php # Login page

@@ -24,7 +24,7 @@ class PostController {
             $post->username = $username;
         }
 
-        require_once __DIR__ . '/../views/postList.html.php';
+        require_once __DIR__ . '/../views/posts/postList.html.php';
     }
 
     // Create a new post with validation
@@ -82,7 +82,7 @@ class PostController {
             header("Location: /forum/public/");
             exit();
         } else {
-            require_once __DIR__ . '/../views/createPost.html.php';
+            require_once __DIR__ . '/../views/posts/createPost.html.php';
         }
     }  
 
@@ -149,7 +149,7 @@ class PostController {
             $postId = $_GET['id'] ?? null;
             if ($postId) {
                 $post = $this->postDAO->getPostById($postId);
-                require_once __DIR__ . '/../views/updatePost.html.php';
+                require_once __DIR__ . '/../views/posts/post/updatePost.html.php';
             } else {
                 echo "Post ID not provided.";
             }

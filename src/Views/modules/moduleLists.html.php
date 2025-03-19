@@ -27,5 +27,5 @@ ob_start(); // Start output buffering
 
 <?php
 $content = ob_get_clean(); // Store the buffered output into $content
-include 'layout.html.php'; // Include the layout
+include __DIR__ . '/../layouts/layout.html.php'; // Include the layout
 ?>
