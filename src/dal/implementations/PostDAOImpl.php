@@ -80,7 +80,7 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         return $data ? $this->mapToPost($data) : null; // return object
     }
 
-    public function getPostByTitle($title) : array
+    public function getPostByTitle($title) : ?post
     {
         $query = "SELECT * FROM posts WHERE title = :title";
         $stmt = $this->executeQuery($query, [':title' => $title]);
@@ -92,8 +92,6 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
     {
         $query = "DELETE FROM posts WHERE post_id = :post_id";
         $stmt = $this->executeQuery($query, [':post_id' => $postId]);
-        $stmt->bindParam(':post_id', $postId);
-        $stmt->execute();
     }
 
     public function getAllPosts() : array

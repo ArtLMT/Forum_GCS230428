@@ -58,18 +58,22 @@ class ModuleController {
         require_once __DIR__ . '/../views/createModule.html.php';
     }
 
-    public function delete ()
+    public function delete()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $moduleId = $_POST['module_id'];
-            $this->moduleDAO->deleteModule($moduleId);
-            
-            header("Location: /forum/public/");
-            exit();
+        $moduleId = $_GET['id'] ?? null;
+    
+        if (!$moduleId || !Validation::checkModuleById($moduleId)) {
+            echo "Error: Invalid module ID";
+            exit(); // Stop execution
         }
+        
+        $this->moduleDAO->deleteModule($moduleId);
+        header("Location: /forum/public/moduleLists"); // Redirect after deletion
+        exit();
+    }
+    
 
         // require_once __DIR__ . '/../views/deleteModule.html.php';
-    }
 
     public function update() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
