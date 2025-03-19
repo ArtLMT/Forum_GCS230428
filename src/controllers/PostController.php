@@ -13,18 +13,22 @@ class PostController {
     }
 
     // List all posts
+    // public function listPosts() {
+    //     $userDAO = new UserDAOImpl();
+
+    //     $posts = $this->postDAO->getAllPosts();
+
+    //     foreach($posts as $post) {
+    //         $userId = $post->getUserId();
+    //         $username = $userDAO->getUsername($userId);
+    //         $post->username = $username;
+    //     }
+
+    //     require_once __DIR__ . '/../views/posts/postList.html.php';
+    // }
     public function listPosts() {
-        $userDAO = new UserDAOImpl();
-
         $posts = $this->postDAO->getAllPosts();
-
-        foreach($posts as $post) {
-            $userId = $post->getUserId();
-            $username = $userDAO->getUsername($userId);
-            $post->username = $username;
-        }
-
-        require_once __DIR__ . '/../views/posts/postList.html.php';
+        require_once __DIR__ .  '/../views/posts/postList.html.php';
     }
 
     // Create a new post with validation

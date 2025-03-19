@@ -104,7 +104,7 @@ class Post {
     }
 
     // New getter for the image
-    public function getImage() {
+    public function getPostImage() {
         return $this->image;
     }
 
@@ -112,5 +112,6 @@ class Post {
     public function setImage($image) {
         $this->image = $image;
     }
+
 }
 ?>

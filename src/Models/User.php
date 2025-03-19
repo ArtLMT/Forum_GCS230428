@@ -13,10 +13,10 @@ class User {
     private $image_path;
     
     public function __construct(
-        $userId = null, 
         $username,  // Required
         $password,  // Required
         $email,  // Required
+        $userId = null, 
         $timestamp = null,
         $updatedTimestamp = null,
         $image_path = null
@@ -90,7 +90,7 @@ class User {
         $this->updatedTimestamp = $updatedTimestamp;
     }
 
-    public function getImagePath() 
+    public function getUserImage() 
     {
         return $this->image_path;
     }

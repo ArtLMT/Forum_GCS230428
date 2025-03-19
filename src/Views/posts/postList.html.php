@@ -1,5 +1,9 @@
 <?php
 ob_start(); // Start output buffering
+
+use src\dal\implementations\UserDAOImpl;
+
+$userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
 ?>
 
 <?php if (!empty($posts)) : ?>
@@ -7,34 +11,31 @@ ob_start(); // Start output buffering
         <?php foreach ($posts as $post) : ?>
             <div class="post">
                 <div class="post-header">
-                <?php if ($post->getImage()) : ?>   
-                    <img src="/forum/public/<?= htmlspecialchars($post->getImage()) ?>" alt="Post Image" style="width:40px; height:40px; border-radius: 50%;">
-                <?php endif; ?>
-                <div>
-                    <h2><?= htmlspecialchars($post->getTitle()) ?></h2>
-                    <h3><?= htmlspecialchars($post->username)?></h3>
-                </div>
+                    <div>
+                        <h2><?= htmlspecialchars($post->getTitle()) ?></h2>
+                        <h3>
+                            <?php 
+                                $username = $userDAO->getUsername($post->getUserId()); 
+                                echo htmlspecialchars($username);
+                            ?>
+                        </h3>
+                    </div>
                 </div>
 
                 <div class="post-content">
                     <p><?= htmlspecialchars($post->getContent()) ?></p>
-                    <?php if ($post->getImage()) : ?>
-                        <img src="/forum/public/<?= htmlspecialchars($post->getImage()) ?>" alt="Post Image" style="max-width:200px;">
+                    <?php if ($post->getPostImage()) : ?>
+                        <img src="/forum/public/<?= htmlspecialchars($post->getPostImage()) ?>" alt="Post Image" style="max-width:200px;">
                     <?php endif; ?>
                 </div>
 
-                <!-- <small>Posted by User: <?= htmlspecialchars($post->username) ?></small> -->
-
                 <div class="post-footer">
-
                     <a href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>">Edit</a>
                     <a href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');">Delete</a>
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
-
-
 <?php else : ?>
     <p>No posts available.</p>
 <?php endif; ?>

@@ -46,7 +46,7 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
                       SET title = :title,
                           content = :content,
                           module_id = :module_id,
-                          image_path = :image_path
+                          image_path = :image_pathgetPostImage
                       WHERE post_id = :post_id";
             $params = [
                 ':title' => $title,
@@ -103,13 +103,14 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         
         $posts = [];
         foreach ($rows as $row) {
-            $posts[] = $this->mapToPost($row);
+            $posts[] = $this->mapToPost($row); // Converts database row to Post object
         }
     
         return $posts; // Returns an array of Post objects
     }
 
-    private function mapToPost($data) : object {
+    private function mapToPost($data) : object 
+    {
         $userDAO = new UserDAOImpl();
         $username = $userDAO->getUserById($data['user_id'])->getUsername();
          return new Post(
