@@ -71,3 +71,15 @@ Model -> represent a object, holding the data retrieved from the database
 fetch(PDO::FETCH_ASSOC); // Returns associative array (column names as keys)
 fetch(PDO::FETCH_OBJ);   // Returns an object (column names as properties)
 fetch(PDO::FETCH_NUM);   // Returns a numeric array (column indexes as keys)
+
+
+# Explain changes
+1. Refactor the logic of how backend and front end work:
+The controllers from now on will only return datas as an object
+The views decide how to fetch and display the database
+This is to follow the MVC principles
+
+Separation of Concerns (SoC) – The controller shouldn’t handle data formatting or presentation. That’s the job of the view.
+Security & Flexibility – If you handle data selection (like adding username) inside the controller, you limit flexibility. The view should decide how to present the data.
+Easier Testing & Debugging – When your controller only returns objects, it's easier to write unit tests and debug without worrying about HTML or templates.
+Better Maintainability – If you later change how data is displayed, you only update the view instead of modifying the controller.

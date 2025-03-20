@@ -16,7 +16,7 @@ ob_start();
     <input type="number" name="module_id" value="<?= htmlspecialchars($post->getModuleId()) ?>" required><br>
 
     <!-- Display current image (if exists) -->
-    <?php if ($post->getImage()) : ?>
+    <?php if ($post->getPostImage()) : ?>
         <p>Current Image:</p>
         <img src="/forum/public/<?= htmlspecialchars($post->getImage()) ?>" alt="Current Image" style="max-width:200px;"><br>
         <!-- Option to remove image -->

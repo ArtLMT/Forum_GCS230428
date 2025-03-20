@@ -26,6 +26,10 @@ $router->get('updateModule', 'ModuleController@update');
 $router->post('deleteModule', 'ModuleController@delete');
 $router->get('deleteModule', 'ModuleController@delete');
 
+// User's router
+$router->get('createUser','UserController@create');
+$router->post('createUser','UserController@create');
+
 
 // $router->get('profile', 'UserController@profile');
 
