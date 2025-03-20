@@ -7,6 +7,6 @@
 ,
 
 "scripts": {
-    "build:css": "tailwindcss -i ./style/tailwind.css -o ./css/input.css --watch"
+    "build:css": "tailwindcss -i ./src/style/tailwind.css -o ./public/asset/css/input.css --watch"
   }
 }
