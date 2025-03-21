@@ -554,18 +554,12 @@ video {
   display: none;
 }
 
-.static {
-  position: static;
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
-.hidden {
-  display: none;
-}
-
-.uppercase {
-  text-transform: uppercase;
-}
-
-.lowercase {
-  text-transform: lowercase;
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity, 1));
 }

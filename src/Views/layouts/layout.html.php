@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forum</title>
-    <link rel="stylesheet" href="/forum/public/css/reset.css">
-    <link rel="stylesheet" href="/forum/public/css/style.css">
+    <link rel="stylesheet" href="/forum/public/assets/css/reset.css">
+    <link rel="stylesheet" href="/forum/public/assets/css/style.css">
+    <link rel="stylesheet" href="/forum/public/assets/css/input.css">
 </head>
 <body>
     <header>
-        <nav> 
+        <nav class="fixed h-[40px] bg-orange-400 inline-flex">
             <a class = "nav-home" href="/forum/public/">Nerds For Nerds</a>
-
              <p>Search bar</p>
              <a href="/forum/public/createPost">Add post</a>
              <a href="/forum/public/moduleLists">Modules</a>
@@ -19,9 +19,10 @@
              <a href="">Profile</a>
         </form>
         </nav>
-        <h1>Welcome to Forum Test</h1>
+        
     </header>
     <main>
+    <p class="text-2xl text-red-600">Welcome to Forum Test</p>
         <!-- side menu -->
         <div class="side-menu">
         <p>This is the side menu</p>
