@@ -21,9 +21,9 @@ class User {
         $updatedTimestamp = null,
         $image_path = null
     ) {
-        $this->userId = $userId;
         $this->username = $username;
         $this->password = $password;
+        $this->userId = $userId;
         $this->email = $email;
         $this->timestamp = $timestamp;
         $this->updatedTimestamp = $updatedTimestamp;

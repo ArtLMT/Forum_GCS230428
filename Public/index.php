@@ -29,7 +29,12 @@ $router->get('deleteModule', 'ModuleController@delete');
 // User's router
 $router->get('signIn','UserController@createUser');
 $router->post('signIn','UserController@createUser');
-
+$router->get('userLists','UserController@getAllUser');
+$router->post('userLists','UserController@getAllUser');
+$router->get('updateUser','UserController@updateUser');
+$router->post('updateUser','UserController@updateUser');
+$router->get('deleteUser','UserController@deleteUser');
+$router->post('deleteUser','UserController@deleteUser');
 
 // $router->get('profile', 'UserController@profile');
 

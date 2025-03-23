@@ -30,9 +30,11 @@
         <!-- Side Menu -->
         <div class="fixed left-0 top-[4rem] w-[16rem] h-[calc(100%-4rem)] flex flex-col bg-gray-800 text-white p-4">
             <p class="mb-4">This is the side menu</p>
-            <a href="/forum/public/signIn" class="side-menu-content mb-2">Create User</a>
             <a href="/forum/public/createModule" class="mb-2">Create Module</a>
             <a href="" class="side-menu-content mb-2">Feedback</a>
+            <p class="mb-4 text-2xl">USER SETTING</p>
+            <a href="/forum/public/userLists" class = "side-menu-content mb-2">List all user</a>
+            <a href="/forum/public/signIn" class="side-menu-content mb-2">Create User</a>
             <a href="" class="side-menu-content logout mt-auto">Logout</a>   
         </div>
 

@@ -75,7 +75,7 @@ class UserController {
             header("Location: /forum/public/");
         } else {
             // Note 1: The views haven't been created yet, so this will throw an error.
-            require_once __DIR__ . '/../views/user/signInForm.html.php';
+            require_once __DIR__ . '/../views/users/signInForm.html.php';
         }
     }
 
@@ -85,24 +85,56 @@ class UserController {
             $username = $_POST['username'];
             $password = $_POST['password'];
             $email = $_POST['email'];
-            $this->userDAO->updateUser($userId, $username, $password, $email);
-            header("Location: /Forum/public/");
+            $this->userDAO->updateUser($username, $password, $email, $userId);
+            header("Location: /forum/public/userLists");
         } else {
             $userId = $_GET['user_id'];
             $user = $this->userDAO->getUserById($userId);
-            // Note 1: The views haven;t been created yet, so this will throw an error.
-            require_once __DIR__ . '/../views/userForm.html.php';
+
+            require_once __DIR__ . '/../views/users/profile.html.php';
         }
     }
 
+    // public function deleteUser() 
+    // {
+    //     $userId = $_GET['user_id'] ?? null;
+    //     if (!$userId) {
+    //         echo "Error: invalid User ID.";
+    //         return;
+    //     }
+        
+    //     $this->userDAO->deleteUser($userId);
+    //     header("Location: /forum/public/userLists");
+    //     exit();
+    // }
+
     public function deleteUser() 
     {
-
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userId = $_POST['user_id'] ?? null;
+            if (!$userId) {
+                echo "Error: invalid User ID.";
+                return;
+            }
+            
+            $this->userDAO->deleteUser($userId);
+            header("Location: /forum/public/userLists");
+            exit();
+        } else {
+            echo "Invalid request method!";
+        }
     }
+
 
     public function login() 
     {
 
+    }
+
+    public function getAllUser()
+    {
+        $users = $this->userDAO->getAllUsers();
+        require_once __DIR__ . '/../views/users/userList.html.php';
     }
 }
 ?>

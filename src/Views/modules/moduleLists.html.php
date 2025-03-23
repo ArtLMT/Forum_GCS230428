@@ -18,6 +18,8 @@ ob_start(); // Start output buffering
                 </div>
             </div>
             <br>
+            <p>======================================</p>
+            <br>
         <?php endforeach; ?>
     </div>
 <?php else : ?>
