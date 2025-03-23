@@ -1,9 +1,26 @@
 <?php
-// Login form
-// Should be separated with the layout ?
-// ob_start(); // Start output buffering
+ob_start();
+
+?>
+<h2>Sign in</h2>
+
+<form action="/forum/public/signIn" method = "post" enctype = "multipart/form-data">
+    <label> Username </label>
+    <input class="border-solid border-4" type="text" name="username" required>
+
+    <label>Pasword:</label>
+    <input class="border-solid border-4" type="text" name="password">
+
+    <label>email:</label>
+    <input class="border-solid border-4" style ="text" name ="email">
+
+    <br>
+    <input class="border-solid border-4" type="submit" value = "Sign In">
+</form>
 
 
 
-// include 'layout.html.php'; // Include the layout
+<?php
+$content = ob_get_clean();
+include __DIR__ . '/../layouts/layout.html.php'; // Include the layout file to render the page
 ?>

@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="/forum/public/assets/css/input.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col min-h-screen text-[62.5%] text-lg">
+<body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border">
     <!-- Navigation Bar -->
     <header class="fixed top-0 w-full h-[4rem] bg-orange-400 z-50">
-        <nav class="flex items-center h-full px-8 ">
+        <nav class="flex items-center h-full px-20 ">
             <a class="nav-home text-2xl flex-[2] min-w-[20%]" href="/forum/public/">Nerds For Nerds</a>
             <p class="flex-[4] min-w-[40%] text-center">Search bar</p>
-            <div class="flex-[4] min-w-[40%] flex justify-end gap-8">
-
+            <div class="flex-[4] min-w-[40%] flex justify-end gap-16">
+                <!-- navigate to other functionality page -->
                 <a href="/forum/public/createPost">Add post</a>
                 <a href="/forum/public/moduleLists">Modules</a>
                 <a href="">Messages</a>
@@ -30,15 +30,15 @@
         <!-- Side Menu -->
         <div class="fixed left-0 top-[4rem] w-[16rem] h-[calc(100%-4rem)] flex flex-col bg-gray-800 text-white p-4">
             <p class="mb-4">This is the side menu</p>
-            <a href="" class="side-menu-content mb-2">Create User</a>
-            <a href="" class="side-menu-content mb-2">option_2</a>
+            <a href="/forum/public/signIn" class="side-menu-content mb-2">Create User</a>
+            <a href="/forum/public/createModule" class="mb-2">Create Module</a>
             <a href="" class="side-menu-content mb-2">Feedback</a>
             <a href="" class="side-menu-content logout mt-auto">Logout</a>   
         </div>
 
         <!-- Main Content -->
         <div class="flex-1 ml-[16rem] mt-[4rem] p-4">
-            <div class="post-area border-2 border-gray-300 p-4">
+            <div class="post-area border-2 border-gray-300 p-4 max-w-7xl border-solid border-4">
                 <?php echo $content; ?>
             </div>
         </div>

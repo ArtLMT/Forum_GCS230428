@@ -9,7 +9,7 @@ $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
 <?php if (!empty($posts)) : ?>
     <div>
         <?php foreach ($posts as $post) : ?>
-            <div class="post">
+            <div class="post border-solid border-4">
                 <div class="post-header">
                     <div>
                         <h2><?= htmlspecialchars($post->getTitle()) ?></h2>

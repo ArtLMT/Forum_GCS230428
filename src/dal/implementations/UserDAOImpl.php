@@ -15,12 +15,12 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
     public function createUser($username, $password, $email) 
     {
         // Hash the password before storing it using password_hash() with standard crypt()
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        // $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $query = "INSERT INTO users (username, password, email) 
                 VALUES (:username, :password, :email)";
         $params = [
             ':username' => $username,
-            ':password' => $hashedPassword,
+            ':password' => $password,
             ':email'    => $email,
         ];
         $this->executeQuery($query, $params);
@@ -62,7 +62,7 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
 
     public function updateUser($userId, $username, $password, $email) 
     {
-        $hasedPassword = password_hash($password, PASSWORD_BCRYPT);
+        // $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $query = "UPDATE users
                   SET username = :username,
                       password = :password,
@@ -70,7 +70,7 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
                   WHERE user_id = :user_id";
         $params = [
             ':username' => $username,
-            ':password' => $hasdPassword,
+            ':password' => $password,
             ':email'    => $email,
             ':user_id'  => $userId,
         ];
@@ -116,10 +116,10 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
 
     public function updatePassword($userId, $newPassword) 
     {
-        $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+        // $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
         $query = "UPDATE users SET password = :password WHERE user_id = :user_id";
         $params = [
-            ':password' => $hashedPassword,
+            ':password' => $newPassword,
             ':user_id'  => $userId
         ];
         $this->executeQuery($query, $params);

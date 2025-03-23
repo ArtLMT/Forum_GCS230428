@@ -27,8 +27,8 @@ $router->post('deleteModule', 'ModuleController@delete');
 $router->get('deleteModule', 'ModuleController@delete');
 
 // User's router
-$router->get('createUser','UserController@create');
-$router->post('createUser','UserController@create');
+$router->get('signIn','UserController@createUser');
+$router->post('signIn','UserController@createUser');
 
 
 // $router->get('profile', 'UserController@profile');

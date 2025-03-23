@@ -72,10 +72,10 @@ class UserController {
             $password = $_POST['password'];
             $email = $_POST['email'];
             $this->userDAO->createUser($username, $password, $email);
-            header("Location: /Forum/public/");
+            header("Location: /forum/public/");
         } else {
             // Note 1: The views haven't been created yet, so this will throw an error.
-            require_once __DIR__ . '/../views/user/userForm.html.php';
+            require_once __DIR__ . '/../views/user/signInForm.html.php';
         }
     }
 
