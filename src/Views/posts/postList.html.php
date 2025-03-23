@@ -34,6 +34,7 @@ $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
                     <a href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');">Delete</a>
                 </div>
             </div>
+            <br>
         <?php endforeach; ?>
     </div>
 <?php else : ?>
