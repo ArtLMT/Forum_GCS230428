@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2025 at 12:01 PM
+-- Generation Time: Mar 24, 2025 at 05:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,6 +32,20 @@ CREATE TABLE `comments` (
   `user_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `parent_comment_id` int(11) DEFAULT NULL,
+  `content` text NOT NULL,
+  `create_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `emails`
+--
+
+CREATE TABLE `emails` (
+  `email_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -80,11 +94,12 @@ CREATE TABLE `posts` (
 
 INSERT INTO `posts` (`post_id`, `user_id`, `module_id`, `title`, `content`, `create_date`, `image_path`) VALUES
 (1, 1, 1, 'Testing', 'This is a test posttt', '2025-03-10 15:27:54', NULL),
-(3, 2, 1, 'Second post', 'This is my second post,  I used to test upload img', '2025-03-13 15:22:51', 'uploads/75e646683d82cb5f462564ae9fa82739.jpg'),
-(7, 1, 2, 'What will happen after every action', 'Lets find out?', '2025-03-18 10:10:38', 'uploads/46909b0e7b1be01d5df1d347b527ab99.png'),
+(3, 2, 1, 'Second post', 'This is my second post,  I used to test upload img', '2025-03-13 15:22:51', NULL),
+(7, 1, 2, 'Meme', 'Meme about all of this reality is just a dream.', '2025-03-18 10:10:38', 'uploads/46909b0e7b1be01d5df1d347b527ab99.png'),
 (10, 2, 1, 'What\'s Lorem?', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\n', '2025-03-18 10:29:16', NULL),
 (11, 1, 1, 'More posts for testing', 'Nothing\'s here, this was created to test more posts', '2025-03-23 06:07:22', NULL),
-(12, 3, 4, 'Test keys being delete', 'sadad', '2025-03-23 08:54:50', NULL);
+(12, 3, 4, 'Test keys being delete', 'sadad', '2025-03-23 08:54:50', NULL),
+(16, 1, 2, 'Test drop down menu', 'Test drop down menu', '2025-03-24 11:41:13', NULL);
 
 -- --------------------------------------------------------
 
@@ -106,10 +121,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `create_date`, `image_path`) VALUES
-(1, 'firstuser', 'firstuser@example.com', 'newpassword2', '2025-03-10 15:27:54', NULL),
+(1, 'firstUserEver', 'firstuser@example.com', 'newpassword2', '2025-03-10 15:27:54', NULL),
 (2, 'ARTLMT', 'thanhleminh098@gmail.com', 'a', '2025-03-15 14:40:20', NULL),
-(3, 'newUser', 'newUser@gmail.com', '1', '2025-03-23 07:44:46', NULL),
-(7, 'newUserForTesting', 'email', 'pass', '2025-03-24 11:01:06', NULL);
+(3, 'newUser', 'newUser@gmail.com', '1', '2025-03-23 07:44:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -138,6 +152,13 @@ ALTER TABLE `comments`
   ADD KEY `comments_ibfk_1` (`user_id`),
   ADD KEY `comments_ibfk_2` (`post_id`),
   ADD KEY `comments_ibfk_3` (`parent_comment_id`);
+
+--
+-- Indexes for table `emails`
+--
+ALTER TABLE `emails`
+  ADD PRIMARY KEY (`email_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `modules`
@@ -182,6 +203,12 @@ ALTER TABLE `comments`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `emails`
+--
+ALTER TABLE `emails`
+  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
@@ -191,13 +218,13 @@ ALTER TABLE `modules`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `votes`
@@ -216,6 +243,12 @@ ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`parent_comment_id`) REFERENCES `comments` (`comment_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `emails`
+--
+ALTER TABLE `emails`
+  ADD CONSTRAINT `emails_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `posts`
