@@ -14,8 +14,14 @@ ob_start(); // Start output buffering
     <label>User ID:</label>
     <input type="number" name="user_id" required><br>
     
-    <label>Module ID:</label>
-    <input type="number" name="module_id" required><br>
+    <!-- <label>Module ID:</label>
+    <input type="number" name="module_id" required><br> -->
+    <select name="module_id" required>
+    <option value="">Select a Module</option>
+        <?php foreach ($modules as $module): ?>
+            <option value="<?= $module->getModuleId() ?>"><?= htmlspecialchars($module->getModuleName()) ?></option>
+        <?php endforeach; ?>
+    </select><br>
     
     <label>Image:</label>
     <input type="file" name="image"><br>

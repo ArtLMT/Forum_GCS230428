@@ -9,8 +9,8 @@ ini_set('display_errors', 1);
 
 // Register other routes
 $router->get('', 'PostController@listPosts'); 
-$router->get('createPost', 'PostController@store');  
-$router->post('createPost', 'PostController@store'); 
+$router->get('createPost', 'PostController@createPost');  
+$router->post('createPost', 'PostController@createPost'); 
 $router->post('update', 'PostController@update');
 $router->get('update', 'PostController@update');
 $router->post('delete', 'PostController@delete');
@@ -35,8 +35,6 @@ $router->get('updateUser','UserController@updateUser');
 $router->post('updateUser','UserController@updateUser');
 $router->get('deleteUser','UserController@deleteUser');
 $router->post('deleteUser','UserController@deleteUser');
-
-// $router->get('profile', 'UserController@profile');
 
 $router->dispatch();
 ?>

@@ -3,6 +3,7 @@ namespace src\controllers;
 
 use src\dal\implementations\PostDAOImpl;
 use src\dal\implementations\UserDAOImpl;
+use src\dal\implementations\ModuleDAOImpl;
 use src\utils\Validation;
 
 class PostController {
@@ -22,8 +23,10 @@ class PostController {
 
 
     // Create a new post with validation
-    public function store() 
+    public function createPost() 
     {
+        $moduleDAO = new ModuleDAOImpl();
+        $modules = $moduleDAO->getAllModules();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $title    = $_POST['title'];
             $content  = $_POST['content'];
@@ -31,15 +34,15 @@ class PostController {
             $moduleId = $_POST['module_id'];
 
             //  Validate user_id and module_id
-            if (!Validation::checkUserById($userId)) {
-                echo "Error: Invalid User ID.";
-                return;
-            }
+            // if (!Validation::checkUserById($userId)) {
+            //     echo "Error: Invalid User ID.";
+            //     return;
+            // }
 
-            if (!Validation::checkModuleById($moduleId)) {
-                echo "Error: Invalid Module ID.";
-                return;
-            }
+            // if (!Validation::checkModuleById($moduleId)) {
+            //     echo "Error: Invalid Module ID.";
+            //     return;
+            // }
 
             // Handle image upload (unchanged)
             $imagePath = null;
@@ -153,7 +156,8 @@ class PostController {
     }
 
     // Delete a post with validation
-    public function delete() {
+    public function delete() 
+    {
         $postId = $_GET['id'] ?? null;
 
         if (!$postId || !Validation::checkPostById($postId)) {

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/forum/public/assets/css/input.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border">
+<body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border bg-stone-100">
     <!-- Navigation Bar -->
     <header class="fixed top-0 w-full h-[4rem] bg-orange-400 z-50">
         <nav class="flex items-center h-full px-16 text-white font-semibold">
@@ -26,21 +26,20 @@
     </header>
 
     <!-- Main Section -->
-    <main class="flex-1 flex">
+    <main class="flex-1 flex pt-[4rem]">
         <!-- Side Menu -->
-        <div class="fixed left-0 top-[4rem] w-[16rem] h-[calc(100%-4rem)] flex flex-col bg-gray-800 text-white p-4">
-            <p class="mb-4">This is the side menu</p>
+        <div class="sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] flex flex-col bg-stone-200 text-black p-4">
             <a href="/forum/public/createModule" class="mb-2">Create Module</a>
             <a href="" class="side-menu-content mb-2">Feedback</a>
-            <p class="mb-4 text-2xl">USER SETTING</p>
+            <p class="mb-4 text-xl">-USER SETTING-</p>
             <a href="/forum/public/userLists" class = "side-menu-content mb-2">List all user</a>
             <a href="/forum/public/signIn" class="side-menu-content mb-2">Create User</a>
             <a href="" class="side-menu-content logout mt-auto">Logout</a>   
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 ml-[16rem] mt-[4rem] p-4">
-            <div class="post-area border-2 border-gray-300 p-4 max-w-7xl border-solid border-4">
+        <div class="flex-1 p-4">
+            <div class="post-area border-2 border-gray-300 p-4 max-w-7xl border-solid border-2">
                 <?php echo $content; ?>
             </div>
         </div>

@@ -70,6 +70,7 @@ class ModuleDAOImpl extends BaseDAO implements ModuleDAO {
         $stmt = $this->executeQuery($query);
     
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
         
         $modules = [];
         foreach ($rows as $row) {

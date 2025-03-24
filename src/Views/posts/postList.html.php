@@ -9,10 +9,10 @@ $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
 <?php if (!empty($posts)) : ?>
     <div>
         <?php foreach ($posts as $post) : ?>
-            <div class="post border-solid border-4">
+            <div class="post border-solid border-2">
                 <div class="post-header">
                     <div>
-                        <h2><?= htmlspecialchars($post->getTitle()) ?></h2>
+                        <h2 class="text-center"><?= htmlspecialchars($post->getTitle()) ?></h2>
                         <h3>
                             <?php 
                                 $username = $userDAO->getUsername($post->getUserId()); 
@@ -21,7 +21,6 @@ $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
                         </h3>
                     </div>
                 </div>
-
                 <div class="post-content">
                     <p><?= htmlspecialchars($post->getContent()) ?></p>
                     <?php if ($post->getPostImage()) : ?>
@@ -29,9 +28,9 @@ $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
                     <?php endif; ?>
                 </div>
 
-                <div class="post-footer">
-                    <a href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>">Edit</a>
-                    <a href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');">Delete</a>
+                <div class="flex gap-4 justify-end text-center">
+                    <a class="bg-green-400 border-solid border-green-500 border-2 p-2 w-20" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>">Edit</a>
+                    <a class="bg-red-400 border-solid border-red-500 border-2 p-2 w-20" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');">Delete</a>
                 </div>
             </div>
             <br>

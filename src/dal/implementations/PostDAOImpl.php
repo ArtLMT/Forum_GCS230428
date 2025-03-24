@@ -25,7 +25,8 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         $this->executeQuery($query, $params);
     }
 
-    public function updatePost($postId, $title, $content, $moduleId, $imagePath = null) {
+    public function updatePost($postId, $title, $content, $moduleId, $imagePath = null) 
+    {
         if ($imagePath === '') {
             // The user wants to remove the image
             $query = "UPDATE posts
@@ -43,11 +44,11 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         } elseif ($imagePath) {
             // The user uploaded a new image
             $query = "UPDATE posts
-                      SET title = :title,
-                          content = :content,
-                          module_id = :module_id,
-                          image_path = :image_pathgetPostImage
-                      WHERE post_id = :post_id";
+                SET title = :title,
+                    content = :content,
+                    module_id = :module_id,
+                    image_path = :image_path
+                WHERE post_id = :post_id";
             $params = [
                 ':title' => $title,
                 ':content' => $content,
@@ -69,6 +70,7 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
                 ':post_id' => $postId,
             ];
         }
+
         $this->executeQuery($query, $params); 
     }   
 
