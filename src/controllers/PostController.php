@@ -82,7 +82,8 @@ class PostController {
     }  
 
     // Update an existing post with validation
-    public function update() {
+    public function update() 
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $postId   = $_POST['post_id'];
             $title    = $_POST['title'];

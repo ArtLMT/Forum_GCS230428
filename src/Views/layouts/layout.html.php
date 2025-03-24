@@ -12,8 +12,8 @@
 <body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border">
     <!-- Navigation Bar -->
     <header class="fixed top-0 w-full h-[4rem] bg-orange-400 z-50">
-        <nav class="flex items-center h-full px-20 ">
-            <a class="nav-home text-2xl flex-[2] min-w-[20%]" href="/forum/public/">Nerds For Nerds</a>
+        <nav class="flex items-center h-full px-16 text-white font-semibold">
+            <a class="nav-home text-2xl flex-[2] min-w-[20%] font-black text-white" href="/forum/public/">Nerds For Nerds</a>
             <p class="flex-[4] min-w-[40%] text-center">Search bar</p>
             <div class="flex-[4] min-w-[40%] flex justify-end gap-16">
                 <!-- navigate to other functionality page -->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2025 at 04:47 PM
+-- Generation Time: Mar 24, 2025 at 12:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -82,7 +82,9 @@ INSERT INTO `posts` (`post_id`, `user_id`, `module_id`, `title`, `content`, `cre
 (1, 1, 1, 'Testing', 'This is a test posttt', '2025-03-10 15:27:54', NULL),
 (3, 2, 1, 'Second post', 'This is my second post,  I used to test upload img', '2025-03-13 15:22:51', 'uploads/75e646683d82cb5f462564ae9fa82739.jpg'),
 (7, 1, 2, 'What will happen after every action', 'Lets find out?', '2025-03-18 10:10:38', 'uploads/46909b0e7b1be01d5df1d347b527ab99.png'),
-(10, 2, 1, 'What\'s Lorem?', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\n', '2025-03-18 10:29:16', NULL);
+(10, 2, 1, 'What\'s Lorem?', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\n', '2025-03-18 10:29:16', NULL),
+(11, 1, 1, 'More posts for testing', 'Nothing\'s here, this was created to test more posts', '2025-03-23 06:07:22', NULL),
+(12, 3, 4, 'Test keys being delete', 'sadad', '2025-03-23 08:54:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -104,8 +106,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `create_date`, `image_path`) VALUES
-(1, 'firstuser', 'firstuser@example.com', 'password', '2025-03-10 15:27:54', NULL),
-(2, 'ARTLMT', 'thanhleminh098@gmail.com', '1', '2025-03-15 14:40:20', NULL);
+(1, 'firstuser', 'firstuser@example.com', 'newpassword2', '2025-03-10 15:27:54', NULL),
+(2, 'ARTLMT', 'thanhleminh098@gmail.com', 'a', '2025-03-15 14:40:20', NULL),
+(3, 'newUser', 'newUser@gmail.com', '1', '2025-03-23 07:44:46', NULL),
+(7, 'newUserForTesting', 'email', 'pass', '2025-03-24 11:01:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -131,9 +135,9 @@ CREATE TABLE `votes` (
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`comment_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `post_id` (`post_id`),
-  ADD KEY `parent_comment_id` (`parent_comment_id`);
+  ADD KEY `comments_ibfk_1` (`user_id`),
+  ADD KEY `comments_ibfk_2` (`post_id`),
+  ADD KEY `comments_ibfk_3` (`parent_comment_id`);
 
 --
 -- Indexes for table `modules`
@@ -147,8 +151,8 @@ ALTER TABLE `modules`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`post_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `module_id` (`module_id`);
+  ADD KEY `posts_ibfk_1` (`user_id`),
+  ADD KEY `posts_ibfk_2` (`module_id`);
 
 --
 -- Indexes for table `users`
@@ -163,9 +167,9 @@ ALTER TABLE `users`
 --
 ALTER TABLE `votes`
   ADD PRIMARY KEY (`vote_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `post_id` (`post_id`),
-  ADD KEY `comment_id` (`comment_id`);
+  ADD KEY `votes_ibfk_1` (`user_id`),
+  ADD KEY `votes_ibfk_2` (`post_id`),
+  ADD KEY `votes_ibfk_3` (`comment_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -181,19 +185,19 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `votes`
@@ -209,24 +213,24 @@ ALTER TABLE `votes`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`),
-  ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`parent_comment_id`) REFERENCES `comments` (`comment_id`);
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`parent_comment_id`) REFERENCES `comments` (`comment_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`module_id`) REFERENCES `modules` (`module_id`);
+  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`module_id`) REFERENCES `modules` (`module_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `votes`
 --
 ALTER TABLE `votes`
-  ADD CONSTRAINT `votes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `votes_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`),
-  ADD CONSTRAINT `votes_ibfk_3` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`comment_id`);
+  ADD CONSTRAINT `votes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `votes_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `votes_ibfk_3` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`comment_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -18,7 +18,8 @@ ob_start();
     <!-- Display current image (if exists) -->
     <?php if ($post->getPostImage()) : ?>
         <p>Current Image:</p>
-        <img src="/forum/public/<?= htmlspecialchars($post->getImage()) ?>" alt="Current Image" style="max-width:200px;"><br>
+        <img src="/forum/public/<?= htmlspecialchars($post->getPostImage())?>" alt="Current Image" style="max-width:200px;">
+        <br>
         <!-- Option to remove image -->
         <label>
             <input type="checkbox" name="remove_image" value="1">
