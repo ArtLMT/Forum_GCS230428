@@ -14,7 +14,8 @@ $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
                     <div>
                         <h2 class="text-center"><?= htmlspecialchars($post->getTitle()) ?></h2>
                         <h3>
-                            <?php 
+                            <?php
+                            //  htmlspecialchars($userDAO->getUsername($post->getUserId()));
                                 $username = $userDAO->getUsername($post->getUserId()); 
                                 echo htmlspecialchars($username);
                             ?>

@@ -12,7 +12,7 @@ class Post {
     private $moduleId;
     private $timestamp;
     private $updatedTimestamp;
-    private $image; // new property for image
+    private $image;
 
     // Constructor (updated with default values so it can be created without all parameters)
     public function __construct(

@@ -72,4 +72,5 @@ class Comment {
     {
         $this->updatedTimestamp = $updatedTimestamp;
     }
+}
 ?>
