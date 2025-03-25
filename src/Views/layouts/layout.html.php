@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="/forum/public/assets/css/input.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border bg-stone-100">
+<body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border">
     <!-- Navigation Bar -->
-    <header class="fixed top-0 w-full h-[4rem] bg-orange-400 z-50">
+    <header class="fixed top-0 w-full h-[4rem] bg-neutral-800 z-50 border-b border-solid border-green-500">
         <nav class="flex items-center h-full px-16 text-white font-semibold">
             <a class="nav-home text-2xl flex-[2] min-w-[20%] font-black text-white p-2" href="/forum/public/">Study-Hub</a>
             <p class="flex-[4] min-w-[40%] text-center">Search bar</p>
@@ -26,27 +26,27 @@
     </header>
 
     <!-- Main Section -->
-    <main class="flex-1 flex pt-[4rem]">
+    <main class="flex-1 flex pt-[4rem] bg-gray-800 text-white">
         <!-- Side Menu -->
-        <div class="sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] flex flex-col bg-stone-200 text-black p-4">
+        <div class="bg-black text-white sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] flex flex-col p-4 border-r border-solid border-green-500">
             <a class="mb-2 hover:bg-stone-300" href="/forum/public/createModule">Create Module</a>
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="">Feedback</a>
-            <br>
-            <a class = "side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/userLists">List all user</a>
+            <hr class="mb-4 mt-2">
+            <a class ="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/userLists">List all user</a>
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/signIn">Create User</a>
             <a class="side-menu-content logout mt-auto hover:bg-stone-300" href="">Logout</a>   
         </div>
 
         <!-- Main Content -->
         <div class="flex-1">
-            <div class="post-area border-2 border-gray-300 p-4 max-w-7xl border-solid border-2">
+            <div class="post-area p-4 w-2/3 mx-auto">
                 <?php echo $content; ?>
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white text-center p-2 mt-auto">
+    <footer class="bg-neutral-800 text-white text-center p-2 mt-auto py-6 border-t border-solid border-green-500">
         <p>&copy; <?php echo date("Y"); ?> Forum Test. All rights reserved.</p>
     </footer>
 </body>
