@@ -1,7 +1,7 @@
 <?php
 namespace src;
 
-use src\controllers\PostController;
+
 
 class Router {
     private $routes = [];

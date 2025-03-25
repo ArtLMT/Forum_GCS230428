@@ -36,5 +36,10 @@ $router->post('updateUser','UserController@updateUser');
 $router->get('deleteUser','UserController@deleteUser');
 $router->post('deleteUser','UserController@deleteUser');
 
+// Email Message router
+$router->get('messageList','EmailMessageController@listMessage');
+$router->post('messageList','EmailMessageController@listMessage');
+$router->get('createMessage','EmailMessageController@createMessage');
+$router->post('createMessage','EmailMessageController@createMessage');
 $router->dispatch();
 ?>

@@ -27,52 +27,52 @@ class EmailMessage {
     // Getters and Setters
     public function getEmailMessageId ()
     {
-        return $this->$emailMessageId;
+        return $this->emailMessageId;
     }
 
     public function setEmailMessageId ($emailMessageId)
     {
-        $this->$emailMessageId = $emailMessageId;
+        $this->emailMessageId = $emailMessageId;
     }
 
     public function getTitle ()
     {
-        return $this->$title;
+        return $this->title;
     }
 
     public function setTitle ($title)
     {
-        $this->$title = $title;
+        $this->title = $title;
     }
 
     public function getContent ()
     {
-        return $this->$content;
+        return $this->content;
     }
 
     public function setContent ($content)
     {
-        $this->$content = $content;
+        $this->content = $content;
     }
 
     public function getUserId ()
     {
-        return $this->$userId;
+        return $this->userId;
     }
 
     public function setUserId ($userId)
     {
-        $this->$userId = $userId;
+        $this->userId = $userId;
     }
 
     public function getCreateDate ()
     {
-        return $this->$createDate;
+        return $this->createDate;
     }
 
     public function setCreateDate ($createDate)
-    {
-        $this->$createDate = $createDate;
+    
+        $this->createDate = $createDate;
     }
 }
 ?>

@@ -2,7 +2,7 @@
 ob_start(); // Start output buffering
 ?>
 
-<h2>Create Post</h2>
+<h2 class="text-center ">Create Post</h2>
 
 <form action="/forum/public/createPost" method="post" enctype="multipart/form-data">
     <label>Title:</label>

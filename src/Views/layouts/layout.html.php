@@ -13,14 +13,14 @@
     <!-- Navigation Bar -->
     <header class="fixed top-0 w-full h-[4rem] bg-orange-400 z-50">
         <nav class="flex items-center h-full px-16 text-white font-semibold">
-            <a class="nav-home text-2xl flex-[2] min-w-[20%] font-black text-white" href="/forum/public/">Nerds For Nerds</a>
+            <a class="nav-home text-2xl flex-[2] min-w-[20%] font-black text-white p-2" href="/forum/public/">Study-Hub</a>
             <p class="flex-[4] min-w-[40%] text-center">Search bar</p>
             <div class="flex-[4] min-w-[40%] flex justify-end gap-16">
                 <!-- navigate to other functionality page -->
-                <a href="/forum/public/createPost">Add post</a>
-                <a href="/forum/public/moduleLists">Modules</a>
-                <a href="">Messages</a>
-                <a href="">Profile</a>
+                <a class="p-3 hover:bg-orange-300 rounded-xl"href="/forum/public/createPost">Add post</a>
+                <a class="p-3 hover:bg-orange-300 rounded-xl"href="/forum/public/moduleLists">Modules</a>
+                <a class="p-3 hover:bg-orange-300 rounded-xl"href="/forum/public/messageList">Messages</a>
+                <a class="p-3 hover:bg-orange-300 rounded-xl"href="">Profile</a>
             </div>
         </nav>
     </header>
@@ -29,16 +29,16 @@
     <main class="flex-1 flex pt-[4rem]">
         <!-- Side Menu -->
         <div class="sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] flex flex-col bg-stone-200 text-black p-4">
-            <a href="/forum/public/createModule" class="mb-2">Create Module</a>
-            <a href="" class="side-menu-content mb-2">Feedback</a>
-            <p class="mb-4 text-xl">-USER SETTING-</p>
-            <a href="/forum/public/userLists" class = "side-menu-content mb-2">List all user</a>
-            <a href="/forum/public/signIn" class="side-menu-content mb-2">Create User</a>
-            <a href="" class="side-menu-content logout mt-auto">Logout</a>   
+            <a class="mb-2 hover:bg-stone-300" href="/forum/public/createModule">Create Module</a>
+            <a class="side-menu-content mb-2 hover:bg-stone-300" href="">Feedback</a>
+            <br>
+            <a class = "side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/userLists">List all user</a>
+            <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/signIn">Create User</a>
+            <a class="side-menu-content logout mt-auto hover:bg-stone-300" href="">Logout</a>   
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 p-4">
+        <div class="flex-1">
             <div class="post-area border-2 border-gray-300 p-4 max-w-7xl border-solid border-2">
                 <?php echo $content; ?>
             </div>
