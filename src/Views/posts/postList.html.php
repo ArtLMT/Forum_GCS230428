@@ -9,7 +9,7 @@ $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
 <?php if (!empty($posts)) : ?>
     <div>
         <?php foreach ($posts as $post) : ?>
-            <div class="post bg-slate-900 border-solid border-2 rounded-lg border-green-500">
+            <div class="post bg-slate-900 border-solid border-2 rounded-lg border-green-700">
                 <div class="post-header flex p-2">
                     <p class="flex-[1] bg-white rounded-full max-h-11 max-w-11"></p>
                     <div class='flex-[19]'>
@@ -34,7 +34,7 @@ $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
                 </div>
 
                 <div class="flex gap-4 justify-end text-center mr-5 mb-[1rem] mt-[1rem]">
-                    <a class="bg-green-400 border-solid border-green-500 border-2 p-1 w-14 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>">Edit</a>
+                    <a class="bg-green-400 border-solid border-green-700 border-2 p-1 w-14 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>">Edit</a>
                     <a class="bg-red-400 border-solid border-red-500 border-2 p-1 w-14 text-xs" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');">Delete</a>
                 </div>
             </div>

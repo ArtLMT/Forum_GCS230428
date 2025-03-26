@@ -17,17 +17,19 @@ class EmailMessageController{
     public function createMessage($title, $content, $userId)
     {
         $this->emailDAO->sendMessage($title, $content, $userId);
+
     }
 
     // need to pass all message to the view
     public function listMessage()
     {
         $messages = $this->emailDAO->getAllMessage();
+        $userDAO = $this->userDAO;
         foreach ($messages as $message) {
             $emailId = $message->getEmailMessageId();
         }
 
-        require_once __DIR__ . '/../views/messages/messagesList.html.php';
+        require_once __DIR__ . '/../views/messages/messagesList.php';
     }
 }
 ?>

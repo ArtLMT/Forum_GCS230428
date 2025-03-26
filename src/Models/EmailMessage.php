@@ -15,13 +15,13 @@ class EmailMessage {
         $title = null,
         $content = null,
         $createDate = null,
-        $userId = null,
+        $userId = null
     ) {
-        $this->$emailMessageId = $emailMessageId;
-        $this->$title = $title;
-        $this->$content = $content;
-        $this->$createDate = $createDate;
-        $this->$userId = $userId;
+        $this->emailMessageId = $emailMessageId;
+        $this->title = $title;
+        $this->content = $content;
+        $this->createDate = $createDate;
+        $this->userId = $userId;
     }
 
     // Getters and Setters
@@ -70,9 +70,10 @@ class EmailMessage {
         return $this->createDate;
     }
 
-    public function setCreateDate ($createDate)
-    
+    public function setCreateDate ($createDate){
         $this->createDate = $createDate;
     }
+    
 }
+
 ?>
