@@ -70,7 +70,7 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         return new User($user['username'], $user['password'], $user['email'], $user['user_id']);
     }
 
-    public function updateUser($username, $password, $email, $userId) 
+    public function editUser($username, $password, $email, $userId) 
     {
         // $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $query = "UPDATE users

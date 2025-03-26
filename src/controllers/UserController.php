@@ -79,13 +79,13 @@ class UserController {
         }
     }
 
-    public function updateUser() {
+    public function editUser() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userId = $_POST['user_id'];
             $username = $_POST['username'];
             $password = $_POST['password'];
             $email = $_POST['email'];
-            $this->userDAO->updateUser($username, $password, $email, $userId);
+            $this->userDAO->editUser($username, $password, $email, $userId);
             header("Location: /forum/public/userLists");
         } else {
             $userId = $_GET['user_id'];

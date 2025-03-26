@@ -2,114 +2,95 @@
 namespace src\controllers;
 
 use src\dal\implementations\ModuleDAOImpl;
-use src\dal\implementations\UserDAOImpl;
-use src\dal\implementations\PostDAOImpl;
 use src\utils\Validation;
-
 
 class ModuleController {
     private $moduleDAO;
-    private $userDAO;
-    private $postDAO;
 
     public function __construct() {
         $this->moduleDAO = new ModuleDAOImpl();
-        $this->userDAO = new UserDAOImpl();
-        $this->postDAO = new PostDAOImpl();
     }
 
-    public function createModule($moduleName, $moduleDescription) 
-    {
-        $this->moduleDAO->createModule($moduleName, $moduleDescription);
-    }
-
-    public function updateModule($moduleId, $moduleName, $moduleDescription) 
-    {
-        $this->moduleDAO->updateModule($moduleId, $moduleName, $moduleDescription);
-    }
-
-    public function getModuleById($moduleId) : Module
-    {
-        $module = $this->moduleDAO->getModuleById($moduleId);
-        return $module;
-    }
-
-    public function listModules() 
-    {
+    // GET /modules - List all modules
+    public function index() {
         $modules = $this->moduleDAO->getAllModules();
-        foreach($modules as $module) {
-            $moduleId = $module->getModuleId();
-        }
-
         require_once __DIR__ . '/../views/modules/moduleLists.html.php';
     }
 
-    public function store()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $moduleName = $_POST['module_name'];
-            $moduleDescription = $_POST['module_description'];
-
-            $this->createModule($moduleName, $moduleDescription);
-            header('Location: /forum/public/moduleLists');
-            exit();
-        }
-
+    // GET /modules/create - Show form for creating a module
+    public function create() {
         require_once __DIR__ . '/../views/modules/createModule.html.php';
     }
 
-    public function delete()
-    {
-        $moduleId = $_GET['id'] ?? null;
-    
-        if (!$moduleId || !Validation::checkModuleById($moduleId)) {
-            echo "Error: Invalid module ID";
-            exit(); // Stop execution
+    // POST /modules - Store a new module
+    public function store() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
         }
-        
-        $this->moduleDAO->deleteModule($moduleId);
-        header("Location: /forum/public/moduleLists"); // Redirect after deletion
+
+        $moduleName = $_POST['module_name'];
+        $moduleDescription = $_POST['module_description'];
+
+        $this->moduleDAO->createModule($moduleName, $moduleDescription);
+        header('Location: /forum/public/moduleLists');
         exit();
     }
-    
 
-        // require_once __DIR__ . '/../views/deleteModule.html.php';
+    // GET /modules/{id}/edit - Show edit form
+    public function edit() {
+        $moduleId = $_GET['id'] ?? null;
 
-    public function update() 
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $moduleId = $_POST['module_id'];
-            $moduleName = $_POST['module_name'];
-            $moduleDescription = $_POST['module_description'];
-    
-            $moduleDAO = new ModuleDAOImpl();
-    
-            if (!Validation::checkModuleById($moduleId)) {
-                echo "Error: Invalid Module ID.";
-                return;
-            }
-    
-            $moduleDAO->updateModule($moduleId, $moduleName, $moduleDescription);
-            header("Location: /forum/public/moduleLists");
-            exit();
-        } else {
-            $moduleId = $_GET['id'] ?? null;
-    
-            if (!$moduleId) {
-                echo "Error: Module ID is missing.";
-                return;
-            }
-    
-            $moduleDAO = new ModuleDAOImpl();
-            $module = $moduleDAO->getModuleById($moduleId);
-    
-            if (!$module) {
-                echo "Error: Module not found.";
-                return;
-            }
-    
-            require_once __DIR__ . '/../views/modules/updateModule.html.php';
+        if (!$moduleId || !Validation::checkModuleById($moduleId)) {
+            echo "Error: Invalid Module ID.";
+            return;
         }
+
+        $module = $this->moduleDAO->getModuleById($moduleId);
+        require_once __DIR__ . '/../views/modules/updateModule.html.php';
     }
-    
+
+    // POST /modules/{id} - Update an existing module
+    public function update() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
+        }
+
+        $moduleId = $_POST['module_id'];
+        $moduleName = $_POST['module_name'];
+        $moduleDescription = $_POST['module_description'];
+
+        if (!Validation::checkModuleById($moduleId)) {
+            echo "Error: Invalid Module ID.";
+            return;
+        }
+
+        $this->moduleDAO->updateModule($moduleId, $moduleName, $moduleDescription);
+        header("Location: /forum/public/moduleLists");
+        exit();
+    }
+
+    // GET /modules/{id}/delete - Delete a module
+    public function destroy() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
+        }
+
+        $moduleId = $_GET['id'] ?? null;
+
+        if (!$moduleId || !Validation::checkModuleById($moduleId)) {
+            echo "Error: Invalid Module ID.";
+            return;
+        }
+
+        $this->moduleDAO->deleteModule($moduleId);
+        header("Location: /forum/public/moduleLists");
+        exit();
+    }
 }
+?>

@@ -7,7 +7,7 @@ interface UserDAO {
     public function createUser($username, $password, $email); 
     public function getUserById($userId);
     public function getUserByUsername($username);
-    public function updateUser($userId, $username, $password, $email);
+    public function editUser($userId, $username, $password, $email);
     public function deleteUser($userId);
 }
 ?>
