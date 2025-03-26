@@ -29,7 +29,7 @@ class EmailMessageController{
             $emailId = $message->getEmailMessageId();
         }
 
-        require_once __DIR__ . '/../views/messages/messagesList.php';
+        require_once __DIR__ . '/../views/messages/messagesList.html.php';
     }
 }
 ?>

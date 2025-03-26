@@ -12,7 +12,8 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         $this->pdo = $this->db->getConnection();
     }
 
-    public function createPost($title, $content, $userId, $moduleId, $imagePath = null) {
+    public function createPost($title, $content, $userId, $moduleId, $imagePath = null) 
+    {
         $query = "INSERT INTO posts (title, content, user_id, module_id, image_path) 
                 VALUES (:title, :content, :user_id, :module_id, :image_path)";
         $params = [

@@ -56,14 +56,14 @@ class PostController {
                 if (in_array($fileExtension, $allowedExtensions)) {
                     $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
                     
-                    $uploadFileDir = realpath(__DIR__ . '/../../public/uploads');
+                    $uploadFileDir = realpath(__DIR__ . '/../../public/uploads/postAsset');
                     if (!$uploadFileDir) {
                         die("Upload directory not found.");
                     }
                     $dest_path = $uploadFileDir . DIRECTORY_SEPARATOR . $newFileName;
                     
                     if(move_uploaded_file($fileTmpPath, $dest_path)) {
-                        $imagePath = "uploads/" . $newFileName;
+                        $imagePath = "uploads/postAsset/" . $newFileName;
                     } else {
                         echo "Error moving the uploaded file.";
                         return;
@@ -118,14 +118,14 @@ class PostController {
                 if (in_array($fileExtension, $allowedExtensions)) {
                     $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
 
-                    $uploadDir = realpath(__DIR__ . '/../../public/uploads');
+                    $uploadDir = realpath(__DIR__ . '/../../public/uploads/postAsset');
                     if (!$uploadDir) {
                         die("Upload directory not found.");
                     }
                     $destPath = $uploadDir . DIRECTORY_SEPARATOR . $newFileName;
 
                     if (move_uploaded_file($fileTmpPath, $destPath)) {
-                        $imagePath = "uploads/" . $newFileName;
+                        $imagePath = "uploads/postAsset/" . $newFileName;
                     } else {
                         echo "Error moving the uploaded file.";
                         return;

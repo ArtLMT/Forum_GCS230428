@@ -30,6 +30,7 @@ ob_start();
         <?php endforeach ?>
     </div>
 <?php endif ?>
+
 <?php
 $content = ob_get_clean();
 include dirname(__DIR__) . '/layouts/layout.html.php';
