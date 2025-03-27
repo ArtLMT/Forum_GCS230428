@@ -18,11 +18,12 @@ class EmailMessageDAOImpl extends BaseDAO implements EmailMessageDAO {
         $content,
         $userId
     ) {
-        $query = "INSERT INTO emails (title, content, user_id) VALUES (:title, : content, :user_id)";
+        $query = "INSERT INTO emails (title, content, user_id)
+                VALUES (:title, :content, :user_id)";
         $params = [
             ':title' => $title,
             ':content' => $content,
-            ':user_id' => $userId,
+            ':user_id' => $userId
         ];
         $this->executeQuery($query, $params);
     }
@@ -51,6 +52,18 @@ class EmailMessageDAOImpl extends BaseDAO implements EmailMessageDAO {
             $data['create_date'],
             $data['user_id']
         );
+    }
+
+    public function deleteEmail($emailId)
+    {
+        $query = "DELETE FROM emails WHERE email_id = :email_id";
+        $stmt = $this->executeQuery($query,[':email_id' => $emailId]);
+    }
+
+    public function getMessageById($emailId) 
+    {
+        $query = "SELECT * FROM emails WHERE email_id = :email_id";
+        return $this->executeQuery($query,[':email_id' => $emailId]);
     }
 }
 ?>

@@ -37,8 +37,11 @@ $router->post('deleteUser', 'UserController@deleteUser');
 // Email Message router
 $router->get('messageList', 'EmailMessageController@listMessage');
 $router->post('messageList', 'EmailMessageController@listMessage');
-$router->get('createMessage', 'EmailMessageController@createMessage');
-$router->post('createMessage', 'EmailMessageController@createMessage');
+$router->get('createMessagePage', 'EmailMessageController@createMessage');
+$router->post('createMessage', 'EmailMessageController@store');
+$router->get('editMessage', 'EmailMessageController@edit');
+$router->post('updateMessage', 'EmailMessageController@update');
+$router->get('deleteEmailMessage', 'EmailMessageController@destroy');
 
 $router->dispatch();
 ?>

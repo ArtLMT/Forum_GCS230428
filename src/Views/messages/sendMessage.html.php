@@ -3,15 +3,18 @@ ob_start();
 ?>
 <h2>Send Feedback</h2>
 
-<form action="forum/public/messageList" method="post">
+<form action="/forum/public/createMessage" method="post" enctype="multipart/form-data">
     <label>Title</label>
-    <input type="text" name="title" required>
+    <input class="text-black" type="text" name="title" required>
     <br>
 
     <label>Conetent</label>
-    <textarea name="content" required></textarea>
+    <textarea class="text-black" name="content" required></textarea>
     <br>
 
+    <label>User Id</label>
+    <textarea class="text-black" name="userId" required></textarea>
+    <br>
     <input type="submit" value ="Send Message">
 </form>
 

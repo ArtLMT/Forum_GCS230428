@@ -14,10 +14,24 @@ class EmailMessageController{
         $this->userDAO = new UserDAOImpl();
     }
 
-    public function createMessage($title, $content, $userId)
+    public function store()
     {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
+        }
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+        $userId = $_POST['userId'];
         $this->emailDAO->sendMessage($title, $content, $userId);
+        header("Location: /forum/public/messageList");
+        exit();
+    }
 
+    public function createMessage()
+    {
+        require_once __DIR__ . '/../views/messages/sendMessage.html.php';
     }
 
     // need to pass all message to the view
@@ -30,6 +44,41 @@ class EmailMessageController{
         }
 
         require_once __DIR__ . '/../views/messages/messagesList.html.php';
+    }
+
+    public function edit() 
+    {
+        $emailId = $_GET['id'] ?? null;
+        if ($emailId) {
+            $message = $this->emailDAO->getMessageById($emailId);
+            require_once __DIR__ . '/../views/messages/editMessages.html.php';
+        } else {
+            echo "Message ID not provided";
+        }
+    }
+
+    public function update()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
+        }
+    }
+
+    public function destroy() 
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
+        }
+
+        $emailId = $_GET['id'] ?? null;
+        $this->emailDAO->deleteEmail($emailId);
+
+        header("Location:/forum/public/messageList/");
+        exit();
     }
 }
 ?>

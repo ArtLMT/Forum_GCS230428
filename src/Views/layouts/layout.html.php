@@ -30,10 +30,12 @@
         <!-- Side Menu -->
         <div class="bg-slate-900 text-white sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] flex flex-col p-4 border-r border-solid border-green-500">
             <a class="mb-2 hover:bg-stone-300" href="/forum/public/createModule">Create Module</a>
-            <a class="side-menu-content mb-2 hover:bg-stone-300" href="">Feedback</a>
             <hr class="mb-4 mt-2">
             <a class ="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/userLists">List all user</a>
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/signIn">Create User</a>
+            <hr class="mb-4 mt-2">
+            <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/createMessagePage">Give Feedback</a>
+            <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/messageList">Feedback</a>
             <a class="side-menu-content logout mt-auto hover:bg-stone-300" href="">Logout</a>   
         </div>
 
