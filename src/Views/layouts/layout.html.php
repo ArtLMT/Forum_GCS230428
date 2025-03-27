@@ -11,7 +11,7 @@
 </head>
 <body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border">
     <!-- Navigation Bar -->
-    <header class="fixed top-0 w-full h-[4rem] bg-neutral-800 z-50 border-b border-solid border-green-500">
+    <header class="fixed top-0 w-full h-[4rem] bg-neutral-800 z-50 border-b border-solid border-green-500 shadow-md shadow-green-500">
         <nav class="flex items-center h-full px-16 text-white font-semibold">
             <a class="nav-home text-2xl flex-[2] min-w-[20%] font-black text-white p-2" href="/forum/public/">Study-Hub</a>
             <p class="flex-[4] min-w-[40%] text-center">Search bar</p>
@@ -28,7 +28,7 @@
     <!-- Main Section -->
     <main class="flex-1 flex pt-[4rem] bg-gray-800 text-white">
         <!-- Side Menu -->
-        <div class="bg-black text-white sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] flex flex-col p-4 border-r border-solid border-green-500">
+        <div class="bg-slate-900 text-white sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] flex flex-col p-4 border-r border-solid border-green-500">
             <a class="mb-2 hover:bg-stone-300" href="/forum/public/createModule">Create Module</a>
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="">Feedback</a>
             <hr class="mb-4 mt-2">

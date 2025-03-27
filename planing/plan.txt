@@ -83,3 +83,10 @@ Separation of Concerns (SoC) – The controller shouldn’t handle data formatti
 Security & Flexibility – If you handle data selection (like adding username) inside the controller, you limit flexibility. The view should decide how to present the data.
 Easier Testing & Debugging – When your controller only returns objects, it's easier to write unit tests and debug without worrying about HTML or templates.
 Better Maintainability – If you later change how data is displayed, you only update the view instead of modifying the controller.
+
+htmlspecialchars: use to prevent hmlt and js code to be executed
+-> use when:
+    display
+    user input data
+    display in tags: <p></p> <h1></h1> etc
+However, its not needed when there's a strictly rules, such as numberic field, or file

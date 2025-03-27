@@ -5,6 +5,7 @@ ob_start(); // Start output buffering
 <?php if(!empty($modules)) : ?>
     <div>
         <?php foreach($modules as $module) : ?>
+            <hr class="mt-2 mb-2">
             <div class="module">
                 <div class="module-header">
                     <h2><?= htmlspecialchars($module->getModuleName()) ?></h2>
@@ -17,9 +18,6 @@ ob_start(); // Start output buffering
                     <a href="/forum/public/deleteModule?id=<?= htmlspecialchars($module->getModuleId()) ?>" onclick="return confirm('Are you sure?');">Delete</a>
                 </div>
             </div>
-            <br>
-            <p>======================================</p>
-            <br>
         <?php endforeach; ?>
     </div>
 <?php else : ?>

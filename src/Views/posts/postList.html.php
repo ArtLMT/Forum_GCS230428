@@ -27,7 +27,7 @@ $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
                 </div>
 
                 <div class="post-content">
-                    <p class= "mr-[4rem] ml-[4rem] mt-[1rem] mb-[1rem]"><?= htmlspecialchars($post->getContent()) ?></p>
+                    <p class= "mr-[4rem] ml-[4rem] mt-[1rem] mb-[1rem]"><?= htmlspecialchars($post->getContent())?></p>
                     <?php if ($post->getPostImage()) : ?>
                         <!-- <?php var_dump($post->getPostImage()); ?> -->
                         <img class="m-auto" src="/forum/public/<?= htmlspecialchars($post->getPostImage()) ?>" alt="Post Image" style="max-width:200px;">

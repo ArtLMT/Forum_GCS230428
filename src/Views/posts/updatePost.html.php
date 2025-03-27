@@ -13,12 +13,12 @@ ob_start();
     <textarea name="content" required><?= htmlspecialchars($post->getContent()) ?></textarea><br>
 
     <label>Module ID:</label>
-    <input type="number" name="module_id" value="<?= htmlspecialchars($post->getModuleId()) ?>" required><br>
+    <input type="number" name="module_id" value="<?=$post->getModuleId() ?>" required><br>
 
     <!-- Display current image (if exists) -->
     <?php if ($post->getPostImage()) : ?>
         <p>Current Image:</p>
-        <img src="/forum/public/<?= htmlspecialchars($post->getPostImage())?>" alt="Current Image" style="max-width:200px;">
+        <img src="/forum/public/<?=$post->getPostImage()?>" alt="Current Image" style="max-width:200px;">
         <br>
         <!-- Option to remove image -->
         <label>

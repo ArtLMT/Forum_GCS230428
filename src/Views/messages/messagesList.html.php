@@ -15,16 +15,14 @@ ob_start();
                             <?php
                                 $userId = $message->getUserId();
                                 $username = $userDAO->getUsername($userId);
-                                echo htmlspecialchars($username); 
+                                echo htmlspecialchars($username);
                             ?>
                         </h1>
                         <h2><?=htmlspecialchars($message->getTitle())?></h2>
                     </div>
                 </div>
                 <div>
-                    <?php   
-                        echo htmlspecialchars($message->getContent());
-                    ?>
+                    <?=htmlspecialchars($message->getContent())?>
                 </div>
             </div>
         <?php endforeach ?>
