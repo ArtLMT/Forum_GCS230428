@@ -7,7 +7,7 @@ $router = new Router();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Register other routes
+//
 $router->get('', 'PostController@index'); 
 $router->get('createPost', 'PostController@createPost');  
 $router->post('createPost', 'PostController@store'); 
@@ -33,6 +33,7 @@ $router->get('updateUser', 'UserController@editUser');
 $router->post('updateUser' ,'UserController@updateUser');
 $router->get('deleteUser', 'UserController@deleteUser');
 $router->post('deleteUser', 'UserController@deleteUser');
+$router->get('showProfile', 'UserController@showProfile');
 
 // Email Message router
 $router->get('messageList', 'EmailMessageController@listMessage');

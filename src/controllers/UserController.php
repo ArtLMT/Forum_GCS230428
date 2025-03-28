@@ -38,7 +38,7 @@ class UserController {
     public function editUser() {
         $userId = $_GET['user_id'];
         $user = $this->userDAO->getUserById($userId);
-        require_once __DIR__ . '/../views/users/profile.html.php';
+        require_once __DIR__ . '/../views/users/editUser.html.php';
     }
 
     public function updateUser() {
@@ -87,6 +87,11 @@ class UserController {
         }
     }
 
+    public function showProfile() {
+        $userId = $_GET['id'];
+        $user = $this->userDAO->getUserById($userId);
+        require_once __DIR__ . '/../views/users/profile.html.php';
+    }
 
     public function login() 
     {

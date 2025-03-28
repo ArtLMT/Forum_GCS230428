@@ -11,16 +11,16 @@
 </head>
 <body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border">
     <!-- Navigation Bar -->
-    <header class="fixed top-0 w-full h-[4rem] bg-neutral-800 z-50 border-b border-solid border-green-500 shadow-md shadow-green-500">
+    <header class="fixed top-0 w-full h-[4rem] bg-neutral-800 z-50 border-b border-solid border-green-500 shadow-sm shadow-green-500">
         <nav class="flex items-center h-full px-16 text-white font-semibold">
             <a class="nav-home text-2xl flex-[2] min-w-[20%] font-black text-white p-2" href="/forum/public/">Study-Hub</a>
             <p class="flex-[4] min-w-[40%] text-center">Search bar</p>
             <div class="flex-[4] min-w-[40%] flex justify-end gap-16">
                 <!-- navigate to other functionality page -->
-                <a class="p-3 hover:shadow-md hover:ring-2 hover:ring-green-700 hover:transition hover:duration-300 hover:ease-in-out rounded-xl"href="/forum/public/createPost">Add post</a>
-                <a class="p-3 hover:shadow-md hover:ring-2 hover:ring-green-700 hover:transition hover:duration-300 hover:ease-in-out rounded-xl"href="/forum/public/moduleLists">Modules</a>
-                <a class="p-3 hover:shadow-md hover:ring-2 hover:ring-green-700 hover:transition hover:duration-300 hover:ease-in-out rounded-xl"href="/forum/public/messageList">Messages</a>
-                <a class="p-3 hover:shadow-md hover:ring-2 hover:ring-green-700 hover:transition hover:duration-300 hover:ease-in-out rounded-xl"href="">Profile</a>
+                <a class="p-3 hover:shadow-md hover:shadow-x-2 hover:shadow-green-500 hover:transition hover:duration-200 hover:ease-in-out rounded-xl"href="/forum/public/createPost">Add post</a>
+                <a class="p-3 hover:shadow-md hover:shadow-x-2 hover:shadow-green-500 hover:transition hover:duration-200 hover:ease-in-out rounded-xl"href="/forum/public/moduleLists">Modules</a>
+                <a class="p-3 hover:shadow-md hover:shadow-x-2 hover:shadow-green-500 hover:transition hover:duration-200 hover:ease-in-out rounded-xl"href="/forum/public/messageList">Messages</a>
+                <a class="p-3 hover:shadow-md hover:shadow-x-2 hover:shadow-green-500 hover:transition hover:duration-200 hover:ease-in-out rounded-xl"href="">Profile</a>
             </div>
         </nav>
     </header>
@@ -41,7 +41,7 @@
 
         <!-- Main Content -->
         <div class="flex-1">
-            <div class="post-area p-4 w-2/3 mx-auto">
+            <div class="post-area">
                 <?php echo $content; ?>
             </div>
         </div>
