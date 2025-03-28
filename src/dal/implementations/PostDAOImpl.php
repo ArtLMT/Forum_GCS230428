@@ -26,54 +26,25 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         $this->executeQuery($query, $params);
     }
 
-    public function updatePost($postId, $title, $content, $moduleId, $imagePath = null) 
-    {
-        if ($imagePath === '') {
-            // The user wants to remove the image
-            $query = "UPDATE posts
-                      SET title = :title,
-                          content = :content,
-                          module_id = :module_id,
-                          image_path = NULL
-                      WHERE post_id = :post_id";
-            $params = [
-                ':title' => $title,
-                ':content' => $content,
-                ':module_id' => $moduleId,
-                ':post_id' => $postId,
-            ];
-        } elseif ($imagePath) {
-            // The user uploaded a new image
-            $query = "UPDATE posts
+    public function updatePost($postId, $title, $content, $moduleId, $imagePath = null) {
+        $query = "UPDATE posts
                 SET title = :title,
                     content = :content,
                     module_id = :module_id,
                     image_path = :image_path
                 WHERE post_id = :post_id";
-            $params = [
-                ':title' => $title,
-                ':content' => $content,
-                ':module_id' => $moduleId,
-                ':image_path' => $imagePath,
-                ':post_id' => $postId,
-            ];
-        } else {
-            // The user didn't remove or replace the image
-            $query = "UPDATE posts
-                      SET title = :title,
-                          content = :content,
-                          module_id = :module_id
-                      WHERE post_id = :post_id";
-            $params = [
-                ':title' => $title,
-                ':content' => $content,
-                ':module_id' => $moduleId,
-                ':post_id' => $postId,
-            ];
-        }
-
-        $this->executeQuery($query, $params); 
-    }   
+    
+        $params = [
+            ':title' => $title,
+            ':content' => $content,
+            ':module_id' => $moduleId,
+            ':post_id' => $postId,
+            ':image_path' => $imagePath
+        ];
+    
+        $this->executeQuery($query, $params);
+    }
+    
 
     public function getPostById($postId) : ?post
     {
@@ -116,7 +87,7 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
     {
         $userDAO = new UserDAOImpl();
         $username = $userDAO->getUserById($data['user_id'])->getUsername();
-         return new Post(
+        return new Post(
             $data['post_id'],        // postId
             $data['title'],          // title
             $data['content'],        // content

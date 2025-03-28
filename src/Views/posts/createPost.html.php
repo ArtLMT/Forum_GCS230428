@@ -6,18 +6,18 @@ ob_start(); // Start output buffering
 
 <form action="/forum/public/createPost" method="post" enctype="multipart/form-data">
     <label>Title:</label>
-    <input type="text" name="title" required><br>
+    <input class="text-gray-700" type="text" name="title" required><br>
     
     <label>Content:</label>
-    <textarea name="content" required></textarea><br>
+    <textarea class="text-gray-700" name="content" required></textarea><br>
     
     <label>User ID:</label>
-    <input type="number" name="user_id" required><br>
+    <input class="text-gray-700" type="number" name="user_id" required><br>
     
     <!-- <label>Module ID:</label>
     <input type="number" name="module_id" required><br> -->
-    <select name="module_id" required>
-    <option value="">Select a Module</option>
+    <select class="text-black"name="module_id" required>
+    <option class="text-black" value="">Select a Module</option>
         <?php foreach ($modules as $module): ?>
             <option value="<?= $module->getModuleId() ?>"><?= htmlspecialchars($module->getModuleName()) ?></option>
         <?php endforeach; ?>

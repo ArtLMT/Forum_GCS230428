@@ -5,6 +5,7 @@ use src\dal\implementations\PostDAOImpl;
 use src\dal\implementations\UserDAOImpl;
 use src\dal\implementations\ModuleDAOImpl;
 use src\utils\Validation;
+use src\utils\Utils;
 
 class PostController {
     private $postDAO;
@@ -40,7 +41,7 @@ class PostController {
         $moduleId = $_POST['module_id'];
 
         // Handle file upload
-        $imagePath = $this->handleImageUpload();
+        $imagePath = Utils::handleImageUpload($_FILES['image'], realpath(__DIR__ . '/../../public/uploads/postAsset'));
 
         // Store post
         $this->postDAO->createPost($title, $content, $userId, $moduleId, $imagePath);
@@ -59,37 +60,52 @@ class PostController {
         }
     }
 
-    // PUT/PATCH /posts/{id} - Update an existing post
+    // Update an existing post
     public function update() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
             echo "Method Not Allowed";
             return;
         }
-
+    
         $postId   = $_POST['post_id'];
         $title    = $_POST['title'];
         $content  = $_POST['content'];
         $moduleId = $_POST['module_id'];
-
+        $removeImage = isset($_POST['remove_image']) ? true : false;
+    
         if (!Validation::checkPostById($postId)) {
             echo "Error: Invalid Post ID.";
             return;
         }
-
+    
         if (!Validation::checkModuleById($moduleId)) {
             echo "Error: Invalid Module ID.";
             return;
         }
-
-        // Handle file upload
-        $imagePath = $this->handleImageUpload();
-
-        // Update post
+    
+        // Retrieve current post data
+        $post = $this->postDAO->getPostById($postId);
+        $existingImage = $post->getPostImage();
+    
+        // Handle file upload (new image)
+        $imagePath = Utils::handleImageUpload($_FILES['image'], realpath(__DIR__ . '/../../public/uploads/postAsset'));
+    
+        // If user checked "Remove Image", delete old image and clear path
+        if ($removeImage && $existingImage) {
+            Utils::deleteImage($existingImage);
+            $imagePath = null; // Clear the image in the database
+        } elseif (!$imagePath) {
+            // If no new image was uploaded, keep the existing image
+            $imagePath = $existingImage;
+        }
+    
+        // Update the post
         $this->postDAO->updatePost($postId, $title, $content, $moduleId, $imagePath);
         header("Location: /forum/public/");
         exit();
     }
+    
 
     // DELETE /posts/{id} - Delete a post
     public function destroy() {
@@ -109,37 +125,6 @@ class PostController {
         $this->postDAO->deletePost($postId);
         header("Location: /forum/public/");
         exit();
-    }
-
-    // Private helper function for image upload
-    private function handleImageUpload() {
-        $imagePath = null;
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $fileTmpPath  = $_FILES['image']['tmp_name'];
-            $fileName     = $_FILES['image']['name'];
-            $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-
-            if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif'])) {
-                $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-                $uploadDir = realpath(__DIR__ . '/../../public/uploads/postAsset');
-
-                if (!$uploadDir) {
-                    die("Upload directory not found.");
-                }
-
-                $destPath = $uploadDir . DIRECTORY_SEPARATOR . $newFileName;
-                if (move_uploaded_file($fileTmpPath, $destPath)) {
-                    $imagePath = "uploads/postAsset/" . $newFileName;
-                } else {
-                    echo "Error moving the uploaded file.";
-                    return null;
-                }
-            } else {
-                echo "Invalid file type.";
-                return null;
-            }
-        }
-        return $imagePath;
     }
 }
 ?>

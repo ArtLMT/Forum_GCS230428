@@ -7,11 +7,11 @@ ob_start();
         <input type="hidden" name="id" value="<?= htmlspecialchars($message->getEmailMessageId()) ?>">
 
         <label>Title:</label>
-        <input type="text" name="title" value="<?= htmlspecialchars($message->getTitle()) ?>" required>
+        <input class="text-gray-700" type="text" name="title" value="<?= htmlspecialchars($message->getTitle()) ?>" required>
         <br>
 
         <label>Content:</label>
-        <textarea name="content" required><?= htmlspecialchars($message->getContent()) ?></textarea>
+        <textarea class="text-gray-700"name="content" required><?= htmlspecialchars($message->getContent()) ?></textarea>
         <br>
 
         <input type="submit" value="Update Message">

@@ -8,13 +8,13 @@ ob_start();
         <input type="hidden" name="post_id" value="<?= htmlspecialchars($post->getPostId()) ?>">
 
         <label>Title:</label>
-        <input type="text" name="title" value="<?= htmlspecialchars($post->getTitle()) ?>" required><br>
+        <input class="text-gray-700" type="text" name="title" value="<?= htmlspecialchars($post->getTitle()) ?>" required><br>
 
         <label>Content:</label>
-        <textarea name="content" required><?= htmlspecialchars($post->getContent()) ?></textarea><br>
+        <textarea class="text-gray-700" name="content" required><?= htmlspecialchars($post->getContent()) ?></textarea><br>
 
         <label>Module ID:</label>
-        <input type="number" name="module_id" value="<?=$post->getModuleId() ?>" required><br>
+        <input class="text-gray-700" type="number" name="module_id" value="<?=$post->getModuleId() ?>" required><br>
 
         <!-- Display current image (if exists) -->
         <?php if ($post->getPostImage()) : ?>
