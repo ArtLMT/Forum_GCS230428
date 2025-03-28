@@ -3,22 +3,37 @@ ob_start(); // Start output buffering
 ?>
 <h1 class="text-center text-3xl">This is profile page / Update page</h1>
 <?php if (isset($user) && $user !== null) : ?>
-    <form class="text-black" action="/forum/public/updateUser" method="post">
+    
+    <form action="/forum/public/updateUser" method="post" enctype="multipart/form-data">
         <input type="hidden" name="user_id" value="<?= htmlspecialchars($user->getUserId()) ?>">
 
         <label>Username:</label>
-        <input type="text" name="username" value="<?=htmlspecialchars($user->getUsername())?>">
+        <input class="text-gray-700" type="text" name="username" value="<?=htmlspecialchars($user->getUsername())?>">
         <br>
 
         <label>password:</label>
-        <input type="text" name="password" value="<?=htmlspecialchars($user->getPassword())?>">
+        <input class="text-gray-700" type="text" name="password" value="<?=htmlspecialchars($user->getPassword())?>">
         <br>
 
         <label>Email:</label>
-        <input type="text" name="email" value="<?=htmlspecialchars($user->getEmail())?>">
+        <input class="text-gray-700" type="text" name="email" value="<?=htmlspecialchars($user->getEmail())?>">
         <br>
 
-        <input type="submit" value = "Update User">
+        <?php if ($user->getUserImage()) : ?>
+            <img src="/forum/public/<?=$user->getUserImage()?>" alt="">
+            <p>Current image</p>
+            <br>
+            <label>
+                <input type="checkbox" name="remove_image" value ="1">
+                remove this image
+            </label>
+        <?php endif; ?>
+
+        <label>Upload profile picture</label>
+        <input type="file" name="image">
+        <br>
+
+        <input class="p-2 border-2 rounded-xl text-center"type="submit" value = "Update User">
     </form>
 <?php else: ?>
     <p>Error: User not found.</p>

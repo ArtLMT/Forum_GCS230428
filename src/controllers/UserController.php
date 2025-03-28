@@ -5,6 +5,7 @@ session_start();
 
 use src\dal\implementations\UserDAOImpl;
 use src\dal\implementations\PostDAOImpl;
+use src\utils\Utils;
 
 class UserController {
     private $userDAO;
@@ -46,8 +47,26 @@ class UserController {
             $username = $_POST['username'];
             $password = $_POST['password'];
             $email = $_POST['email'];
-            $this->userDAO->editUser($username, $password, $email, $userId);
-            header("Location: /forum/public/userLists");
+            $removeImage = isset($_POST['remove_image']) ? true : false;
+
+            $user = $this->userDAO->getUserById($userId);
+            $existingImage = $user->getUserImage();
+
+     
+            // Handle file upload (new image)
+            $imagePath = Utils::handleImageUpload($_FILES['image'], realpath(__DIR__ . '/../../public/uploads/userAsset'));
+        
+            // If user checked "Remove Image", delete old image and clear path
+            if ($removeImage && $existingImage) {
+                Utils::deleteImage($existingImage);
+                $imagePath = null; // Clear the image in the database
+            } elseif (!$imagePath) {
+                // If no new image was uploaded, keep the existing image
+                $imagePath = $existingImage;
+            }
+
+                $this->userDAO->editUser($username, $password, $email, $userId, $imagePath);
+                header("Location: /forum/public/userLists");
         } 
     }
 

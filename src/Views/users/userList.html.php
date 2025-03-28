@@ -20,6 +20,12 @@ ob_start();
             <p>getPassword</p>
             <div><?=htmlspecialchars($user->getPassword())?></div>
             <br>
+            
+            <?php if ($user->getUserImage()) : ?>
+                <p>Profile Picture</p>
+                <img src="/forum/public/<?=$user->getUserImage()?>" alt="Profile picture">
+            <?php endif ?>
+
             <div class="flex gap-4 justify-end text-center">
                 <a class="bg-green-400 border-solid border-green-500 border-2 p-2 w-20"href="/forum/public/updateUser?user_id=<?= htmlspecialchars($user->getUserId())?>">Edit</a>
                 <form action="/forum/public/deleteUser" method="POST" onsubmit="return confirm('Are you sure?');">

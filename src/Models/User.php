@@ -95,7 +95,7 @@ class User {
         return $this->image_path;
     }
 
-    public function setImagePath($image_path) 
+    public function setUserImage($image_path) 
     {
         $this->image_path = $image_path;
     }

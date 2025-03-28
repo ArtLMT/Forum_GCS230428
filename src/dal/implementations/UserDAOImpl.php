@@ -26,18 +26,18 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         $this->executeQuery($query, $params);
     }
 
-    public function verifyUser($username, $password) : ?User
-    {
-        $query = "SELECT * FROM users WHERE username = :username";
-        $params = [':username' => $username];
-        $stmt = $this->executeQuery($query, $params);
-        $user = $stmt->fetch();
+    // public function verifyUser($username, $password) : ?User
+    // {
+    //     $query = "SELECT * FROM users WHERE username = :username";
+    //     $params = [':username' => $username];
+    //     $stmt = $this->executeQuery($query, $params);
+    //     $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password'])) {
-            return new User($user['username'], $user['password'], $user['email'], $user['user_id']);
-        }
-        return null; // Return null if authentication fails
-    }
+    //     if ($user && password_verify($password, $user['password'])) {
+    //         return new User($user['username'], $user['password'], $user['email'], $user['user_id']);
+    //     }
+    //     return null; // Return null if authentication fails
+    // }
 
 
     // Need to do: Validate and handle if there isn't a user with the given id
@@ -52,7 +52,16 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
             return null; // Return null if user is not found
         }
 
-        return new User($user['username'], $user['password'], $user['email'], $user['user_id']);
+        return new User(
+            $user['username'],
+            $user['password'],
+            $user['email'],
+            $user['user_id'],
+            $user['timestamp'] ?? null,
+            $user['updated_timestamp'] ?? null,
+            $user['image_path'] ?? null  // ✅ Include the image path
+        );
+        
     }
 
     // Validate and handle if there isn't a user with the given username
@@ -67,22 +76,33 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
             return null;
         }
 
-        return new User($user['username'], $user['password'], $user['email'], $user['user_id']);
+        return new User(
+            $user['username'],
+            $user['password'],
+            $user['email'],
+            $user['user_id'],
+            $user['timestamp'] ?? null,
+            $user['updated_timestamp'] ?? null,
+            $user['image_path'] ?? null  // ✅ Include the image path
+        );
+        
     }
 
-    public function editUser($username, $password, $email, $userId) 
+    public function editUser($username, $password, $email, $userId, $imagePath) 
     {
         // $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $query = "UPDATE users
                   SET username = :username,
                       password = :password,
-                      email = :email
+                      email = :email,
+                      image_path = :image_path
                   WHERE user_id = :user_id";
         $params = [
             ':username' => $username,
             ':password' => $password,
             ':email'    => $email,
             ':user_id'  => $userId,
+            ':image_path' => $imagePath,
         ];
         $this->executeQuery($query, $params);
     }
@@ -115,15 +135,24 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
 
     public function getAllUsers() : array
     {
-        $query = "SELECT * FROM users";
+        $query = "SELECT * FROM users"; 
         $stmt = $this->executeQuery($query);
         $rows = $stmt->fetchAll();
         $users = [];
         foreach ($rows as $row) {
-            $users[] = new User($row['username'], $row['password'], $row['email'], $row['user_id']);
+            $users[] = new User(
+                $row['username'], 
+                $row['password'], 
+                $row['email'], 
+                $row['user_id'],
+                $row['timestamp'] ?? null,
+                $row['updated_timestamp'] ?? null,
+                $row['image_path'] ?? null // ✅ Include image_path
+            );
         }
         return $users;
     }
+    
 
     public function updatePassword($userId, $newPassword) 
     {
