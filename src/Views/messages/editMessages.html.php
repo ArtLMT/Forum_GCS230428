@@ -2,15 +2,17 @@
 ob_start();
 ?>
 <h2>Update Message</h2>
-<?php if (!isset($message) && $message === null): ?>
+<?php if (isset($message)) : ?>
     <form action="/forum/public/updateMessage" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="email_id" value="<?= htmlspecialchars($message->getEmailMessageId()) ?>">
+        <input type="hidden" name="id" value="<?= htmlspecialchars($message->getEmailMessageId()) ?>">
 
-        <label>title:</label>
-        <input type="text" name="title" value="<?= htmlspecialchars($message->getTitle()) ?>" required><br>
+        <label>Title:</label>
+        <input type="text" name="title" value="<?= htmlspecialchars($message->getTitle()) ?>" required>
+        <br>
 
         <label>Content:</label>
-        <textarea name="content" value="<?= htmlspecialchars($message->getContent()) ?>" required></textarea><br>
+        <textarea name="content" required><?= htmlspecialchars($message->getContent()) ?></textarea>
+        <br>
 
         <input type="submit" value="Update Message">
     </form>
@@ -19,5 +21,5 @@ ob_start();
 <?php endif; ?>
 <?php
 $content = ob_get_clean();
-include dirname(__DIR__) . '/layouts/layout.html.php';
+include __DIR__ . '/../layouts/layout.html.php'; // Include the layout
 ?>

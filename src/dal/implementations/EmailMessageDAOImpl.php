@@ -63,7 +63,22 @@ class EmailMessageDAOImpl extends BaseDAO implements EmailMessageDAO {
     public function getMessageById($emailId) 
     {
         $query = "SELECT * FROM emails WHERE email_id = :email_id";
-        return $this->executeQuery($query,[':email_id' => $emailId]);
+        $stmt = $this->executeQuery($query,[':email_id' => $emailId]);
+        return $this->getMessage($stmt->fetch(\PDO::FETCH_ASSOC));
+    }
+
+    public function updateMessage($emailId, $title, $content)
+    {
+        $query = "UPDATE emails
+                SET title = :title,
+                    content = :content
+                WHERE email_id = :email_id";
+        $params = [
+            ':title' => $title,
+            ':content' => $content,
+            ':email_id' => $emailId,
+        ];
+        $this->executeQuery($query,$params);
     }
 }
 ?>

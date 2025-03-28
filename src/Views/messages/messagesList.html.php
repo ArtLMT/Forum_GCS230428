@@ -23,6 +23,8 @@ ob_start();
                 </div>
                 <div>
                     <?=htmlspecialchars($message->getContent())?>
+                    <br>
+                    id = <?= htmlspecialchars($message->getEmailMessageId()) ?>
                 </div>
                 <div class="flex gap-4 justify-end text-center mr-5 mb-[1rem] mt-[1rem]">
                     <a class="bg-green-400 border-solid border-green-700 border-2 p-1 w-14 text-xs" href="/forum/public/editMessage?id=<?= htmlspecialchars($message->getEmailMessageId()) ?>">Edit</a>

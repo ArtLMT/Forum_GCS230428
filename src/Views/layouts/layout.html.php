@@ -17,10 +17,10 @@
             <p class="flex-[4] min-w-[40%] text-center">Search bar</p>
             <div class="flex-[4] min-w-[40%] flex justify-end gap-16">
                 <!-- navigate to other functionality page -->
-                <a class="p-3 hover:bg-orange-300 rounded-xl"href="/forum/public/createPost">Add post</a>
-                <a class="p-3 hover:bg-orange-300 rounded-xl"href="/forum/public/moduleLists">Modules</a>
-                <a class="p-3 hover:bg-orange-300 rounded-xl"href="/forum/public/messageList">Messages</a>
-                <a class="p-3 hover:bg-orange-300 rounded-xl"href="">Profile</a>
+                <a class="p-3 hover:shadow-md hover:ring-2 hover:ring-green-700 hover:transition hover:duration-300 hover:ease-in-out rounded-xl"href="/forum/public/createPost">Add post</a>
+                <a class="p-3 hover:shadow-md hover:ring-2 hover:ring-green-700 hover:transition hover:duration-300 hover:ease-in-out rounded-xl"href="/forum/public/moduleLists">Modules</a>
+                <a class="p-3 hover:shadow-md hover:ring-2 hover:ring-green-700 hover:transition hover:duration-300 hover:ease-in-out rounded-xl"href="/forum/public/messageList">Messages</a>
+                <a class="p-3 hover:shadow-md hover:ring-2 hover:ring-green-700 hover:transition hover:duration-300 hover:ease-in-out rounded-xl"href="">Profile</a>
             </div>
         </nav>
     </header>
