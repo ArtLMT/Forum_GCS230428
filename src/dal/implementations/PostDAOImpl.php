@@ -62,10 +62,16 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         return $data ? $this->mapToPost($data) : null; // return object
     }
 
-    public function deletePost($postId) 
+    public function getPostByUserId($userId) 
     {
-        $query = "DELETE FROM posts WHERE post_id = :post_id";
-        $stmt = $this->executeQuery($query, [':post_id' => $postId]);
+        $query = "SELECT * FROM posts WHERE user_id = :user_id";
+        $stmt = $this->executeQuery($query, ['user_id' => $userId]);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $posts = [];
+        foreach($rows as $row) {
+            $posts[] = $this->mapToPost($row);
+        }
+        return $posts;
     }
 
     public function getAllPosts() : array
@@ -99,5 +105,12 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
             $data['image_path'] ?? null   // image
         );
     }
+
+    public function deletePost($postId) 
+    {
+        $query = "DELETE FROM posts WHERE post_id = :post_id";
+        $stmt = $this->executeQuery($query, [':post_id' => $postId]);
+    }
+
 }
 ?>

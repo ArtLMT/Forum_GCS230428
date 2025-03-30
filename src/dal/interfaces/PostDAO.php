@@ -6,6 +6,7 @@ interface PostDAO {
     public function updatePost($postId, $title, $content, $moduleId);
     public function getPostById($postId);
     public function getPostByTitle($title);
+    public function getPostByUserId($userId);
     public function deletePost($postId);
     public function getAllPosts();
 }

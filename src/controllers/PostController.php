@@ -15,20 +15,23 @@ class PostController {
     }
 
     // GET /posts - List all posts
-    public function index() {
+    public function index() 
+    {
         $posts = $this->postDAO->getAllPosts();
         require_once __DIR__ . '/../views/posts/postList.html.php';
     }
 
     // GET /posts/create - Show form for creating a post
-    public function createPost() {
+    public function createPost() 
+    {
         $moduleDAO = new ModuleDAOImpl();
         $modules = $moduleDAO->getAllModules();
         require_once __DIR__ . '/../views/posts/createPost.html.php';
     }
 
     // POST /posts - Store a new post
-    public function store() {
+    public function store() 
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
             echo "Method Not Allowed";
@@ -50,7 +53,8 @@ class PostController {
     }
 
     // GET /posts/{id}/edit - Show edit form
-    public function edit() {
+    public function edit() 
+    {
         $postId = $_GET['id'] ?? null;
         if ($postId) {
             $post = $this->postDAO->getPostById($postId);
@@ -61,7 +65,8 @@ class PostController {
     }
 
     // Update an existing post
-    public function update() {
+    public function update() 
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
             echo "Method Not Allowed";
@@ -125,6 +130,13 @@ class PostController {
         $this->postDAO->deletePost($postId);
         header("Location: /forum/public/");
         exit();
+    }
+
+    public function getPostByUserId()
+    {
+        $userId   = $_POST['user_id'];
+        $this->postDAO->getPostByUserId($userId);
+        require_once __DIR__ . '/../views/users/userPosts.html.php';
     }
 }
 ?>
