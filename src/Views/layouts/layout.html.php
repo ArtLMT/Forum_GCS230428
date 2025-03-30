@@ -1,3 +1,14 @@
+<?php
+use src\utils\SessionManager;
+SessionManager::start();
+
+// Check if user is logged in
+if (!SessionManager::get('user_id')) {
+    header("Location: /forum/public/login");
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en" class="hide-scrollbar">
 <head>
@@ -37,7 +48,7 @@
             <hr class="mb-4 mt-2">
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/createMessagePage">Give Feedback</a>
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/messageList">Feedback</a>
-            <a class="side-menu-content logout mt-auto hover:bg-stone-300" href="">Logout</a>   
+            <a class="side-menu-content logout mt-auto hover:bg-stone-300" href="/forum/public/logout">Logout</a>   
         </div>
 
         <!-- Main Content -->

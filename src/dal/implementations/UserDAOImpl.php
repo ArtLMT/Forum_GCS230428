@@ -59,11 +59,18 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
             $user['user_id'],
             $user['timestamp'] ?? null,
             $user['updated_timestamp'] ?? null,
-            $user['image_path'] ?? null  // ✅ Include the image path
+            $user['image_path'] ?? null 
         );
-        
     }
 
+    public function getUserByEmail($email): ?User {
+        $query = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->executeQuery($query, [':email' => $email]);
+        $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $data ? $this->mapToUser($data) : null;
+    }
+    
     // Validate and handle if there isn't a user with the given username
     public function getUserByUsername($username) : ?User
     {

@@ -21,7 +21,7 @@ class UserController {
     }
 
     public function createUser() {
-        require_once __DIR__ . '/../views/users/signInForm.html.php';
+        require_once __DIR__ . '/../views/users/createUser.html.php';
     }
 
     public function store() 

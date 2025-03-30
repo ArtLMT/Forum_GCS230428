@@ -8,49 +8,79 @@ Perhaps this's project structure should look like this
 
     /forum-website 
     ├── /public
+    │   ├── /css
+    │   │   ├── input.css
     │   ├── /assets
     │   │   ├── /css
     │   │   │   ├── style.css
     │   │   ├── /js
     │   │       ├── script.js
     │   │       ├── validation.js
+    │   ├── /uploads
+    │   │       ├──/postAsset # store post's images
+    │   │       ├──/userAsset # store user's images
+    │   ├── .htaccess
     │   ├── index.php # everything start here
-    │   ├── / utils
-    │       ├── Validation.php # Store validate method, currently only have validate if exits
     ├── /src
     │   ├── Router.php
+    │   ├──/style
+    │   │   ├── tailwind.css
     │   ├── /controllers
-    │   │   ├── PostController
-    │   │   ├── CommentController
-    │   │   ├── ModuleController
-    │   │   ├── AuthController
-    │   │   ├── UserController
-    │   ├── /models # only contain getter and setter
-    │   │   ├── User.php        # User model
-    │   │   ├── Post.php        # Post model
-    │   │   ├── Comment.php     # Comment model
-    │   │   ├── Vote.php        # Vote model
+    │   │   ├── AuthController.php
+    │   │   ├── AuthController.php
+    │   │   ├── CommentController.php
+    │   │   ├── EmailMessageController.php
+    │   │   ├── ModuleController.php
+    │   │   ├── PostController.php
+    │   │   ├── UserController.php
     │   ├── /dal
     │   │   ├── /interfaces
-    │   │   │   ├── UserDAO.php       # Interface for User DAO
-    │   │   │   ├── PostDAO.php       # Interface for Post DAO
     │   │   │   ├── CommentDAO.php    # Interface for Comment DAO
+    │   │   │   ├── EmailMessageDAO.php # Interface for EmailMessage DAO
+    │   │   │   ├── ModuleDAO.php     # Interface for Module DAO
+    │   │   │   ├── PostDAO.php       # Interface for Post DAO
+    │   │   │   ├── UserDAO.php       # Interface for User DAO
     │   │   │   ├── VoteDAO.php       # Interface for Vote DAO
     │   │   ├── /implementations
-    │   │   │   ├── UserDAOImpl.php   # Implementation of UserDAO
-    │   │   │   ├── PostDAOImpl.php   # Implementation of PostDAO
     │   │   │   ├── CommentDAOImpl.php # Implementation of CommentDAO
+    │   │   │   ├── EmailMessageDAOImpl.php # Implementation of EmailMessageDAO
+    │   │   │   ├── ModuleDAOImpl.php # Implementation of ModuleDAO
+    │   │   │   ├── PostDAOImpl.php   # Implementation of PostDAO
+    │   │   │   ├── UserDAOImpl.php   # Implementation of UserDAO
     │   │   │   ├── VoteDAOImpl.php   # Implementation of VoteDAO
     │   │   ├── BaseDAO.php # Store function to execute sql
+    │   ├── /models # only contain getter and setter
+    │   │   ├── Comment.php     # Comment model
+    │   │   ├── EmailMessage.php     # EmailMessage model
+    │   │   ├── User.php        # User model
+    │   │   ├── Post.php        # Post model
+    │   │   ├── Vote.php        # Vote model
+    │   ├── / utils
+    │   │   ├── Utils.php
+    │   │   ├── Validation.php # Store validate method, currently only have validate if exits
+    │   │   ├── Auth.php
     │   ├── /views
     │       ├── /layout
     │       │   ├── layout.html.php # Layout of the website, have a container for other view file
-    │       │   ├──
-    │       ├── 
-    │       ├── postList.html.php # Part of they layout, display all post as default
-    │       ├── updatePost.html.php # UI to edit a post
-    │       ├── loginFrom.html.php # Login page
-    │       ├── signIn.html.php # login page Thí and loginFrom should be similar
+    │       ├── /auth
+    │       │   ├── loginFrom.html.php 
+    │       │   ├── signInForm.html.php
+    │       ├── /messages
+    │       │   ├── editMessages.html.php
+    │       │   ├── messagesList.html.php
+    │       │   ├── sendMessage.html.php
+    │       ├── /module
+    │       │   ├── createModule.html.php
+    │       │   ├── moduleLists.html.php
+    │       │   ├── updateModule.html.php
+    │       ├── /post
+    │       │   ├── createPost.html.php
+    │       │   ├── postList.html.php # Part of they layout, display all post as default
+    │       │   ├── updatePost.html.php # UI to edit a post
+    │       ├── /users
+    │       │   ├── editUser.html.php
+    │       │   ├── profile.html.php
+    │       │   ├── userList.html.php
     ├── /config
     │   ├── Database.php    # Handles PDO connection
     │   ├── queries.sql     # Store SQL queries
@@ -90,3 +120,7 @@ htmlspecialchars: use to prevent hmlt and js code to be executed
     user input data
     display in tags: <p></p> <h1></h1> etc
 However, its not needed when there's a strictly rules, such as numberic field, or file
+
+Login system:
+Email and password will be used to verify user
+Not username -> had error since it's not unique

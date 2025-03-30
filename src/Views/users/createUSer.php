@@ -6,18 +6,18 @@ ob_start();
 
 <form action="/forum/public/signIn" method = "post" enctype = "multipart/form-data">
     <label> Username </label>
-    <input class="border-solid border-4" type="text" name="username" required>
+    <input class="border-solid border-2" type="text" name="username" required>
     <br>
 
     <label>Pasword:</label>
-    <input class="border-solid border-4" type="text" name="password">
+    <input class="border-solid border-2" type="text" name="password">
     <br>
 
     <label>email:</label>
-    <input class="border-solid border-4" style ="text" name ="email">
+    <input class="border-solid border-2" style ="text" name ="email">
 
     <br>
-    <input class="border-solid border-4" type="submit" value = "Sign In">
+    <input class="border-solid border-2" type="submit" value = "Sign In">
 </form>
 
 

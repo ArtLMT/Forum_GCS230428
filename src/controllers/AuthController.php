@@ -1,45 +1,59 @@
 <?php
 namespace src\controllers;
 
-use src\utils\Validation;
-use src\dal\implementations\UserDAOImpl;
+use src\dal\implementations\AuthDAOImpl;
+use src\utils\SessionManager;
 
 class AuthController {
-    /**
-     * Display the login form.
-     */
-    public function loginPage() {
-        require_once __DIR__ . '/../views/loginForm.html.php'; // Correct path
+    private $authDAO;
+
+    public function __construct() {
+        $this->authDAO = new AuthDAOImpl();
     }
 
-    /**
-     * Process the login form.
-     */
-    public function login() {
+    public function showLoginForm() {
+        include_once __DIR__ . "/../views/auth/loginForm.html.php"; 
+    }
 
-        $userDAO = new UserDAOImpl(); // Make sure this class exists!
+    public function showSignInForm()
+    {
+        include_once __DIR__ . "/../views/auth/SignInForm.html.php";
+    }
 
+    // POST /auth/login - Handle user login
+    public function login() 
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = Validation::sanitizeInput($_POST['username']);
-            $password = Validation::sanitizeInput($_POST['password']);
-
-            if (!Validation::validateNotEmpty($username) || !Validation::validateNotEmpty($password)) {
-                echo "Username and password are required.";
+            $email = $_POST['email'] ?? '';
+            $password = $_POST['password'] ?? '';
+    
+            $user = $this->authDAO->getUserByEmail($email);
+            echo $getPassword = $user->getPassword();
+            // getUserId -> ra password???
+            // getPassword->username
+    
+            if ($getPassword == $password) {  // ✅ Use object method
+                SessionManager::start();
+                SessionManager::set('user_id', $user->getUserId());
+                SessionManager::set('username', $user->getUsername());
+    
+                // Redirect to dashboard
+                header("Location: /forum/public/");
                 exit();
-            }
-
-            $user = $userDAO->getUserByUsername($username);
-
-            if ($password === $user->getPassword()) {
-                session_start(); // Why?
-                $_SESSION['user_id'] = $user->geUsertId();
-                $_SESSION['username'] = $user->getUsername();
-                header("Location: http://localhost/forum/public/index.php");
-                exit();                
             } else {
-                echo "Invalid credentials. Try again.";
+                echo "Invalid email or password";
+                // $_SESSION['error'] = "Invalid email or password";
+                header("Location: /forum/public/signIn"); // Redirect back to login
+                exit();
             }
         }
     }
+    
+
+    // GET /auth/logout - Handle user logout
+    public function logout() {
+        SessionManager::destroy();
+        include_once __DIR__ . "/../views/auth/loginForm.html.php"; 
+        exit();
+    }
 }
-?>

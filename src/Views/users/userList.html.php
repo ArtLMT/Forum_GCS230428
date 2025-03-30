@@ -23,7 +23,7 @@ ob_start();
             
             <?php if ($user->getUserImage()) : ?>
                 <p>Profile Picture</p>
-                <img src="/forum/public/<?=$user->getUserImage()?>" alt="Profile picture">
+                <img class ="size-[75px]"src="/forum/public/<?=$user->getUserImage()?>" alt="Profile picture">
             <?php endif ?>
 
             <div class="flex gap-4 justify-end text-center">
