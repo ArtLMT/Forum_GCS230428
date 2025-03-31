@@ -3,13 +3,13 @@ ob_start(); // Start output buffering
 
 use src\dal\implementations\UserDAOImpl;
 
-$userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
 ?>
 <div class="w-2/3 mx-auto">
     <?php if (!empty($posts)) : ?>
         <div class="mt-[2%]">
             <?php foreach ($posts as $post) : ?>
                 <?php 
+                    $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
                     $user = $userDAO->getUserById($post->getUserId());
                     $userImage = $user->getUserImage();
                     $username = $userDAO->getUsername($post->getUserId());
