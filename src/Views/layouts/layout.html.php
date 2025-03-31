@@ -1,5 +1,6 @@
 <?php
 use src\utils\SessionManager;
+use src\controllers\UserController;
 SessionManager::start();
 
 // Check if user is logged in
@@ -8,9 +9,18 @@ if (!SessionManager::get('user_id')) {
     exit();
 }
 
+// Get current user
+$userController = new UserController();
+$user = $userController->getCurrentUser();
+
+// if (!$user) {
+//     header("Location: /forum/public/login");
+//     exit();
+// }
+
 ?>
 <!DOCTYPE html>
-<html lang="en" class="hide-scrollbar">
+<html lang="en" class="hide-scrollbar scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +28,7 @@ if (!SessionManager::get('user_id')) {
     <link rel="stylesheet" href="/forum/public/assets/css/reset.css">
     <link rel="stylesheet" href="/forum/public/assets/css/style.css">
     <link rel="stylesheet" href="/forum/public/assets/css/input.css">
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border">
@@ -25,13 +36,19 @@ if (!SessionManager::get('user_id')) {
     <header class="fixed top-0 w-full h-[4rem] bg-neutral-800 z-50 border-b border-solid border-gray-400 shadow-sm shadow-gray-500">
         <nav class="flex items-center h-full px-16 text-white font-semibold">
             <a class="nav-home text-2xl flex-[2] min-w-[20%] font-black text-white p-2" href="/forum/public/">Study-Hub</a>
-            <p class="flex-[4] min-w-[40%] text-center bg-gray-200 text-black rounded-xl">Search bar</p>
-            <div class="flex-[4] min-w-[40%] flex justify-end gap-2">
+            <input class="flex-[4] min-w-[40%] text-center bg-gray-200 text-black rounded-xl" placeholder="Search bar"></input>
+            <div class="flex-[4] min-w-[40%] flex justify-end gap-2 items-center">
                 <!-- Navigate to other functionality page -->
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/createPost">Add post</a>
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/moduleLists">Modules</a>
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/messageList">Messages</a>
-                <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="">Profile</a>
+                <a class="bg-gray-600 text-white rounded-full text-xl font-bold size-[48px] flex items-center justify-center transition duration-400 ease-in-out transform hover:scale-110" href="/forum/public/showProfile?id=<?= htmlspecialchars($user->getUserId())?>">
+                    <?php if ($user->getUserImage()) : ?>
+                        <img src="/forum/public/<?= htmlspecialchars($user->getUserImage()) ?>" class="size-[48px] rounded-full object-cover" alt="User Profile">
+                    <?php else : ?>
+                        <?= strtoupper(substr($user->getUsername($user->getUserId()), 0, 1)) ?>
+                    <?php endif; ?>
+                </a>
             </div>
 
         </nav>
@@ -48,7 +65,8 @@ if (!SessionManager::get('user_id')) {
             <hr class="mb-4 mt-2">
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/createMessagePage">Give Feedback</a>
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/messageList">Feedback</a>
-            <a class="side-menu-content logout mt-auto hover:bg-stone-300" href="/forum/public/logout">Logout</a>   
+            <a class="flex flex-row w-[100%] side-menu-content logout mt-auto hover:bg-red-700 p-[10px] rounded-xl items-center" href="/forum/public/logout"><img class="w-[36px] mr-[10px]" src="/forum/public/assets/img/logout.svg" alt="logout">logout</a>
+        
         </div>
 
         <!-- Main Content -->

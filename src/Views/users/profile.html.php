@@ -1,7 +1,9 @@
 <?php 
 ob_start(); // Start output buffering
 use src\dal\implementations\PostDAOImpl;
+use src\utils\SessionManager;
 $postDAO = new PostDAOImpl();
+$currentUser = SessionManager::get('user_id');
 ?>
 <!-- <h1 class="text-center text-3xl">This is profile page</h1> -->
 <div class="flex w-5/6 mx-auto rounded-lg my-[40px]"> 
@@ -51,10 +53,13 @@ $postDAO = new PostDAOImpl();
                         <div class="truncate w-96 ml-4">
                             <?=$post->getContent()?>
                         </div>
-                        <div class="flex gap-4 justify-end text-center mr-5 mb-[1rem]">
-                          <a class="bg-green-400 border-solid border-gray-600 border-2 p-1 w-14 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>">Edit</a>
-                          <a class="bg-red-400 border-solid border-red-500 border-2 p-1 w-14 text-xs" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');">Delete</a>
-                         </div>
+                        <!-- Auth check -->
+                        <?php if($currentUser == $user->getUserId()) :?>
+                            <div class="flex gap-4 justify-end text-center mr-5 mb-[1rem]">
+                            <a class="bg-green-400 border-solid border-gray-600 border-2 p-1 w-14 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>">Edit</a>
+                            <a class="bg-red-400 border-solid border-red-500 border-2 p-1 w-14 text-xs" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');">Delete</a>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>

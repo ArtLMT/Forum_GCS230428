@@ -44,7 +44,7 @@ class AuthController {
                 exit();
             } else {
                 echo "Invalid email or password";
-                $_SESSION['error'] = "Invalid email or password";
+                SessionManager::set('error', 'Invalid email or password.');
                 header("Location: /forum/public/login"); // Redirect back to login
                 exit();
             }

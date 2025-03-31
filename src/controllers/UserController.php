@@ -1,10 +1,9 @@
 <?php
 namespace src\controllers;
 
-session_start();
-
 use src\dal\implementations\UserDAOImpl;
 use src\dal\implementations\PostDAOImpl;
+use src\utils\SessionManager;
 use src\utils\Utils;
 
 class UserController {
@@ -93,9 +92,12 @@ class UserController {
         require_once __DIR__ . '/../views/users/profile.html.php';
     }
 
-    public function login() 
-    {
-
+    public function getCurrentUser() {
+        $userId = SessionManager::get('user_id');
+        if ($userId) {
+            return $this->userDAO->getUserById($userId);
+        }
+        return null;
     }
 }
 ?>

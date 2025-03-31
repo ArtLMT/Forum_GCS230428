@@ -124,3 +124,12 @@ However, its not needed when there's a strictly rules, such as numberic field, o
 Login system:
 Email and password will be used to verify user
 Not username -> had error since it's not unique
+
+DAO and Controller:
+-> call Controller when: 
+    -> handling requests from users (e.g., processing form submissions)
+    -> performing business logic before saving or retrieving data.
+-> call DAO when:
+    ->  directly interacting with the database (CRUD operations)
+    ->  inside a controller and need to get/save users
+    -> If another class needs raw database data without extra processing
