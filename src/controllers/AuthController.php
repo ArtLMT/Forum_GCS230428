@@ -1,14 +1,17 @@
 <?php
 namespace src\controllers;
 
-use src\dal\implementations\AuthDAOImpl;
+// use src\dal\implementations\AuthDAOImpl;
+use src\dal\implementations\UserDAOImpl;
 use src\utils\SessionManager;
 
 class AuthController {
     private $authDAO;
+    private $userDAO;
 
     public function __construct() {
-        $this->authDAO = new AuthDAOImpl();
+        // $this->authDAO = new AuthDAOImpl();
+        $this->userDAO = new userDAOImpl();
     }
 
     public function showLoginForm() {
@@ -27,7 +30,7 @@ class AuthController {
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
     
-            $user = $this->authDAO->getUserByEmail($email);
+            $user = $this->userDAO->getUserByEmail($email);
             echo $getPassword = $user->getPassword();
             // getUserId -> ra password???
             // getPassword->username

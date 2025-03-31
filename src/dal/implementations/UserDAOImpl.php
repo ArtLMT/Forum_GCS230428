@@ -68,7 +68,13 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         $stmt = $this->executeQuery($query, [':email' => $email]);
         $data = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        return $data ? $this->mapToUser($data) : null;
+        return new User(
+            $data['username'],
+            $data['password'],
+            $data['email'],
+            $data['user_id'],
+            $data['created_at'] ?? null
+        );
     }
     
     // Validate and handle if there isn't a user with the given username
