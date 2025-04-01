@@ -19,6 +19,9 @@ class PostController {
     public function index() 
     {
         $posts = $this->postDAO->getAllPosts();
+        $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
+        $userController = new UserController();
+        
         require_once __DIR__ . '/../views/posts/postList.html.php';
     }
 
@@ -133,11 +136,9 @@ class PostController {
         exit();
     }
 
-    public function getPostByUserId()
+    public function getPostByUserId($userId)
     {
-        $userId   = $_POST['user_id'];
-        $this->postDAO->getPostByUserId($userId);
-        require_once __DIR__ . '/../views/users/userPosts.html.php';
+        return $this->postDAO->getPostByUserId($userId);
     }
 
     public function getPostById($postId)
@@ -147,10 +148,28 @@ class PostController {
 
     public function openPost()
     {
-        $postId   = $_GET['post_id'];
-        $post = $this->getPostById($postId);
+        // post asset:
+        $post = $this->getPostById($_GET['post_id']);
+        $postImage = $post->getPostImage();
+        $postContent = $post->getContent();
+        $postTitle = $post->getTitle();
+        $postDate = $post->getTimestamp();
+
+        $userDAO = new UserDAOImpl();
+        $user = $userDAO->getUserById($post->getUserId());
+        $userImage = $user->getUserImage();
+        $username = $userDAO->getUsername($post->getUserId());
+        $firstLetter = strtoupper(substr($username, 0, 1)); // Get first letter and make it uppercase
 
         require_once __DIR__ . '/../views/posts/postInDetail.html.php';
     }
+
+    // public function getPostAsset()
+    // {
+    //     $post = $this->getPostById($_GET['post_id']);
+    //     $postImage = $post->getPostImage();
+    //     $postContent = $post->getContent();
+    //     $postTitle = $post->getTitle();
+    // }
 }
 ?>

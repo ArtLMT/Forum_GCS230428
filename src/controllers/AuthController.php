@@ -36,6 +36,7 @@ class AuthController {
     
             if ($getPassword == $password) {
                 SessionManager::start();
+                SessionManager::set('user',$user);
                 SessionManager::set('user_id', $user->getUserId());
                 SessionManager::set('username', $user->getUsername());
     

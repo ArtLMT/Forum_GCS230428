@@ -6,7 +6,7 @@ SessionManager::start();
 
 <h2 class="text-center text-3xl font-bold mb-10 text-gray-800">Login</h2>
 <?php if (isset($_SESSION['error'])) : ?>
-    <p class="error text-black">
+    <p class="error text-red-700 font-bold">
         <?php
         $error = SessionManager::get('error');
         echo htmlspecialchars($error);

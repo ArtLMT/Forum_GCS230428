@@ -3,20 +3,16 @@ ob_start(); // Start output buffering
 
 use src\dal\implementations\UserDAOImpl;
 use src\controllers\UserController;
-
-$title = 'Home';
-
+$title = "Home";
 ?>
 <div class="w-2/3 mx-auto">
     <?php if (!empty($posts)) : ?>
         <div class="mt-[2%] ">
             <?php foreach ($posts as $post) : ?>
                 <?php 
-                    $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
-                    $user = $userDAO->getUserById($post->getUserId());
+                    $user = $userController->getUser($post->getUserId());
                     $userImage = $user->getUserImage();
                     $username = $userDAO->getUsername($post->getUserId());
-                    $firstLetter = strtoupper(substr($username, 0, 1)); // Get first letter and make it uppercase
                 ?>
                 <div class="post bg-slate-900 border-solid border-2 rounded-lg border-gray-600 hover:border-gray-300 duration-700 ease-in-out transform hover:scale-105">
                     <div class="post-header flex p-3">
@@ -24,14 +20,14 @@ $title = 'Home';
                             <?php if ($userImage) : ?>
                                 <img src="/forum/public/<?= htmlspecialchars($userImage) ?>" class="size-[60px] rounded-full object-cover" alt="User Profile">
                             <?php else : ?>
-                                <?= $firstLetter ?>
+                                <?= strtoupper(substr($username, 0, 1)) // Get first letter and make it uppercase  ?> 
                             <?php endif; ?>
                         </a>
                         <div class='ml-3'>
                             <h3 class="text-base">
                                 <?= htmlspecialchars($username); ?>
                                 
-                                <?= htmlspecialchars($post->getTimestamp()) ?>
+                                <?= htmlspecialchars($post->getTimestamp());?>
                             </h3>
                             <h2 class="m-0 text-3xl leading-1"><?= htmlspecialchars($post->getTitle()) ?></h2>
                         </div>
@@ -42,7 +38,7 @@ $title = 'Home';
                         <a href="/forum/public/postDetail?post_id=<?= $post->getPostId()?>">
                             <p class= "mx-[5rem] my-[1rem] truncate w-96"><?= htmlspecialchars($post->getContent())?></p>
                             <?php if ($post->getPostImage()) : ?>
-                                <img class="m-auto object-cover max-w-[900px] max-h-[600px]" src="/forum/public/<?= htmlspecialchars($post->getPostImage()) ?>" alt="Post Image">
+                                <img class="m-auto mb-[1rem] object-cover max-w-[900px] max-h-[600px]" src="/forum/public/<?= htmlspecialchars($post->getPostImage()) ?>" alt="Post Image">
                             <?php endif; ?>
                         </a>
                     </div>

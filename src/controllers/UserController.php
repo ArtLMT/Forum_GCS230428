@@ -2,7 +2,7 @@
 namespace src\controllers;
 
 use src\dal\implementations\UserDAOImpl;
-use src\dal\implementations\PostDAOImpl;
+use src\controllers\PostController;
 use src\utils\SessionManager;
 use src\utils\Utils;
 
@@ -19,7 +19,8 @@ class UserController {
         require_once __DIR__ . '/../views/users/userList.html.php';
     }
 
-    public function createUser() {
+    public function createUser() 
+    {
         require_once __DIR__ . '/../views/users/createUser.html.php';
     }
 
@@ -34,13 +35,15 @@ class UserController {
         }
     }
 
-    public function editUser() {
+    public function editUser() 
+    {
         $userId = $_GET['user_id'];
         $user = $this->userDAO->getUserById($userId);
         require_once __DIR__ . '/../views/users/editUser.html.php';
     }
 
-    public function updateUser() {
+    public function updateUser() 
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userId = $_POST['user_id'];
             $username = $_POST['username'];
@@ -86,18 +89,38 @@ class UserController {
         }
     }
 
-    public function showProfile() {
+    public function showProfile() 
+    {
         $userId = $_GET['id'];
+        // user asset:
         $user = $this->userDAO->getUserById($userId);
+        $userImage = $user->getUserImage();
+        $userName = $user->getUserName($userId);
+        $password = $user->getPassword();
+        $userMail = $user->getEmail();
+
+        $authController = new AuthController();
+        $postControl = new PostController();
+
+        $posts = $postControl->getPostByUserId($userId);
+
+        // $isOwner = $user === $currentUser ? true : false;
+
         require_once __DIR__ . '/../views/users/profile.html.php';
     }
 
-    public function getCurrentUser() {
+    public function getCurrentUser() 
+    {
         $userId = SessionManager::get('user_id');
         if ($userId) {
             return $this->userDAO->getUserById($userId);
         }
         return null;
+    }
+
+    public function getUser($userId)
+    {
+        return $this->userDAO->getUserById($userId);
     }
 }
 ?>
