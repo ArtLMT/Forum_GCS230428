@@ -122,5 +122,10 @@ class UserController {
     {
         return $this->userDAO->getUserById($userId);
     }
+
+    public function getUserByEmail($email)
+    {
+        return $this->userDAO->getUserByEmail($email);
+    }
 }
 ?>

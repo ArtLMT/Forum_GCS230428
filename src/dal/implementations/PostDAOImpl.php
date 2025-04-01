@@ -62,7 +62,7 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         return $data ? $this->mapToPost($data) : null; // return object
     }
 
-    public function getPostByUserId($userId) : array
+    public function getPostByUserId($userId) 
     {
         $query = "SELECT * FROM posts WHERE user_id = :user_id";
         $stmt = $this->executeQuery($query, ['user_id' => $userId]);

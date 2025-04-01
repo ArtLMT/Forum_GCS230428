@@ -1,16 +1,15 @@
 <?php
 namespace src\controllers;
 
-use src\dal\implementations\UserDAOImpl;
 use src\controllers\UserController;
 use src\utils\SessionManager;
 
 class AuthController {
     private $authDAO;
-    private $userDAO;
+    private $userControl;
 
     public function __construct() {
-        $this->userDAO = new userDAOImpl();
+        $this->userControl = new userController();
     }
 
     public function showLoginForm() 
@@ -29,10 +28,8 @@ class AuthController {
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
     
-            $user = $this->userDAO->getUserByEmail($email);
-            echo $getPassword = $user->getPassword();
-            // getUserId -> ra password???
-            // getPassword->username
+            $user = $this->userControl->getUserByEmail($email);
+            $getPassword = $user->getPassword();
     
             if ($getPassword == $password) {
                 SessionManager::start();

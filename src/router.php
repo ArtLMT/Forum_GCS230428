@@ -1,8 +1,6 @@
 <?php
 namespace src;
 
-
-
 class Router {
     private $routes = [];
 
