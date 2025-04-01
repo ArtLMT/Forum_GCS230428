@@ -10,7 +10,6 @@ class Comment {
     private $userId;
     private $postId;
     private $timestamp;
-    private $updatedTimestamp;
 
     public function __construct($commentId, $content, $voteScore, $userId, $postId, $timestamp, $updatedTimestamp) 
     {
@@ -61,16 +60,6 @@ class Comment {
     public function setTimeStamp($timestamp) 
     {
         $this->timestamp = $timestamp;
-    }
-
-    public function getUpdatedTimeStamp() 
-    {
-        return $this->updatedTimestamp;
-    }
-
-    public function setUpdatedTimeStamp($updatedTimestamp) 
-    {
-        $this->updatedTimestamp = $updatedTimestamp;
     }
 }
 ?>

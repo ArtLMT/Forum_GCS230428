@@ -7,7 +7,7 @@ $router = new Router();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-//
+// Post's routes
 $router->get('', 'PostController@index'); 
 $router->get('createPost', 'PostController@createPost');  
 $router->post('createPost', 'PostController@store'); 
@@ -16,6 +16,7 @@ $router->get('update', 'PostController@edit');
 // $router->post('delete', 'PostController@destroy');
 $router->get('delete', 'PostController@destroy');
 $router->get('userPost', 'PostController@getPostByUserId');
+$router->get('postDetail', 'PostController@openPost');
 
 // Module's routes
 $router->get('moduleLists', 'ModuleController@index'); // List all posts

@@ -4,6 +4,7 @@ namespace src\controllers;
 use src\dal\implementations\PostDAOImpl;
 use src\dal\implementations\UserDAOImpl;
 use src\dal\implementations\ModuleDAOImpl;
+use src\controllers\UserController;
 use src\utils\Validation;
 use src\utils\Utils;
 
@@ -137,6 +138,19 @@ class PostController {
         $userId   = $_POST['user_id'];
         $this->postDAO->getPostByUserId($userId);
         require_once __DIR__ . '/../views/users/userPosts.html.php';
+    }
+
+    public function getPostById($postId)
+    {
+        return $this->postDAO->getPostById($postId);
+    }
+
+    public function openPost()
+    {
+        $postId   = $_GET['post_id'];
+        $post = $this->getPostById($postId);
+
+        require_once __DIR__ . '/../views/posts/postInDetail.html.php';
     }
 }
 ?>

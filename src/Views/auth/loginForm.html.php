@@ -1,7 +1,7 @@
 <?php
 ob_start();
 use src\utils\SessionManager;
-// SessionManager::start();
+SessionManager::start();
 ?>
 
 <h2 class="text-center text-3xl font-bold mb-10 text-gray-800">Login</h2>

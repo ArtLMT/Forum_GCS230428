@@ -11,9 +11,9 @@ if (!SessionManager::get('user_id')) {
 
 // Get current user
 $userController = new UserController();
-$user = $userController->getCurrentUser();
+$currentUser = $userController->getCurrentUser();
 
-// if (!$user) {
+// if (!$currentUser) {
 //     header("Location: /forum/public/login");
 //     exit();
 // }
@@ -24,7 +24,7 @@ $user = $userController->getCurrentUser();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum</title>
+    <title><?= htmlspecialchars( $title)?></title>
     <link rel="stylesheet" href="/forum/public/assets/css/reset.css">
     <link rel="stylesheet" href="/forum/public/assets/css/style.css">
     <link rel="stylesheet" href="/forum/public/assets/css/input.css">
@@ -42,11 +42,11 @@ $user = $userController->getCurrentUser();
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/createPost">Add post</a>
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/moduleLists">Modules</a>
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/messageList">Messages</a>
-                <a class="bg-gray-600 text-white rounded-full text-xl font-bold size-[48px] flex items-center justify-center transition duration-400 ease-in-out transform hover:scale-110" href="/forum/public/showProfile?id=<?= htmlspecialchars($user->getUserId())?>">
-                    <?php if ($user->getUserImage()) : ?>
-                        <img src="/forum/public/<?= htmlspecialchars($user->getUserImage()) ?>" class="size-[48px] rounded-full object-cover" alt="User Profile">
+                <a class="bg-gray-600 text-white rounded-full text-xl font-bold size-[48px] flex items-center justify-center transition duration-400 ease-in-out transform hover:scale-110" href="/forum/public/showProfile?id=<?= htmlspecialchars($currentUser->getUserId())?>">
+                    <?php if ($currentUser->getUserImage()) : ?>
+                        <img src="/forum/public/<?= htmlspecialchars($currentUser->getUserImage()) ?>" class="size-[48px] rounded-full object-cover" alt="User Profile">
                     <?php else : ?>
-                        <?= strtoupper(substr($user->getUsername($user->getUserId()), 0, 1)) ?>
+                        <?= strtoupper(substr($currentUser->getUsername($currentUser->getUserId()), 0, 1)) ?>
                     <?php endif; ?>
                 </a>
             </div>
@@ -57,7 +57,7 @@ $user = $userController->getCurrentUser();
     <!-- Main Section -->
     <main class="flex-1 flex pt-[4rem] bg-gray-800 text-white">
         <!-- Side Menu -->
-        <div class="bg-slate-900 text-white sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] flex flex-col p-4 border-r border-solid border-gray-400">
+        <div class="bg-slate-900 text-white sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] flex flex-col p-4 border-r border-solid border-gray-400 font-semibold">
             <a class="mb-2 hover:bg-stone-300" href="/forum/public/createModule">Create Module</a>
             <hr class="mb-4 mt-2">
             <a class ="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/userLists">List all user</a>
@@ -65,7 +65,7 @@ $user = $userController->getCurrentUser();
             <hr class="mb-4 mt-2">
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/createMessagePage">Give Feedback</a>
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/messageList">Feedback</a>
-            <a class="flex flex-row w-[100%] side-menu-content logout mt-auto hover:bg-red-700 p-[10px] rounded-xl items-center" href="/forum/public/logout"><img class="w-[36px] mr-[10px]" src="/forum/public/assets/img/logout.svg" alt="logout">logout</a>
+            <a class="flex flex-row w-[100%] side-menu-content logout mt-auto hover:bg-red-700 hover:scale-105 hover:animate-bounce p-[10px] rounded-xl items-center transition duration-400 ease-in-out transform" href="/forum/public/logout"><img class="w-[36px] mr-[10px]" src="/forum/public/assets/img/logout.svg" alt="logout">logout</a>
         
         </div>
 

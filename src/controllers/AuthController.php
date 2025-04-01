@@ -1,8 +1,8 @@
 <?php
 namespace src\controllers;
 
-// use src\dal\implementations\AuthDAOImpl;
 use src\dal\implementations\UserDAOImpl;
+use src\controllers\UserController;
 use src\utils\SessionManager;
 
 class AuthController {
@@ -55,5 +55,14 @@ class AuthController {
         SessionManager::destroy();
         include_once __DIR__ . "/../views/auth/loginForm.html.php"; 
         exit();
+    }
+
+    public function isOwner($userId)
+    {
+        $userController = new UserController();
+        $currentUser = $userController->getCurrentUser();
+        $currentUserId = $currentUser->getUserId();
+
+        return $userId == $currentUserId ? true : false;
     }
 }

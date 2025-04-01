@@ -2,11 +2,14 @@
 ob_start(); // Start output buffering
 
 use src\dal\implementations\UserDAOImpl;
+use src\controllers\UserController;
+
+$title = 'Home';
 
 ?>
 <div class="w-2/3 mx-auto">
     <?php if (!empty($posts)) : ?>
-        <div class="mt-[2%]">
+        <div class="mt-[2%] ">
             <?php foreach ($posts as $post) : ?>
                 <?php 
                     $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
@@ -36,10 +39,12 @@ use src\dal\implementations\UserDAOImpl;
                     <hr class="min-w-[85%] place-self-center">
 
                     <div class="post-content">
-                        <p class= "mx-[5rem] my-[1rem] truncate w-96"><?= htmlspecialchars($post->getContent())?></p>
-                        <?php if ($post->getPostImage()) : ?>
-                            <img class="m-auto object-cover max-w-[900px] max-h-[600px]" src="/forum/public/<?= htmlspecialchars($post->getPostImage()) ?>" alt="Post Image">
-                        <?php endif; ?>
+                        <a href="/forum/public/postDetail?post_id=<?= $post->getPostId()?>">
+                            <p class= "mx-[5rem] my-[1rem] truncate w-96"><?= htmlspecialchars($post->getContent())?></p>
+                            <?php if ($post->getPostImage()) : ?>
+                                <img class="m-auto object-cover max-w-[900px] max-h-[600px]" src="/forum/public/<?= htmlspecialchars($post->getPostImage()) ?>" alt="Post Image">
+                            <?php endif; ?>
+                        </a>
                     </div>
                 </div>
                 <br>
