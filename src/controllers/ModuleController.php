@@ -11,18 +11,23 @@ class ModuleController {
         $this->moduleDAO = new ModuleDAOImpl();
     }
 
-    // GET /modules - List all modules
+    public function getAllModules()
+    {
+        return $modules = $this->moduleDAO->getAllModules();
+    }
+
+    // List all modules
     public function index() {
         $modules = $this->moduleDAO->getAllModules();
         require_once __DIR__ . '/../views/modules/moduleLists.html.php';
     }
 
-    // GET /modules/create - Show form for creating a module
+    // Show form for creating a module
     public function create() {
         require_once __DIR__ . '/../views/modules/createModule.html.php';
     }
 
-    // POST /modules - Store a new module
+    // Store a new module
     public function store() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
@@ -38,8 +43,9 @@ class ModuleController {
         exit();
     }
 
-    // GET /modules/{id}/edit - Show edit form
-    public function edit() {
+    // Show edit form
+    public function edit() 
+    {
         $moduleId = $_GET['id'] ?? null;
 
         if (!$moduleId || !Validation::checkModuleById($moduleId)) {
@@ -51,8 +57,9 @@ class ModuleController {
         require_once __DIR__ . '/../views/modules/updateModule.html.php';
     }
 
-    // POST /modules/{id} - Update an existing module
-    public function update() {
+    // Update an existing module
+    public function update() 
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
             echo "Method Not Allowed";
@@ -73,8 +80,9 @@ class ModuleController {
         exit();
     }
 
-    // GET /modules/{id}/delete - Delete a module
-    public function destroy() {
+    // Delete a module
+    public function destroy() 
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             http_response_code(405);
             echo "Method Not Allowed";

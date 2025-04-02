@@ -2,8 +2,7 @@
 namespace src\controllers;
 
 use src\dal\implementations\PostDAOImpl;
-use src\dal\implementations\UserDAOImpl;
-use src\dal\implementations\ModuleDAOImpl;
+use src\controllers\ModuleController;
 use src\controllers\UserController;
 use src\utils\Validation;
 use src\utils\Utils;
@@ -19,7 +18,6 @@ class PostController {
     public function index() 
     {
         $posts = $this->postDAO->getAllPosts();
-        $userDAO = new UserDAOImpl(); // Create an instance of UserDAOImpl
         $userController = new UserController();
         
         require_once __DIR__ . '/../views/posts/postList.html.php';
@@ -28,8 +26,8 @@ class PostController {
     // GET /posts/create - Show form for creating a post
     public function createPost() 
     {
-        $moduleDAO = new ModuleDAOImpl();
-        $modules = $moduleDAO->getAllModules();
+        $moduleController= new ModuleController();
+        $modules = $moduleController->getAllModules();
         require_once __DIR__ . '/../views/posts/createPost.html.php';
     }
 
@@ -155,10 +153,10 @@ class PostController {
         $postTitle = $post->getTitle();
         $postDate = $post->getTimestamp();
 
-        $userDAO = new UserDAOImpl();
-        $user = $userDAO->getUserById($post->getUserId());
+        $userController = new UserController();
+        $user = $userController->getUser($post->getUserId());
         $userImage = $user->getUserImage();
-        $username = $userDAO->getUsername($post->getUserId());
+        $username = $user->getUsername($post->getUserId());
         $firstLetter = strtoupper(substr($username, 0, 1)); // Get first letter and make it uppercase
 
         require_once __DIR__ . '/../views/posts/postInDetail.html.php';

@@ -40,15 +40,6 @@ class ModuleDAOImpl extends BaseDAO implements ModuleDAO {
         $this->executeQuery($query, $params);
     }
     
-    // public function getModuleById($moduleId)
-    // {
-    //     $query = "SELECT * FROM modules WHERE module_ida = :module_id";
-    //     $stmt = $this->pdo->prepare($query);
-    //     $stmt->bindParam(':module_id', $moduleId, \PDO::PARAM_INT);
-    //     $stmt->execute();
-    
-    //     return $stmt->fetch(\PDO::FETCH_ASSOC); 
-    // }
     public function getModuleById($moduleId) 
     {
         $query = "SELECT * FROM modules WHERE module_id = :module_id";
