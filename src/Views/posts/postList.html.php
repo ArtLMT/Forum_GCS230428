@@ -3,6 +3,7 @@ ob_start(); // Start output buffering
 
 use src\dal\implementations\UserDAOImpl;
 use src\controllers\UserController;
+use src\utils\Utils;
 $title = "Home";
 ?>
 <div class="w-2/3 mx-auto">
@@ -26,11 +27,10 @@ $title = "Home";
                         <div class='ml-3'>
                             <h3 class="text-base">
                                 <?= htmlspecialchars($username); ?>
-                                
                                 <?php
-                                $date = htmlspecialchars($post->getTimestamp());
-                                $timestamp = strtotime($date);
-                                echo date("d/m/Y", $timestamp); 
+                                    $date = htmlspecialchars($post->getPostedTime());
+                                    $timestamp = strtotime($date);
+                                    echo htmlspecialchars(Utils::timeAgo($date));
                                 ?>
                             </h3>
                             <h2 class="m-0 text-3xl leading-1"><?= htmlspecialchars($post->getTitle()) ?></h2>

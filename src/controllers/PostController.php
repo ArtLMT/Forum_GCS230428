@@ -152,7 +152,7 @@ class PostController {
         $postImage = $post->getPostImage();
         $postContent = $post->getContent();
         $postTitle = $post->getTitle();
-        $postDate = $post->getTimestamp();
+        $postDate = $post->getPostedTime();
 
         $userController = new UserController();
         $userId = $post->getUserId();
@@ -164,14 +164,6 @@ class PostController {
         $currentUserId = SessionManager::get('user_id');
 
         require_once __DIR__ . '/../views/posts/postInDetail.html.php';
-    }
-
-    // public function getPostAsset()
-    // {
-    //     $post = $this->getPostById($_GET['post_id']);
-    //     $postImage = $post->getPostImage();
-    //     $postContent = $post->getContent();
-    //     $postTitle = $post->getTitle();
-    // }
+    }    
 }
 ?>

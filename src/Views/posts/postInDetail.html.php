@@ -1,8 +1,8 @@
 <?php
 ob_start();
 use src\controllers\UserController;
-// use src\dal\implementations\UserDAOImpl;
 use src\controllers\PostController;
+use src\utils\Utils;
 
 $title = $postTitle;
 ?>
@@ -24,7 +24,11 @@ $title = $postTitle;
                 <h3 class="text-base">
                     <?= htmlspecialchars($username); ?>
                     
-                    <?= htmlspecialchars($post->getTimestamp()) ?>
+                    <?php
+                    $date = htmlspecialchars($post->getpostedTime());
+                    $timestamp = strtotime($date);
+                    echo htmlspecialchars(Utils::timeAgo($date));
+                    ?>
                 </h3>
                 <h2 class="m-0 text-3xl leading-1"><?= htmlspecialchars($postTitle) ?></h2>
             </div>

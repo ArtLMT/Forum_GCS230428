@@ -10,7 +10,7 @@ class Post {
     private $voteScore;
     private $userId;
     private $moduleId;
-    private $timestamp;
+    private $postedTime;
     private $updatedTimestamp;
     private $image;
 
@@ -22,7 +22,7 @@ class Post {
         $voteScore = 0,
         $userId = null,
         $moduleId = null,
-        $timestamp = null,
+        $postedTime = null,
         $updatedTimestamp = null,
         $image = null
     ) {
@@ -32,13 +32,12 @@ class Post {
         $this->voteScore = $voteScore;
         $this->userId = $userId;
         $this->moduleId = $moduleId;
-        $this->timestamp = $timestamp;
+        $this->postedTime = $postedTime;
         $this->updatedTimestamp = $updatedTimestamp;
         $this->image = $image;
     }
 
     // Getters and Setters
-
     public function getPostId() {
         return $this->postId;
     }
@@ -87,12 +86,12 @@ class Post {
         $this->moduleId = $moduleId;
     }
 
-    public function getTimestamp() {
-        return $this->timestamp;
+    public function getPostedTime() {
+        return $this->postedTime;
     }
 
-    public function setTimestamp($timestamp) {
-        $this->timestamp = $timestamp;
+    public function setPostedTime($postedTime) {
+        $this->postedTime = $postedTime;
     }
 
     public function getUpdatedTimestamp() {

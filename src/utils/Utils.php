@@ -45,7 +45,28 @@ class Utils {
         }
     }
     
+    public static function timeAgo($datetime, $full = false) {
+        date_default_timezone_set('Asia/Ho_Chi_Minh'); // Change timezone
+        $now = new \DateTime(); // Built in function to get time
+        $past = new \DateTime($datetime); // create the formatted time
+        $diff = $now->diff($past);
     
+        $units = [
+            'year'   => $diff->y,
+            'month'  => $diff->m,
+            'day'    => $diff->d,
+            'hour'   => $diff->h,
+            'minute' => $diff->i,
+            'second' => $diff->s
+        ];
+    
+        foreach ($units as $unit => $value) {
+            if ($value > 0) {
+                return $value . " " . $unit . ($value > 1 ? "s" : "") . " ago";
+            }
+        }
+        return "just now";
+    }
 }
 
 ?>
