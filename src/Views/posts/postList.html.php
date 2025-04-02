@@ -12,7 +12,7 @@ $title = "Home";
                 <?php 
                     $user = $userController->getUser($post->getUserId());
                     $userImage = $user->getUserImage();
-                    $username = $userDAO->getUsername($post->getUserId());
+                    $username = $user->getUsername($post->getUserId());
                 ?>
                 <div class="post bg-slate-900 border-solid border-2 rounded-lg border-gray-600 hover:border-gray-300 duration-700 ease-in-out transform hover:scale-105">
                     <div class="post-header flex p-3">
@@ -27,7 +27,11 @@ $title = "Home";
                             <h3 class="text-base">
                                 <?= htmlspecialchars($username); ?>
                                 
-                                <?= htmlspecialchars($post->getTimestamp());?>
+                                <?php
+                                $date = htmlspecialchars($post->getTimestamp());
+                                $timestamp = strtotime($date);
+                                echo date("d/m/Y", $timestamp); 
+                                ?>
                             </h3>
                             <h2 class="m-0 text-3xl leading-1"><?= htmlspecialchars($post->getTitle()) ?></h2>
                         </div>

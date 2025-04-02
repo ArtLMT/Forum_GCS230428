@@ -5,6 +5,7 @@ use src\dal\implementations\PostDAOImpl;
 use src\controllers\ModuleController;
 use src\controllers\UserController;
 use src\utils\Validation;
+use src\utils\SessionManager;
 use src\utils\Utils;
 
 class PostController {
@@ -154,10 +155,13 @@ class PostController {
         $postDate = $post->getTimestamp();
 
         $userController = new UserController();
-        $user = $userController->getUser($post->getUserId());
+        $userId = $post->getUserId();
+        $user = $userController->getUser($userId);
         $userImage = $user->getUserImage();
-        $username = $user->getUsername($post->getUserId());
+        $username = $user->getUsername($userId);
         $firstLetter = strtoupper(substr($username, 0, 1)); // Get first letter and make it uppercase
+
+        $currentUserId = SessionManager::get('user_id');
 
         require_once __DIR__ . '/../views/posts/postInDetail.html.php';
     }

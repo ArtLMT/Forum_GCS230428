@@ -34,20 +34,23 @@ $currentUser = $userController->getCurrentUser();
 <body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border">
     <!-- Navigation Bar -->
     <header class="fixed top-0 w-full h-[4rem] bg-neutral-800 z-50 border-b border-solid border-gray-400 shadow-sm shadow-gray-500">
-        <nav class="flex items-center h-full px-16 text-white font-semibold">
-            <a class="nav-home text-2xl flex-[2] min-w-[20%] font-black text-white p-2" href="/forum/public/">Study-Hub</a>
-            <input class="flex-[4] min-w-[40%] text-center bg-gray-200 text-black rounded-xl" placeholder="Search bar"></input>
-            <div class="flex-[4] min-w-[40%] flex justify-end gap-2 items-center">
+        <nav class="flex items-center h-full px-4 text-white font-semibold">
+            <a class="nav-home text-2xl flex-[3] min-w-[20%] font-black text-white p-2" href="/forum/public/">Study-Hub</a>
+            <input class="flex-[6] justify-self-center min-w-[20%] text-center bg-gray-200 text-black rounded-xl" placeholder="Search bar"></input>
+            <div class="flex-[1] min-w-[25%] flex justify-end items-center">
                 <!-- Navigate to other functionality page -->
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/createPost">Add post</a>
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/moduleLists">Modules</a>
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/messageList">Messages</a>
-                <a class="bg-gray-600 text-white rounded-full text-xl font-bold size-[48px] flex items-center justify-center transition duration-400 ease-in-out transform hover:scale-110" href="/forum/public/showProfile?id=<?= htmlspecialchars($currentUser->getUserId())?>">
+                <a class="flex items-center transition duration-400 ease-in-out transform hover:scale-110" href="/forum/public/showProfile?id=<?= htmlspecialchars($currentUser->getUserId())?>">
                     <?php if ($currentUser->getUserImage()) : ?>
                         <img src="/forum/public/<?= htmlspecialchars($currentUser->getUserImage()) ?>" class="size-[48px] rounded-full object-cover" alt="User Profile">
                     <?php else : ?>
-                        <?= strtoupper(substr($currentUser->getUsername($currentUser->getUserId()), 0, 1)) ?>
+                        <p class="flex items-center justify-center bg-gray-600 text-white rounded-full text-xl font-bold size-[48px]">
+                            <?= strtoupper(substr($currentUser->getUsername($currentUser->getUserId()), 0, 1)) ?>
+                        </p>
                     <?php endif; ?>
+                    <p class="ml-[0.4rem]"><?=$currentUser->getUsername($currentUser->getUserId())?></p>
                 </a>
             </div>
 
@@ -65,7 +68,9 @@ $currentUser = $userController->getCurrentUser();
             <hr class="mb-4 mt-2">
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/createMessagePage">Give Feedback</a>
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/messageList">Feedback</a>
-            <a class="flex flex-row w-[100%] side-menu-content logout mt-auto hover:bg-red-700 hover:scale-105 hover:animate-bounce p-[10px] rounded-xl items-center transition duration-400 ease-in-out transform" href="/forum/public/logout"><img class="w-[36px] mr-[10px]" src="/forum/public/assets/img/logout.svg" alt="logout">logout</a>
+            <a class="flex flex-row w-[100%] side-menu-content logout mt-auto hover:bg-red-700 hover:scale-105 hover:animate-bounce p-[10px] rounded-xl items-center transition duration-400 ease-in-out transform" href="/forum/public/logout">
+                <img class="w-[36px] mr-[10px]" src="/forum/public/assets/img/logout.svg" alt="logout">logout
+            </a>
         
         </div>
 
