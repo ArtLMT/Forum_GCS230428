@@ -153,12 +153,10 @@ class PostController {
         $postContent = $post->getContent();
         $postTitle = $post->getTitle();
         $postDate = $post->getPostedTime();
+        $username = $post->getUsername();
+        $userImage = $post->getUserImage();
+        $ownerId = $post->getUserId();
 
-        $userController = new UserController();
-        $userId = $post->getUserId();
-        $user = $userController->getUser($userId);
-        $userImage = $user->getUserImage();
-        $username = $user->getUsername($userId);
         $firstLetter = strtoupper(substr($username, 0, 1)); // Get first letter and make it uppercase
 
         $currentUserId = SessionManager::get('user_id');

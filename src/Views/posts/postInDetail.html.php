@@ -6,7 +6,7 @@ use src\utils\Utils;
 
 $title = $postTitle;
 ?>
-<!-- <?php var_dump($postId)?> -->
+<!-- <?php var_dump($userId)?> -->
 
 <div class="post w-2/3 m-auto mt-[2rem] bg-slate-900 border-solid border-2 rounded-lg border-gray-600">
     <!-- <div><img src="/forum/public/assets/img/backButton.svg" alt=""></div> -->
@@ -33,7 +33,7 @@ $title = $postTitle;
                 <h2 class="m-0 text-3xl leading-1"><?= htmlspecialchars($postTitle) ?></h2>
             </div>
         </div>
-        <?php if ($currentUserId == $userId) :?>
+        <?php if ($currentUserId == $ownerId) :?>
             <div class="flex gap-4 justify-end items-center mr-5 mb-[1rem]">
                 <a class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-1 size-8 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>"><img class=""src="/forum/public/assets/img/editWhite.svg" alt=""></a>
                 <a class="bg-red-400 border-solid border-red-500 border-2 p-1 size-8 text-xs" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt=""></a>

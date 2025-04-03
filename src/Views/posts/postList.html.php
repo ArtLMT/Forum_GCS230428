@@ -10,10 +10,9 @@ $title = "Home";
     <?php if (!empty($posts)) : ?>
         <div class="mt-[2%] ">
             <?php foreach ($posts as $post) : ?>
-                <?php 
-                    $user = $userController->getUser($post->getUserId());
-                    $userImage = $user->getUserImage();
-                    $username = $user->getUsername($post->getUserId());
+                <?php
+                    $userImage = $post->getUserImage();
+                    $username = $post->getUsername();
                 ?>
                 <div class="post bg-slate-900 border-solid border-2 rounded-lg border-gray-600 hover:border-gray-300 duration-700 ease-in-out transform hover:scale-105">
                     <div class="post-header flex p-3">

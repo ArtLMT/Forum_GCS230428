@@ -11,8 +11,10 @@ class Post {
     private $userId;
     private $moduleId;
     private $postedTime;
-    private $updatedTimestamp;
+    private $username;
     private $image;
+    private $moduleName;
+    private $avatar;
 
     // Constructor (updated with default values so it can be created without all parameters)
     public function __construct(
@@ -23,8 +25,10 @@ class Post {
         $userId = null,
         $moduleId = null,
         $postedTime = null,
-        $updatedTimestamp = null,
-        $image = null
+        $username = null,
+        $moduleName = null,
+        $image = null,
+        $avatar = null
     ) {
         $this->postId = $postId;
         $this->title = $title;
@@ -33,8 +37,10 @@ class Post {
         $this->userId = $userId;
         $this->moduleId = $moduleId;
         $this->postedTime = $postedTime;
-        $this->updatedTimestamp = $updatedTimestamp;
+        $this->username = $username;
+        $this->moduleName = $moduleName;
         $this->image = $image;
+        $this->avatar = $avatar;
     }
 
     // Getters and Setters
@@ -94,12 +100,12 @@ class Post {
         $this->postedTime = $postedTime;
     }
 
-    public function getUpdatedTimestamp() {
-        return $this->updatedTimestamp;
+    public function getUserName() {
+        return $this->username;
     }
 
-    public function setUpdatedTimestamp($updatedTimestamp) {
-        $this->updatedTimestamp = $updatedTimestamp;
+    public function setUserName($username) {
+        $this->username = $username;
     }
 
     // New getter for the image
@@ -112,5 +118,22 @@ class Post {
         $this->image = $image;
     }
 
+    public function getMoudleName() {
+        return $this->moduleName;
+    }
+
+    public function setModuleName($moduleName) {
+        $this->moduleName = $moduleName;
+    }
+
+    public function getUserImage()
+    {
+        return $this->avatar;
+    }
+
+    public function setUserImage($avatar)
+    {
+        $this->avatar = $avartar;
+    }
 }
 ?>

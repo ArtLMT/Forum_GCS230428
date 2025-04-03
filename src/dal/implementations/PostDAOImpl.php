@@ -48,7 +48,13 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
 
     public function getPostById($postId) : ?post
     {
-        $query = "SELECT * FROM posts WHERE post_id = :post_id";
+            $query = " SELECT p.post_id, p.title, p.content, p.user_id, p.module_id, p.create_date, p.image_path, u.image_path AS avatar, u.username AS username, m.module_name AS module_name 
+                    FROM posts p
+                    INNER JOIN users u ON p.user_id = u.user_id
+                    INNER JOIN modules m ON p.module_id = m.module_id
+                    WHERE p.post_id = :post_id
+                    ORDER BY p.create_date DESC";
+
         $stmt = $this->executeQuery($query, [':post_id' => $postId]);
         $data = $stmt->fetch(\PDO::FETCH_ASSOC); // array
         return $data ? $this->mapToPost($data) : null; // return object
@@ -56,7 +62,12 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
 
     public function getPostByTitle($title) : ?post
     {
-        $query = "SELECT * FROM posts WHERE title = :title";
+        $query = "SELECT p.post_id, p.title, p.content, p.user_id, p.module_id, p.create_date, p.image_path, u.image_path AS avatar, u.username AS username, m.module_name AS module_name
+                FROM posts p
+                INNER JOIN users u ON p.user_id = u.user_id
+                INNER JOIN modules m ON p.module_id = m.module_id
+                WHERE p.title = :title
+                ORDER BY p.create_date DESC";
         $stmt = $this->executeQuery($query, [':title' => $title]);
         $data = $stmt->fetch(\PDO::FETCH_ASSOC); // array
         return $data ? $this->mapToPost($data) : null; // return object
@@ -64,7 +75,12 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
 
     public function getPostByUserId($userId) 
     {
-        $query = "SELECT * FROM posts WHERE user_id = :user_id";
+        $query = "SELECT p.post_id, p.title, p.content, p.user_id, p.module_id, p.create_date, p.image_path, u.image_path AS avatar, u.username AS username, m.module_name AS module_name
+                FROM posts p
+                INNER JOIN users u ON p.user_id = u.user_id
+                INNER JOIN modules m ON p.module_id = m.module_id
+                WHERE u.user_id = :user_id
+                ORDER BY p.create_date DESC";
         $stmt = $this->executeQuery($query, ['user_id' => $userId]);
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $posts = [];
@@ -76,7 +92,12 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
 
     public function getAllPosts() : array
     {
-        $query = "SELECT * FROM posts";
+        // $query = "SELECT * FROM posts";
+        $query = "SELECT p.post_id, p.title, p.content, p.user_id, p.module_id, p.create_date, p.image_path, u.image_path AS avatar, u.username AS username, m.module_name AS module_name
+                    FROM posts p
+                    INNER JOIN users u ON p.user_id = u.user_id
+                    INNER JOIN modules m ON p.module_id = m.module_id
+                    ORDER BY p.create_date DESC";
         $stmt = $this->executeQuery($query);
 
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -91,8 +112,11 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
 
     private function mapToPost($data) : object 
     {
-        $userDAO = new UserDAOImpl();
-        $username = $userDAO->getUserById($data['user_id'])->getUsername();
+        // $userDAO = new UserDAOImpl();
+        // $username = $userDAO->getUserById($data['user_id'])->getUsername();
+        // var_dump($data);
+        // exit;
+
         return new Post(
             $data['post_id'],        // postId
             $data['title'],          // title
@@ -101,8 +125,10 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
             $data['user_id'],        // userId
             $data['module_id'],      // moduleId
             $data['create_date'],    // timestamp
-            null,                    // updatedTimestamp (default to null)
-            $data['image_path'] ?? null   // image
+            $data['username'],       // username
+            $data['module_name'],    // moduleName
+            $data['image_path'] ?? null,   // image
+            $data['avatar'] ?? null
         );
     }
 
