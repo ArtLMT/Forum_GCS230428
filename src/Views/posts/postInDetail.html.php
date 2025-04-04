@@ -8,10 +8,10 @@ $title = $postTitle;
 ?>
 <!-- <?php var_dump($userId)?> -->
 
-<div class="post w-2/3 m-auto mt-[2rem] bg-slate-900 border-solid border-2 rounded-lg border-gray-600">
+<div class="post bg-slate-900 border-solid border-2 rounded-lg">
     <!-- <div><img src="/forum/public/assets/img/backButton.svg" alt=""></div> -->
     <div class="post-header flex p-3 items-center">
-        <a class="relative left-[0.5rem] hover:scale-110 transition duration-400 ease-in-out transform"href="/forum/public/"><img src="/forum/public/assets/img/backButton.svg" alt=""></a>
+        <a class="relative left-[0.5rem]"href="/forum/public/"><img src="/forum/public/assets/img/backButton.svg" alt=""></a>
         <div class="flex items-center justify-center ml-[1.5rem]">
             <a class="size-[60px] flex items-center justify-center bg-gray-500 text-white rounded-full text-4xl font-bold" href="/forum/public/showProfile?id=<?=$post->getUserId()?>">
                 <?php if ($userImage) : ?>
@@ -22,12 +22,11 @@ $title = $postTitle;
             </a>
             <div class='ml-3'>
                 <h3 class="text-base">
-                    <?= htmlspecialchars($username); ?>
-                    
-                    <?php
-                    $date = htmlspecialchars($post->getpostedTime());
-                    $timestamp = strtotime($date);
-                    echo htmlspecialchars(Utils::timeAgo($date));
+                    <?php 
+                        echo htmlspecialchars($username);
+                        $date = htmlspecialchars($post->getpostedTime());
+                        $timestamp = strtotime($date);
+                        echo htmlspecialchars(Utils::timeAgo($date));
                     ?>
                 </h3>
                 <h2 class="m-0 text-3xl leading-1"><?= htmlspecialchars($postTitle) ?></h2>

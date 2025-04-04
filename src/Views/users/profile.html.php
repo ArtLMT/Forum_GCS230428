@@ -8,7 +8,7 @@ $postDAO = new PostDAOImpl();
 $title = $userName;
 ?>
 <!-- <h1 class="text-center text-3xl">This is profile page</h1> -->
-<div class="flex w-5/6 mx-auto rounded-lg my-[40px]"> 
+<div class="flex w-[120%] relative right-[10%] mx-auto rounded-lg my-[40px]"> 
     <div class="h-[840px] bg-slate-900 w-1/3 border-solid border-2 rounded-lg border-gray-400">
         <div class="mx-auto mt-8 flex items-center justify-center size-[200px] bg-gray-600 text-gray-300 rounded-full text-8xl font-bold">
             <?php if ($userImage) : ?>

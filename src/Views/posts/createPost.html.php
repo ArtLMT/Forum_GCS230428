@@ -1,32 +1,35 @@
 <?php
 ob_start(); // Start output buffering
+$title = "Create Post";
 ?>
 
 <h2 class="text-center ">Create Post</h2>
 
-<form action="/forum/public/createPost" method="post" enctype="multipart/form-data">
-    <label>Title:</label>
-    <input class="text-gray-700" type="text" name="title" required><br>
-    
-    <label>Content:</label>
-    <textarea class="text-gray-700" name="content" required></textarea><br>
-    
-    <label>User ID:</label>
-    <input class="text-gray-700" type="number" name="user_id" required><br>
-    
-    <!-- <label>Module ID:</label>
-    <input type="number" name="module_id" required><br> -->
-    <select class="text-black"name="module_id" required>
-    <option class="text-black" value="">Select a Module</option>
-        <?php foreach ($modules as $module): ?>
-            <option value="<?= $module->getModuleId() ?>"><?= htmlspecialchars($module->getModuleName()) ?></option>
-        <?php endforeach; ?>
-    </select><br>
-    
-    <label>Image:</label>
-    <input type="file" name="image"><br>
-    
-    <input type="submit" value="Create Post">
+<form class="bg-slate-900 border-solid border-2 rounded-lg" action="/forum/public/createPost" method="post" enctype="multipart/form-data">  
+    <div class="m-[1rem] flex flex-col items-center">    
+        <label>Title:</label>
+        <input class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" type="text" name="title" required>
+        
+        <label>Content:</label>
+        <textarea class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" name="content" required></textarea>
+        
+        <label>User ID:</label>
+        <input class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" type="number" name="user_id" required>
+        
+        <!-- <label>Module ID:</label>
+        <input type="number" name="module_id" required><br> -->
+        <select class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl"name="module_id" required>
+        <option class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" value="">Select a Module</option>
+            <?php foreach ($modules as $module): ?>
+                <option class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" value="<?= $module->getModuleId() ?>"><?= htmlspecialchars($module->getModuleName()) ?></option>
+            <?php endforeach; ?>
+        </select>
+        
+        <label>Image:</label>
+        <input type="file" name="image">
+        
+        <input class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-3 rounded-2xl transition duration-400 ease-in-out transform hover:scale-105" type="submit" value="Create Post">
+    </div>
 </form>
 
 <?php

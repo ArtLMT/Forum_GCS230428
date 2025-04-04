@@ -6,7 +6,7 @@ use src\controllers\UserController;
 use src\utils\Utils;
 $title = "Home";
 ?>
-<div class="w-2/3 mx-auto">
+<div class="">
     <?php if (!empty($posts)) : ?>
         <div class="mt-[2%] ">
             <?php foreach ($posts as $post) : ?>

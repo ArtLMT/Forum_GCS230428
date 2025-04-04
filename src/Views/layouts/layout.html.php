@@ -36,7 +36,7 @@ $currentUser = $userController->getCurrentUser();
     <header class="fixed top-0 w-full h-[4rem] bg-neutral-800 z-50 border-b border-solid border-gray-400 shadow-sm shadow-gray-500">
         <nav class="flex items-center h-full px-4 text-white font-semibold">
             <a class="nav-home text-2xl flex-[3] min-w-[20%] font-black text-white p-2" href="/forum/public/">Study-Hub</a>
-            <input class="flex-[6] justify-self-center min-w-[20%] text-center bg-gray-200 text-black rounded-xl" placeholder="Search bar"></input>
+            <input class=" bg-gray-300 flex-[6] justify-self-center min-w-[20%] text-center bg-gray-200 text-black rounded-xl" placeholder="Search bar"></input>
             <div class="flex-[1] min-w-[25%] flex justify-end items-center">
                 <!-- Navigate to other functionality page -->
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/createPost">Add post</a>
@@ -75,8 +75,8 @@ $currentUser = $userController->getCurrentUser();
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1">
-            <div class="post-area">
+        <div class="flex-1"> 
+            <div class="post-area w-2/3 mx-auto border-gray-300 mt-[2rem]">
                 <?= $content;?>
             </div>
         </div>
