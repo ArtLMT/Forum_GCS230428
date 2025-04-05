@@ -10,6 +10,7 @@ class User {
     private $email;
     private $timestamp;
     private $image_path;
+    private $isAdmin;
     
     public function __construct(
         $username,  // Required

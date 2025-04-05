@@ -116,7 +116,8 @@ class PostController {
     
 
     // DELETE /posts/{id} - Delete a post
-    public function destroy() {
+    public function destroy() 
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             http_response_code(405);
             echo "Method Not Allowed";
@@ -138,17 +139,12 @@ class PostController {
     public function getPostByUserId($userId)
     {
         return $this->postDAO->getPostByUserId($userId);
-    }
-
-    public function getPostById($postId)
-    {
-        return $this->postDAO->getPostById($postId);
-    }
+    } 
 
     public function openPost()
     {
         // post asset:
-        $post = $this->getPostById($_GET['post_id']);
+        $post = $this->postDAO->getPostById($_GET['post_id']);
         $postImage = $post->getPostImage();
         $postContent = $post->getContent();
         $postTitle = $post->getTitle();

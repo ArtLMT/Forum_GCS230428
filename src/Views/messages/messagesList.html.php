@@ -1,5 +1,6 @@
 <?php
 ob_start();
+$title = "List of feedbacks";
 ?>
 
 <h2 class="flex justify-center text-2xl">Feedback:</h2>

@@ -26,7 +26,8 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         $this->executeQuery($query, $params);
     }
 
-    public function updatePost($postId, $title, $content, $moduleId, $imagePath = null) {
+    public function updatePost($postId, $title, $content, $moduleId, $imagePath = null) 
+    {
         $query = "UPDATE posts
                 SET title = :title,
                     content = :content,

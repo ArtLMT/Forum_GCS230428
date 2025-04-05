@@ -99,7 +99,8 @@ class ModuleDAOImpl extends BaseDAO implements ModuleDAO {
         return $result ? $result['module_description'] : null;
     }
     
-    public function deleteModule($moduleId) {
+    public function deleteModule($moduleId) 
+    {
         $query = "DELETE FROM modules WHERE module_id = :module_id";
         $params = [':module_id' => $moduleId];
     

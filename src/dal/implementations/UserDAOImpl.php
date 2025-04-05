@@ -62,7 +62,8 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         );
     }
 
-    public function getUserByEmail($email): ?User {
+    public function getUserByEmail($email): ?User 
+    {
         $query = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->executeQuery($query, [':email' => $email]);
         $data = $stmt->fetch(\PDO::FETCH_ASSOC);

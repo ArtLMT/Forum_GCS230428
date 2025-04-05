@@ -8,7 +8,7 @@ $title = $postTitle;
 ?>
 <!-- <?php var_dump($userId)?> -->
 
-<div class="post bg-slate-900 border-solid border-2 rounded-lg">
+<div class="post bg-slate-900 border-solid border-2 rounded-lg max-h-[800px]">
     <!-- <div><img src="/forum/public/assets/img/backButton.svg" alt=""></div> -->
     <div class="post-header flex p-3 items-center">
         <a class="relative left-[0.5rem]"href="/forum/public/"><img src="/forum/public/assets/img/backButton.svg" alt=""></a>
@@ -41,10 +41,10 @@ $title = $postTitle;
     </div>
     <hr class="min-w-[85%] place-self-center">
 
-    <div class="post-content my-[1rem]">      
+    <div class="post-content m-auto my-[1rem]">      
         <p class= "mx-[5rem] my-[1rem]"><?= htmlspecialchars($postContent)?></p>
         <?php if ($postImage) : ?>
-            <img class="m-auto object-cover max-w-[900px] max-h-[600px]" src="/forum/public/<?= htmlspecialchars($postImage) ?>" alt="Post Image">
+            <img class="m-auto object-cover max-w-[1050px] max-h-[650px]" src="/forum/public/<?= htmlspecialchars($postImage) ?>" alt="Post Image">
         <?php endif; ?>
     </div>
 </div>
