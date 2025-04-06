@@ -34,7 +34,7 @@ $currentUser = SessionManager::get('user');
 <body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border">
     <!-- Navigation Bar -->
     <header class="fixed top-0 w-full h-[4rem] bg-neutral-800 z-50 border-b border-solid border-gray-400 shadow-sm shadow-gray-500">
-        <nav class="flex items-center h-full px-4 text-white font-semibold">
+        <nav class="flex items-center h-full px-8 text-white font-semibold">
             <a class="nav-home text-2xl flex-[3] min-w-[20%] font-black text-white p-2" href="/forum/public/">Study-Hub</a>
             <input class=" bg-gray-300 flex-[6] justify-self-center min-w-[20%] text-center bg-gray-200 text-black rounded-xl" placeholder="Search bar"></input>
             <div class="flex-[1] min-w-[25%] flex justify-end items-center">
@@ -42,7 +42,7 @@ $currentUser = SessionManager::get('user');
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/createPost">Add post</a>
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/moduleLists">Modules</a>
                 <a class="p-3 rounded-xl transition duration-400 ease-in-out transform hover:scale-105 hover:bg-neutral-700 hover:shadow-lg" href="/forum/public/messageList">Messages</a>
-                <a class="flex items-center transition duration-400 ease-in-out transform hover:scale-110" href="/forum/public/showProfile?id=<?= htmlspecialchars($currentUser->getUserId())?>">
+                <!-- <a class="flex items-center transition duration-400 ease-in-out transform hover:scale-110" href="/forum/public/showProfile?id=<?= htmlspecialchars($currentUser->getUserId())?>">
                     <?php if ($currentUser->getUserImage()) : ?>
                         <img src="/forum/public/<?= htmlspecialchars($currentUser->getUserImage()) ?>" class="size-[48px] rounded-full object-cover" alt="User Profile">
                     <?php else : ?>
@@ -51,7 +51,42 @@ $currentUser = SessionManager::get('user');
                         </p>
                     <?php endif; ?>
                     <p class="ml-[0.4rem]"><?=$currentUser->getUsername($currentUser->getUserId())?></p>
-                </a>
+                </a> -->
+                <div class="relative">
+                    <button id="avatar-button" class="flex items-center transition duration-400 ease-in-out transform hover:scale-110 focus:outline-none">
+                        <?php if ($currentUser->getUserImage()) : ?>
+                            <img src="/forum/public/<?= htmlspecialchars($currentUser->getUserImage()) ?>" class="size-[48px] rounded-full object-cover" alt="User Profile">
+                        <?php else : ?>
+                            <p class="flex items-center justify-center bg-gray-600 text-white rounded-full text-xl font-bold size-[48px]">
+                                <?= strtoupper(substr($currentUser->getUsername($currentUser->getUserId()), 0, 1)) ?>
+                            </p>
+                        <?php endif; ?>
+                        <p class="ml-[0.4rem]"><?= $currentUser->getUsername($currentUser->getUserId()) ?></p>
+                    </button>
+
+                    <!-- Dropdown menu -->
+                    <div id="avatar-dropdown" class="absolute right-0 mt-2 w-48 flex flex-col justify-center text-center algin-center  bg-white text-black rounded-b-3xl shadow-lg hidden z-50">
+                        <a href="/forum/public/showProfile?id=<?= $currentUser->getUserId() ?>" class="block py-2 hover:bg-gray-200">View Profile</a>
+                        <a href="/forum/public/messageList" class="block py-2 hover:bg-gray-200">Help & support</a>
+                        <a href="/forum/public/logout" class="block py-2 hover:bg-red-500 hover:text-white rounded-b-3xl">Logout</a>
+                    </div>
+                </div>
+                <script>
+                    const avatarButton = document.getElementById('avatar-button');
+                    const dropdownMenu = document.getElementById('avatar-dropdown');
+
+                    avatarButton.addEventListener('click', function (e) {
+                        e.stopPropagation(); // Prevent click from bubbling
+                        dropdownMenu.classList.toggle('hidden');
+                    });
+
+                    // Close dropdown when clicking outside
+                    document.addEventListener('click', function () {
+                        if (!dropdownMenu.classList.contains('hidden')) {
+                            dropdownMenu.classList.add('hidden');
+                        }
+                    });
+                </script>
 
             </div>
 
