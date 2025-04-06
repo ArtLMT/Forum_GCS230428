@@ -149,13 +149,17 @@ class PostController {
         $postContent = $post->getContent();
         $postTitle = $post->getTitle();
         $postDate = $post->getPostedTime();
+
+        
         $username = $post->getUsername();
         $userImage = $post->getUserImage();
         $ownerId = $post->getUserId();
 
         $firstLetter = strtoupper(substr($username, 0, 1)); // Get first letter and make it uppercase
 
-        $currentUserId = SessionManager::get('user_id');
+        $currentUser = SessionManager::get('user');
+        $currentUserId = $currentUser->getUserId();
+        $currentUserIsAdmin = $currentUser->getIsAdmin();
 
         require_once __DIR__ . '/../views/posts/postInDetail.html.php';
     }    

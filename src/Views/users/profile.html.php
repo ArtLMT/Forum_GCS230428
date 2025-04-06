@@ -1,11 +1,12 @@
 <?php 
 ob_start(); // Start output buffering
 use src\dal\implementations\PostDAOImpl;
-use src\controllers\AuthController;
-use src\utils\SessionManager;
+// use src\controllers\AuthController;
+// use src\utils\SessionManager;
 $postDAO = new PostDAOImpl();
 
 $title = $userName;
+// echo $userIsAdmin;
 ?>
 <!-- <h1 class="text-center text-3xl">This is profile page</h1> -->
 <div class="flex w-[120%] relative right-[10%] mx-auto rounded-lg my-[40px]"> 
@@ -58,7 +59,7 @@ $title = $userName;
                         <!-- Auth check -->
                          <div class="flex gap-4 justify-end items-center mr-5 mb-[1rem] text-gray-400">
                             <a class="p-2 hover:italic hover:text-gray-300"href="/forum/public/postDetail?post_id=<?= $post->getPostId()?>">See more</a>
-                            <?php if($authController->isOwner($userId)) :?>
+                            <?php if(($isOwner)) :?>
                                  <a class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-1 size-8 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>"><img class=""src="/forum/public/assets/img/editWhite.svg" alt=""></a>
                                  <a class="bg-red-400 border-solid border-red-500 border-2 p-1 size-8 text-xs" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt=""></a>
                             <?php endif; ?>
@@ -69,7 +70,6 @@ $title = $userName;
         </div>
     </div>
 </div>
-
 
 <?php
 $content = ob_get_clean(); // Store the buffered output into $content

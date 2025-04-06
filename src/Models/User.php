@@ -1,9 +1,7 @@
 <?php
 namespace src\models;
 
-
 class User {
-    private $pdo;
     private $userId;
     private $username;
     private $password;
@@ -18,7 +16,8 @@ class User {
         $email,  // Required
         $userId = null, 
         $timestamp = null,
-        $image_path = null
+        $image_path = null,
+        $isAdmin = 0
     ) {
         $this->username = $username;
         $this->password = $password;
@@ -26,6 +25,7 @@ class User {
         $this->email = $email;
         $this->timestamp = $timestamp;
         $this->image_path = $image_path;
+        $this->isAdmin = $isAdmin;
     }
 
     public function getUserId() 
@@ -86,6 +86,16 @@ class User {
     public function setUserImage($image_path) 
     {
         $this->image_path = $image_path;
+    }
+
+    public function getIsAdmin()
+    {
+        return $this->isAdmin;
+    }
+
+    public function setAdmin($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
     }
 }
 ?>

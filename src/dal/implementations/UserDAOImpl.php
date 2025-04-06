@@ -58,7 +58,8 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
             $user['email'],
             $user['user_id'],
             $user['timestamp'] ?? null,
-            $user['image_path'] ?? null 
+            $user['image_path'] ?? null,
+            $user['is_admin'] ?? 0
         );
     }
 
@@ -73,7 +74,9 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
             $data['password'],
             $data['email'],
             $data['user_id'],
-            $data['created_at'] ?? null
+            $data['created_at'] ?? null,
+            $data['image_path'] ?? null,
+            $data['is_admin'] ?? 0
         );
     }
     
@@ -95,7 +98,8 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
             $user['email'],
             $user['user_id'],
             $user['timestamp'] ?? null,
-            $user['image_path'] ?? null  // ✅ Include the image path
+            $user['image_path'] ?? null,  // Include the image path
+            $user['is_admin'] ?? 0
         );
         
     }

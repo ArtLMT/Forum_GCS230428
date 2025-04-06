@@ -33,8 +33,8 @@ class AuthController {
     
             if ($getPassword == $password) {
                 SessionManager::start();
-                SessionManager::set('user',$user);
-                SessionManager::set('user_id', $user->getUserId());
+                SessionManager::set('user', $user);
+                // SessionManager::set('user_id', $user->getUserId());
                 SessionManager::set('username', $user->getUsername());
     
                 // Redirect to dashboard
@@ -57,8 +57,7 @@ class AuthController {
 
     public function isOwner($userId)
     {
-        $userController = new UserController();
-        $currentUser = $userController->getCurrentUser();
+        $currentUser = SessionManager::get('user');
         $currentUserId = $currentUser->getUserId();
 
         return $userId == $currentUserId ? true : false;

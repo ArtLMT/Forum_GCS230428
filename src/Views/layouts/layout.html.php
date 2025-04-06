@@ -4,14 +4,14 @@ use src\controllers\UserController;
 SessionManager::start();
 
 // Check if user is logged in
-if (!SessionManager::get('user_id')) {
+if (!SessionManager::get('user')) {
     header("Location: /forum/public/login");
     exit();
 }
 
 // Get current user
-$userController = new UserController();
-$currentUser = $userController->getCurrentUser();
+// $userController = new UserController();
+$currentUser = SessionManager::get('user');
 
 // if (!$currentUser) {
 //     header("Location: /forum/public/login");
@@ -52,6 +52,7 @@ $currentUser = $userController->getCurrentUser();
                     <?php endif; ?>
                     <p class="ml-[0.4rem]"><?=$currentUser->getUsername($currentUser->getUserId())?></p>
                 </a>
+
             </div>
 
         </nav>

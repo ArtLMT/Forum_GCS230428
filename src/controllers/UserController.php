@@ -101,22 +101,23 @@ class UserController {
 
         $authController = new AuthController();
         $postControl = new PostController();
+        $isOwner = $authController->isOwner($userId);
 
         $posts = $postControl->getPostByUserId($userId);
 
-        // $isOwner = $user === $currentUser ? true : false;
 
         require_once __DIR__ . '/../views/users/profile.html.php';
     }
 
-    public function getCurrentUser() 
-    {
-        $userId = SessionManager::get('user_id');
-        if ($userId) {
-            return $this->userDAO->getUserById($userId);
-        }
-        return null;
-    }
+    // public function getCurrentUser() 
+    // {
+    //     // $userId = SessionManager::get('user_id');
+    //     // if ($userId) {
+    //     //     return $this->userDAO->getUserById($userId);
+    //     // }
+    //     // return null;
+    //     return SessionManager::get('user');
+    // }
 
     public function getUser($userId)
     {
