@@ -133,3 +133,7 @@ DAO and Controller:
     ->  directly interacting with the database (CRUD operations)
     ->  inside a controller and need to get/save users
     -> If another class needs raw database data without extra processing
+
+Added isAdmin into users table
+store 0 and 1 value for easy use (bool)
+use Tiny INT to cost less memory

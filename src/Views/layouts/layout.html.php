@@ -12,6 +12,7 @@ if (!SessionManager::get('user')) {
 // Get current user
 // $userController = new UserController();
 $currentUser = SessionManager::get('user');
+$isAdmin = $currentUser->getIsAdmin();
 
 // if (!$currentUser) {
 //     header("Location: /forum/public/login");
@@ -28,7 +29,6 @@ $currentUser = SessionManager::get('user');
     <link rel="stylesheet" href="/forum/public/assets/css/reset.css">
     <link rel="stylesheet" href="/forum/public/assets/css/style.css">
     <link rel="stylesheet" href="/forum/public/assets/css/input.css">
-    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border">
@@ -65,9 +65,13 @@ $currentUser = SessionManager::get('user');
                     </button>
 
                     <!-- Dropdown menu -->
-                    <div id="avatar-dropdown" class="absolute right-0 mt-2 w-48 flex flex-col justify-center text-center algin-center  bg-white text-black rounded-b-3xl shadow-lg hidden z-50">
+                    <div id="avatar-dropdown" class="absolute  mt-2 w-48 flex flex-col justify-center text-center algin-center  bg-white text-black rounded-b-3xl shadow-lg hidden z-50">
                         <a href="/forum/public/showProfile?id=<?= $currentUser->getUserId() ?>" class="block py-2 hover:bg-gray-200">View Profile</a>
-                        <a href="/forum/public/messageList" class="block py-2 hover:bg-gray-200">Help & support</a>
+                        <a href="/forum/public/createMessagePage" class="block py-2 hover:bg-gray-200">Help & support</a>
+                        <?php if($isAdmin) :?>
+                            <a href="/forum/public/dashboard">Admin dashboard</a>
+                            <a href="/forum/public/messageList" class="block py-2 hover:bg-gray-200" >Feedbacks</a>
+                        <?php endif; ?>
                         <a href="/forum/public/logout" class="block py-2 hover:bg-red-500 hover:text-white rounded-b-3xl">Logout</a>
                     </div>
                 </div>
@@ -87,7 +91,6 @@ $currentUser = SessionManager::get('user');
                         }
                     });
                 </script>
-
             </div>
 
         </nav>

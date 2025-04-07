@@ -52,5 +52,8 @@ $router->post('login', 'AuthController@login'); // Handle login form submission
 $router->get('logout', 'AuthController@logout'); // Logout user
 $router->get('signIn', 'AuthController@showSignInForm');
 
+// Admin controller routes
+$router->get('dashboard', 'AdminController@showDashboard');
+
 $router->dispatch();
 ?>
