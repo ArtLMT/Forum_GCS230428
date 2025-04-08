@@ -54,6 +54,11 @@ $router->get('signIn', 'AuthController@showSignInForm');
 
 // Admin controller routes
 $router->get('dashboard', 'AdminController@showDashboard');
+$router->get('admin/createUser', 'AdminController@showUserCreate');
+$router->post('admin/storeUser', 'AdminController@storeUser');
+$router->get('admin/editUser', 'AdminController@userEdit');
+$router->post('admin/updateUser', 'AdminController@updateUser');
+$router->post('deleteUser', 'adminController@deleteUser');
 
 $router->dispatch();
 ?>

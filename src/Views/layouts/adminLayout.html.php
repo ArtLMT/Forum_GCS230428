@@ -1,6 +1,8 @@
 <?php
 use src\utils\SessionManager;
 use src\controllers\UserController;
+use src\controllers\AdminController;
+
 SessionManager::start();
 
 // Check if user is logged in
@@ -13,6 +15,9 @@ if (!SessionManager::get('user')) {
 // $userController = new UserController();
 $currentUser = SessionManager::get('user');
 $isAdmin = $currentUser->getIsAdmin();
+
+$AdminController = new AdminController();
+$totalUser = $AdminController->getTotalUser();
 
 // if (!$currentUser) {
 //     header("Location: /forum/public/login");
@@ -37,24 +42,25 @@ $isAdmin = $currentUser->getIsAdmin();
     </header>
     <main class="flex">
         <!-- Sidebar -->
-        <div class="w-[200px] bg-gray-600 h-[calc(100vh-4rem)]">
+        <div class="flex flex-col w-[200px] bg-gray-600 h-[calc(100vh-4rem)]">
             <a class="bg-green-400"href="/forum/public/">Back to normal</a>
+            <a href="/forum/public/admin/createUser">Create User</a>
         </div>
 
         <!-- Main content area -->
-        <div class="flex flex-col mt-[2rem] mx-24 w-full">
+        <div class="flex flex-col mt-[2rem] mx-24 w-full text-2xl">
             <!-- Counter Section -->
-            <div class="flex gap-24">
-                <div class="flex items-center w-[300px] h-[100px] rounded-3xl bg-gray-400">
-                    <div class="w-[40px] h-[40px] bg-blue-300 mx-5 flex items-center">counter</div>
-                    <a class="" href="">User</a>
+            <div class="flex gap-24 mx-auto">
+                <div class="flex items-center w-[400px] h-[100px] rounded-3xl bg-gray-400">
+                    <div class="w-[40px] h-[40px] bg-blue-300 mx-5 flex items-center justify-center"><?=htmlspecialchars($totalUser)?></div>
+                    <a class="" href="">Registered Users</a>
                 </div>
-                <div class="flex items-center w-[300px] h-[100px] rounded-3xl bg-gray-400">
-                    <div class="w-[40px] h-[40px] bg-blue-300 mx-5 flex items-center">counter</div>
+                <div class="flex items-center w-[400px] h-[100px] rounded-3xl bg-gray-400">
+                    <div class="w-[40px] h-[40px] bg-blue-300 mx-5 flex items-center justify-center">18</div>
                     <a class="" href="">Post</a>
                 </div>
-                <div class="flex items-center w-[300px] h-[100px] rounded-3xl bg-gray-400">
-                    <div class="w-[40px] h-[40px] bg-blue-300 mx-5 flex items-center">counter</div>
+                <div class="flex items-center w-[400px] h-[100px] rounded-3xl bg-gray-400">
+                    <div class="w-[40px] h-[40px] bg-blue-300 mx-5 flex items-center justify-center">18</div>
                     <a class="" href="">Module</a>
                 </div>
             </div>

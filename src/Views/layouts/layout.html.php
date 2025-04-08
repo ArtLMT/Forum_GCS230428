@@ -103,7 +103,7 @@ $isAdmin = $currentUser->getIsAdmin();
             <a class="mb-2 hover:bg-stone-300" href="/forum/public/createModule">Create Module</a>
             <hr class="mb-4 mt-2">
             <a class ="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/userLists">List all user</a>
-            <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/signIn">Create User</a>
+            <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/createUser">Create User</a>
             <hr class="mb-4 mt-2">
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/createMessagePage">Give Feedback</a>
             <a class="side-menu-content mb-2 hover:bg-stone-300" href="/forum/public/messageList">Feedback</a>

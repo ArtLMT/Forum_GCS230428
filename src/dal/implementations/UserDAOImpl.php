@@ -162,7 +162,8 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
                 $row['email'], 
                 $row['user_id'],
                 $row['timestamp'] ?? null,
-                $row['image_path'] ?? null // ✅ Include image_path
+                $row['image_path'] ?? null, // Include image_path
+                $row['is_admin'] ?? 0
             );
         }
         return $users;
@@ -180,5 +181,11 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         $this->executeQuery($query, $params);
     }
 
+    public function getTotalUser()
+    {
+        $query = "SELECT COUNT(user_id) AS total FROM users";
+        $stmt = $this->executeQuery($query);
+        return $stmt->fetch(\PDO::FETCH_ASSOC)['total']; // This returns just the number
+    }
 }
 ?>

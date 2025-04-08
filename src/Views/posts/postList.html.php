@@ -1,8 +1,6 @@
 <?php
 ob_start(); // Start output buffering
 
-use src\dal\implementations\UserDAOImpl;
-use src\controllers\UserController;
 use src\utils\Utils;
 $title = "Home";
 ?>

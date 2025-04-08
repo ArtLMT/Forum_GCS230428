@@ -19,7 +19,7 @@ class PostController {
     public function index() 
     {
         $posts = $this->postDAO->getAllPosts();
-        $userController = new UserController();
+        // $userController = new UserController();
         
         require_once __DIR__ . '/../views/posts/postList.html.php';
     }

@@ -16,12 +16,12 @@ class UserController {
     public function index()
     {
         $users = $this->userDAO->getAllUsers();
-        require_once __DIR__ . '/../views/users/userList.html.php';
+        require_once __DIR__ . '/../views/users/userList.html.php'; // for the layout
     }
 
     public function createUser() 
     {
-        require_once __DIR__ . '/../views/users/createUser.html.php';
+        require_once __DIR__ . '/../views/admins/adminCreateUser.html.php';
     }
 
     public function store() 
@@ -109,16 +109,6 @@ class UserController {
         require_once __DIR__ . '/../views/users/profile.html.php';
     }
 
-    // public function getCurrentUser() 
-    // {
-    //     // $userId = SessionManager::get('user_id');
-    //     // if ($userId) {
-    //     //     return $this->userDAO->getUserById($userId);
-    //     // }
-    //     // return null;
-    //     return SessionManager::get('user');
-    // }
-
     public function getUser($userId)
     {
         return $this->userDAO->getUserById($userId);
@@ -127,6 +117,11 @@ class UserController {
     public function getUserByEmail($email)
     {
         return $this->userDAO->getUserByEmail($email);
+    }
+
+    public function getTotalUser()
+    {
+        return $this->userDAO->getTotalUser();
     }
 }
 ?>

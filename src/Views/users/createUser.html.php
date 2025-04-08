@@ -1,8 +1,7 @@
 <?php
 ob_start();
-
 ?>
-<h2 class="text-center text-3xl">Sign in</h2>
+<h2 class="text-center text-3xl">CreateUser</h2>
 
 <form action="/forum/public/signIn" method = "post" enctype = "multipart/form-data">
     <label> Username </label>
