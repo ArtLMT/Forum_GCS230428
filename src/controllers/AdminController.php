@@ -13,19 +13,30 @@ class AdminController {
         $this->userDAO = new UserDAOImpl();
     }
 
-    public function showDashboard() {
+    public function showDashboard()
+    {
         $user = SessionManager::get('user');
-
+    
         if (!$user || !$user->getIsAdmin()) {
             header("Location: /forum/public/");
             exit();
         }
-
+    
         $title = "Admin Dashboard";
-        $users = $this->userDAO->getAllUsers();
-
-        require_once __DIR__ . "/../views/admins/adminDashboard.html.php"; // Create this view
+    
+        // Pagination setup
+        $limit = 9;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $limit;
+    
+        $users = $this->userDAO->getUsersPaginated($limit, $offset);
+        $totalUsers = $this->userDAO->getTotalUser();
+        $totalPages = ceil($totalUsers / $limit);
+    
+        require_once __DIR__ . "/../views/admins/adminUserList.html.php";
     }
+    
+    
 
     public function showUserCreate()
     {

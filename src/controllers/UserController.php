@@ -21,7 +21,7 @@ class UserController {
 
     public function createUser() 
     {
-        require_once __DIR__ . '/../views/admins/adminCreateUser.html.php';
+        require_once __DIR__ . '/../views/auth/signInForm.html.php';
     }
 
     public function store() 
@@ -30,7 +30,19 @@ class UserController {
             $username = $_POST['username'];
             $password = $_POST['password'];
             $email = $_POST['email'];
+            // Create the user in the database
             $this->userDAO->createUser($username, $password, $email);
+
+            // Start session and store user data
+            SessionManager::start();
+
+            // Fetch the newly created user
+            $user = $this->userDAO->getUserByEmail($email);
+
+            // Store user in session
+            SessionManager::set('user', $user);
+            SessionManager::set('username', $user->getUsername());
+            
             header("Location: /forum/public/");
         }
     }

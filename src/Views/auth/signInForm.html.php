@@ -1,7 +1,7 @@
 <?php
 ob_start();
 use src\utils\SessionManager;
-// SessionManager::start();
+SessionManager::start();
 ?>
 
 <div class="login-container ">

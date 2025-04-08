@@ -187,5 +187,32 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         $stmt = $this->executeQuery($query);
         return $stmt->fetch(\PDO::FETCH_ASSOC)['total']; // This returns just the number
     }
+
+    public function getUsersPaginated($limit, $offset): array
+    {
+        $query = "SELECT * FROM users LIMIT :limit OFFSET :offset";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':limit', (int)$limit, \PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int)$offset, \PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $users = [];
+    
+        foreach ($rows as $row) {
+            $users[] = new User(
+                $row['username'], 
+                $row['password'], 
+                $row['email'], 
+                $row['user_id'],
+                $row['timestamp'] ?? null,
+                $row['image_path'] ?? null, 
+                $row['is_admin'] ?? 0
+            );
+        }
+    
+        return $users;
+    }
+    
 }
 ?>
