@@ -23,7 +23,7 @@ ob_start();
                     <div><?= htmlspecialchars($user->getUsername()) ?></div>
                     <div><?= htmlspecialchars($user->getEmail()) ?></div>
                     <div class="flex gap-2">
-                        <a class="flex justify-center bg-sky-400 hover:bg-cyan-400 px-2 py-1 size-12 rounded" href="/forum/public/admin/editUser?user_id=<?= $user->getUserId() ?>"><img class=""src="/forum/public/assets/img/editWhite.svg" alt=""></a>
+                        <a class="flex justify-center bg-sky-400 hover:bg-cyan-4    00 px-2 py-1 size-12 rounded" href="/forum/public/admin/editUser?user_id=<?= $user->getUserId() ?>"><img class=""src="/forum/public/assets/img/editWhite.svg" alt=""></a>
                         <form action="/forum/public/deleteUser" method="POST" onsubmit="return confirm('Are you sure?');">
                             <input type="hidden" name="user_id" value="<?= $user->getUserId() ?>">
                             <button class=" flex justify-center bg-gray-400 hover:bg-red-400 px-2 py-1 rounded size-12" type="submit"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt=""></button>
@@ -40,10 +40,13 @@ ob_start();
             <?php endforeach; ?>
         </div>
         
+         <!-- pagination section -->
         <div class="text-center mt-6">
             <?php if ($totalPages > 1): ?>
                 <div class="inline-flex gap-2">
                     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <!-- When clicked, this refreshes the page and passes ?page=NUMBER to the URL -->
+                    <!-- Then showDashboard() will run again and load the new page's users -->
                         <a class="px-3 py-1 rounded <?= $i == $page ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black' ?>" href="?page=<?= $i ?>">
                             <?= $i ?>
                         </a>

@@ -32,10 +32,10 @@ $totalUser = $AdminController->getTotalUser();
 </head>
 <body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border overflow-hidden">
     <header class="w-full h-[4rem] bg-zinc-300 z-50 border-b border-solid border-zinc-400 shadow-sm shadow-gray-500">
-        <nav class="flex items-center h-full px-8 text-black font-semibold">
+        <nav class="flex items-center h-full px-12 text-black font-semibold">
             <a class="nav-home text-2xl flex-[3] min-w-[20%] font-black p-2" href="/forum/public/">Study-Hub</a>
             <input class=" bg-gray-300 flex-[6] justify-self-center min-w-[20%] text-center bg-gray-300 text-neutral-500 rounded-xl border-solid border-2 border-neutral-500" placeholder="Search bar"></input>
-            <div class="flex-[1] min-w-[25%] flex justify-end items-center">
+            <div class="flex-[1] min-w-[25%] flex justify-end items-center mr-[3rem]">
                 <div class="relative">
                     <button id="avatar-button" class="flex items-center transition duration-400 ease-in-out transform hover:scale-110 focus:outline-none">
                         <?php if ($currentUser->getUserImage()) : ?>

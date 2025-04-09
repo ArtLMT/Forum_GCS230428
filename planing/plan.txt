@@ -137,3 +137,9 @@ DAO and Controller:
 Added isAdmin into users table
 store 0 and 1 value for easy use (bool)
 use Tiny INT to cost less memory
+
+Pagination:
+Using getUsersPaginated to get user's Pagination for example
+Including 2 params: Limit and Offset.
+Limit is the numbers of object that will be set at 1 time
+Offset is the order of the first object will be set, exp: offset = 0 -> get from 0 to limit ; offset = 8 -> get from 8 to limit

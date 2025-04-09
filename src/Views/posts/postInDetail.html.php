@@ -8,12 +8,12 @@ $title = $postTitle;
 ?>
 <!-- <?php var_dump($userId)?> -->
 
-<div class="post bg-slate-900 border-solid border-2 rounded-lg max-h-[800px]">
+<div class="post bg-white border-solid border-2 border-indigo-500 shadow-md rounded-lg max-h-[800px]">
     <!-- <div><img src="/forum/public/assets/img/backButton.svg" alt=""></div> -->
     <div class="post-header flex p-3 items-center">
-        <a class="relative left-[0.5rem]"href="/forum/public/"><img src="/forum/public/assets/img/backButton.svg" alt=""></a>
+        <a class="relative left-[0.5rem]"href="/forum/public/"><img src="/forum/public/assets/img/back_button_black.svg" alt="" class="size-12"></a>
         <div class="flex items-center justify-center ml-[1.5rem]">
-            <a class="size-[60px] flex items-center justify-center bg-gray-500 text-white rounded-full text-4xl font-bold" href="/forum/public/showProfile?id=<?=$post->getUserId()?>">
+            <a class="size-[60px] flex items-center justify-center bg-indigo-500 text-white rounded-full text-4xl font-bold" href="/forum/public/showProfile?id=<?=$post->getUserId()?>">
                 <?php if ($userImage) : ?>
                     <img src="/forum/public/<?= htmlspecialchars($userImage) ?>" class="size-[60px] rounded-full object-cover" alt="User Profile">
                 <?php else : ?>
@@ -21,15 +21,10 @@ $title = $postTitle;
                 <?php endif; ?>
             </a>
             <div class='ml-3'>
-                <h3 class="text-base">
-                    <?php 
-                        echo htmlspecialchars($username);
-                        $date = htmlspecialchars($post->getpostedTime());
-                        // $timestamp = strtotime($date);
-                        echo htmlspecialchars(Utils::timeAgo($date));
-                    ?>
+                <h3 class="text-slate-500 text-sm"">
+                    <?= htmlspecialchars($username); ?>  • <?= htmlspecialchars(Utils::timeAgo($post->getPostedTime())); ?>
                 </h3>
-                <h2 class="m-0 text-3xl leading-1"><?= htmlspecialchars($postTitle) ?></h2>
+                <h2 class="m-0 text-3xl text-indigo-700 font-bold"><?= htmlspecialchars($postTitle) ?></h2>
             </div>
         </div>
         <?php if ($currentUserId == $ownerId || $currentUserIsAdmin) :?>
@@ -42,9 +37,9 @@ $title = $postTitle;
     <hr class="min-w-[85%] place-self-center">
 
     <div class="post-content m-auto my-[1rem]">      
-        <p class= "mx-[5rem] my-[1rem]"><?= htmlspecialchars($postContent)?></p>
+        <p class= "mx-[5rem] my-[1rem] text-slate-700"><?= htmlspecialchars($postContent)?></p>
         <?php if ($postImage) : ?>
-            <img class="m-auto object-cover max-w-[1050px] max-h-[650px]" src="/forum/public/<?= htmlspecialchars($postImage) ?>" alt="Post Image">
+            <img class="m-auto object-cover max-w-[1050px] max-h-[650px] rounded-md shadow-sm" src="/forum/public/<?= htmlspecialchars($postImage) ?>" alt="Post Image">
         <?php endif; ?>
     </div>
 </div>
