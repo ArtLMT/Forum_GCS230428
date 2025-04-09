@@ -35,7 +35,7 @@ class AuthController {
                 SessionManager::start();
                 SessionManager::set('user', $user);
                 // SessionManager::set('user_id', $user->getUserId());
-                SessionManager::set('username', $user->getUsername());
+                // SessionManager::set('username', $user->getUsername());
     
                 // Redirect to dashboard
                 header("Location: /forum/public/");

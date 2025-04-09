@@ -13,8 +13,8 @@ $title = "Create Post";
         <label>Content:</label>
         <textarea class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" name="content" required></textarea>
         
-        <label>User ID:</label>
-        <input class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" type="number" name="user_id" required>
+        <!-- <label>User ID:</label> -->
+        <!-- <input class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" type="number" name="user_id" required> -->
         
         <!-- <label>Module ID:</label>
         <input type="number" name="module_id" required><br> -->

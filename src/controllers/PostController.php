@@ -43,8 +43,10 @@ class PostController {
 
         $title    = $_POST['title'];
         $content  = $_POST['content'];
-        $userId   = $_POST['user_id'];
         $moduleId = $_POST['module_id'];
+
+        $currentUser = SessionManager::get('user');
+        $userId = $currentUser->getUserId();
 
         // Handle file upload
         $imagePath = Utils::handleImageUpload($_FILES['image'], realpath(__DIR__ . '/../../public/uploads/postAsset'));
