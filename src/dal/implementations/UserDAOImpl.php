@@ -26,20 +26,6 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         $this->executeQuery($query, $params);
     }
 
-    // public function verifyUser($username, $password) : ?User
-    // {
-    //     $query = "SELECT * FROM users WHERE username = :username";
-    //     $params = [':username' => $username];
-    //     $stmt = $this->executeQuery($query, $params);
-    //     $user = $stmt->fetch();
-
-    //     if ($user && password_verify($password, $user['password'])) {
-    //         return new User($user['username'], $user['password'], $user['email'], $user['user_id']);
-    //     }
-    //     return null; // Return null if authentication fails
-    // }
-
-
     // Need to do: Validate and handle if there isn't a user with the given id
     public function getUserById($userId) : ?User
     {

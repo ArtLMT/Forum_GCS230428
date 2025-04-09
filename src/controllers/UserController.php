@@ -79,8 +79,15 @@ class UserController {
                 $imagePath = $existingImage;
             }
 
-                $this->userDAO->editUser($username, $password, $email, $userId, $imagePath);
-                header("Location: /forum/public/userLists");
+            $this->userDAO->editUser($username, $password, $email, $userId, $imagePath);
+            // After update:
+            if ($userId == SessionManager::get('user')->getUserId()) {
+                $updatedUser = $this->userDAO->getUserById($_POST['user_id']);
+                $_SESSION['user'] = $updatedUser;
+            }
+            
+
+            header("Location: /forum/public/userLists");
         } 
     }
 

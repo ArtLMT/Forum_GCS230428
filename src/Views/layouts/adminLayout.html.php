@@ -31,12 +31,12 @@ $totalUser = $AdminController->getTotalUser();
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border overflow-hidden">
-    <header class="w-full h-[4rem] bg-neutral-400 z-50 border-b border-solid border-gray-400 shadow-sm shadow-gray-500">
+    <header class="w-full h-[4rem] bg-zinc-300 z-50 border-b border-solid border-zinc-400 shadow-sm shadow-gray-500">
         <nav class="flex items-center h-full px-8 text-black font-semibold">
             <a class="nav-home text-2xl flex-[3] min-w-[20%] font-black p-2" href="/forum/public/">Study-Hub</a>
-            <input class=" bg-gray-300 flex-[6] justify-self-center min-w-[20%] text-center bg-gray-200 text-black rounded-xl" placeholder="Search bar"></input>
+            <input class=" bg-gray-300 flex-[6] justify-self-center min-w-[20%] text-center bg-gray-300 text-neutral-500 rounded-xl border-solid border-2 border-neutral-500" placeholder="Search bar"></input>
             <div class="flex-[1] min-w-[25%] flex justify-end items-center">
-                <div class="relative ">
+                <div class="relative">
                     <button id="avatar-button" class="flex items-center transition duration-400 ease-in-out transform hover:scale-110 focus:outline-none">
                         <?php if ($currentUser->getUserImage()) : ?>
                             <img src="/forum/public/<?= htmlspecialchars($currentUser->getUserImage()) ?>" class="size-[48px] rounded-full object-cover" alt="User Profile">
@@ -49,14 +49,26 @@ $totalUser = $AdminController->getTotalUser();
                     </button>
 
                     <!-- Dropdown menu -->
-                    <div id="avatar-dropdown" class="absolute mt-2 w-48 flex flex-col justify-center text-center algin-center bg-white text-black rounded-b-3xl shadow-lg hidden z-50">
-                        <a href="/forum/public/showProfile?id=<?= $currentUser->getUserId() ?>" class="block py-2 hover:bg-gray-200">View Profile</a>
+                    <div id="avatar-dropdown" class="absolute mt-2 w-48 flex flex-col justify-center text-center algin-center bg-white text-black rounded-b-xl shadow-lg hidden z-50">
+                        <a href="/forum/public/showProfile?id=<?= $currentUser->getUserId() ?>" class="relative flex justify-center items-center py-2 hover:bg-gray-200">
+                            <img src="/forum/public/assets/img/user_black.svg" alt="" class="absolute left-2">
+                            <p class="flex justify-center-safe">View Profile</p>
+                        </a>
                         <!-- <a href="/forum/public/createMessagePage" class="block py-2 hover:bg-gray-200">Help & support</a> -->
                         <?php if($isAdmin) :?>
-                            <a href="/forum/public/dashboard" class="block py-2 hover:bg-gray-200">Admin dashboard</a>
-                            <a href="/forum/public/messageList" class="block py-2 hover:bg-gray-200" >Feedbacks</a>
+                            <a href="/forum/public/dashboard" class="relative flex justify-center items-center py-2 hover:bg-gray-200">
+                                <img src="/forum/public/assets/img/admin_mode_black.svg" alt="" class="absolute left-2 size-6">
+                                <p>Dashboard</p>
+                            </a>
+                            <a href="/forum/public/messageList" class="relative flex justify-center items-center py-2 hover:bg-gray-200" >
+                                <img src="/forum/public/assets/img/feedback_black.svg" alt="" class="absolute left-2">
+                                <p>Feedbacks</p>
+                            </a>
                         <?php endif; ?>
-                        <a href="/forum/public/logout" class="block py-2 hover:bg-red-500 hover:text-white rounded-b-3xl">Logout</a>
+                        <a href="/forum/public/logout" class="relative flex justify-center items-center py-2 hover:bg-red-500 hover:text-white rounded-b-xl">
+                            <img src="/forum/public/assets/img/logout_black.svg" alt="" class="absolute left-2 size-6">
+                            <p>Logout</p>
+                        </a>
                     </div>
                 </div>
                 <script>
@@ -81,7 +93,7 @@ $totalUser = $AdminController->getTotalUser();
     </header>
     <main class="flex">
         <!-- Sidebar -->
-        <div class="flex flex-col w-[200px] bg-gray-600 h-[calc(100vh-4rem)]">
+        <div class="flex flex-col w-[300px] bg-stone-100 h-[calc(100vh-4rem)]">
             <a class="bg-green-400"href="/forum/public/">Back to normal</a>
             <a href="/forum/public/admin/createUser">Create User</a>
         </div>
@@ -90,32 +102,32 @@ $totalUser = $AdminController->getTotalUser();
         <div class="flex flex-col mt-[2rem] mx-24 w-full text-2xl">
             <!-- Counter Section -->
             <div class="flex gap-24 mx-auto">
-                <div class="flex items-center w-[300px] h-[100px] rounded-full bg-gray-400">
-                    <div class="size-[60px] rounded-full font-bold text-3xl bg-blue-300 mx-5 flex items-center justify-center"><?=htmlspecialchars($totalUser)?></div>
+                <div class="flex items-center w-[300px] h-[100px] rounded-xl bg-cyan-300 border-solid border-2 border-cyan-400">
+                    <div class="size-[60px] rounded-full font-bold text-3xl bg-cyan-200 mx-5 flex items-center justify-center"><?=htmlspecialchars($totalUser)?></div>
                     <a class="flex items-center justify-center" href="/forum/public/dashboard">
-                        <p class="w-[120px] text-center">Registered Users</p>
-                        <img class="size-12"src="/forum/public/assets/img/users_black.svg" alt="">
+                        <p class="w-[120px] text-center">Users</p>
+                        <img class="size-12 justify-end"src="/forum/public/assets/img/users_black.svg" alt="">
                     </a>
                 </div>
-                <div class="flex items-center w-[300px] h-[100px] rounded-full bg-gray-400">
-                    <div class="size-[60px] rounded-full font-bold text-3xl bg-blue-300 mx-5 flex items-center justify-center">18</div>
+                <div class="flex items-center w-[300px] h-[100px] rounded-xl bg-violet-400 border-solid border-2 border-violet-500">
+                    <div class="size-[60px] rounded-full font-bold text-3xl bg-violet-200 mx-5 flex items-center justify-center">18</div>
                     <a class="flex items-center justify-center" href="">
                         <p class="w-[120px] text-center">Post</p>
-                        <img class="size-12"src="/forum/public/assets/img/post_black.svg" alt="">
+                        <img class="size-12 justify-end"src="/forum/public/assets/img/post_black.svg" alt="">
                     </a>
                 </div>
-                <div class="flex items-center w-[300px] h-[100px] rounded-full bg-gray-400">
-                    <div class="size-[60px] rounded-full font-bold text-3xl bg-blue-300 mx-5 flex items-center justify-center">18</div>
+                <div class="flex items-center w-[300px] h-[100px] rounded-xl bg-emerald-300 border-solid border-2 border-emerald-400">
+                    <div class="size-[60px] rounded-full font-bold text-3xl bg-emerald-200 mx-5 flex items-center justify-center">18</div>
                     <a class="flex items-center justify-center" href="">
                         <p class="w-[120px] text-center">Module</p>
-                        <img class="size-16"src="/forum/public/assets/img/module_black.svg" alt="">
+                        <img class="size-12 justify-end"src="/forum/public/assets/img/module_black.svg" alt="">
                     </a>
                 </div>
-                <div class="flex items-center w-[300px] h-[100px] rounded-full bg-gray-400">
-                    <div class="size-[60px] rounded-full font-bold text-3xl bg-blue-300 mx-5 flex items-center justify-center">18</div>
+                <div class="flex items-center w-[300px] h-[100px] rounded-xl bg-orange-200 border-solid border-2 border-orange-300">
+                    <div class="size-[60px] rounded-full font-bold text-3xl bg-orange-100 mx-5 flex items-center justify-center">18</div>
                     <a class="flex items-center justify-center" href="">
                         <p class="w-[120px] text-center">Feedbacks</p>
-                        <img class="size-12"src="/forum/public/assets/img/feedback_black.svg" alt="">
+                        <img class="size-12 justify-end"src="/forum/public/assets/img/feedback_black.svg" alt="">
                     </a>
                 </div>
             </div>

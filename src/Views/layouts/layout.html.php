@@ -49,13 +49,28 @@ $isAdmin = $currentUser->getIsAdmin();
 
                     <!-- Dropdown menu -->
                     <div id="avatar-dropdown" class="absolute  mt-2 w-48 flex flex-col justify-center text-center algin-center  bg-white text-black rounded-b-3xl shadow-lg hidden z-50">
-                        <a href="/forum/public/showProfile?id=<?= $currentUser->getUserId() ?>" class="block py-2 hover:bg-gray-200">View Profile</a>
-                        <a href="/forum/public/createMessagePage" class="block py-2 hover:bg-gray-200">Help & support</a>
+                        <a href="/forum/public/showProfile?id=<?= $currentUser->getUserId() ?>" class="relative flex justify-center items-center py-2 hover:bg-gray-200">
+                            <img src="/forum/public/assets/img/user_black.svg" alt="" class="absolute left-2">
+                            <p>View Profile</p>
+                        </a>
+                        <a href="/forum/public/createMessagePage" class="relative flex justify-center items-center py-2 hover:bg-gray-200">
+                            <img src="/forum/public/assets/img/contact_black.svg" alt="" class="absolute left-2 size-6">
+                            <p>Contact</p>
+                        </a>
                         <?php if($isAdmin) :?>
-                            <a href="/forum/public/dashboard" class="block py-2 hover:bg-gray-200">Admin dashboard</a>
-                            <a href="/forum/public/messageList" class="block py-2 hover:bg-gray-200" >Feedbacks</a>
+                            <a href="/forum/public/dashboard" class="relative flex justify-center items-center py-2 hover:bg-gray-200">
+                                <img src="/forum/public/assets/img/admin_mode_black.svg" alt="" class="absolute left-2 size-6">
+                                <p>Admin mode</p>
+                            </a>
+                            <a href="/forum/public/messageList" class="relative flex justify-center items-center py-2 hover:bg-gray-200" >
+                                <img src="/forum/public/assets/img/feedback_black.svg" alt="" class="absolute left-2">
+                                <p>Feedbacks</p>
+                            </a>
                         <?php endif; ?>
-                        <a href="/forum/public/logout" class="block py-2 hover:bg-red-500 hover:text-white rounded-b-3xl">Logout</a>
+                        <a href="/forum/public/logout" class="relative flex justify-center items-center py-2 hover:bg-red-500 hover:text-white rounded-b-3xl">
+                            <img src="/forum/public/assets/img/logout_black.svg" alt="" class="absolute left-2 size-6">
+                            <p>Logout</p>
+                        </a>
                     </div>
                 </div>
                 <script>
