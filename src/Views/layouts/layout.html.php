@@ -28,10 +28,18 @@ $isAdmin = $currentUser->getIsAdmin();
     <header class="fixed top-0 w-full h-[4rem] bg-indigo-700 z-50 border-b border-solid border-indigo-800 shadow-sm shadow-indigo-500">
         <nav class="flex items-center h-full px-12 text-white font-semibold">
             <a class="text-2xl flex-[3] min-w-[20%] font-black p-2" href="/forum/public/">Study-Hub</a>
-            <input class="bg-slate-100 text-slate-800 flex-[6] text-center rounded-xl" placeholder="Search bar" />
+            <input class="bg-slate-100 text-slate-800 flex-[6] px-4 rounded-xl" placeholder="Search bar" />
             <div class="flex-[1] min-w-[25%] flex justify-end items-center mr-[3rem]">
                 <a class="p-3 rounded-xl hover:bg-indigo-600 hover:shadow-md" href="/forum/public/moduleLists">Modules</a>
                 <a class="p-3 rounded-xl hover:bg-indigo-600 hover:shadow-md" href="/forum/public/messageList">Messages</a>
+                <a href="/forum/public/createPost"
+                class="group relative flex items-center justify-center bg-emerald-400 hover:bg-emerald-600 h-[40px] w-[120px] rounded-full text-stone-100 py-3">
+                    <!-- <img src="/forum/public/assets/img/add_post_black.svg"
+                        class="absolute left-6 size-8 group-hover:hidden" alt="Add Post" /> -->
+                    <!-- <img src="/forum/public/assets/img/add_post_white.svg"
+                        class="absolute left-6 size-8 hidden group-hover:block" alt="Add Post Hover" /> -->
+                    <p class="">Add post</p>
+                </a>
                 <div class="relative ml-[1rem]">
                     <button id="avatar-button" class="flex items-center hover:scale-110 focus:outline-none">
                         <?php if ($currentUser->getUserImage()) : ?>
@@ -108,13 +116,9 @@ $isAdmin = $currentUser->getIsAdmin();
     <main class="flex-1 flex pt-[4rem] bg-slate-100 text-slate-800">
         <!-- Side Menu -->
         <div class="bg-white sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] pt-4 flex flex-col border-r border-solid border-slate-300 text-xl font-semibold">
-            <a href="/forum/public/createPost"
-            class="group relative flex items-center justify-center bg-emerald-400 hover:bg-emerald-600 h-[40px] rounded-full text-stone-100 py-3">
-                <img src="/forum/public/assets/img/add_post_black.svg"
-                    class="absolute left-6 size-8 group-hover:hidden" alt="Add Post" />
-                <img src="/forum/public/assets/img/add_post_white.svg"
-                    class="absolute left-6 size-8 hidden group-hover:block" alt="Add Post Hover" />
-                <p class="ps-2">Add post</p>
+            <p class="text-base ps-2">Module</p>
+            <a class="flex justify-start items-center hover:bg-violet-100 py-3" href="/forum/public/moduleLists">
+                <p class="ps-2">Module list</p>
             </a>
             <a class="flex justify-start items-center hover:bg-violet-100 py-3" href="/forum/public/createModule">
                 <p class="ps-2">Create Module</p>
@@ -140,7 +144,7 @@ $isAdmin = $currentUser->getIsAdmin();
 
         <!-- Main Content -->
         <div class="flex-1"> 
-            <div class="post-area w-2/3 mx-auto border-slate-300 mt-[2rem]">
+            <div class="post-area w-3/5 mx-auto border-slate-300 mt-[2rem]">
                 <?= $content; ?>
             </div>
         </div>

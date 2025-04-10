@@ -48,27 +48,47 @@ $totalUser = $AdminController->getTotalUser();
                         <p class="ml-[0.4rem]"><?= $currentUser->getUsername($currentUser->getUserId()) ?></p>
                     </button>
 
-                    <!-- Dropdown menu -->
-                    <div id="avatar-dropdown" class="absolute mt-2 w-48 flex flex-col justify-center text-center algin-center bg-white text-black rounded-b-xl shadow-lg hidden z-50">
-                        <a href="/forum/public/showProfile?id=<?= $currentUser->getUserId() ?>" class="relative flex justify-center items-center py-2 hover:bg-gray-200">
-                            <img src="/forum/public/assets/img/user_black.svg" alt="" class="absolute left-2">
-                            <p class="flex justify-center-safe">View Profile</p>
-                        </a>
-                        <!-- <a href="/forum/public/createMessagePage" class="block py-2 hover:bg-gray-200">Help & support</a> -->
-                        <?php if($isAdmin) :?>
-                            <a href="/forum/public/dashboard" class="relative flex justify-center items-center py-2 hover:bg-gray-200">
-                                <img src="/forum/public/assets/img/admin_mode_black.svg" alt="" class="absolute left-2 size-6">
-                                <p>Dashboard</p>
+                    <div id="avatar-dropdown" class="absolute right-0 mt-2 w-64 bg-white text-slate-800 rounded-xl shadow-xl hidden z-50 overflow-hidden">
+                        <!-- User Info at Top -->
+                        <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-200">
+                            <?php if ($currentUser->getUserImage()) : ?>
+                                <img src="/forum/public/<?= htmlspecialchars($currentUser->getUserImage()) ?>" class="size-12 rounded-full object-cover" />
+                            <?php else : ?>
+                                <div class="size-12 bg-indigo-600 text-white flex items-center justify-center rounded-full text-xl font-bold">
+                                    <?= strtoupper(substr($currentUser->getUsername($currentUser->getUserId()), 0, 1)) ?>
+                                </div>
+                            <?php endif; ?>
+                            <div>
+                                <p class="text-base font-semibold"><?= $currentUser->getUsername($currentUser->getUserId()) ?></p>
+                                <p class="text-sm text-gray-500"><?= $isAdmin ? 'Admin' : 'Student' ?></p>
+                            </div>
+                        </div>
+
+                        <!-- Dropdown Options -->
+                        <div class="flex flex-col text-left">
+                            <a href="/forum/public/showProfile?id=<?= $currentUser->getUserId() ?>" class="flex items-center px-4 py-3 hover:bg-indigo-100">
+                                <img src="/forum/public/assets/img/user_black.svg" class="size-6 mr-3" />
+                                View Profile
                             </a>
-                            <a href="/forum/public/messageList" class="relative flex justify-center items-center py-2 hover:bg-gray-200" >
-                                <img src="/forum/public/assets/img/feedback_black.svg" alt="" class="absolute left-2">
-                                <p>Feedbacks</p>
+                            <a href="/forum/public/createMessagePage" class="flex items-center px-4 py-3 hover:bg-indigo-100">
+                                <img src="/forum/public/assets/img/contact_black.svg" class="size-6 mr-3" />
+                                Contact
                             </a>
-                        <?php endif; ?>
-                        <a href="/forum/public/logout" class="relative flex justify-center items-center py-2 hover:bg-red-500 hover:text-white rounded-b-xl">
-                            <img src="/forum/public/assets/img/logout_black.svg" alt="" class="absolute left-2 size-6">
-                            <p>Logout</p>
-                        </a>
+                            <?php if($isAdmin): ?>
+                                <a href="/forum/public/messageList" class="flex items-center px-4 py-3 hover:bg-indigo-100">
+                                    <img src="/forum/public/assets/img/feedback_black.svg" class="size-6 mr-3" />
+                                    Feedbacks
+                                </a>
+                                <a href="/forum/public/dashboard" class="flex items-center px-4 py-3 hover:bg-indigo-100">
+                                    <img src="/forum/public/assets/img/admin_mode_black.svg" class="size-6 mr-3" />
+                                    Admin mode
+                                </a>
+                            <?php endif; ?>
+                            <a href="/forum/public/logout" class="flex items-center px-4 py-3 hover:bg-red-600 hover:text-white rounded-b-xl">
+                                <img src="/forum/public/assets/img/logout_black.svg" class="size-7 mr-3" />
+                                Logout
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <script>
@@ -93,37 +113,106 @@ $totalUser = $AdminController->getTotalUser();
     </header>
     <main class="flex">
         <!-- Sidebar -->
-        <div class="flex flex-col w-[300px] bg-stone-100 h-[calc(100vh-4rem)]">
-            <a class="bg-green-400"href="/forum/public/">Back to normal</a>
-            <a href="/forum/public/admin/createUser">Create User</a>
-        </div>
+        <!-- Side Menu -->
+        <div class="bg-gray-900 text-white sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] pt-4 flex flex-col border-r border-solid border-gray-700 text-lg font-semibold">
+            <!-- <a href="/forum/public/admin/createUser">Create User</a> -->
+            <!-- Header -->
+            <div class="px-4 py-2">
+                <h2 class="text-xl font-bold">Forum Manager</h2>
+                <p class="text-sm text-gray-400">Admin Dashboard</p>
+            </div>
 
+            <!-- Dashboard Section -->
+            <div class="mt-4">
+                <p class="text-xs px-4 py-2 text-gray-400 uppercase">Dashboard</p>
+                <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/dashboard">
+                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    <span>Overview</span>
+                </a>
+            </div>
+
+            <!-- Content Management Section -->
+            <div class="mt-4">
+                <p class="text-xs px-4 py-2 text-gray-400 uppercase">Content Management</p>
+                <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/moduleLists">
+                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M4 4h16v16H4z"/>
+                        <path d="M8 8h8"/>
+                        <path d="M8 12h8"/>
+                        <path d="M8 16h4"/>
+                    </svg>
+                    <span>Posts</span>
+                </a>
+                <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/userLists">
+                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span>Users</span>
+                </a>
+                <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/createModule">
+                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <rect x="3" y="4" width="18" height="4"/>
+                        <rect x="3" y="10" width="18" height="4"/>
+                        <rect x="3" y="16" width="18" height="4"/>
+                    </svg>
+                    <span>Modules</span>
+                </a>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="mt-4">
+                <p class="text-xs px-4 py-2 text-gray-400 uppercase">Settings</p>
+                <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/showProfile?id=<?= $currentUser->getUserId() ?>">
+                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span>Admin Account</span>
+                </a>
+            </div>
+
+            <!-- Logout (at the bottom) -->
+            <a class="flex items-center hover:bg-red-600 py-2 px-4 mt-auto" href="/forum/public/logout">
+                <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16 17 21 12 16 7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+                <span>Logout</span>
+            </a>
+        </div>
         <!-- Main content area -->
-        <div class="flex flex-col mt-[2rem] mx-24 w-full text-2xl">
+        <div class="flex flex-col mt-[2rem] mx-16 w-full text-2xl">
             <!-- Counter Section -->
-            <div class="flex gap-24 mx-auto">
-                <div class="flex items-center w-[300px] h-[100px] rounded-xl bg-cyan-300 border-solid border-2 border-cyan-400">
+            <div class="flex gap-16 mx-auto">
+                <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-cyan-300 border-solid border-2 border-cyan-400">
                     <div class="size-[60px] rounded-full font-bold text-3xl bg-cyan-200 mx-5 flex items-center justify-center"><?=htmlspecialchars($totalUser)?></div>
                     <a class="flex items-center justify-center" href="/forum/public/dashboard">
                         <p class="w-[120px] text-center">Users</p>
                         <img class="size-12 justify-end"src="/forum/public/assets/img/users_black.svg" alt="">
                     </a>
                 </div>
-                <div class="flex items-center w-[300px] h-[100px] rounded-xl bg-violet-400 border-solid border-2 border-violet-500">
+                <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-violet-400 border-solid border-2 border-violet-500">
                     <div class="size-[60px] rounded-full font-bold text-3xl bg-violet-200 mx-5 flex items-center justify-center">18</div>
                     <a class="flex items-center justify-center" href="">
                         <p class="w-[120px] text-center">Post</p>
                         <img class="size-12 justify-end"src="/forum/public/assets/img/post_black.svg" alt="">
                     </a>
                 </div>
-                <div class="flex items-center w-[300px] h-[100px] rounded-xl bg-emerald-300 border-solid border-2 border-emerald-400">
+                <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-emerald-300 border-solid border-2 border-emerald-400">
                     <div class="size-[60px] rounded-full font-bold text-3xl bg-emerald-200 mx-5 flex items-center justify-center">18</div>
                     <a class="flex items-center justify-center" href="">
                         <p class="w-[120px] text-center">Module</p>
                         <img class="size-12 justify-end"src="/forum/public/assets/img/module_black.svg" alt="">
                     </a>
                 </div>
-                <div class="flex items-center w-[300px] h-[100px] rounded-xl bg-orange-200 border-solid border-2 border-orange-300">
+                <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-orange-200 border-solid border-2 border-orange-300">
                     <div class="size-[60px] rounded-full font-bold text-3xl bg-orange-100 mx-5 flex items-center justify-center">18</div>
                     <a class="flex items-center justify-center" href="">
                         <p class="w-[120px] text-center">Feedbacks</p>

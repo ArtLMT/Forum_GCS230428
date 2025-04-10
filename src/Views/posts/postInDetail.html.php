@@ -39,7 +39,7 @@ $title = $postTitle;
     <div class="post-content m-auto my-[1rem]">      
         <p class= "mx-[5rem] my-[1rem] text-slate-700"><?= htmlspecialchars($postContent)?></p>
         <?php if ($postImage) : ?>
-            <img class="m-auto object-cover max-w-[1050px] max-h-[650px] rounded-md shadow-sm" src="/forum/public/<?= htmlspecialchars($postImage) ?>" alt="Post Image">
+            <img class="m-auto object-cover max-w-[900px] max-h-[600px] rounded-md shadow-sm" src="/forum/public/<?= htmlspecialchars($postImage) ?>" alt="Post Image">
         <?php endif; ?>
     </div>
 </div>

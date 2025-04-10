@@ -10,7 +10,7 @@ $title = $userName;
 ?>
 <!-- <h1 class="text-center text-3xl">This is profile page</h1> -->
 <div class="flex w-[120%] relative right-[10%] mx-auto rounded-lg my-[40px]"> 
-    <div class="h-[840px] bg-slate-900 w-1/3 border-solid border-2 rounded-lg border-gray-400">
+    <div class="h-[840px] bg-white w-1/3 border-solid border-2 rounded-lg border-indigo-300">
         <div class="mx-auto mt-8 flex items-center justify-center size-[200px] bg-gray-600 text-gray-300 rounded-full text-8xl font-bold">
             <?php if ($userImage) : ?>
                 <img src="/forum/public/<?= htmlspecialchars($userImage) ?>" class="size-[200px] rounded-full object-cover" alt="User Profile">
@@ -22,7 +22,7 @@ $title = $userName;
         <div class="flex flex-col items-center justify-center text-2xl">
             <p class="text-3xl"><?=htmlspecialchars($user->getUsername()) ?>
                 <a class="ml-[10px] absolute"href="/forum/public/updateUser?user_id=<?= htmlspecialchars($user->getUserId())?>">
-                    <img src="/forum/public/assets/img/editWhite.svg" alt="">
+                    <img src="/forum/public/assets/img/edit_black.svg" alt="">
                 </a>
             </p>
             <br>
@@ -33,11 +33,11 @@ $title = $userName;
         </div>
     </div>
     <!-- User's post container -->
-    <div class="ml-[4%] w-2/3 border-solid border-2 rounded-lg border-gray-400">
+    <div class="ml-[4%] w-2/3 border-solid border-2 rounded-lg border-indigo-300">
         <div class="h-[840px] overflow-y-auto hide-scrollbar">
             <?php if(!empty($posts)) : ?>
                 <?php foreach ($posts as $post) : ?>
-                    <div class="post bg-slate-900 border-solid border-2 rounded-lg border-gray-600 m-2 hover:border-gray-300 duration-700 ease-in-out transform hover:scale-95">
+                    <div class="post bg-white border-solid border-2 rounded-lg border-indigo-200 shadow-xl m-2 hover:border-indigo-700 duration-700 ease-in-out transform hover:scale-95">
                         <!-- header of the post -->
                         <div class="post-header flex m-3">
                             <p class="size-[60px] flex items-center justify-center bg-gray-500 text-gray-300 rounded-full text-4xl font-bold">
@@ -57,8 +57,8 @@ $title = $userName;
                             <?=$post->getContent()?>
                         </div>
                         <!-- Auth check -->
-                         <div class="flex gap-4 justify-end items-center mr-5 mb-[1rem] text-gray-400">
-                            <a class="p-2 hover:italic hover:text-gray-300"href="/forum/public/postDetail?post_id=<?= $post->getPostId()?>">See more</a>
+                         <div class="flex gap-4 justify-end items-center mr-5 mb-[1rem] text-slate-700">
+                            <a class="p-2 hover:italic hover:text-gray-900"href="/forum/public/postDetail?post_id=<?= $post->getPostId()?>">See more</a>
                             <?php if(($isOwner)) :?>
                                  <a class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-1 size-8 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>"><img class=""src="/forum/public/assets/img/editWhite.svg" alt=""></a>
                                  <a class="bg-red-400 border-solid border-red-500 border-2 p-1 size-8 text-xs" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt=""></a>
