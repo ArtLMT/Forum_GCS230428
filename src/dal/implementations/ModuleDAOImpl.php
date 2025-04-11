@@ -106,6 +106,24 @@ class ModuleDAOImpl extends BaseDAO implements ModuleDAO {
     
         $this->executeQuery($query, $params);
     }
+
+    public function getTotalModule()
+    {
+        $query = "SELECT COUNT(module_id) AS total FROM modules";
+        $stmt = $this->executeQuery($query);
+        return $stmt->fetch(\PDO::FETCH_ASSOC)['total'];
+    }
+    
+    public function getTotalPostOfModuleId($moduleId)
+    {
+        $query = "SELECT COUNT(*) AS post_count
+                  FROM posts p
+                  JOIN modules m ON p.module_id = m.module_id
+                  WHERE m.module_id = :module_id";
+    
+        $stmt = $this->executeQuery($query, [':module_id' => $moduleId]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC)['post_count'];
+    }
     
 }
 ?>

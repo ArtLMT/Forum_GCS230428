@@ -23,7 +23,7 @@ ob_start();
                     <div><?= htmlspecialchars($user->getUsername()) ?></div>
                     <div><?= htmlspecialchars($user->getEmail()) ?></div>
                     <div class="flex gap-2">
-                        <a class="flex justify-center bg-sky-400 hover:bg-cyan-4    00 px-2 py-1 size-12 rounded" href="/forum/public/admin/editUser?user_id=<?= $user->getUserId() ?>"><img class=""src="/forum/public/assets/img/editWhite.svg" alt=""></a>
+                        <a class="flex justify-center bg-sky-400 hover:bg-cyan-400 px-2 py-1 size-12 rounded" href="/forum/public/admin/editUser?user_id=<?= $user->getUserId() ?>"><img class="text-red-500"src="/forum/public/assets/img/edit_white.svg" alt=""></a>
                         <form action="/forum/public/deleteUser" method="POST" onsubmit="return confirm('Are you sure?');">
                             <input type="hidden" name="user_id" value="<?= $user->getUserId() ?>">
                             <button class=" flex justify-center bg-gray-400 hover:bg-red-400 px-2 py-1 rounded size-12" type="submit"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt=""></button>

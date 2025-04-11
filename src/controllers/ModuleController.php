@@ -20,6 +20,13 @@ class ModuleController {
     // List all modules
     public function index() {
         $modules = $this->moduleDAO->getAllModules();
+
+        // Get post count for each module
+        $modulePostCounts = [];
+        foreach ($modules as $module) {
+            $modulePostCounts[$module->getModuleId()] = $this->getNumberOfPostOfModuleId($module->getModuleId());
+        }
+        
         require_once __DIR__ . '/../views/modules/moduleLists.html.php';
     }
 
@@ -100,6 +107,11 @@ class ModuleController {
         $this->moduleDAO->deleteModule($moduleId);
         header("Location: /forum/public/moduleLists");
         exit();
+    }
+
+    public function getNumberOfPostOfModuleId($moduleOd)
+    {
+        return $this->moduleDAO->getTotalPostOfModuleId($moduleOd);
     }
 }
 ?>

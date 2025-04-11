@@ -68,7 +68,7 @@ $totalPost = $AdminController->getTotalPost();
                         <!-- Dropdown Options -->
                         <div class="flex flex-col text-left">
                             <a href="/forum/public/showProfile?id=<?= $currentUser->getUserId() ?>" class="flex items-center px-4 py-3 hover:bg-indigo-100">
-                                <img src="/forum/public/assets/img/user_black.svg" class="size-6 mr-3" />
+                                <img src="/forum/public/assets/img/users_black.svg" class="size-6 mr-3"/>
                                 View Profile
                             </a>
                             <a href="/forum/public/createMessagePage" class="flex items-center px-4 py-3 hover:bg-indigo-100">
@@ -126,11 +126,8 @@ $totalPost = $AdminController->getTotalPost();
             <div class="mt-4">
                 <p class="text-xs px-4 py-2 text-gray-400 uppercase">Dashboard</p>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/dashboard">
-                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                        <polyline points="9 22 9 12 15 12 15 22"/>
-                    </svg>
-                    <span>Overview</span>
+                    <img src="/forum/public/assets/img/home_white.svg" alt="" class="w-5 h-5 mr-3">
+                    <p>Overview</p>
                 </a>
             </div>
 
@@ -138,30 +135,16 @@ $totalPost = $AdminController->getTotalPost();
             <div class="mt-4">
                 <p class="text-xs px-4 py-2 text-gray-400 uppercase">Content Management</p>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/moduleLists">
-                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                        <path d="M4 4h16v16H4z"/>
-                        <path d="M8 8h8"/>
-                        <path d="M8 12h8"/>
-                        <path d="M8 16h4"/>
-                    </svg>
-                    <span>Posts</span>
+                    <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/post_white.svg" alt="">
+                    <p>Posts</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/userLists">
-                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
-                    <span>Users</span>
+                    <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/users_white.svg" alt="">
+                    <p>Users</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/createModule">
-                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                        <rect x="3" y="4" width="18" height="4"/>
-                        <rect x="3" y="10" width="18" height="4"/>
-                        <rect x="3" y="16" width="18" height="4"/>
-                    </svg>
-                    <span>Modules</span>
+                    <img class="w-5 h-5 mr-3"src="/forum/public/assets/img/module_white.svg" alt="">
+                    <p>Modules</p>
                 </a>
             </div>
 
@@ -173,7 +156,7 @@ $totalPost = $AdminController->getTotalPost();
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                         <circle cx="12" cy="7" r="4"/>
                     </svg>
-                    <span>Admin Account</span>
+                    <p>Admin Account</p>
                 </a>
             </div>
 
@@ -184,7 +167,7 @@ $totalPost = $AdminController->getTotalPost();
                     <polyline points="16 17 21 12 16 7"/>
                     <line x1="21" y1="12" x2="9" y2="12"/>
                 </svg>
-                <span>Logout</span>
+                <p>Logout</p>
             </a>
         </div>
         <!-- Main content area -->
@@ -202,7 +185,7 @@ $totalPost = $AdminController->getTotalPost();
                     <a class="flex items-center justify-center" href="/forum/public/admin/showPostList">
                         <div class="size-[60px] rounded-full font-bold text-3xl bg-violet-200 mx-5 flex items-center justify-center"><?=htmlspecialchars($totalPost)?></div>
                         <p class="w-[160px] text-center text-white">Post</p>
-                        <img class="size-12 justify-end"src="/forum/public/assets/img/post_white.svg" alt="">
+                        <img class="size-12 justify-end" src="/forum/public/assets/img/post_white.svg" alt="">
                     </a>
                 </div>
                 <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-gray-900 border-solid border-2 border-emerald-400">

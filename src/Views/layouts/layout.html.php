@@ -33,11 +33,7 @@ $isAdmin = $currentUser->getIsAdmin();
                 <a class="p-3 rounded-xl hover:bg-indigo-600 hover:shadow-md" href="/forum/public/moduleLists">Modules</a>
                 <a class="p-3 rounded-xl hover:bg-indigo-600 hover:shadow-md" href="/forum/public/messageList">Messages</a>
                 <a href="/forum/public/createPost"
-                class="group relative flex items-center justify-center bg-emerald-400 hover:bg-emerald-600 h-[40px] w-[120px] rounded-full text-stone-100 py-3">
-                    <!-- <img src="/forum/public/assets/img/add_post_black.svg"
-                        class="absolute left-6 size-8 group-hover:hidden" alt="Add Post" /> -->
-                    <!-- <img src="/forum/public/assets/img/add_post_white.svg"
-                        class="absolute left-6 size-8 hidden group-hover:block" alt="Add Post Hover" /> -->
+                class="relative flex items-center justify-center bg-emerald-400 hover:bg-emerald-600 h-[40px] w-[120px] rounded-full text-stone-100 py-3">
                     <p class="">Add post</p>
                 </a>
                 <div class="relative ml-[1rem]">
@@ -115,31 +111,49 @@ $isAdmin = $currentUser->getIsAdmin();
     <!-- Main Section -->
     <main class="flex-1 flex pt-[4rem] bg-slate-100 text-slate-800">
         <!-- Side Menu -->
-        <div class="bg-white sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] pt-4 flex flex-col border-r border-solid border-slate-300 text-xl font-semibold">
-            <p class="text-base ps-2">Module</p>
-            <a class="flex justify-start items-center hover:bg-violet-100 py-3" href="/forum/public/moduleLists">
-                <p class="ps-2">Module list</p>
-            </a>
-            <a class="flex justify-start items-center hover:bg-violet-100 py-3" href="/forum/public/createModule">
-                <p class="ps-2">Create Module</p>
-            </a>
-            <a class="flex justify-start items-center hover:bg-violet-100 py-3" href="/forum/public/userLists">
-                <p class="ps-2">List all user</p>
-            </a>
-            <a class="flex justify-start items-center hover:bg-violet-100 py-3" href="/forum/public/signIn">
-                <p class="ps-2">Create User</p>
-            </a>
-            <a class="flex justify-start items-center hover:bg-violet-100 py-3" href="/forum/public/createMessagePage">
-                <p class="ps-2">Give Feedback</p>
-            </a>
-            <a class="flex justify-start items-center hover:bg-violet-100 py-3" href="/forum/public/messageList">
-                <p class="ps-2">Feedback</p>
-            </a>
-            <a class="group relative flex flex justify-start items-center w-full mt-auto py-3 hover:bg-red-600 hover:text-white p-[10px] rounded-xl transition duration-400 ease-in-out transform" href="/forum/public/logout">
-                <img class="absolute left-6 size-8 group-hover:hidden" src="/forum/public/assets/img/logout_black.svg" alt="logout">
-                <img class="absolute left-6 size-8 hidden group-hover:block" src="/forum/public/assets/img/logout_white.svg" alt="logout">
-                <p class="ml-[35%]">Logout</p>
-            </a>
+        <div class="bg-white sticky top-16 w-[16rem] h-[calc(100vh-4rem)] pt-4 flex flex-col border-r border-solid border-slate-300 text-xl font-semibold">
+            <div class="px-4 py-2">
+                <h2 class="text-xl font-bold">Student Forum</h2>
+                <p class="text-sm text-gray-400">Study hub</p>
+            </div>
+            <div class="mt-4">
+                <p class="text-xs px-4 py-2 text-gray-400 uppercase">Module</p>
+                <a class="flex items-center hover:bg-violet-100 py-2 px-4" href="/forum/public/moduleLists">
+                    <img class="w-5 h-5 mr-3"src="/forum/public/assets/img/module_black.svg" alt="">
+                    <p>Module list</p>
+                </a>
+                <!-- <a class="flex items-center hover:bg-violet-100 py-2 px-4" href="/forum/public/createModule">
+                    <p>Create Module</p>
+                </a> -->
+            </div>
+            <div class="mt-4">
+                <p class="text-xs px-4 py-2 text-gray-400 uppercase">Users</p>
+                <a class="flex items-center hover:bg-violet-100 py-2 px-4" href="/forum/public/userLists">
+                    <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/users_black.svg" alt="">
+                    <p>List all user</p>
+                </a>
+                <!-- <a class="flex items-center hover:bg-violet-100 py-2 px-4" href="/forum/public/signIn">
+                    <p>Create User</p>
+                </a> -->
+            </div>
+            <div class="mt-4">
+                <p class="text-xs px-4 py-2 text-gray-400 uppercase">Feedbacks</p>
+                <a class="flex items-center hover:bg-violet-100 py-2 px-4" href="/forum/public/createMessagePage">
+                    <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/give_feedback_black.svg" alt="">
+                    <p>Give Feedback</p>
+                </a>
+                <a class="flex items-center hover:bg-violet-100 py-2 px-4" href="/forum/public/messageList">
+                    <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/feedback_black.svg" alt="">
+                    <p>Feedback</p>
+                </a>
+            </div>
+            <div class="mt-auto">
+                <a class="group flex justify-start items-center w-full py-3 hover:bg-red-600 hover:text-white p-[10px] rounded-xl transition duration-400 ease-in-out transform" href="/forum/public/logout">
+                    <img class="absolute left-6 size-8 group-hover:hidden" src="/forum/public/assets/img/logout_black.svg" alt="logout">
+                    <img class="absolute left-6 size-8 hidden group-hover:block" src="/forum/public/assets/img/logout_white.svg" alt="logout">
+                    <p class="ml-[35%]">Logout</p>
+                </a>
+            </div>
         </div>
 
         <!-- Main Content -->
