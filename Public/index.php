@@ -17,6 +17,7 @@ $router->get('update', 'PostController@edit');
 $router->get('delete', 'PostController@destroy');
 $router->get('userPost', 'PostController@getPostByUserId');
 $router->get('postDetail', 'PostController@openPost');
+$router->get('postByModule', 'PostController@showPostByModule');
 
 // Module's routes
 $router->get('moduleLists', 'ModuleController@index'); // List all posts

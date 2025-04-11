@@ -2,6 +2,7 @@
 namespace src\controllers;
 
 use src\dal\implementations\PostDAOImpl;
+use src\dal\implementations\ModuleDAOImpl;
 use src\controllers\ModuleController;
 use src\controllers\UserController;
 use src\utils\Validation;
@@ -165,5 +166,30 @@ class PostController {
 
         require_once __DIR__ . '/../views/posts/postInDetail.html.php';
     }    
+
+    
+    public function showPostByModule()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
+        }
+
+        $moduleId = $_GET['id'] ?? null;
+
+        if (!$moduleId || !Validation::checkModuleById($moduleId)) {
+            echo "Error: Invalid Module ID.";
+            return;
+        }
+        
+        $posts = $this->postDAO->getPostsByModuleId($moduleId);
+        
+        $moduleDAO = new ModuleDAOImpl();
+        $module = $moduleDAO->getModuleById($moduleId);
+
+        require_once __DIR__ . '/../views/posts/postListByModule.html.php';
+
+    }
 }
 ?>

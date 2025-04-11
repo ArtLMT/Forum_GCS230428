@@ -117,6 +117,21 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         return $posts;
     }
 
+    public function getPostsByModuleId($moduleId)
+    {
+        $query = " SELECT p.post_id, p.title, p.content, p.user_id, p.module_id, p.create_date, p.image_path, u.image_path AS avatar, u.username AS username, m.module_name AS module_name 
+        FROM posts p
+        INNER JOIN users u ON p.user_id = u.user_id
+        INNER JOIN modules m ON p.module_id = m.module_id
+        WHERE m.module_id = :module_id
+        ORDER BY p.create_date DESC";
+
+        $stmt = $this->executeQuery($query, [':module_id' => $moduleId]);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC); // fetch ALL rows
+        return !empty($rows) ? $this->mapToPosts($rows) : [];
+        
+    }
+
     public function getAllPosts() : array
     {
         // $query = "SELECT * FROM posts";

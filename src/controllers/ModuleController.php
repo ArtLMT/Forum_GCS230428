@@ -2,6 +2,7 @@
 namespace src\controllers;
 
 use src\dal\implementations\ModuleDAOImpl;
+use src\dal\implementations\PostDAOImpl;
 use src\utils\Validation;
 
 class ModuleController {

@@ -3,9 +3,13 @@ ob_start(); // Start output buffering
 ?>
 
 <?php if(!empty($modules)) : ?>
-    <div>
+    <div class="grid grid-cols-3 gap-4">
         <?php foreach($modules as $module) : ?>
-            <hr class="mt-2 mb-2">
+            <a class="bg-white p-4 rounded shadow" href="/forum/public/postByModule?id=<?= htmlspecialchars($module->getModuleId())?>">
+                <h2 class="text-xl font-bold text-center"><?= htmlspecialchars($module->getModuleName()) ?></h2>
+                <p><?= htmlspecialchars($module->getModuleDescription()) ?></p>
+            </a>
+            <!-- <hr class="mt-2 mb-2">
             <div class="module">
                 <div class="module-header">
                     <h2><?= htmlspecialchars($module->getModuleName()) ?></h2>
@@ -17,7 +21,7 @@ ob_start(); // Start output buffering
                     <a href="/forum/public/updateModule?id=<?= htmlspecialchars($module->getModuleId()) ?>">Edit</a>
                     <a href="/forum/public/deleteModule?id=<?= htmlspecialchars($module->getModuleId()) ?>" onclick="return confirm('Are you sure?');">Delete</a>
                 </div>
-            </div>
+            </div> -->
         <?php endforeach; ?>
     </div>
 <?php else : ?>
