@@ -5,23 +5,18 @@ $title = "Create Post";
 
 <h2 class="text-center ">Create Post</h2>
 
-<form class="bg-slate-900 border-solid border-2 rounded-lg" action="/forum/public/createPost" method="post" enctype="multipart/form-data">  
-    <div class="m-[1rem] flex flex-col items-center">    
+<form class="bg-white border-solid border-2 rounded-lg text-slate-800" action="/forum/public/createPost" method="post" enctype="multipart/form-data">  
+    <div class="m-4 flex flex-col items-center">    
         <label>Title:</label>
-        <input class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" type="text" name="title" required>
+        <input class="px-3 bg-gray-300 text-gray-700 mb-4 w-[80%] rounded-xl" type="text" name="title" required>
         
         <label>Content:</label>
-        <textarea class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" name="content" required></textarea>
+        <textarea class="px-3 bg-gray-300 text-gray-700 mb-4 w-[80%] h-80 rounded-xl" name="content" required></textarea>
         
-        <!-- <label>User ID:</label> -->
-        <!-- <input class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" type="number" name="user_id" required> -->
-        
-        <!-- <label>Module ID:</label>
-        <input type="number" name="module_id" required><br> -->
-        <select class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl"name="module_id" required>
-        <option class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" value="">Select a Module</option>
+        <select class="px-3 bg-gray-300 text-gray-700 mb-4 w-[80%] rounded-xl"name="module_id" required>
+        <option class="px-3 bg-gray-300 text-gray-700 mb-4 w-[80%] rounded-xl" value="">Select a Module</option>
             <?php foreach ($modules as $module): ?>
-                <option class="px-[12px] bg-gray-300 text-gray-700 mb-[1rem] w-[80%] rounded-xl" value="<?= $module->getModuleId() ?>"><?= htmlspecialchars($module->getModuleName()) ?></option>
+                <option class="px-3 bg-gray-300 text-gray-700 mb-4 w-[80%] rounded-xl" value="<?= $module->getModuleId() ?>"><?= htmlspecialchars($module->getModuleName()) ?></option>
             <?php endforeach; ?>
         </select>
         

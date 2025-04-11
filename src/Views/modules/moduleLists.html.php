@@ -1,5 +1,6 @@
 <?php
 ob_start(); // Start output buffering
+$title = "List of Modules";
 ?>
 
 <?php if(!empty($modules)) : ?>
