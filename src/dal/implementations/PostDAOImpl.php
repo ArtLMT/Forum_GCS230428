@@ -12,6 +12,32 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         $this->pdo = $this->db->getConnection();
     }
 
+    private function mapToPost($data) : object 
+    {
+        return new Post(
+            $data['post_id'],        // postId
+            $data['title'],          // title
+            $data['content'],        // content
+            0,                       // voteScore (default to 0)
+            $data['user_id'],        // userId
+            $data['module_id'],      // moduleId
+            $data['create_date'],    // timestamp
+            $data['username'],       // username
+            $data['module_name'],    // moduleName
+            $data['image_path'] ?? null,   // image
+            $data['avatar'] ?? null
+        );
+    }
+
+    private function mapToPosts($datas)
+    {
+        $posts = [];
+        foreach ($datas as $data) {
+            $posts[] = $this->mapToPost($data);
+        }
+        return $posts;
+    }
+
     public function createPost($title, $content, $userId, $moduleId, $imagePath = null) 
     {
         $query = "INSERT INTO posts (title, content, user_id, module_id, image_path) 
@@ -111,33 +137,34 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         return $posts; // Returns an array of Post objects
     }
 
-    private function mapToPost($data) : object 
-    {
-        // $userDAO = new UserDAOImpl();
-        // $username = $userDAO->getUserById($data['user_id'])->getUsername();
-        // var_dump($data);
-        // exit;
-
-        return new Post(
-            $data['post_id'],        // postId
-            $data['title'],          // title
-            $data['content'],        // content
-            0,                       // voteScore (default to 0)
-            $data['user_id'],        // userId
-            $data['module_id'],      // moduleId
-            $data['create_date'],    // timestamp
-            $data['username'],       // username
-            $data['module_name'],    // moduleName
-            $data['image_path'] ?? null,   // image
-            $data['avatar'] ?? null
-        );
-    }
-
     public function deletePost($postId) 
     {
         $query = "DELETE FROM posts WHERE post_id = :post_id";
         $stmt = $this->executeQuery($query, [':post_id' => $postId]);
     }
 
+    public function getTotalPost()
+    {
+        $query = "SELECT COUNT(post_id) AS total FROM posts";
+        $stmt = $this->executeQuery($query);
+        return $stmt->fetch(\PDO::FETCH_ASSOC)['total'];
+    }
+
+    public function getPostsPaginated($limit, $offset): array
+    {
+        $query = "SELECT p.post_id, p.title, p.content, p.user_id, p.module_id, p.create_date, p.image_path, u.image_path AS avatar, u.username AS username, m.module_name AS module_name
+                    FROM posts p
+                    INNER JOIN users u ON p.user_id = u.user_id
+                    INNER JOIN modules m ON p.module_id = m.module_id
+                    ORDER BY p.create_date DESC LIMIT :limit OFFSET :offset";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':limit', (int)$limit, \PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int)$offset, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $this->mapToPosts($rows);
+    }
 }
 ?>

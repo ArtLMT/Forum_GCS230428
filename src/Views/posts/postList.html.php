@@ -24,11 +24,6 @@ $title = "Home";
                         <div class='ml-3'>
                             <h3 class="text-slate-500 text-sm">
                                 <?= htmlspecialchars($username); ?>  • <?= htmlspecialchars(Utils::timeAgo($post->getPostedTime())); ?>
-                                    <!-- <?php
-                                        $date = htmlspecialchars($post->getPostedTime());
-                                        $timestamp = strtotime($date);
-                                        echo htmlspecialchars(Utils::timeAgo($date));
-                                    ?> -->
                             </h3>
                             <h2 class="m-0 text-3xl text-indigo-700 font-bold"><?= htmlspecialchars($post->getTitle()) ?></h2>
                         </div>

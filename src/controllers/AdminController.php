@@ -2,18 +2,21 @@
 namespace src\controllers;
 
 use src\dal\implementations\UserDAOImpl;
+use src\dal\implementations\PostDAOImpl;
 use src\utils\SessionManager;
 use src\utils\Utils;
 
 class AdminController {
     private $userDAO;
     private $totalUser;
+    private $postDAO;
 
     public function __construct() {
         $this->userDAO = new UserDAOImpl();
+        $this->postDAO = new PostDAOImpl();
     }
 
-    public function showDashboard()
+    private function checkIsAdmin()
     {
         $user = SessionManager::get('user');
     
@@ -21,6 +24,10 @@ class AdminController {
             header("Location: /forum/public/");
             exit();
         }
+    }
+    public function showDashboard()
+    {
+        $this->checkIsAdmin();
     
         $title = "Admin Dashboard";
     
@@ -38,6 +45,24 @@ class AdminController {
         require_once __DIR__ . "/../views/admins/adminUserList.html.php";
     }
     
+    public function showPostList()
+    {
+        $this->checkIsAdmin();
+
+        $title = 'List of posts';
+        // Pagination setup
+        $limit = 9; // numbers of user will be taken
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get page number from URL, default to 1
+        $offset = ($page - 1) * $limit; // Calculate where to start loading users from
+    
+        // Get a limited list of users based on pagination
+        $posts = $this->postDAO->getpostsPaginated($limit, $offset); // get $limit number of users, starting from $offest
+        // Get total number of users to calculate how many pages are needed
+        $totalPosts = $this->postDAO->getTotalPost();
+        $totalPages = ceil($totalPosts / $limit); // Round up to full number of pages
+
+        require_once __DIR__ . "/../views/admins/postList.html.php";
+    }
     public function showUserCreate()
     {
         require_once __DIR__ . '/../views/admins/adminCreateUser.html.php';
@@ -53,6 +78,11 @@ class AdminController {
     public function getTotalUser()
     {
         return $totalUser = $this->userDAO->getTotalUser();
+    }
+
+    public function getTotalPost()
+    {
+        return $totalPost = $this->postDAO->getTotalPost();
     }
 
     public function storeUser()

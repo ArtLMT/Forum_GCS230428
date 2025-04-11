@@ -17,6 +17,7 @@ $isAdmin = $currentUser->getIsAdmin();
 
 $AdminController = new AdminController();
 $totalUser = $AdminController->getTotalUser();
+$totalPost = $AdminController->getTotalPost();
 
 ?>
 <!DOCTYPE html>
@@ -30,7 +31,7 @@ $totalUser = $AdminController->getTotalUser();
     <link rel="stylesheet" href="/forum/public/assets/css/input.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border overflow-hidden">
+<body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border overflow-hidden bg-slate-700">
     <header class="w-full h-[4rem] bg-zinc-300 z-50 border-b border-solid border-zinc-400 shadow-sm shadow-gray-500">
         <nav class="flex items-center h-full px-12 text-black font-semibold">
             <a class="nav-home text-2xl flex-[3] min-w-[20%] font-black p-2" href="/forum/public/">Study-Hub</a>
@@ -112,7 +113,6 @@ $totalUser = $AdminController->getTotalUser();
         </nav>
     </header>
     <main class="flex">
-        <!-- Sidebar -->
         <!-- Side Menu -->
         <div class="bg-gray-900 text-white sticky top-[4rem] w-[16rem] h-[calc(100vh-4rem)] pt-4 flex flex-col border-r border-solid border-gray-700 text-lg font-semibold">
             <!-- <a href="/forum/public/admin/createUser">Create User</a> -->
@@ -190,33 +190,33 @@ $totalUser = $AdminController->getTotalUser();
         <!-- Main content area -->
         <div class="flex flex-col mt-[2rem] mx-16 w-full text-2xl">
             <!-- Counter Section -->
-            <div class="flex gap-16 mx-auto">
-                <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-cyan-300 border-solid border-2 border-cyan-400">
-                    <div class="size-[60px] rounded-full font-bold text-3xl bg-cyan-200 mx-5 flex items-center justify-center"><?=htmlspecialchars($totalUser)?></div>
+            <div class="flex gap-16 font-semibold">
+                <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-gray-900 border-solid border-2 border-cyan-400">
                     <a class="flex items-center justify-center" href="/forum/public/dashboard">
-                        <p class="w-[120px] text-center">Users</p>
-                        <img class="size-12 justify-end"src="/forum/public/assets/img/users_black.svg" alt="">
+                        <div class="size-[60px] rounded-full font-bold text-3xl bg-cyan-200 mx-5 flex items-center justify-center"><?=htmlspecialchars($totalUser)?></div>
+                        <p class="w-[160px] text-center text-white">Users</p>
+                        <img class="size-12 justify-end"src="/forum/public/assets/img/users_white.svg" alt="">
                     </a>
                 </div>
-                <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-violet-400 border-solid border-2 border-violet-500">
-                    <div class="size-[60px] rounded-full font-bold text-3xl bg-violet-200 mx-5 flex items-center justify-center">18</div>
-                    <a class="flex items-center justify-center" href="">
-                        <p class="w-[120px] text-center">Post</p>
-                        <img class="size-12 justify-end"src="/forum/public/assets/img/post_black.svg" alt="">
+                <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-gray-900 border-solid border-2 border-violet-500">
+                    <a class="flex items-center justify-center" href="/forum/public/admin/showPostList">
+                        <div class="size-[60px] rounded-full font-bold text-3xl bg-violet-200 mx-5 flex items-center justify-center"><?=htmlspecialchars($totalPost)?></div>
+                        <p class="w-[160px] text-center text-white">Post</p>
+                        <img class="size-12 justify-end"src="/forum/public/assets/img/post_white.svg" alt="">
                     </a>
                 </div>
-                <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-emerald-300 border-solid border-2 border-emerald-400">
-                    <div class="size-[60px] rounded-full font-bold text-3xl bg-emerald-200 mx-5 flex items-center justify-center">18</div>
+                <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-gray-900 border-solid border-2 border-emerald-400">
                     <a class="flex items-center justify-center" href="">
-                        <p class="w-[120px] text-center">Module</p>
-                        <img class="size-12 justify-end"src="/forum/public/assets/img/module_black.svg" alt="">
+                        <div class="size-[60px] rounded-full font-bold text-3xl bg-emerald-200 mx-5 flex items-center justify-center">18</div>
+                        <p class="w-[160px] text-center text-white">Module</p>
+                        <img class="size-12 justify-end"src="/forum/public/assets/img/module_white.svg" alt="">
                     </a>
                 </div>
-                <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-orange-200 border-solid border-2 border-orange-300">
-                    <div class="size-[60px] rounded-full font-bold text-3xl bg-orange-100 mx-5 flex items-center justify-center">18</div>
-                    <a class="flex items-center justify-center" href="">
-                        <p class="w-[120px] text-center">Feedbacks</p>
-                        <img class="size-12 justify-end"src="/forum/public/assets/img/feedback_black.svg" alt="">
+                <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-gray-900 border-solid border-2 border-orange-300">
+                    <a class="flex items-center w-full" href="">
+                        <div class="size-[60px] rounded-full font-bold text-3xl bg-orange-100 mx-5 flex items-center justify-center">18</div>
+                        <p class="w-[160px] text-center text-white">Feedbacks</p>
+                        <img class="size-12 justify-end"src="/forum/public/assets/img/feedback_white.svg" alt="">
                     </a>
                 </div>
             </div>

@@ -12,7 +12,7 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         $this->pdo = $this->db->getConnection();
     }
 
-    private function mapRowToUser(array $row): User
+    private function mapToUser(array $row): User
     {
         return new User(
             $row['username'],
@@ -25,11 +25,11 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         );
     }
 
-    private function mapRowsToUsers(array $rows): array
+    private function mapToUsers(array $rows): array
     {
         $users = [];
         foreach ($rows as $row) {
-            $users[] = $this->mapRowToUser($row);
+            $users[] = $this->mapToUser($row);
         }
         return $users;
     }
@@ -53,7 +53,7 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         $stmt = $this->executeQuery($query, $params);
         $user = $stmt->fetch();
 
-        return $user ? $this->mapRowToUser($user) : null;
+        return $user ? $this->mapToUser($user) : null;
     }
 
     public function getUserByEmail($email): ?User 
@@ -62,7 +62,7 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         $stmt = $this->executeQuery($query, [':email' => $email]);
         $data = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        return $data ? $this->mapRowToUser($data) : null;
+        return $data ? $this->mapToUser($data) : null;
     }
 
     public function getUserByUsername($username) : ?User
@@ -72,7 +72,7 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         $stmt = $this->executeQuery($query, $params);
         $user = $stmt->fetch();
 
-        return $user ? $this->mapRowToUser($user) : null;
+        return $user ? $this->mapToUser($user) : null;
     }
 
     public function editUser($username, $password, $email, $userId, $imagePath) 
@@ -124,7 +124,7 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         $query = "SELECT * FROM users"; 
         $stmt = $this->executeQuery($query);
         $rows = $stmt->fetchAll();
-        return $this->mapRowsToUsers($rows);
+        return $this->mapToUsers($rows);
     }
 
     public function updatePassword($userId, $newPassword) 
@@ -153,7 +153,7 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         $stmt->execute();
 
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        return $this->mapRowsToUsers($rows);
+        return $this->mapToUsers($rows);
     }
 }
 ?>
