@@ -61,6 +61,7 @@ $router->get('admin/editUser', 'AdminController@userEdit');
 $router->post('admin/updateUser', 'AdminController@updateUser');
 $router->post('deleteUser', 'adminController@deleteUser');
 $router->get('admin/showPostList', 'adminController@showPostList');
+$router->get('admin/showModuleList', 'adminController@showModuleList');
 
 $router->dispatch();
 ?>

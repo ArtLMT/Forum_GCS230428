@@ -3,17 +3,19 @@ namespace src\controllers;
 
 use src\dal\implementations\UserDAOImpl;
 use src\dal\implementations\PostDAOImpl;
+use src\dal\implementations\ModuleDAOImpl;
 use src\utils\SessionManager;
 use src\utils\Utils;
 
 class AdminController {
     private $userDAO;
-    private $totalUser;
     private $postDAO;
+    private $moduleDAO;
 
     public function __construct() {
         $this->userDAO = new UserDAOImpl();
         $this->postDAO = new PostDAOImpl();
+        $this->moduleDAO = new ModuleDAOImpl();
     }
 
     private function checkIsAdmin()
@@ -63,6 +65,31 @@ class AdminController {
 
         require_once __DIR__ . "/../views/admins/postList.html.php";
     }
+
+    public function showModuleList()
+    {
+        $this->checkIsAdmin();
+
+        $title = 'List of module';
+        // // Pagination setup
+        $limit = 9; // numbers of user will be taken
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get page number from URL, default to 1
+        $offset = ($page - 1) * $limit; // Calculate where to start loading users from
+    
+        // Get a limited list of users based on pagination
+        $modules = $this->moduleDAO->getModulesPaginated($limit, $offset); // get $limit number of users, starting from $offest
+        // Get total number of users to calculate how many pages are needed
+        $totalModules = $this->moduleDAO->getTotalModule();
+        $totalPages = ceil($totalModules / $limit); // Round up to full number of pages
+
+        $postCounts = [];
+        foreach ($modules as $module) {
+            $moduleId = $module->getModuleId();
+            $postCounts[$moduleId] = $this->moduleDAO->getTotalPostOfModuleId($moduleId);
+        }
+
+        require_once __DIR__ . "/../views/admins/adminModuleList.html.php";
+    }
     public function showUserCreate()
     {
         require_once __DIR__ . '/../views/admins/adminCreateUser.html.php';
@@ -83,6 +110,11 @@ class AdminController {
     public function getTotalPost()
     {
         return $totalPost = $this->postDAO->getTotalPost();
+    }
+
+    public function getTotalModule()
+    {
+        return $totalModule = $this->moduleDAO->getTotalModule();
     }
 
     public function storeUser()

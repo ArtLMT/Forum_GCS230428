@@ -5,9 +5,10 @@ ob_start();
 <div class="h-[calc(100vh-8rem-100px)]">
     <?php if (!empty($users)) : ?>
         <!-- Header row -->
-        <div class=" flex justify-center items-center grid grid-cols-5 font-bold text-white bg-gray-800 py-2 px-4"
-            style="grid-template-columns: 80px 1fr 2fr 160px 1fr;" >
+        <div class=" flex justify-center items-center grid grid-cols-6 font-bold text-white bg-gray-800 py-2 px-4"
+            style="grid-template-columns: 80px 80px 1fr 2fr 160px 1fr;" >
             <div class="flex justify-center items-center">User ID</div>
+            <div>Avatar</div>
             <div>Username</div>
             <div>Email</div>
             <div>Actions</div>
@@ -17,11 +18,26 @@ ob_start();
         <!-- Data rows -->
         <div class="h-[602px]">
             <?php foreach ($users as $user) : ?>
-                <div class="flex justify-center items-center grid grid-cols-5 bg-gray-300 text-black text-base py-2 px-4 my-[4px] rounded-full hover:bg-gray-100 duration-700 ease-in-out transform hover:scale-105"
-                style="grid-template-columns: 80px 1fr 2fr 160px 1fr;">
-                    <div class="flex justify-center items-center"><?= htmlspecialchars($user->getUserId()) ?></div>
-                    <div><?= htmlspecialchars($user->getUsername()) ?></div>
-                    <div><?= htmlspecialchars($user->getEmail()) ?></div>
+                <div class="flex justify-center items-center grid grid-cols-6 bg-gray-300 text-black text-base py-2 px-4 my-[4px] rounded-full hover:bg-gray-100 duration-700 ease-in-out transform hover:scale-105"
+                style="grid-template-columns: 80px 80px 1fr 2fr 160px 1fr;">
+                    <p class="flex justify-center items-center"><?= htmlspecialchars($user->getUserId()) ?></p>
+                    <div class="flex justify-center items-center">
+                         <?php
+                            $userImage = $user->getUserImage();
+                            $username = $user->getUsername();
+                        ?>
+                        <div class="size-12 flex items-center justify-center bg-indigo-500 text-white rounded-full text-4xl font-bold">
+                            <?php if ($userImage) : ?>
+                                    <img src="/forum/public/<?= htmlspecialchars($userImage) ?>" class="size-12 rounded-full object-cover" alt="User Profile">
+                                <?php else : ?>
+                                    <?= strtoupper(substr($username, 0, 1)) // Get first letter and make it uppercase  ?> 
+                                <?php endif; ?>
+                        </div>
+                    </div>
+                    <p>
+                        <?= htmlspecialchars($user->getUsername()) ?>
+                    </p>
+                    <p><?= htmlspecialchars($user->getEmail()) ?></p>
                     <div class="flex gap-2">
                         <a class="flex justify-center bg-sky-400 hover:bg-cyan-400 px-2 py-1 size-12 rounded" href="/forum/public/admin/editUser?user_id=<?= $user->getUserId() ?>"><img class="text-red-500"src="/forum/public/assets/img/edit_white.svg" alt=""></a>
                         <form action="/forum/public/deleteUser" method="POST" onsubmit="return confirm('Are you sure?');">

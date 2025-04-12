@@ -73,7 +73,10 @@ class ModuleDAOImpl extends BaseDAO implements ModuleDAO {
     
     private function mapToModule($data): Module
     {
-        return new Module($data['module_id'], $data['module_name'], $data['module_description']);
+        return new Module($data['module_id'],
+                        $data['module_name'], 
+                        $data['module_description']
+        );
     }
     
 
@@ -124,6 +127,23 @@ class ModuleDAOImpl extends BaseDAO implements ModuleDAO {
         $stmt = $this->executeQuery($query, [':module_id' => $moduleId]);
         return $stmt->fetch(\PDO::FETCH_ASSOC)['post_count'];
     }
-    
+
+    public function getModulesPaginated($limit, $offset): array
+    {
+        $query = "SELECT * FROM modules
+                    ORDER BY module_id ASC LIMIT :limit OFFSET :offset";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':limit', (int)$limit, \PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int)$offset, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $datas = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $moduless = [];
+        foreach ($datas as $data) {
+            $modules[] = $this->mapToModule($data);
+        }
+        return $modules;
+    }
 }
 ?>

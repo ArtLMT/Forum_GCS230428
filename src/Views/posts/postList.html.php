@@ -34,7 +34,7 @@ $title = "Home";
                         <a href="/forum/public/postDetail?post_id=<?= $post->getPostId()?>">
                             <p class= "mx-20 my-4 line-clamp-3 text-slate-700"><?= htmlspecialchars($post->getContent())?></p>
                             <?php if ($post->getPostImage()) : ?>
-                                <img class="m-auto mb-4 object-cover max-w-250 max-h-150 rounded-md shadow-sm" src="/forum/public/<?= htmlspecialchars($post->getPostImage()) ?>" alt="Post Image">
+                                <img class="m-auto mb-4 object-cover max-w-[900px] max-h-[600px] rounded-md shadow-sm" src="/forum/public/<?= htmlspecialchars($post->getPostImage()) ?>" alt="Post Image">
                             <?php endif; ?>
                         </a>
                     </div>

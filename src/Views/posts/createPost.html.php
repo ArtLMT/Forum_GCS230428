@@ -10,15 +10,16 @@ $title = "Create Post";
         <label>Title:</label>
         <input class="px-3 bg-gray-300 text-gray-700 mb-4 w-[80%] rounded-xl" type="text" name="title" required>
         
-        <label>Content:</label>
-        <textarea class="px-3 bg-gray-300 text-gray-700 mb-4 w-[80%] h-80 rounded-xl" name="content" required></textarea>
-        
         <select class="px-3 bg-gray-300 text-gray-700 mb-4 w-[80%] rounded-xl"name="module_id" required>
         <option class="px-3 bg-gray-300 text-gray-700 mb-4 w-[80%] rounded-xl" value="">Select a Module</option>
             <?php foreach ($modules as $module): ?>
                 <option class="px-3 bg-gray-300 text-gray-700 mb-4 w-[80%] rounded-xl" value="<?= $module->getModuleId() ?>"><?= htmlspecialchars($module->getModuleName()) ?></option>
             <?php endforeach; ?>
         </select>
+        
+        <label>Content:</label>
+        <textarea class="px-3 bg-gray-300 text-gray-700 mb-4 w-[80%] h-80 rounded-xl" name="content" required></textarea>
+        
         
         <label>Image:</label>
         <input type="file" name="image">
