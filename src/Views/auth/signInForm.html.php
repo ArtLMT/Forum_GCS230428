@@ -4,7 +4,7 @@ use src\utils\SessionManager;
 SessionManager::start();
 ?>
 
-<div class="login-container ">
+<div class="login-container">
         <h2 class="text-center text-3xl font-bold mb-10 text-gray-800">Sign In</h2>
 
         <?php if (SessionManager::get('error')): ?>

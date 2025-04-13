@@ -117,6 +117,15 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
         return $posts;
     }
 
+    public function countPostByUser($userId) : int
+    {
+        $query = "SELECT COUNT(*) AS post_count
+                FROM posts
+                WHERE user_id = :user_id";
+        $stmt = $this->executeQuery($query, [':user_id' => $userId]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC)['post_count'];
+    }
+
     public function getPostsByModuleId($moduleId)
     {
         $query = " SELECT p.post_id, p.title, p.content, p.user_id, p.module_id, p.create_date, p.image_path, u.image_path AS avatar, u.username AS username, m.module_name AS module_name 

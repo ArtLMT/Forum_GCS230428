@@ -3,9 +3,6 @@ ob_start();
 ?>
 
 <div class="h-[calc(100vh-8rem-100px)]">
-    <div>
-
-    </div>
     <?php if (!empty($modules)) : ?>
         <div class=" flex justify-center items-center grid grid-cols-4 font-bold text-white bg-gray-800 py-2 px-4"
             style="grid-template-columns: 80px 1fr 2fr 80px;" >

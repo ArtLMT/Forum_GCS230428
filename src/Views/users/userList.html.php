@@ -4,38 +4,56 @@ ob_start();
 
 <?php if (!empty($users)) : ?>
     <div>
+        <p>Total user: <?= htmlspecialchars($totalUsers)?></p>
+        <form method="GET" class="mb-6">
+            <input 
+                type="text" 
+                name="search" 
+                placeholder="Search by username or email..." 
+                value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>" 
+                class="border border-gray-400 rounded-lg p-2 w-[300px]"
+            >
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg ml-2 hover:bg-blue-600">
+                Search
+            </button>
+        </form>
+
+    </div>
+    <div class="grid grid-cols-2">
         <?php foreach ($users as $user) : ?>
-            <p>getUserId</p>
-            <div><?= htmlspecialchars($user->getUserId()) ?></div>
-            <br>
-            
-            <p>getUsername</p>
-            <div><?= htmlspecialchars($user->getUsername()) ?></div>
-            <br>
+            <a class="m-8 p-4 w-[450px] bg-white flex rounded-2xl shadow-lg transition-transform hover:scale-105 hover:shadow-xl" href="/forum/public/showProfile?id=<?=$user->getUserId()?>">
+                <div class="size-20 flex items-center justify-center bg-indigo-500 text-white rounded-full text-4xl font-bold mr-4">
+                    <?php if ($user->getUserImage()) : ?>
+                        <img class ="size-20 rounded-full object-cover" src="/forum/public/<?=$user->getUserImage()?>" alt="Profile picture">
+                    <?php else : ?>
+                        <?= strtoupper(substr($user->getUsername(), 0, 1)) // Get first letter and make it uppercase  ?> 
+                    <?php endif; ?>
+                </div>
+                <div class="group-hover:text-red-700">
+                    <div class="m-0 text-3xl text-indigo-700 font-bold"><?= htmlspecialchars($user->getUsername()) ?></div>
+                    <div><?=htmlspecialchars($user->getEmail())?></div>
+                    <p>Post have posted: <?= htmlspecialchars($postCounts[$user->getUserId()])?></p>
+                </div>
 
-            <p>getEmail</p>
-            <div><?=htmlspecialchars($user->getEmail())?></div>
-            <br>
-
-            <p>getPassword</p>
-            <div><?=htmlspecialchars($user->getPassword())?></div>
-            <br>
-            
-            <?php if ($user->getUserImage()) : ?>
-                <p>Profile Picture</p>
-                <img class ="size-[75px]"src="/forum/public/<?=$user->getUserImage()?>" alt="Profile picture">
-            <?php endif ?>
-
-            <div class="flex gap-4 justify-end text-center">
-                <a class="bg-green-400 border-solid border-green-500 border-2 p-2 w-20"href="/forum/public/updateUser?user_id=<?= htmlspecialchars($user->getUserId())?>">Edit</a>
-                <form action="/forum/public/deleteUser" method="POST" onsubmit="return confirm('Are you sure?');">
-                    <input type="hidden" name="user_id" value="<?= htmlspecialchars($user->getUserId()) ?>">
-                    <button class="bg-red-400 p-2 w-20 border-solid border-red-500 border-2" type="submit">Delete</button>
-                </form>
-            </div>
-            <p>======================================</p>
+            </a>
         <?php endforeach; ?>
     </div>
+    <div class="text-center mt-6">
+            <?php if ($totalPages > 1): ?>
+                <div class="inline-flex gap-2">
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <!-- When clicked, this refreshes the page and passes ?page=NUMBER to the URL -->
+                    <!-- Then showDashboard() will run again and load the new page's users -->
+                    <a 
+                    class="px-3 py-1 rounded <?= $i == $page ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black' ?>" 
+                    href="?page=<?= $i ?>&search=<?= urlencode($_GET['search'] ?? '') ?>"
+                    >
+                        <?= $i ?>
+                    </a>
+                    <?php endfor; ?>
+                </div>
+            <?php endif; ?>
+        </div>
 <?php else : ?>
     <p>No users available.</p>
 <?php endif; ?>

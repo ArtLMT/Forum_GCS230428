@@ -8,7 +8,7 @@ $title = "List of Modules";
 <?php if(!empty($modules)) : ?>
     <div class="grid grid-cols-2 gap-14">
         <?php foreach($modules as $module) : ?>
-            <a class="bg-white rounded shadow-lg transition-transform hover:scale-105 hover:shadow-xl" href="/forum/public/postByModule?id=<?= htmlspecialchars($module->getModuleId())?>">
+            <a class="bg-white rounded-2xl shadow-lg transition-transform hover:scale-105 hover:shadow-xl" href="/forum/public/postByModule?id=<?= htmlspecialchars($module->getModuleId())?>">
                 <h2 class="text-xl font-bold text-center py-2"><?= htmlspecialchars($module->getModuleName()) ?></h2>
                 <p class="bg-gray-300 text-center py-2"><?= htmlspecialchars($module->getModuleDescription()) ?></p>
                 <div class="flex items-center justify-center py-2">
@@ -21,7 +21,7 @@ $title = "List of Modules";
                         $badge = $count > 7 ? 'High' : ($count > 3 ? 'Medium' : 'Low');
                         $badgeColor = $count > 7 ? 'green' : ($count > 3 ? 'yellow' : 'red');
                     ?>
-                    <span class="text-xs px-2 py-1 rounded-full bg-<?= $badgeColor ?>-200 text-<?= $badgeColor ?>-800">
+                    <span class="text-xs px-2 py-1 ml-4 rounded-full bg-<?= $badgeColor ?>-200 text-<?= $badgeColor ?>-800">
                         <?= $badge ?> activity
                     </span>
                 </div>

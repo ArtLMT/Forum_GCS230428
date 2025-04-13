@@ -139,7 +139,7 @@ class ModuleDAOImpl extends BaseDAO implements ModuleDAO {
 
         $datas = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        $moduless = [];
+        $modules = [];
         foreach ($datas as $data) {
             $modules[] = $this->mapToModule($data);
         }

@@ -2,20 +2,43 @@
 namespace src\controllers;
 
 use src\dal\implementations\UserDAOImpl;
+use src\dal\implementations\PostDAOImpl;
 use src\controllers\PostController;
 use src\utils\SessionManager;
 use src\utils\Utils;
 
 class UserController {
     private $userDAO;
+    private $postDAO;
 
     public function __construct() {
         $this->userDAO = new UserDAOImpl();
+        $this->postDAO = new PostDAOImpl();
     }
     
     public function index()
     {
-        $users = $this->userDAO->getAllUsers();
+        // $users = $this->userDAO->getAllUsers();
+        $title = "User List";
+
+        // Pagination setup
+        $limit = 6; // numbers of user will be taken
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get page number from URL, default to 1
+        $offset = ($page - 1) * $limit; // Calculate where to start loading users from
+    
+        // Get a limited list of users based on pagination
+        $users = $this->userDAO->getUsersPaginated($limit, $offset); // get $limit number of users, starting from $offest
+        // Get total number of users to calculate how many pages are needed
+        $totalUsers = $this->userDAO->getTotalUser();
+        $totalPages = ceil($totalUsers / $limit); // Round up to full number of pages
+
+        $postCounts = [];
+        foreach ($users as $user) {
+            $userId = $user->getUserId();
+            $postCounts[$userId] = $this->postDAO->countPostByUser($userId);
+        }
+
+
         require_once __DIR__ . '/../views/users/userList.html.php'; // for the layout
     }
 
