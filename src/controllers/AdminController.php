@@ -34,7 +34,7 @@ class AdminController {
         $title = "Admin Dashboard";
     
         // Pagination setup
-        $limit = 9; // numbers of user will be taken
+        $limit = 8; // numbers of user will be taken
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get page number from URL, default to 1
         $offset = ($page - 1) * $limit; // Calculate where to start loading users from
     
@@ -53,7 +53,7 @@ class AdminController {
 
         $title = 'List of posts';
         // Pagination setup
-        $limit = 9; // numbers of user will be taken
+        $limit = 8; // numbers of user will be taken
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get page number from URL, default to 1
         $offset = ($page - 1) * $limit; // Calculate where to start loading users from
     
@@ -72,7 +72,7 @@ class AdminController {
 
         $title = 'List of module';
         // // Pagination setup
-        $limit = 9; // numbers of user will be taken
+        $limit = 8; // numbers of user will be taken
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get page number from URL, default to 1
         $offset = ($page - 1) * $limit; // Calculate where to start loading users from
     
@@ -90,11 +90,35 @@ class AdminController {
 
         require_once __DIR__ . "/../views/admins/adminModuleList.html.php";
     }
+
     public function showUserCreate()
     {
         require_once __DIR__ . '/../views/admins/adminCreateUser.html.php';
     }
 
+    public function showCreatePost()
+    {
+        $modules = $this->moduleDAO->getAllModules();
+        require_once __DIR__ . '/../views/admins/adminCreatePost.html.php';
+    }
+
+    public function showCreateModule()
+    {
+        require_once __DIR__ . '/../views/admins/createModule.html.php';
+    }
+
+    public function showEditModule()
+    {
+        $moduleId = $_GET['id'] ?? null;
+
+        if (!$moduleId ) {
+            echo "Error: Invalid Module ID.";
+            return;
+        }
+
+        $module = $this->moduleDAO->getModuleById($moduleId);
+        require_once __DIR__ . '/../views/admins/updateModule.html.php';
+    }
     public function userEdit()
     {
         $userId = $_GET['user_id'];
@@ -128,6 +152,38 @@ class AdminController {
         }
     }
 
+    public function storePost()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $title    = $_POST['title'];
+            $content  = $_POST['content'];
+            $moduleId = $_POST['module_id'];
+
+            $currentUser = SessionManager::get('user');
+            $userId = $currentUser->getUserId();
+
+            $imagePath = Utils::handleImageUpload($_FILES['image'], realpath(__DIR__ . '/../../public/uploads/postAsset'));
+
+            $this->postDAO->createPost($title, $content, $userId, $moduleId, $imagePath);
+            header("Location: /forum/public/admin/showPostList");
+        }
+    }
+
+    public function storeModule()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
+        }
+
+        $moduleName = $_POST['module_name'];
+        $moduleDescription = $_POST['module_description'];
+
+        $this->moduleDAO->createModule($moduleName, $moduleDescription);
+        header('Location: /forum/public/admin/showModuleList');
+    }
+
     public function updateUser()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -158,6 +214,23 @@ class AdminController {
         } 
     }
 
+    public function updateModule()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
+        }
+
+        $moduleId = $_POST['module_id'];
+        $moduleName = $_POST['module_name'];
+        $moduleDescription = $_POST['module_description'];
+
+        $this->moduleDAO->updateModule($moduleId, $moduleName, $moduleDescription);
+        header("Location: /forum/public/admin/showModuleList");
+        exit();
+    }
+
     public function deleteUser() 
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -173,6 +246,46 @@ class AdminController {
         } else {
             echo "Invalid request method!";
         }
+    }
+
+    public function deletePost()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
+        }
+
+        $postId = $_POST['post_id'] ?? null;
+
+        if (!$postId) {
+            echo "Error: Invalid Post ID.";
+            return;
+        }
+
+        $this->postDAO->deletePost($postId);
+        header("Location: /forum/public/admin/showPostList");
+        exit();
+    }
+
+    public function deleteModule()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
+        }
+
+        $moduleId = $_POST['module_id'] ?? null;
+
+        if (!$moduleId) {
+            echo "Error: Invalid Module ID.";
+            return;
+        }
+
+        $this->moduleDAO->deleteModule($moduleId);
+        header("Location: /forum/public/admin/showModuleList");
+        exit();
     }
 }
 ?>

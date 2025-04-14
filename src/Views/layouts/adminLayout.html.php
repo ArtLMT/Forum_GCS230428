@@ -36,7 +36,7 @@ $totalModule = $AdminController->getTotalModule();
     <header class="bg-gradient-to-r from-[#0a1225] to-[#6c8dc2] shadow-sm w-full h-[4rem] z-50 border-b border-solid border-zinc-400 shadow-sm shadow-gray-500"
     >
         <nav class="flex items-center h-full px-8 text-slate-100 font-semibold">
-            <a class="nav-home text-2xl p-2" href="/forum/public/">Study-Hub</a>
+            <a class="nav-home text-2xl p-2" href="/forum/public/">StudyRoom</a>
             <!-- <input class=" bg-gray-300 flex-[6] justify-self-center min-w-[20%] text-center bg-gray-300 text-neutral-500 rounded-xl border-solid border-2 border-neutral-500" placeholder="Search bar"></input> -->
             <div class="flex-[1] min-w-[25%] flex justify-end items-center mr-[3rem]">
                 <div class="relative">
@@ -70,11 +70,11 @@ $totalModule = $AdminController->getTotalModule();
                         <!-- Dropdown Options -->
                         <div class="flex flex-col text-left">
                             <a href="/forum/public/showProfile?id=<?= $currentUser->getUserId() ?>" class="flex items-center px-4 py-3 hover:bg-indigo-100">
-                                <img src="/forum/public/assets/img/users_black.svg" class="size-6 mr-3"/>
+                                <img src="/forum/public/assets/img/user_black.svg" class="size-6 mr-3"/>
                                 View Profile
                             </a>
                             <a href="/forum/public/createMessagePage" class="flex items-center px-4 py-3 hover:bg-indigo-100">
-                                <img src="/forum/public/assets/img/contact_black.svg" class="size-6 mr-3" />
+                                <img src="/forum/public/assets/img/contact_black.svg" class="size-6 mr-3"/>
                                 Contact
                             </a>
                             <?php if($isAdmin): ?>
@@ -140,30 +140,29 @@ $totalModule = $AdminController->getTotalModule();
                     <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/post_white.svg" alt="">
                     <p>Posts</p>
                 </a>
+                <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/showCreatePost">
+                    <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/add_post_white.svg" alt="">
+                    <p>Add Posts</p>
+                </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/dashboard">
                     <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/users_white.svg" alt="">
                     <p>Users</p>
+                </a>
+                <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/createUser">
+                    <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/add_user_white.svg" alt="">
+                    <p>Add User</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/showModuleList">
                     <img class="w-5 h-5 mr-3"src="/forum/public/assets/img/module_white.svg" alt="">
                     <p>Modules</p>
                 </a>
-            </div>
-
-            <!-- Settings Section -->
-            <div class="mt-4">
-                <p class="text-xs px-4 py-2 text-gray-400 uppercase">Settings</p>
-                <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/showProfile?id=<?= $currentUser->getUserId() ?>">
-                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                    <p>Admin Account</p>
+                <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/showCreateModule">
+                    <img class="w-5 h-5 mr-3"src="/forum/public/assets/img/module_white.svg" alt="">
+                    <p>Create Modules</p>
                 </a>
             </div>
-
             <!-- Logout (at the bottom) -->
-            <a class="flex items-center hover:bg-red-600 py-2 px-4 mt-auto" href="/forum/public/logout">
+            <a class="flex items-center hover:bg-red-600 py-2 px-4 mt-auto mb-4" href="/forum/public/logout">
                 <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                     <polyline points="16 17 21 12 16 7"/>

@@ -27,7 +27,7 @@ $isAdmin = $currentUser->getIsAdmin();
     <!-- Navigation Bar -->
     <header class="fixed top-0 w-full h-[4rem] bg-indigo-700 z-50 border-b border-solid border-indigo-800 shadow-sm shadow-indigo-500">
         <nav class="flex items-center h-full px-12 text-white font-semibold">
-            <a class="text-2xl flex-[3] min-w-[20%] font-black p-2" href="/forum/public/">Study-Hub</a>
+            <a class="text-2xl flex-[3] min-w-[20%] font-black p-2" href="/forum/public/">StudyRoom</a>
             <input class="bg-slate-100 text-slate-800 flex-[6] px-4 rounded-xl" placeholder="Search bar" />
             <div class="flex-[1] min-w-[25%] flex justify-end items-center mr-[3rem]">
                 <a class="p-3 rounded-xl hover:bg-indigo-600 hover:shadow-md" href="/forum/public/moduleLists">Modules</a>

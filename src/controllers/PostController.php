@@ -55,7 +55,6 @@ class PostController {
         // Store post
         $this->postDAO->createPost($title, $content, $userId, $moduleId, $imagePath);
         header("Location: /forum/public/");
-        exit();
     }
 
     // GET /posts/{id}/edit - Show edit form

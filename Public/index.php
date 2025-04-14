@@ -59,9 +59,18 @@ $router->get('admin/createUser', 'AdminController@showUserCreate');
 $router->post('admin/storeUser', 'AdminController@storeUser');
 $router->get('admin/editUser', 'AdminController@userEdit');
 $router->post('admin/updateUser', 'AdminController@updateUser');
-$router->post('deleteUser', 'adminController@deleteUser');
+$router->post('admin/deleteUser', 'adminController@deleteUser');
 $router->get('admin/showPostList', 'adminController@showPostList');
+$router->get('admin/showCreatePost', 'adminController@showCreatePost');
+$router->post('admin/createPost', 'adminController@storePost');
+$router->post('admin/deletePost', 'adminController@deletePost');
 $router->get('admin/showModuleList', 'adminController@showModuleList');
+$router->post('admin/createModule', 'adminController@storeModule');
+$router->get('admin/showCreateModule', 'adminController@showCreateModule');
+$router->post('admin/deleteModule', 'adminController@deleteModule');
+$router->get('admin/editModule', 'AdminController@showEditModule');
+$router->post('admin/updateModule', 'AdminController@updateModule');
+
 
 $router->dispatch();
 ?>

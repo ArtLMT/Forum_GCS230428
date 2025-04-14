@@ -16,7 +16,7 @@ ob_start();
         </div>
 
         <!-- Data rows -->
-        <div class="h-[602px]">
+        <div class="h-[560px]">
             <?php foreach ($users as $user) : ?>
                 <div class="flex justify-center items-center grid grid-cols-6 bg-gray-300 text-black text-base py-2 px-4 my-[4px] rounded-full hover:bg-gray-100 duration-700 ease-in-out transform hover:scale-105"
                 style="grid-template-columns: 80px 80px 1fr 2fr 160px 1fr;">
@@ -40,8 +40,8 @@ ob_start();
                     <p><?= htmlspecialchars($user->getEmail()) ?></p>
                     <div class="flex gap-2">
                         <a class="flex justify-center bg-sky-400 hover:bg-cyan-400 px-2 py-1 size-12 rounded" href="/forum/public/admin/editUser?user_id=<?= $user->getUserId() ?>"><img class="text-red-500"src="/forum/public/assets/img/edit_white.svg" alt=""></a>
-                        <form action="/forum/public/deleteUser" method="POST" onsubmit="return confirm('Are you sure?');">
-                            <input type="hidden" name="user_id" value="<?= $user->getUserId() ?>">
+                        <form action="/forum/public/admin/deleteUser" method="POST" onsubmit="return confirm('Are you sure?');">
+                            <input type="hidden" name="user_id" value="<?= htmlspecialchars($user->getUserId()) ?>">
                             <button class=" flex justify-center bg-gray-400 hover:bg-red-400 px-2 py-1 rounded size-12" type="submit"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt=""></button>
                         </form>
                     </div>
@@ -57,7 +57,7 @@ ob_start();
         </div>
         
          <!-- pagination section -->
-        <div class="text-center mt-6">
+        <div class="text-center">
             <?php if ($totalPages > 1): ?>
                 <div class="inline-flex gap-2">
                     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
