@@ -82,8 +82,9 @@ $isAdmin = $currentUser->getIsAdmin();
                                     Admin mode
                                 </a>
                             <?php endif; ?>
-                            <a href="/forum/public/logout" class="flex items-center px-4 py-3 hover:bg-red-600 hover:text-white rounded-b-xl">
-                                <img src="/forum/public/assets/img/logout_black.svg" class="size-7 mr-3" />
+                            <a href="/forum/public/logout" class="group flex items-center px-4 py-3 hover:bg-red-600 hover:text-white rounded-b-xl">
+                                <img class="mr-3 size-7 group-hover:hidden" src="/forum/public/assets/img/logout_black.svg" alt="logout">
+                                <img class="mr-3 size-7 hidden group-hover:block" src="/forum/public/assets/img/logout_white.svg" alt="logout">
                                 Logout
                             </a>
                         </div>
@@ -147,8 +148,8 @@ $isAdmin = $currentUser->getIsAdmin();
                     <p>Feedback</p>
                 </a>
             </div>
-            <div class="mt-auto">
-                <a class="group flex justify-start items-center w-full py-3 hover:bg-red-600 hover:text-white p-[10px] rounded-xl transition duration-400 ease-in-out transform" href="/forum/public/logout">
+            <div class="mt-auto mb-4">
+                <a class="group flex justify-start items-center w-full py-3 bg-rose-400 hover:bg-red-600 hover:text-white p-[10px] transition duration-400 ease-in-out transform" href="/forum/public/logout">
                     <img class="absolute left-6 size-8 group-hover:hidden" src="/forum/public/assets/img/logout_black.svg" alt="logout">
                     <img class="absolute left-6 size-8 hidden group-hover:block" src="/forum/public/assets/img/logout_white.svg" alt="logout">
                     <p class="ml-[35%]">Logout</p>

@@ -231,6 +231,19 @@ class AdminController {
         exit();
     }
 
+    public function updateUserRole()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userId = $_POST['user_id'];
+            $userIsAdmin = $_POST['is_admin'];
+
+            $newRole = $userIsAdmin ? 0 : 1;
+
+            $this->userDAO->setUserIsAdmin($userId, $newRole);
+            header("Location: /forum/public/dashboard");
+        }
+    }
+
     public function deleteUser() 
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

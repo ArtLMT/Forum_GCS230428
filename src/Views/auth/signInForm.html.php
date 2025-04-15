@@ -18,7 +18,7 @@ SessionManager::start();
             <button class="w-full h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Sign In</button>
         </form>
 
-        <p class="mt-5">Already have an account? <a href="/forum/public/login">Login</a></p>
+        <p class="mt-5">Already have an account? <a href="/forum/public/login" class="text-blue-600 font-bold">Login</a></p>
     </div>
 
 <?php

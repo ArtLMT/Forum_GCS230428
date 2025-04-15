@@ -12,7 +12,7 @@ ob_start();
             <div>Username</div>
             <div>Email</div>
             <div>Actions</div>
-            <div class="flex items-center justify-center">Promote</div>
+            <div class="flex items-center justify-center">Role</div>
         </div>
 
         <!-- Data rows -->
@@ -46,11 +46,20 @@ ob_start();
                         </form>
                     </div>
                     <div class="flex justify-center items-center">
-                        <?php if($user->getIsAdmin()) : ?>
-                            <a class="flex items-center justify-center bg-red-400 hover:bg-red-500 text-white font-semibold w-[120px] h-8 rounded-full text-center" href="">Demote</a>
-                        <?php else : ?>
-                            <a class="flex items-center justify-center bg-emerald-400 hover:bg-emerald-500 text-white font-semibold w-[120px] h-8 rounded-full text-center" href="">Promote</a>
-                        <?php endif;?>
+                        <form method="POST" action="/forum/public/admin/updateUserRole" class="inline">
+                            <input type="hidden" name="user_id" value="<?= $user->getUserId(); ?>">
+                            <input type="hidden" name="is_admin" value="<?= $user->getIsAdmin(); ?>">
+                            
+                            <?php if ($user->getIsAdmin()) : ?>
+                                <button type="submit" class="flex items-center justify-center bg-red-400 hover:bg-red-500 text-white font-semibold w-[120px] h-8 rounded-full text-center">
+                                    Admin
+                                </button>
+                            <?php else : ?>
+                                <button type="submit" class="flex items-center justify-center bg-emerald-400 hover:bg-emerald-500 text-white font-semibold w-[120px] h-8 rounded-full text-center">
+                                    Student
+                                </button>
+                            <?php endif; ?>
+                        </form>
                     </div>
                 </div>
             <?php endforeach; ?>

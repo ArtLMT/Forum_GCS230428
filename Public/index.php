@@ -59,6 +59,7 @@ $router->get('admin/createUser', 'AdminController@showUserCreate');
 $router->post('admin/storeUser', 'AdminController@storeUser');
 $router->get('admin/editUser', 'AdminController@userEdit');
 $router->post('admin/updateUser', 'AdminController@updateUser');
+$router->post('admin/updateUserRole', 'AdminController@updateUserRole');
 $router->post('admin/deleteUser', 'adminController@deleteUser');
 $router->get('admin/showPostList', 'adminController@showPostList');
 $router->get('admin/showCreatePost', 'adminController@showCreatePost');

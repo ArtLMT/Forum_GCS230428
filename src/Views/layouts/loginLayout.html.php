@@ -14,9 +14,9 @@ SessionManager::start();
     
 </head>
 <body>
-    <div class="login-container h-[100vh] flex items-center justify-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+    <div class="login-container h-[100vh] flex items-center justify-center bg-gradient-to-r from-[#112042] via-[#3f62b5] to-[#6c8dc2]">
         <div class="relative">
-            <div class="absolute -top-2 -left-2 -right-2 -bottom-2 rounded-lg bg-gradient-to-r from-orange-400 via-pink-500 to-red-500 shadow-lg animate-pulse">
+            <div class="absolute -top-2 -left-2 -right-2 -bottom-2 rounded-lg bg-gradient-to-r from-[#e027e3] via-[#a80f94] to-[#bf0885] shadow-lg animate-pulse">
 
             </div>
             <!-- form container -->

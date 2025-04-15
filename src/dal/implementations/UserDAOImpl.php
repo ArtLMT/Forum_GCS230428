@@ -119,6 +119,16 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
         return $password['password'];
     }
 
+    public function setUserIsAdmin($userId ,$userIsAdmin)
+    {
+        $query = "UPDATE users
+                SET is_Admin = :userIsAdmin
+                WHERE user_id = :userId";
+        $params = [':userIsAdmin' => $userIsAdmin, ':userId' => $userId];
+
+        $this->executeQuery($query, $params);
+    }
+
     public function getAllUsers() : array
     {
         $query = "SELECT * FROM users"; 
