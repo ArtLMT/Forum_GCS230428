@@ -26,7 +26,7 @@ ob_start();
                             $userImage = $user->getUserImage();
                             $username = $user->getUsername();
                         ?>
-                        <div class="size-12 flex items-center justify-center bg-indigo-500 text-white rounded-full text-4xl font-bold">
+                        <div class="size-12 flex items-center justify-center bg-indigo-500 text-white rounded-full text-xl font-bold">
                             <?php if ($userImage) : ?>
                                     <img src="/forum/public/<?= htmlspecialchars($userImage) ?>" class="size-12 rounded-full object-cover" alt="User Profile">
                                 <?php else : ?>

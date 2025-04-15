@@ -16,9 +16,10 @@ $currentUser = SessionManager::get('user');
 $isAdmin = $currentUser->getIsAdmin();
 
 $AdminController = new AdminController();
-$totalUser = $AdminController->getTotalUser();
-$totalPost = $AdminController->getTotalPost();
-$totalModule = $AdminController->getTotalModule();
+$totalUser = $AdminController->countTotalUser();
+$totalPost = $AdminController->countTotalPost();
+$totalModule = $AdminController->countTotalModule();
+$totalFeedback = $AdminController->countTotalEmailMessage();
 
 ?>
 <!DOCTYPE html>
@@ -197,8 +198,8 @@ $totalModule = $AdminController->getTotalModule();
                     </a>
                 </div>
                 <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-gray-900 border-solid border-2 border-orange-300">
-                    <a class="flex items-center w-full" href="">
-                        <div class="size-[60px] rounded-full font-bold text-3xl bg-orange-100 mx-5 flex items-center justify-center">18</div>
+                    <a class="flex items-center w-full" href="/forum/public/admin/listFeedback">
+                        <div class="size-[60px] rounded-full font-bold text-3xl bg-orange-100 mx-5 flex items-center justify-center"><?= htmlspecialchars($totalFeedback)?></div>
                         <p class="w-[160px] text-center text-white">Feedbacks</p>
                         <img class="size-12 justify-end"src="/forum/public/assets/img/feedback_white.svg" alt="">
                     </a>

@@ -1,6 +1,5 @@
 <?php
 ob_start(); // Start output buffering
-$title = "Create module";
 ?>
 
 <form class="bg-white border-solid border-2 rounded-lg" action="/forum/public/createModule" method="post">

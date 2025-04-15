@@ -1,6 +1,5 @@
 <?php
 ob_start(); // Start output buffering
-$title = "Create Post";
 ?>
 
 <h2 class="text-center ">Create Post</h2>

@@ -4,6 +4,7 @@ namespace src\controllers;
 use src\dal\implementations\UserDAOImpl;
 use src\dal\implementations\PostDAOImpl;
 use src\dal\implementations\ModuleDAOImpl;
+use src\dal\implementations\EmailMessageDAOImpl;
 use src\utils\SessionManager;
 use src\utils\Utils;
 
@@ -11,11 +12,13 @@ class AdminController {
     private $userDAO;
     private $postDAO;
     private $moduleDAO;
+    private $emailMessageDAO;
 
     public function __construct() {
         $this->userDAO = new UserDAOImpl();
         $this->postDAO = new PostDAOImpl();
         $this->moduleDAO = new ModuleDAOImpl();
+        $this->emailMessageDAO = new EmailMessageDAOImpl();
     }
 
     private function checkIsAdmin()
@@ -93,22 +96,26 @@ class AdminController {
 
     public function showUserCreate()
     {
+        $title = "Add user";
         require_once __DIR__ . '/../views/admins/adminCreateUser.html.php';
     }
 
     public function showCreatePost()
     {
+        $title = "Create Post";
         $modules = $this->moduleDAO->getAllModules();
         require_once __DIR__ . '/../views/admins/adminCreatePost.html.php';
     }
 
     public function showCreateModule()
     {
+        $title = "Create module";
         require_once __DIR__ . '/../views/admins/createModule.html.php';
     }
 
     public function showEditModule()
-    {
+    {   
+        $title = "Edit module";
         $moduleId = $_GET['id'] ?? null;
 
         if (!$moduleId ) {
@@ -119,6 +126,26 @@ class AdminController {
         $module = $this->moduleDAO->getModuleById($moduleId);
         require_once __DIR__ . '/../views/admins/updateModule.html.php';
     }
+
+    public function showFeedback()
+    {
+        // $messages = $this->emailMessageDAO->getAllMessage();
+        $title = "List of feebacks";
+
+        // Pagination setup
+        $limit = 3; // numbers of user will be taken
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get page number from URL, default to 1
+        $offset = ($page - 1) * $limit; // Calculate where to start loading users from
+    
+        // Get a limited list of users based on pagination
+        $messages = $this->emailMessageDAO->getEmailMessagePaginated($limit, $offset); // get $limit number of users, starting from $offest
+        // Get total number of users to calculate how many pages are needed
+        $totalMessages = $this->emailMessageDAO->countMessages();
+        $totalPages = ceil($totalMessages / $limit); // Round up to full number of pages
+
+        require_once __DIR__ . '/../views/admins/listFeedback.html.php';
+    }
+
     public function userEdit()
     {
         $userId = $_GET['user_id'];
@@ -126,19 +153,24 @@ class AdminController {
         require_once __DIR__ . '/../views/admins/editUser.html.php';
     }
 
-    public function getTotalUser()
+    public function countTotalUser()
     {
         return $totalUser = $this->userDAO->getTotalUser();
     }
 
-    public function getTotalPost()
+    public function countTotalPost()
     {
         return $totalPost = $this->postDAO->getTotalPost();
     }
 
-    public function getTotalModule()
+    public function countTotalModule()
     {
         return $totalModule = $this->moduleDAO->getTotalModule();
+    }
+
+    public function countTotalEmailMessage()
+    {
+        return $totalEmailMessages = $this->emailMessageDAO->countMessages();
     }
 
     public function storeUser()

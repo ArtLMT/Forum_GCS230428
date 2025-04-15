@@ -71,6 +71,7 @@ $router->get('admin/showCreateModule', 'adminController@showCreateModule');
 $router->post('admin/deleteModule', 'adminController@deleteModule');
 $router->get('admin/editModule', 'AdminController@showEditModule');
 $router->post('admin/updateModule', 'AdminController@updateModule');
+$router->get('admin/listFeedback', 'AdminController@showFeedback');
 
 
 $router->dispatch();

@@ -9,19 +9,25 @@ class EmailMessage {
     private $content;
     private $createDate;
     private $userId;
+    private $avatar;
+    private $username;
 
     public function __construct(
         $emailMessageId = null, 
         $title = null,
         $content = null,
         $createDate = null,
-        $userId = null
+        $userId = null,
+        $avatar = null,
+        $username = null
     ) {
         $this->emailMessageId = $emailMessageId;
         $this->title = $title;
         $this->content = $content;
         $this->createDate = $createDate;
         $this->userId = $userId;
+        $this->avatar = $avatar;
+        $this->username = $username;
     }
 
     // Getters and Setters
@@ -74,6 +80,25 @@ class EmailMessage {
         $this->createDate = $createDate;
     }
     
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function setUsername()
+    {
+        $this->username = $username;
+    }
 }
 
 ?>

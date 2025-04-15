@@ -75,7 +75,8 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
 
     public function getPostById($postId) : ?post
     {
-            $query = " SELECT p.post_id, p.title, p.content, p.user_id, p.module_id, p.create_date, p.image_path, u.image_path AS avatar, u.username AS username, m.module_name AS module_name 
+            $query = " SELECT p.post_id, p.title, p.content, p.user_id, p.module_id, p.create_date, p.image_path, 
+                    u.image_path AS avatar, u.username AS username, m.module_name AS module_name 
                     FROM posts p
                     INNER JOIN users u ON p.user_id = u.user_id
                     INNER JOIN modules m ON p.module_id = m.module_id
@@ -89,7 +90,8 @@ class PostDAOImpl extends BaseDAO implements PostDAO {
 
     public function getPostByTitle($title) : ?post
     {
-        $query = "SELECT p.post_id, p.title, p.content, p.user_id, p.module_id, p.create_date, p.image_path, u.image_path AS avatar, u.username AS username, m.module_name AS module_name
+        $query = "SELECT p.post_id, p.title, p.content, p.user_id, p.module_id, p.create_date, p.image_path, 
+                u.image_path AS avatar, u.username AS username, m.module_name AS module_name
                 FROM posts p
                 INNER JOIN users u ON p.user_id = u.user_id
                 INNER JOIN modules m ON p.module_id = m.module_id
