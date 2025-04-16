@@ -221,7 +221,8 @@ class AdminController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userId = $_POST['user_id'];
             $username = $_POST['username'];
-            $password = $_POST['password'];
+            // $password = $_POST['password'];
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $email = $_POST['email'];
             $removeImage = isset($_POST['remove_image']) ? true : false;
 

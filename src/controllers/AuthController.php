@@ -31,7 +31,7 @@ class AuthController {
             $user = $this->userControl->getUserByEmail($email);
             $getPassword = $user->getPassword();
     
-            if ($getPassword == $password) {
+            if (password_verify($password, $getPassword)) {
                 SessionManager::start();
                 SessionManager::set('user', $user);
                 // SessionManager::set('user_id', $user->getUserId());

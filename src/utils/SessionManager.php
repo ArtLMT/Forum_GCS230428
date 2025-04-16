@@ -18,6 +18,15 @@ class SessionManager {
         return $_SESSION[$key] ?? null;
     }
 
+    public static function getOnce($key) {
+        self::start();
+        $value = $_SESSION[$key] ?? null;
+        if (isset($_SESSION[$key])) {
+            unset($_SESSION[$key]); // remove it after first access
+        }
+        return $value;
+    }
+
     public static function remove($key) {
         self::start();
         unset($_SESSION[$key]);

@@ -79,7 +79,7 @@ $totalFeedback = $AdminController->countTotalEmailMessage();
                                 Contact
                             </a>
                             <?php if($isAdmin): ?>
-                                <a href="/forum/public/messageList" class="flex items-center px-4 py-3 hover:bg-indigo-100">
+                                <a href="/forum/public/admin/listFeedback" class="flex items-center px-4 py-3 hover:bg-indigo-100">
                                     <img src="/forum/public/assets/img/feedback_black.svg" class="size-6 mr-3" />
                                     Feedbacks
                                 </a>
@@ -129,7 +129,7 @@ $totalFeedback = $AdminController->countTotalEmailMessage();
             <div class="mt-4">
                 <p class="text-xs px-4 py-2 text-gray-400 uppercase">Dashboard</p>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/dashboard">
-                    <img src="/forum/public/assets/img/home_white.svg" alt="" class="w-5 h-5 mr-3">
+                    <img src="/forum/public/assets/img/home_white.svg" alt="" class="size-5 mr-3">
                     <p>Overview</p>
                 </a>
             </div>
@@ -138,33 +138,37 @@ $totalFeedback = $AdminController->countTotalEmailMessage();
             <div class="mt-4">
                 <p class="text-xs px-4 py-2 text-gray-400 uppercase">Content Management</p>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/showPostList">
-                    <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/post_white.svg" alt="">
+                    <img class="size-5 mr-3" src="/forum/public/assets/img/post_white.svg" alt="">
                     <p>Posts</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/showCreatePost">
-                    <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/add_post_white.svg" alt="">
+                    <img class="size-5 mr-3" src="/forum/public/assets/img/add_post_white.svg" alt="">
                     <p>Add Posts</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/dashboard">
-                    <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/users_white.svg" alt="">
+                    <img class="size-5 mr-3" src="/forum/public/assets/img/users_white.svg" alt="">
                     <p>Users</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/createUser">
-                    <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/add_user_white.svg" alt="">
+                    <img class="size-5 mr-3" src="/forum/public/assets/img/add_user_white.svg" alt="">
                     <p>Add User</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/showModuleList">
-                    <img class="w-5 h-5 mr-3"src="/forum/public/assets/img/module_white.svg" alt="">
+                    <img class="size-5 mr-3"src="/forum/public/assets/img/module_white.svg" alt="">
                     <p>Modules</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/showCreateModule">
-                    <img class="w-5 h-5 mr-3"src="/forum/public/assets/img/module_white.svg" alt="">
+                    <img class="size-5 mr-3"src="/forum/public/assets/img/module_white.svg" alt="">
                     <p>Create Modules</p>
+                </a>
+                <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/listFeedback">
+                    <img class="size-5 mr-3"src="/forum/public/assets/img/feedback_white.svg" alt="">
+                    <p>Feedbacks</p>
                 </a>
             </div>
             <!-- Logout (at the bottom) -->
             <a class="flex items-center hover:bg-red-600 py-2 px-4 mt-auto mb-4" href="/forum/public/logout">
-                <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <svg class="size-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                     <polyline points="16 17 21 12 16 7"/>
                     <line x1="21" y1="12" x2="9" y2="12"/>
