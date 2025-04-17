@@ -3,7 +3,7 @@ namespace src\controllers;
 
 use src\dal\implementations\EmailMessageDAOImpl;
 use src\dal\implementations\UserDAOImpl;
-use src\dal\utils\Validation;
+use src\utils\SessionManager;
 
 class EmailMessageController{
     private $emailDAO;
@@ -12,6 +12,17 @@ class EmailMessageController{
     public function __construct() {
         $this->emailDAO = new EmailMessageDAOImpl();
         $this->userDAO = new UserDAOImpl();
+    }
+
+    public function isLoggedIn()
+    {
+        $currentUser = SessionManager::get('user');
+        if ($currentUser === null) {
+            $errors['unauth'] = 'You need to login to access this page.';
+            SessionManager::set('errors', $errors);
+            header("Location: /forum/public/login");
+            exit();
+        }
     }
 
     public function store()
@@ -34,12 +45,15 @@ class EmailMessageController{
 
     public function createMessage()
     {
+        $this->isLoggedIn();
         require_once __DIR__ . '/../views/messages/sendMessage.html.php';
     }
 
     // need to pass all message to the view
     public function listMessage()
     {
+        $this->isLoggedIn();
+
         $messages = $this->emailDAO->getAllMessage();
         $userDAO = $this->userDAO;
         foreach ($messages as $message) {
@@ -51,6 +65,7 @@ class EmailMessageController{
 
     public function edit() 
     {
+        $this->isLoggedIn();
         $emailId = $_GET['id'] ?? null;
 
         if (!$emailId) {

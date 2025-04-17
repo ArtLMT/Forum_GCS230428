@@ -6,6 +6,7 @@ use src\dal\implementations\PostDAOImpl;
 use src\controllers\PostController;
 use src\utils\SessionManager;
 use src\utils\Utils;
+use src\utils\Validation;
 
 class UserController {
     private $userDAO;
@@ -18,7 +19,7 @@ class UserController {
     
     public function index()
     {
-        // $users = $this->userDAO->getAllUsers();
+        $this->isLoggedIn();
         $title = "User List";
 
         // Pagination setup
@@ -38,12 +39,12 @@ class UserController {
             $postCounts[$userId] = $this->postDAO->countPostByUser($userId);
         }
 
-
         require_once __DIR__ . '/../views/users/userList.html.php'; // for the layout
     }
 
     public function createUser() 
     {
+        $this->isLoggedIn();
         require_once __DIR__ . '/../views/auth/signInForm.html.php';
     }
 
@@ -51,22 +52,37 @@ class UserController {
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'];
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // ← Hashed here
+            $password = $_POST['password'];
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // ← Hashed here
             $email = $_POST['email'];
 
             $checkEmail = $this->userDAO->getUserByEmail($email);
             $errors = [];
 
-            if($checkEmail) {
-                $errors = [];
-                $errors['duplicateEmail'] = "The email have exited, please use another email.";
-                SessionManager::set('form_errors', $errors);
+            // Check if username is not empty
+            if (!Validation::validateNotEmpty($username)) {
+                $errors['username'] = "Username is required.";
+            }
+
+            // Check if email already exists
+            if (Validation::checkUserByEmail($email)) {
+                $errors['duplicateEmail'] = "This email is already used.";
+            }
+
+            // Check password strength
+            if (empty($password)) {
+                $errors["password"] = "Password cannot be empty";
+            } elseif (strlen($password) < 8) {
+                $errors["password"] = "Password must be at least 8 characters long";
+            }
+
+            if($errors) {
+                SessionManager::set('errors', $errors);
                 header("Location: /forum/public/signIn"); // Redirect back to login
                 exit();
             }
-
     
-            $this->userDAO->createUser($username, $password, $email);
+            $this->userDAO->createUser($username, $hashedPassword, $email);
     
             SessionManager::start();
             $user = $this->userDAO->getUserByEmail($email);
@@ -81,6 +97,8 @@ class UserController {
 
     public function editUser() 
     {
+        $this->isLoggedIn();
+
         $title = "Editing user";
         $userId = $_GET['user_id'];
         $user = $this->userDAO->getUserById($userId);
@@ -154,54 +172,7 @@ class UserController {
             
             header("Location: /forum/public/showProfile?id=$userId");
         } 
-    }
-
-    // public function updateUser() 
-    // {
-    //     SessionManager::start(); // đảm bảo session đã được khởi tạo
-    
-    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //         $userId = $_POST['user_id'];
-    //         $username = $_POST['username'];
-    //         $password = $_POST['password'];
-    //         $checkPassword = $_POST['verifyPassword'];
-    //         $email = $_POST['email'];
-    
-    //         // Kiểm tra password có khớp không
-    //         if ($password !== $checkPassword) {
-    //             $_SESSION['form_error'] = "Passwords do not match.";
-    //             $_SESSION['old_input'] = $_POST;
-    //             header("Location: /forum/public/editUser?user_id=$userId");
-    //             exit;
-    //         }
-    
-    //         $password = password_hash($password, PASSWORD_DEFAULT);
-    //         $removeImage = isset($_POST['remove_image']);
-    
-    //         $user = $this->userDAO->getUserById($userId);
-    //         $existingImage = $user->getUserImage();
-    
-    //         $imagePath = Utils::handleImageUpload($_FILES['image'], realpath(__DIR__ . '/../../public/uploads/userAsset'));
-    
-    //         if ($removeImage && $existingImage) {
-    //             Utils::deleteImage($existingImage);
-    //             $imagePath = null;
-    //         } elseif (!$imagePath) {
-    //             $imagePath = $existingImage;
-    //         }
-    
-    //         $this->userDAO->editUser($username, $password, $email, $userId, $imagePath);
-    
-    //         // Nếu người dùng hiện tại đang chỉnh sửa chính mình
-    //         if ($userId == SessionManager::get('user')->getUserId()) {
-    //             $_SESSION['user'] = $this->userDAO->getUserById($userId);
-    //         }
-    
-    //         header("Location: /forum/public/userLists");
-    //         exit;
-    //     }
-    // }
-    
+    }    
 
     public function deleteUser() 
     {
@@ -222,6 +193,7 @@ class UserController {
 
     public function showProfile() 
     {
+        $this->isLoggedIn();
         $userId = $_GET['id'];
         // user asset:
         $user = $this->userDAO->getUserById($userId);
@@ -253,6 +225,17 @@ class UserController {
     public function getTotalUser()
     {
         return $this->userDAO->getTotalUser();
+    }
+
+    public function isLoggedIn()
+    {
+        $currentUser = SessionManager::get('user');
+        if ($currentUser === null) {
+            $errors['unauth'] = 'You need to login to access this page.';
+            SessionManager::set('errors', $errors);
+            header("Location: /forum/public/login");
+            exit();
+        }
     }
 }
 ?>

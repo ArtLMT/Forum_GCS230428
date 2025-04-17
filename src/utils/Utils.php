@@ -68,7 +68,10 @@ class Utils {
         return "just now";
     }
 
-    
+    public static function checkModuleById()
+    {
+        
+    }
 }
 
 ?>

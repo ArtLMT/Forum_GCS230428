@@ -4,20 +4,7 @@ ob_start();
 
 <?php if (!empty($users)) : ?>
     <div>
-        <p>Total user: <?= htmlspecialchars($totalUsers)?></p>
-        <form method="GET" class="mb-6">
-            <input 
-                type="text" 
-                name="search" 
-                placeholder="Search by username or email..." 
-                value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>" 
-                class="border border-gray-400 rounded-lg p-2 w-[300px]"
-            >
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg ml-2 hover:bg-blue-600">
-                Search
-            </button>
-        </form>
-
+        <p class="place-self-center text-2xl font-semibold">Total user: <?= htmlspecialchars($totalUsers)?></p>
     </div>
     <div class="grid grid-cols-2">
         <?php foreach ($users as $user) : ?>
@@ -34,7 +21,6 @@ ob_start();
                     <div><?=htmlspecialchars($user->getEmail())?></div>
                     <p>Post have posted: <?= htmlspecialchars($postCounts[$user->getUserId()])?></p>
                 </div>
-
             </a>
         <?php endforeach; ?>
     </div>

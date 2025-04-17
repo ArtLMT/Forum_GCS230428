@@ -23,13 +23,18 @@ class AdminController {
 
     private function checkIsAdmin()
     {
-        $user = SessionManager::get('user');
-    
-        if (!$user || !$user->getIsAdmin()) {
+        $currentUser = SessionManager::get('user');
+        if ($currentUser === null) {
+            $errors['unauth'] = 'You need to login to access this page.';
+            SessionManager::set('errors', $errors);
+            header("Location: /forum/public/login");
+            exit();
+        } else if (!$user || !$user->getIsAdmin()) {
             header("Location: /forum/public/");
             exit();
         }
     }
+
     public function showDashboard()
     {
         $this->checkIsAdmin();

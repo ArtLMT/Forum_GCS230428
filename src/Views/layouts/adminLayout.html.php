@@ -5,12 +5,6 @@ use src\controllers\AdminController;
 
 SessionManager::start();
 
-// Check if user is logged in
-if (!SessionManager::get('user')) {
-    header("Location: /forum/public/login");
-    exit();
-}
-
 // Get current user 
 $currentUser = SessionManager::get('user');
 $isAdmin = $currentUser->getIsAdmin();

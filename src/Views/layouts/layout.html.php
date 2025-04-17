@@ -3,10 +3,6 @@ use src\utils\SessionManager;
 use src\controllers\UserController;
 SessionManager::start();
 
-if (!SessionManager::get('user')) {
-    header("Location: /forum/public/login");
-    exit();
-}
 
 $currentUser = SessionManager::get('user');
 $isAdmin = $currentUser->getIsAdmin();

@@ -3,6 +3,7 @@ namespace src\controllers;
 
 use src\controllers\UserController;
 use src\utils\SessionManager;
+use src\utils\Validation;
 
 class AuthController {
     private $authDAO;
@@ -27,7 +28,16 @@ class AuthController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
-    
+
+            $errors = [];
+            if (!Validation::checkUserByEmail($email)) {
+                $errors['duplicateEmail'] = "Invalid email or password.";
+                SessionManager::set('errors', $errors);
+                header("Location: /forum/public/login"); // Redirect back to login
+                exit();
+            }
+
+
             $user = $this->userControl->getUserByEmail($email);
             $getPassword = $user->getPassword();
     
@@ -43,7 +53,7 @@ class AuthController {
             } else {
                 $errors = [];
                 $errors['wrongPassword'] = "Invalid email or password.";
-                SessionManager::set('form_errors', $errors);
+                SessionManager::set('errors', $errors);
                 header("Location: /forum/public/login"); // Redirect back to login
                 exit();
             }

@@ -17,8 +17,21 @@ class ModuleController {
         return $modules = $this->moduleDAO->getAllModules();
     }
 
+    public function isLoggedIn()
+    {
+        $currentUser = SessionManager::get('user');
+        if ($currentUser === null) {
+            $errors['unauth'] = 'You need to login to access this page.';
+            SessionManager::set('errors', $errors);
+            header("Location: /forum/public/login");
+            exit();
+        }
+    }
+
     // List all modules
-    public function index() {
+    public function index() 
+    {
+        $this->isLoggedIn();
         $modules = $this->moduleDAO->getAllModules();
 
         // Get post count for each module
@@ -31,12 +44,15 @@ class ModuleController {
     }
 
     // Show form for creating a module
-    public function create() {
+    public function create() 
+    {
+        $this->isLoggedIn();
         require_once __DIR__ . '/../views/modules/createModule.html.php';
     }
 
     // Store a new module
-    public function store() {
+    public function store() 
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
             echo "Method Not Allowed";
@@ -54,6 +70,7 @@ class ModuleController {
     // Show edit form
     public function edit() 
     {
+        $this->isLoggedIn();
         $moduleId = $_GET['id'] ?? null;
 
         if (!$moduleId || !Validation::checkModuleById($moduleId)) {

@@ -16,9 +16,21 @@ class PostController {
         $this->postDAO = new PostDAOImpl();
     }
 
+    public function isLoggedIn()
+    {
+        $currentUser = SessionManager::get('user');
+        if ($currentUser === null) {
+            $errors['unauth'] = 'You need to login to access this page.';
+            SessionManager::set('errors', $errors);
+            header("Location: /forum/public/login");
+            exit();
+        }
+    }
+
     // GET /posts - List all posts
     public function index() 
     {
+        $this->isLoggedIn();
         $posts = $this->postDAO->getAllPosts();
         // $userController = new UserController();
         
@@ -28,6 +40,7 @@ class PostController {
     // GET /posts/create - Show form for creating a post
     public function createPost() 
     {
+        $this->isLoggedIn();
         $moduleController= new ModuleController();
         $modules = $moduleController->getAllModules();
         require_once __DIR__ . '/../views/posts/createPost.html.php';
@@ -60,6 +73,7 @@ class PostController {
     // GET /posts/{id}/edit - Show edit form
     public function edit() 
     {
+        $this->isLoggedIn();
         $postId = $_GET['id'] ?? null;
         if ($postId) {
             $post = $this->postDAO->getPostById($postId);
@@ -145,6 +159,7 @@ class PostController {
 
     public function openPost()
     {
+        $this->isLoggedIn();
         // post asset:
         $post = $this->postDAO->getPostById($_GET['post_id']);
         $postImage = $post->getPostImage();
@@ -169,6 +184,8 @@ class PostController {
     
     public function showPostByModule()
     {
+        $this->isLoggedIn();
+
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             http_response_code(405);
             echo "Method Not Allowed";
