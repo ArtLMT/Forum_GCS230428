@@ -47,7 +47,7 @@ ob_start();
             <?php endif; ?>
         </div>
     <?php else : ?>
-        <p class="text-white px-4 py-2">No Modules available.</p>
+        <p class="text-white text-3xl px-4 py-2 place-self-center">No Modules available.</p>
     <?php endif; ?>
 </div>
 

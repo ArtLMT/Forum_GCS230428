@@ -27,9 +27,7 @@ $title = $userName;
             </p>
             <br>
             <p class="text-2xl">Email: <?=htmlspecialchars($userMail)?></p>
-            <br>
-            <p class="text-2xl">Password: <?=htmlspecialchars($password)?></p>
-            <br>
+            <br>    
         </div>
     </div>
     <!-- User's post container -->

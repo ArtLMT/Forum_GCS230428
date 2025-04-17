@@ -12,9 +12,6 @@ $title = "Feedback";
         <label>Conetent</label>
         <textarea class="text-gray-700 bg-gray-300 mb-4 w-[80%] h-50 text-justify rounded-3xl px-4"name="content" required></textarea>
     
-        <label>User Id</label>
-        <textarea class="text-gray-700 bg-gray-300 mb-4 w-[80%] rounded-xl" name="userId" required></textarea>
-    
         <input class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-3 rounded-2xl transition duration-400 ease-in-out transform hover:scale-105" type="submit" value ="Send Message">
     </div>
 </form>

@@ -34,10 +34,9 @@ $totalFeedback = $AdminController->countTotalEmailMessage();
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex flex-col min-h-screen text-[62.5%] text-lg box-border overflow-hidden bg-slate-700">
-    <header class="bg-gradient-to-r from-[#0a1225] to-[#6c8dc2] shadow-sm w-full h-[4rem] z-50 border-b border-solid border-zinc-400 shadow-sm shadow-gray-500"
-    >
+    <header class="bg-gradient-to-r from-[#0a1225] to-[#6c8dc2] shadow-sm w-full h-[4rem] z-50 border-b border-solid border-zinc-400 shadow-sm shadow-gray-500">
         <nav class="flex items-center h-full px-8 text-slate-100 font-semibold">
-            <a class="nav-home text-2xl p-2" href="/forum/public/">StudyRoom</a>
+            <a class="nav-home text-2xl p-2 text-shadow-white text-shadow-lg" href="/forum/public/">StudyRoom</a>
             <!-- <input class=" bg-gray-300 flex-[6] justify-self-center min-w-[20%] text-center bg-gray-300 text-neutral-500 rounded-xl border-solid border-2 border-neutral-500" placeholder="Search bar"></input> -->
             <div class="flex-[1] min-w-[25%] flex justify-end items-center mr-[3rem]">
                 <div class="relative">
@@ -49,6 +48,11 @@ $totalFeedback = $AdminController->countTotalEmailMessage();
                                 <?= strtoupper(substr($currentUser->getUsername($currentUser->getUserId()), 0, 1)) ?>
                             </p>
                         <?php endif; ?>
+                        <!-- Down Arrow Icon -->
+                        <svg class="relative right-4 top-4 size-4 text-white bg-gray-800 rounded-full p-0.5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
                         <p class="ml-[0.4rem]"><?= $currentUser->getUsername($currentUser->getUserId()) ?></p>
                     </button>
 

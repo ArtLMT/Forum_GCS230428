@@ -53,6 +53,18 @@ class UserController {
             $username = $_POST['username'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // ← Hashed here
             $email = $_POST['email'];
+
+            $checkEmail = $this->userDAO->getUserByEmail($email);
+            $errors = [];
+
+            if($checkEmail) {
+                $errors = [];
+                $errors['duplicateEmail'] = "The email have exited, please use another email.";
+                SessionManager::set('form_errors', $errors);
+                header("Location: /forum/public/signIn"); // Redirect back to login
+                exit();
+            }
+
     
             $this->userDAO->createUser($username, $password, $email);
     

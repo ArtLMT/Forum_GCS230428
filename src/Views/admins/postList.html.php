@@ -12,8 +12,6 @@ ob_start();
             <div>title</div>
             <div>content</div>
             <div class="flex justify-end">Actions</div>
-            <!-- <div>Actions</div> -->
-            <!-- <div class="flex items-center justify-center">Promote</div> -->
         </div>
 
         <!-- Data rows -->
@@ -37,7 +35,6 @@ ob_start();
                     <div class="truncate w-40"><?= htmlspecialchars($post->getTitle()) ?></div>
                     <div class="truncate w-80"><?= htmlspecialchars($post->getContent()) ?></div>
                     <div class="flex gap-4 justify-end items-center mr-5 mb-[1rem]">
-                        <a class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-1 size-8 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>"><img class=""src="/forum/public/assets/img/editWhite.svg" alt=""></a>
                         <form action="/forum/public/admin/deletePost" method="POST" onsubmit="return confirm('Are you sure?');" class="bg-red-400 border-solid border-red-500 border-2 p-1 size-8 text-xs">
                             <input type="hidden" name="post_id" value="<?= htmlspecialchars($post->getPostId()) ?>">
                             <button class="" type="submit"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt=""></button>
@@ -63,7 +60,7 @@ ob_start();
         </div>
 
     <?php else : ?>
-        <p class="text-white px-4 py-2">No users available.</p>
+        <p class="text-white text-3xl px-4 py-2 place-self-center">No users available.</p>
     <?php endif; ?>
 </div>
 

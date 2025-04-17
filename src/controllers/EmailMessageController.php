@@ -23,7 +23,10 @@ class EmailMessageController{
         }
         $title = $_POST['title'];
         $content = $_POST['content'];
-        $userId = $_POST['userId'];
+        
+        $currentUser = SessionManager::get('user');
+        $userId = $currentUser->getUserId();
+        
         $this->emailDAO->sendMessage($title, $content, $userId);
         header("Location: /forum/public/messageList");
         exit();
