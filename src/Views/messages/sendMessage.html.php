@@ -3,18 +3,29 @@ ob_start();
 $title = "Feedback";
 ?>
 
-<form class="bg-white border-solid border-2 rounded-lg"action="/forum/public/createMessage" method="post" enctype="multipart/form-data">
-    <div class="m-4 flex flex-col items-center">
-        <h2>Send Feedback</h2>
-        <label>Title</label>
-        <input class="px-4 bg-gray-300 text-gray-700 mb-4 w-[80%] rounded-xl" type="text" name="title" required>
-    
-        <label>Conetent</label>
-        <textarea class="text-gray-700 bg-gray-300 mb-4 w-[80%] h-50 text-justify rounded-3xl px-4"name="content" required></textarea>
-    
-        <input class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-3 rounded-2xl transition duration-400 ease-in-out transform hover:scale-105" type="submit" value ="Send Message">
-    </div>
-</form>
+<div class="max-w-6xl mx-auto mt-1 p-4 bg-white rounded-2xl shadow-md space-y-4 bg-gray-50">
+
+    <form class="spacy-y-4" action="/forum/public/createMessage" method="post" enctype="multipart/form-data">
+        <h2 class="text-2xl font-bold text-center text-gray-800">Send Feedback</h2>
+
+        <div>
+            <label class="block mb-1 font-medium text-gray-700">Title</label>
+            <input class="w-full px-4 py-2 border rounded-lg shadow-sm" type="text" name="title" required>
+        </div>
+        
+        <div>
+            <label class="block mb-1 font-medium text-gray-700">Content</label>
+            <textarea class="w-full h-[200px] px-4 py-2 border rounded-lg shadow-sm" name="content" required></textarea>
+        </div>
+        
+        <div class="text-center ">
+            <button type="submit" value="Send Message"
+                class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-200">
+                Send Message
+            </button>   
+        </div>
+    </form>
+</div>
 
 <?php
 $content = ob_get_clean();

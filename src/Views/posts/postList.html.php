@@ -12,7 +12,7 @@ $title = "Home";
                     $userImage = $post->getUserImage();
                     $username = $post->getUsername();
                 ?>
-                <div class="bg-white border-solid border-2 rounded-lg border-indigo-200 hover:border-indigo-500 shadow-md duration-700 ease-in-out transform hover:scale-105">
+                <div class="bg-white border-solid border-2 rounded-lg border-indigo-200 hover:border-indigo-500 shadow-md duration-700 ease-in-out transform">
                     <div class="post-header flex p-3">
                         <a class="size-14 flex items-center justify-center bg-indigo-500 text-white rounded-full text-4xl font-bold" href="/forum/public/showProfile?id=<?=$post->getUserId()?>">
                             <?php if ($userImage) : ?>
@@ -22,7 +22,7 @@ $title = "Home";
                             <?php endif; ?>
                         </a>
                         <div class='ml-3'>
-                            <h3 class="text-slate-500 text-sm">
+                            <h3 class="text-slate-500 text-sm"> by
                                 <?= htmlspecialchars($username); ?>  • <?= htmlspecialchars(Utils::timeAgo($post->getPostedTime())); ?>
                             </h3>
                             <h2 class="m-0 text-3xl text-indigo-700 font-bold"><?= htmlspecialchars($post->getTitle()) ?></h2>

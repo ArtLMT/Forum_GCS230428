@@ -12,7 +12,7 @@ $title = $postTitle;
     <!-- <div><img src="/forum/public/assets/img/backButton.svg" alt=""></div> -->
     <div class="post-header flex p-3 items-center">
         <a class="relative left-2"href="/forum/public/"><img src="/forum/public/assets/img/back_button_black.svg" alt="" class="size-12"></a>
-        <div class="flex items-center justify-center ml-6">
+        <div class="flex items-center justify-start ml-6 w-full">
             <a class="size-14 flex items-center justify-center bg-indigo-500 text-white rounded-full text-4xl font-bold" href="/forum/public/showProfile?id=<?=$post->getUserId()?>">
                 <?php if ($userImage) : ?>
                     <img src="/forum/public/<?= htmlspecialchars($userImage) ?>" class="size-14 rounded-full object-cover" alt="User Profile">
@@ -27,10 +27,10 @@ $title = $postTitle;
                 <h2 class="m-0 text-3xl text-indigo-700 font-bold"><?= htmlspecialchars($postTitle) ?></h2>
             </div>
         </div>
-        <?php if ($currentUserId == $ownerId || $currentUserIsAdmin) :?>
-            <div class="flex gap-4 justify-end items-center mr-5 mb-4">
-                <a class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-1 size-8 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>"><img class=""src="/forum/public/assets/img/editWhite.svg" alt=""></a>
-                <a class="bg-red-400 border-solid border-red-500 border-2 p-1 size-8 text-xs" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt=""></a>
+        <?php if ($currentUserId == $ownerId) :?>
+            <div class="flex gap-4 justify-end items-center mr-5 mb-4 text-white font-semibold">
+                <a class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-1 w-14 h-8 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>"><img class=""src="/forum/public/assets/img/edit_white.svg" alt="">Edit</a>
+                <a class="flex justify-center bg-red-400 border-solid border-red-500 border-2 p-1 w-14 h-8 text-xs" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');"><img class="size-4" src="/forum/public/assets/img/deleteWhite.svg" alt="">Delete</a>
             </div>
         <?php endif; ?>
     </div>

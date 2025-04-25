@@ -56,6 +56,10 @@ class EmailMessageController{
 
         $messages = $this->emailDAO->getAllMessage();
         $userDAO = $this->userDAO;
+
+        $authController = new AuthController();
+        // $isOwner = $authController->isOwner($userId);
+
         foreach ($messages as $message) {
             $emailId = $message->getEmailMessageId();
         }
@@ -73,10 +77,6 @@ class EmailMessageController{
         }
 
         $message = $this->emailDAO->getMessageById($emailId);
-        // echo "<pre>";
-        // print_r($message);
-        // echo "</pre>";
-        // exit();
 
         require_once __DIR__ . '/../views/messages/editMessages.html.php';
     }

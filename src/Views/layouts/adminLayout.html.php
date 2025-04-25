@@ -72,20 +72,17 @@ $totalFeedback = $AdminController->countTotalEmailMessage();
                                 <img src="/forum/public/assets/img/user_black.svg" class="size-6 mr-3"/>
                                 View Profile
                             </a>
-                            <a href="/forum/public/createMessagePage" class="flex items-center px-4 py-3 hover:bg-indigo-100">
-                                <img src="/forum/public/assets/img/contact_black.svg" class="size-6 mr-3"/>
-                                Contact
-                            </a>
-                            <?php if($isAdmin): ?>
+  
+                            
                                 <a href="/forum/public/admin/listFeedback" class="flex items-center px-4 py-3 hover:bg-indigo-100">
                                     <img src="/forum/public/assets/img/feedback_black.svg" class="size-6 mr-3" />
                                     Feedbacks
                                 </a>
-                                <a href="/forum/public/dashboard" class="flex items-center px-4 py-3 hover:bg-indigo-100">
+                                <a href="/forum/public/" class="flex items-center px-4 py-3 hover:bg-indigo-100">
                                     <img src="/forum/public/assets/img/admin_mode_black.svg" class="size-6 mr-3" />
-                                    Admin mode
+                                    Normal mode
                                 </a>
-                            <?php endif; ?>
+
                             <a href="/forum/public/logout" class="flex items-center px-4 py-3 hover:bg-red-600 hover:text-white rounded-b-xl">
                                 <img src="/forum/public/assets/img/logout_black.svg" class="size-7 mr-3" />
                                 Logout

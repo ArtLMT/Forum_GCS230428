@@ -53,9 +53,9 @@ class EmailMessageDAOImpl extends BaseDAO implements EmailMessageDAO {
             $data['title'],
             $data['content'],
             $data['create_date'],
-            $data['user_id'],
-            $data['avatar'],
-            $data['username']
+            $data['user_id'] ?? null,
+            $data['avatar'] ?? null,
+            $data['username'] ?? null
         );
     }
 

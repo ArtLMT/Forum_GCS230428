@@ -4,6 +4,7 @@ namespace src\controllers;
 use src\dal\implementations\ModuleDAOImpl;
 use src\dal\implementations\PostDAOImpl;
 use src\utils\Validation;
+use src\utils\SessionManager;
 
 class ModuleController {
     private $moduleDAO;

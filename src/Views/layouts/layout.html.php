@@ -117,15 +117,16 @@ $isAdmin = $currentUser->getIsAdmin();
                 <h2 class="text-xl font-bold">Student Forum</h2>
                 <p class="text-sm text-gray-400">Study hub</p>
             </div>
+            <a class="flex items-center hover:bg-violet-100 py-2 px-4" href="/forum/public/">
+                <img class="w-5 h-5 mr-3"src="/forum/public/assets/img/home_black.svg" alt="">
+                <p>Home</p>
+            </a>
             <div class="mt-4">
                 <p class="text-xs px-4 py-2 text-gray-400 uppercase">Module</p>
                 <a class="flex items-center hover:bg-violet-100 py-2 px-4" href="/forum/public/moduleLists">
                     <img class="w-5 h-5 mr-3"src="/forum/public/assets/img/module_black.svg" alt="">
                     <p>Module list</p>
                 </a>
-                <!-- <a class="flex items-center hover:bg-violet-100 py-2 px-4" href="/forum/public/createModule">
-                    <p>Create Module</p>
-                </a> -->
             </div>
             <div class="mt-4">
                 <p class="text-xs px-4 py-2 text-gray-400 uppercase">Users</p>
@@ -133,9 +134,6 @@ $isAdmin = $currentUser->getIsAdmin();
                     <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/users_black.svg" alt="">
                     <p>List all user</p>
                 </a>
-                <!-- <a class="flex items-center hover:bg-violet-100 py-2 px-4" href="/forum/public/signIn">
-                    <p>Create User</p>
-                </a> -->
             </div>
             <div class="mt-4">
                 <p class="text-xs px-4 py-2 text-gray-400 uppercase">Feedbacks</p>

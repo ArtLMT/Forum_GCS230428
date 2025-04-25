@@ -29,7 +29,7 @@ class AdminController {
             SessionManager::set('errors', $errors);
             header("Location: /forum/public/login");
             exit();
-        } else if (!$user || !$user->getIsAdmin()) {
+        } else if (!$currentUser->getIsAdmin()) {
             header("Location: /forum/public/");
             exit();
         }
