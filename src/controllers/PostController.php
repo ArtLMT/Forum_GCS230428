@@ -5,6 +5,7 @@ use src\dal\implementations\PostDAOImpl;
 use src\dal\implementations\ModuleDAOImpl;
 use src\controllers\ModuleController;
 use src\controllers\UserController;
+use src\controllers\CommentController;
 use src\utils\Validation;
 use src\utils\SessionManager;
 use src\utils\Utils;
@@ -161,7 +162,16 @@ class PostController {
     {
         $this->isLoggedIn();
         // post asset:
-        $post = $this->postDAO->getPostById($_GET['post_id']);
+        $postId = $_GET['post_id'];
+        if (!$postId || !Validation::checkPostById($postId))
+        {
+            echo 'bug is here';
+            
+        }
+
+        $commentDAO = new CommentController();
+        $comments = $commentDAO->getcomment($postId);
+        $post = $this->postDAO->getPostById($postId);
         $postImage = $post->getPostImage();
         $postContent = $post->getContent();
         $postTitle = $post->getTitle();

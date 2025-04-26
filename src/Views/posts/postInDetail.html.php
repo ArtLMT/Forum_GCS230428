@@ -8,7 +8,7 @@ $title = $postTitle;
 ?>
 <!-- <?php var_dump($userId)?> -->
 
-<div class="post bg-white border-solid border-2 border-indigo-500 shadow-md rounded-lg max-h-[800px]">
+<div class="post bg-white border-solid border-2 border-indigo-500 shadow-md rounded-lg my-8">
     <!-- <div><img src="/forum/public/assets/img/backButton.svg" alt=""></div> -->
     <div class="post-header flex p-3 items-center">
         <a class="relative left-2"href="/forum/public/"><img src="/forum/public/assets/img/back_button_black.svg" alt="" class="size-12"></a>
@@ -21,7 +21,7 @@ $title = $postTitle;
                 <?php endif; ?>
             </a>
             <div class='ml-3'>
-                <h3 class="text-slate-500 text-sm"">
+                <h3 class="text-slate-500 text-sm">
                     <?= htmlspecialchars($username); ?>  • <?= htmlspecialchars(Utils::timeAgo($post->getPostedTime())); ?>
                 </h3>
                 <h2 class="m-0 text-3xl text-indigo-700 font-bold"><?= htmlspecialchars($postTitle) ?></h2>
@@ -42,6 +42,49 @@ $title = $postTitle;
             <img class="m-auto object-cover max-w-[900px] max-h-[600px] rounded-md shadow-sm" src="/forum/public/<?= htmlspecialchars($postImage) ?>" alt="Post Image">
         <?php endif; ?>
     </div>
+
+    <!-- Comment -->
+    <div class="px-12 py-6 bg-gray-50 border-t border-indigo-200">
+        <form action="/forum/public/addComment" method="post" class="flex flex-col gap-4 max-w-3xl mx-auto">
+            <input type="hidden" name="post_id" value="<?= htmlspecialchars($post->getPostId()) ?>">
+
+            <textarea 
+                name="content" 
+                placeholder="Write your comment..." 
+                required 
+                class="border-2 border-indigo-400 rounded-md p-3 h-28 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-300"
+            ></textarea>
+
+            <div class="flex justify-end">
+                <button type="submit"
+                    class="bg-indigo-600 text-white font-medium px-6 py-2 rounded-md hover:bg-indigo-700 transition">
+                    Post Comment
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="px-12 py-6 bg-white">
+    <h3 class="text-2xl font-semibold text-indigo-700 mb-6">Comments</h3>
+
+    <?php foreach ($comments as $comment) : ?>
+        <div class="flex gap-4 mb-6 p-4 bg-indigo-50 border border-indigo-200 rounded-md shadow-sm max-w-4xl">
+            <a href="/forum/public/showProfile?id=<?= $comment->getUserId() ?>" class="shrink-0">
+                <?php if ($comment->getUserImage()) : ?>
+                    <img src="/forum/public/<?= htmlspecialchars($comment->getUserImage()) ?>" class="w-14 h-14 rounded-full object-cover" alt="User Profile">
+                <?php else : ?>
+                    <div class="w-14 h-14 rounded-full bg-indigo-500 text-white flex items-center justify-center text-xl font-bold">
+                        <?= $firstLetter ?>
+                    </div>
+                <?php endif; ?>
+            </a>
+
+            <div>
+                <p class="text-sm text-gray-500 font-medium mb-1"><?= $comment->getUsername() ?></p>
+                <p class="text-gray-700"><?= htmlspecialchars($comment->getContent()) ?></p>
+            </div>
+        </div>
+    <?php endforeach ?>
+</div>
 </div>
 
 

@@ -47,6 +47,9 @@ $router->get('editMessage', 'EmailMessageController@edit');
 $router->post('updateMessage', 'EmailMessageController@update');
 $router->get('deleteEmailMessage', 'EmailMessageController@destroy');
 
+// comment router
+$router->post('addComment', 'CommentController@store');
+
 // Authentication Routes
 $router->get('login', 'AuthController@showLoginForm'); // Show login page
 $router->post('login', 'AuthController@login'); // Handle login form submission

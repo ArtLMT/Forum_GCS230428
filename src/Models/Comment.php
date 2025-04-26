@@ -3,23 +3,30 @@ namespace src\models;
 // require_once __DIR__ . "/Database.php";
 
 class Comment {
-    private $pdo;
     private $commentId;
     private $content;
-    private $voteScore;
     private $userId;
+    private $username;
+    private $userImage;
     private $postId;
-    private $timestamp;
+    private $commentDate;
 
-    public function __construct($commentId, $content, $voteScore, $userId, $postId, $timestamp, $updatedTimestamp) 
+    public function __construct(
+        $commentId = null,
+        $content = null, 
+        $userId = null, 
+        $username = null,
+        $userImage = null, 
+        $postId = null, 
+        $commentDate = null) 
     {
         $this->commentId = $commentId;
         $this->content = $content;
-        $this->voteScore = $voteScore;
         $this->userId = $userId;
+        $this->username = $username;
+        $this->userImage = $userImage;
         $this->postId = $postId;
-        $this->timestamp = $timestamp;
-        $this->updatedTimestamp = $updatedTimestamp;
+        $this->commentDate = $commentDate;
     }
 
     public function getCommentId() 
@@ -41,25 +48,43 @@ class Comment {
     {
         $this->content = $content;
     }
-
-    public function getVoteScore() 
+    public function getUserId()
     {
-        return $this->voteScore;
+        return $this->userId;
     }
 
-    public function setVoteScore($voteScore) 
+    public function setUserId($userId)
     {
-        $this->voteScore = $voteScore;
+        $this->userId = $userId;
+    }
+    public function getUsername()
+    {
+        return $this->username;
     }
 
-    public function getTimeStamp() 
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    public function getUserImage()
+    {
+        return $this->userImage;
+    }
+    
+    public function setUserImage($userImage)
+    {
+        $this->userImage = $userImage;
+    }
+
+    public function getCommentDate() 
     {
         return $this->timestamp;
     }
 
-    public function setTimeStamp($timestamp) 
+    public function setCommentDate($commentDate) 
     {
-        $this->timestamp = $timestamp;
+        $this->timestamp = $commentDate;
     }
 }
 ?>
