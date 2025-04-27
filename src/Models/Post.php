@@ -118,7 +118,7 @@ class Post {
         $this->image = $image;
     }
 
-    public function getMoudleName() {
+    public function getModuleName() {
         return $this->moduleName;
     }
 

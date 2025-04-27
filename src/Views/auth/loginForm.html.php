@@ -6,7 +6,7 @@ $errors = SessionManager::getOnce('errors');
 
 ?>
 
-<h2 class="text-center text-3xl font-bold mb-10 text-gray-800">Log in</h2>
+<h2 class="text-center text-4xl font-bold mb-10 text-blue-500">Log in</h2>
 
 <?php if (!empty($errors)): ?>
     <div class="error-messages text-red-700 font-bold">

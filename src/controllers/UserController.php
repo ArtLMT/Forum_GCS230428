@@ -22,16 +22,13 @@ class UserController {
         $this->isLoggedIn();
         $title = "User List";
 
-        // Pagination setup
-        $limit = 6; // numbers of user will be taken
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get page number from URL, default to 1
-        $offset = ($page - 1) * $limit; // Calculate where to start loading users from
+        $limit = 6;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $limit;
     
-        // Get a limited list of users based on pagination
-        $users = $this->userDAO->getUsersPaginated($limit, $offset); // get $limit number of users, starting from $offest
-        // Get total number of users to calculate how many pages are needed
+        $users = $this->userDAO->getUsersPaginated($limit, $offset);
         $totalUsers = $this->userDAO->getTotalUser();
-        $totalPages = ceil($totalUsers / $limit); // Round up to full number of pages
+        $totalPages = ceil($totalUsers / $limit);
 
         $postCounts = [];
         foreach ($users as $user) {
@@ -39,7 +36,7 @@ class UserController {
             $postCounts[$userId] = $this->postDAO->countPostByUser($userId);
         }
 
-        require_once __DIR__ . '/../views/users/userList.html.php'; // for the layout
+        require_once __DIR__ . '/../views/users/userList.html.php';
     }
 
     public function createUser() 
@@ -50,58 +47,80 @@ class UserController {
 
     public function store() 
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // ← Hashed here
-            $email = $_POST['email'];
-
-            $checkEmail = $this->userDAO->getUserByEmail($email);
-            $errors = [];
-
-            // Check if username is not empty
-            if (!Validation::validateNotEmpty($username)) {
-                $errors['username'] = "Username is required.";
-            }
-
-            // Check if email already exists
-            if (Validation::checkUserByEmail($email)) {
-                $errors['duplicateEmail'] = "This email is already used.";
-            }
-
-            // Check password strength
-            if (empty($password)) {
-                $errors["password"] = "Password cannot be empty";
-            } elseif (strlen($password) < 8) {
-                $errors["password"] = "Password must be at least 8 characters long";
-            }
-
-            if($errors) {
-                SessionManager::set('errors', $errors);
-                header("Location: /forum/public/signIn"); // Redirect back to login
-                exit();
-            }
-    
-            $this->userDAO->createUser($username, $hashedPassword, $email);
-    
-            SessionManager::start();
-            $user = $this->userDAO->getUserByEmail($email);
-    
-            SessionManager::set('user', $user);
-            SessionManager::set('username', $user->getUsername());
-            
-            header("Location: /forum/public/");
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
         }
+
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $email = $_POST['email'];
+
+        $errors = [];
+
+        if (!Validation::validateNotEmpty($username)) {
+            $errors['username'] = "Username is required.";
+        }
+
+        if (!Validation::validateNotEmpty($email) || !Validation::validateEmail($email)) {
+            $errors['email'] = "A valid email is required.";
+        }
+
+        if (Validation::checkUserByEmail($email)) {
+            $errors['duplicateEmail'] = "This email is already used.";
+        }
+
+        if (!Validation::validateNotEmpty($password)) {
+            $errors['password'] = "Password is required.";
+        } elseif (strlen($password) < 8) {
+            $errors['password'] = "Password must be at least 8 characters long.";
+        }
+
+        if (!empty($errors)) {
+            SessionManager::set('errors', $errors);
+            header("Location: /forum/public/signIn");
+            exit();
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $this->userDAO->createUser($username, $hashedPassword, $email);
+
+        SessionManager::start();
+        $user = $this->userDAO->getUserByEmail($email);
+
+        SessionManager::set('user', $user);
+        SessionManager::set('username', $user->getUsername());
+
+        header("Location: /forum/public/");
     }
-    
 
     public function editUser() 
     {
         $this->isLoggedIn();
 
-        $title = "Editing user";
-        $userId = $_GET['user_id'];
+        $userId = $_GET['user_id'] ?? null;
+
+        if (!Validation::validateNotEmpty($userId) || !Validation::checkUserById($userId)) {
+            $message = "Invalid or missing User ID.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+
+        $currentUser = SessionManager::get('user');
+        $currentUserId = $currentUser->getUserId();
+
+        if ($userId !== $currentUserId)
+        {
+            $message = "Oops! You're not authorized to edit this user.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+
         $user = $this->userDAO->getUserById($userId);
+        $title = "Editing user";
+
         require_once __DIR__ . '/../views/users/editUser.html.php';
     }
 
@@ -109,96 +128,115 @@ class UserController {
     {
         SessionManager::start();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $userId = $_POST['user_id'];
-            $username = $_POST['username'];
-            $oldPassword = $_POST['oldPassword'];
-            $password = $_POST['password'];
-            $checkPassword = $_POST['verifyPassword'];
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
+        }
+
+        $userId = $_POST['user_id'];
+
+        if (!Validation::validateNotEmpty($userId) || !Validation::checkUserById($userId)) {
+            echo "Invalid User ID.";
+            return;
+        }
+
+        $username = $_POST['username'];
+        $oldPassword = $_POST['oldPassword'];
+        $password = $_POST['password'];
+        $checkPassword = $_POST['verifyPassword'];
+        $email = $_POST['email'];
+        $removeImage = isset($_POST['remove_image']) ? true : false;
+
+        $user = $this->userDAO->getUserById($userId);
+
+        $errors = [];
+
+        if (!Validation::validateNotEmpty($username)) {
+            $errors['username'] = "Username cannot be empty.";
+        }
+
+        if (!Validation::validateNotEmpty($email) || !Validation::validateEmail($email)) {
+            $errors['email'] = "A valid email is required.";
+        }
+
+        if (!empty($password) || !empty($checkPassword) || !empty($oldPassword)) {
+            if ($password !== $checkPassword) {
+                $errors['password'] = "New password and confirmation do not match.";
+            }
+
+            if (!password_verify($oldPassword, $user->getPassword())) {
+                $errors['oldPassword'] = "Old password is incorrect.";
+            }
+
+            if (!empty($errors)) {
+                SessionManager::set('form_errors', $errors);
+                SessionManager::set('form_data', $_POST);
+                header("Location: /forum/public/updateUser?user_id=$userId");
+                exit();
+            }
 
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $email = $_POST['email'];
-            $removeImage = isset($_POST['remove_image']) ? true : false;
+        } else {
+            $hashedPassword = $user->getPassword();
+        }
 
-            $user = $this->userDAO->getUserById($userId);
+        $existingImage = $user->getUserImage();
+        $imagePath = Utils::handleImageUpload($_FILES['image'], realpath(__DIR__ . '/../../public/uploads/userAsset'));
 
-            $errors = [];
-            if (!empty($password) || !empty($checkPassword) || !empty($oldPassword)) {
-                // Check if confirm password matches
-                if ($password !== $checkPassword) {
-                    $errors['password'] = "The new password doesn't match the confirmation.";
-                }
-    
-                // Check if old password is correct
-                if (!password_verify($oldPassword, $user->getPassword())) {
-                    $errors['oldPassword'] = "Old password is incorrect.";
-                }
+        if ($removeImage && $existingImage) {
+            Utils::deleteImage($existingImage);
+            $imagePath = null;
+        } elseif (!$imagePath) {
+            $imagePath = $existingImage;
+        }
 
-                if (!empty($errors)) {
-                    // Store errors in session and redirect back to form
-                    SessionManager::set('form_errors', $errors);
-                    SessionManager::set('form_data', $_POST); // Optional: to keep the inputs
-                    header("Location: /forum/public/updateUser?user_id=$userId");
-                    exit;
-                }
-                
-                // Hash new password
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            } else {
-                // If user didn't change password, keep the old hash
-                $hashedPassword = $user->getPassword();
-            }
+        $this->userDAO->editUser($username, $hashedPassword, $email, $userId, $imagePath);
 
-            $existingImage = $user->getUserImage();
+        if ($userId == SessionManager::get('user')->getUserId()) {
+            $updatedUser = $this->userDAO->getUserById($userId);
+            $_SESSION['user'] = $updatedUser;
+        }
 
-            // Handle file upload (new image)
-            $imagePath = Utils::handleImageUpload($_FILES['image'], realpath(__DIR__ . '/../../public/uploads/userAsset'));
-        
-            // If user checked "Remove Image", delete old image and clear path
-            if ($removeImage && $existingImage) {
-                Utils::deleteImage($existingImage);
-                $imagePath = null; // Clear the image in the database
-            } elseif (!$imagePath) {
-                // If no new image was uploaded, keep the existing image
-                $imagePath = $existingImage;
-            }
-
-            $this->userDAO->editUser($username, $hashedPassword, $email, $userId, $imagePath);
-            // if currentUser is updated, update it to the view
-            if ($userId == SessionManager::get('user')->getUserId()) {
-                $updatedUser = $this->userDAO->getUserById($_POST['user_id']);
-                $_SESSION['user'] = $updatedUser;
-            }
-            
-            header("Location: /forum/public/showProfile?id=$userId");
-        } 
-    }    
+        header("Location: /forum/public/showProfile?id=$userId");
+    }
 
     public function deleteUser() 
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $userId = $_POST['user_id'] ?? null;
-            if (!$userId) {
-                echo "Error: invalid User ID.";
-                return;
-            }
-            
-            $this->userDAO->deleteUser($userId);
-            header("Location: /forum/public/userLists");
-            exit();
-        } else {
-            echo "Invalid request method!";
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
         }
+
+        $userId = $_POST['user_id'] ?? null;
+
+        if (!Validation::validateNotEmpty($userId) || !Validation::checkUserById($userId)) {
+            echo "Error: Invalid User ID.";
+            return;
+        }
+
+        $this->userDAO->deleteUser($userId);
+        header("Location: /forum/public/userLists");
+        exit();
     }
 
     public function showProfile() 
     {
         $this->isLoggedIn();
-        $userId = $_GET['id'];
-        // user asset:
+
+        $userId = $_GET['id'] ?? null;
+
+        if (!Validation::validateNotEmpty($userId) || !Validation::checkUserById($userId)) {
+            $message = "Invalid or missing User ID.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+
         $user = $this->userDAO->getUserById($userId);
+
         $userImage = $user->getUserImage();
-        $userName = $user->getUserName($userId);
+        $userName = $user->getUserName();
         $password = $user->getPassword();
         $userMail = $user->getEmail();
 
@@ -207,7 +245,6 @@ class UserController {
         $isOwner = $authController->isOwner($userId);
 
         $posts = $postControl->getPostByUserId($userId);
-
 
         require_once __DIR__ . '/../views/users/profile.html.php';
     }

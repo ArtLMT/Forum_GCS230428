@@ -2,7 +2,6 @@
 namespace src\controllers;
 
 use src\dal\implementations\ModuleDAOImpl;
-use src\dal\implementations\PostDAOImpl;
 use src\utils\Validation;
 use src\utils\SessionManager;
 
@@ -15,7 +14,7 @@ class ModuleController {
 
     public function getAllModules()
     {
-        return $modules = $this->moduleDAO->getAllModules();
+        return $this->moduleDAO->getAllModules();
     }
 
     public function isLoggedIn()
@@ -34,8 +33,6 @@ class ModuleController {
     {
         $this->isLoggedIn();
         $modules = $this->moduleDAO->getAllModules();
-
-        // Get post count for each module
         $modulePostCounts = [];
         foreach ($modules as $module) {
             $modulePostCounts[$module->getModuleId()] = $this->getNumberOfPostOfModuleId($module->getModuleId());
@@ -60,8 +57,15 @@ class ModuleController {
             return;
         }
 
-        $moduleName = $_POST['module_name'];
-        $moduleDescription = $_POST['module_description'];
+        $moduleName = $_POST['module_name'] ?? '';
+        $moduleDescription = $_POST['module_description'] ?? '';
+
+        // Validation
+        if (!Validation::validateNotEmpty($moduleName) || !Validation::validateNotEmpty($moduleDescription)) {
+            $message = "Module name and description cannot be empty.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
 
         $this->moduleDAO->createModule($moduleName, $moduleDescription);
         header('Location: /forum/public/moduleLists');
@@ -74,9 +78,10 @@ class ModuleController {
         $this->isLoggedIn();
         $moduleId = $_GET['id'] ?? null;
 
-        if (!$moduleId || !Validation::checkModuleById($moduleId)) {
-            echo "Error: Invalid Module ID.";
-            return;
+        if (!Validation::validateNotEmpty($moduleId) || !Validation::checkModuleById($moduleId)) {
+            $message = "Oops! Invalid Module ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
 
         $module = $this->moduleDAO->getModuleById($moduleId);
@@ -92,13 +97,20 @@ class ModuleController {
             return;
         }
 
-        $moduleId = $_POST['module_id'];
-        $moduleName = $_POST['module_name'];
-        $moduleDescription = $_POST['module_description'];
+        $moduleId = $_POST['module_id'] ?? null;
+        $moduleName = $_POST['module_name'] ?? '';
+        $moduleDescription = $_POST['module_description'] ?? '';
 
-        if (!Validation::checkModuleById($moduleId)) {
-            echo "Error: Invalid Module ID.";
-            return;
+        if (!Validation::validateNotEmpty($moduleId) || !Validation::checkModuleById($moduleId)) {
+            $message = "Oops! Invalid Module ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+
+        if (!Validation::validateNotEmpty($moduleName) || !Validation::validateNotEmpty($moduleDescription)) {
+            $message = "Module name and description cannot be empty.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
 
         $this->moduleDAO->updateModule($moduleId, $moduleName, $moduleDescription);
@@ -117,9 +129,10 @@ class ModuleController {
 
         $moduleId = $_GET['id'] ?? null;
 
-        if (!$moduleId || !Validation::checkModuleById($moduleId)) {
-            echo "Error: Invalid Module ID.";
-            return;
+        if (!Validation::validateNotEmpty($moduleId) || !Validation::checkModuleById($moduleId)) {
+            $message = "Oops! Invalid Module ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
 
         $this->moduleDAO->deleteModule($moduleId);
@@ -127,9 +140,9 @@ class ModuleController {
         exit();
     }
 
-    public function getNumberOfPostOfModuleId($moduleOd)
+    public function getNumberOfPostOfModuleId($moduleId)
     {
-        return $this->moduleDAO->getTotalPostOfModuleId($moduleOd);
+        return $this->moduleDAO->getTotalPostOfModuleId($moduleId);
     }
 }
 ?>

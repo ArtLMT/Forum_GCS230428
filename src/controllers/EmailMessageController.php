@@ -4,6 +4,7 @@ namespace src\controllers;
 use src\dal\implementations\EmailMessageDAOImpl;
 use src\dal\implementations\UserDAOImpl;
 use src\utils\SessionManager;
+use src\utils\Validation;
 
 class EmailMessageController{
     private $emailDAO;
@@ -34,6 +35,12 @@ class EmailMessageController{
         }
         $title = $_POST['title'];
         $content = $_POST['content'];
+
+        if (!Validation::validateNotEmpty($title) || !Validation::validateNotEmpty($content)) {
+            $message = "Oops! Title and Content cannot be empty.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
         
         $currentUser = SessionManager::get('user');
         $userId = $currentUser->getUserId();
@@ -72,11 +79,23 @@ class EmailMessageController{
         $this->isLoggedIn();
         $emailId = $_GET['id'] ?? null;
 
-        if (!$emailId) {
-            echo "Message ID not provided";
+        if (!Validation::validateNotEmpty($emailId) || !Validation::checkEmailMessageById($emailId)) {
+            $message = "Oops! Invalid email message ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
 
+        
         $message = $this->emailDAO->getMessageById($emailId);
+        $currentUser = SessionManager::get('user');
+        $currentUserId = $currentUser->getUserId();
+
+        if ($message->getUserId() !== $currentUserId)
+        {
+            $message = "Oops! You're not authorized to edit this message.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
 
         require_once __DIR__ . '/../views/messages/editMessages.html.php';
     }
@@ -95,6 +114,18 @@ class EmailMessageController{
         $title = $_POST['title'];
         $content = $_POST['content'];
 
+        if (!Validation::validateNotEmpty($emailId) || !Validation::checkEmailMessageById($emailId)) {
+            $message = "Oops! Invalid email message ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+
+        if (!Validation::validateNotEmpty($title) || !Validation::validateNotEmpty($content)) {
+            $message = "Oops! Title and Content cannot be empty.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+
         $this->emailDAO->updateMessage($emailId, $title, $content);
         header("Location: /forum/public/messageList/");
         exit();
@@ -109,6 +140,12 @@ class EmailMessageController{
         }
 
         $emailId = $_GET['id'] ?? null;
+        if (!Validation::validateNotEmpty($emailId) || !Validation::checkEmailMessageById($emailId)) {
+            $message = "Oops! Invalid email message ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+
         $this->emailDAO->deleteEmail($emailId);
 
         header("Location:/forum/public/messageList/");

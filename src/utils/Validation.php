@@ -4,11 +4,13 @@ namespace src\utils;
 use src\dal\implementations\UserDAOImpl;
 use src\dal\implementations\PostDAOImpl;
 use src\dal\implementations\ModuleDAOImpl;
+use src\dal\implementations\EmailMessageDAOImpl;
 
 class Validation {
     private static ?UserDAOImpl $userDAO = null; // nullable type
     private static ?PostDAOImpl $postDAO = null; // nullable type
     private static ?ModuleDAOImpl $moduleDAO = null; // nullable type
+    private static ?EmailMessageDAOImpl $emailDAO = null; // nullable type
 
     private static function init()
     {
@@ -20,6 +22,10 @@ class Validation {
         }
         if (self::$moduleDAO === null) {
             self::$moduleDAO = new ModuleDAOImpl();
+        }
+
+        if (self::$emailDAO === null) {
+            self::$emailDAO = new EmailMessageDAOImpl();
         }
     }
 
@@ -63,6 +69,12 @@ class Validation {
     {
         self::init();
         return self::$moduleDAO->getModuleByName($moduleName) ? true : false;
+    }
+
+    public static function checkEmailMessageById($emailId) 
+    {
+        self::init();
+        return self::$emailDAO->getMessageById($emailId) ? true : false;
     }
 
     public static function validateNotEmpty($input) 

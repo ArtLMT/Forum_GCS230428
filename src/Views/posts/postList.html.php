@@ -11,12 +11,14 @@ $title = "Home";
                 <?php
                     $userImage = $post->getUserImage();
                     $username = $post->getUsername();
+                    // var_dump($post);
+                    // exit();
                 ?>
                 <div class="bg-white border-solid border-2 rounded-lg border-indigo-200 hover:border-indigo-500 shadow-md duration-700 ease-in-out transform">
                     <div class="post-header flex p-3">
-                        <a class="size-14 flex items-center justify-center bg-indigo-500 text-white rounded-full text-4xl font-bold" href="/forum/public/showProfile?id=<?=$post->getUserId()?>">
+                        <a class="size-10 flex items-center justify-center bg-indigo-500 text-white rounded-full text-2xl font-bold" href="/forum/public/showProfile?id=<?=$post->getUserId()?>">
                             <?php if ($userImage) : ?>
-                                <img src="/forum/public/<?= htmlspecialchars($userImage) ?>" class="size-14 rounded-full object-cover" alt="User Profile">
+                                <img src="/forum/public/<?= htmlspecialchars($userImage) ?>" class="size-10 rounded-full object-cover" alt="User Profile">
                             <?php else : ?>
                                 <?= strtoupper(substr($username, 0, 1)) // Get first letter and make it uppercase  ?> 
                             <?php endif; ?>
@@ -25,6 +27,9 @@ $title = "Home";
                             <h3 class="text-slate-500 text-sm"> by
                                 <?= htmlspecialchars($username); ?>  • <?= htmlspecialchars(Utils::timeAgo($post->getPostedTime())); ?>
                             </h3>
+                            <h4 class="text-slate-400 text-sm italic">
+                                Module: <?= htmlspecialchars($post->getModuleName()); ?>
+                            </h4>
                             <h2 class="m-0 text-3xl text-indigo-700 font-bold"><?= htmlspecialchars($post->getTitle()) ?></h2>
                         </div>
                     </div>

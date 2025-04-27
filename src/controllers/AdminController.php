@@ -6,6 +6,7 @@ use src\dal\implementations\PostDAOImpl;
 use src\dal\implementations\ModuleDAOImpl;
 use src\dal\implementations\EmailMessageDAOImpl;
 use src\utils\SessionManager;
+use src\utils\Validation;
 use src\utils\Utils;
 
 class AdminController {
@@ -101,12 +102,16 @@ class AdminController {
 
     public function showUserCreate()
     {
+        $this->checkIsAdmin();
+
         $title = "Add user";
         require_once __DIR__ . '/../views/admins/adminCreateUser.html.php';
     }
 
     public function showCreatePost()
     {
+        $this->checkIsAdmin();
+
         $title = "Create Post";
         $modules = $this->moduleDAO->getAllModules();
         require_once __DIR__ . '/../views/admins/adminCreatePost.html.php';
@@ -114,18 +119,23 @@ class AdminController {
 
     public function showCreateModule()
     {
+        $this->checkIsAdmin();
+
         $title = "Create module";
         require_once __DIR__ . '/../views/admins/createModule.html.php';
     }
 
     public function showEditModule()
     {   
+        $this->checkIsAdmin();
+
         $title = "Edit module";
         $moduleId = $_GET['id'] ?? null;
 
-        if (!$moduleId ) {
-            echo "Error: Invalid Module ID.";
-            return;
+        if (!Validation::validateNotEmpty($moduleId) || !Validation::checkModuleById($moduleId)) {
+            $message = "Oops! Invalid Module ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
 
         $module = $this->moduleDAO->getModuleById($moduleId);
@@ -134,6 +144,7 @@ class AdminController {
 
     public function showFeedback()
     {
+        $this->checkIsAdmin();
         // $messages = $this->emailMessageDAO->getAllMessage();
         $title = "List of feebacks";
 
@@ -153,7 +164,16 @@ class AdminController {
 
     public function userEdit()
     {
+        $this->checkIsAdmin();
+        
         $userId = $_GET['user_id'];
+
+        if (!Validation::validateNotEmpty($userId) || !Validation::checkUserById($userId)) {
+            $message = "Oops! Invalid User ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+
         $user = $this->userDAO->getUserById($userId);
         require_once __DIR__ . '/../views/admins/editUser.html.php';
     }
@@ -225,6 +245,13 @@ class AdminController {
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userId = $_POST['user_id'];
+
+            if (!Validation::validateNotEmpty($userId) || !Validation::checkUserById($userId)) {
+                $message = "Oops! Invalid User ID provided.";
+                require_once __DIR__ . '/../views/error/displayError.html.php';
+                exit();
+            }
+
             $username = $_POST['username'];
             // $password = $_POST['password'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -260,9 +287,15 @@ class AdminController {
             return;
         }
 
-        $moduleId = $_POST['module_id'];
+        $moduleId = $_POST['module_id'] ?? null;
         $moduleName = $_POST['module_name'];
         $moduleDescription = $_POST['module_description'];
+
+        if (!Validation::validateNotEmpty($moduleId) || !Validation::checkModuleById($moduleId)) {
+            $message = "Oops! Invalid Module ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
 
         $this->moduleDAO->updateModule($moduleId, $moduleName, $moduleDescription);
         header("Location: /forum/public/admin/showModuleList");
@@ -272,12 +305,24 @@ class AdminController {
     public function updateUserRole()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $userId = $_POST['user_id'];
-            $userIsAdmin = $_POST['is_admin'];
+            $userId = $_POST['user_id'] ?? null;
 
+            if (!Validation::validateNotEmpty($userId) || !Validation::checkUserById($userId)) {
+                $message = "Oops! Invalid User ID provided.";
+                require_once __DIR__ . '/../views/error/displayError.html.php';
+                exit();
+            }
+
+            $userIsAdmin = $_POST['is_admin'];
             $newRole = $userIsAdmin ? 0 : 1;
 
             $this->userDAO->setUserIsAdmin($userId, $newRole);
+            
+            if ($userId == SessionManager::get('user')->getUserId()) {
+                $updatedUser = $this->userDAO->getUserById($userId);
+                $_SESSION['user'] = $updatedUser;
+            }
+
             header("Location: /forum/public/dashboard");
         }
     }
@@ -286,16 +331,19 @@ class AdminController {
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userId = $_POST['user_id'] ?? null;
-            if (!$userId) {
-                echo "Error: invalid User ID.";
-                return;
+
+            if (!Validation::validateNotEmpty($userId) || !Validation::checkUserById($userId)) {
+                $message = "Oops! Invalid User ID provided.";
+                require_once __DIR__ . '/../views/error/displayError.html.php';
+                exit();
             }
-            
+
             $this->userDAO->deleteUser($userId);
             header("Location: /forum/public/dashboard");
             exit();
         } else {
-            echo "Invalid request method!";
+            http_response_code(405);
+            echo "Method Not Allowed";
         }
     }
 
@@ -309,9 +357,10 @@ class AdminController {
 
         $postId = $_POST['post_id'] ?? null;
 
-        if (!$postId) {
-            echo "Error: Invalid Post ID.";
-            return;
+        if (!Validation::validateNotEmpty($postId) || !Validation::checkPostById($postId)) {
+            $message = "Oops! Invalid Post ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
 
         $this->postDAO->deletePost($postId);
@@ -329,9 +378,10 @@ class AdminController {
 
         $moduleId = $_POST['module_id'] ?? null;
 
-        if (!$moduleId) {
-            echo "Error: Invalid Module ID.";
-            return;
+        if (!Validation::validateNotEmpty($moduleId) || !Validation::checkModuleById($moduleId)) {
+            $message = "Oops! Invalid Module ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
 
         $this->moduleDAO->deleteModule($moduleId);

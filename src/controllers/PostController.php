@@ -76,12 +76,38 @@ class PostController {
     {
         $this->isLoggedIn();
         $postId = $_GET['id'] ?? null;
-        if ($postId) {
-            $post = $this->postDAO->getPostById($postId);
-            require_once __DIR__ . '/../views/posts/updatePost.html.php';
-        } else {
-            echo "Post ID not provided.";
+
+        if (!Validation::validateNotEmpty($postId)) {
+            $message = "Oops! Post ID not provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
+
+        if (!Validation::checkPostById($postId)) {
+            $message = "Oops! The post you're looking for doesn't exist.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+
+        $post = $this->postDAO->getPostById($postId);
+        $title = $post->getTitle();
+        $content = $post->getContent();
+
+        $currentUser = SessionManager::get('user');
+        $currentUserId = $currentUser->getUserId();
+
+        if ($post->getUserId() !== $currentUserId)
+        {
+            $message = "Oops! You're not authorized to edit this post.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+        
+        $moduleController= new ModuleController();
+        $modules = $moduleController->getAllModules();
+
+        require_once __DIR__ . '/../views/posts/updatePost.html.php';
+
     }
 
     // Update an existing post
@@ -99,16 +125,17 @@ class PostController {
         $moduleId = $_POST['module_id'];
         $removeImage = isset($_POST['remove_image']) ? true : false;
     
-        if (!Validation::checkPostById($postId)) {
-            echo "Error: Invalid Post ID.";
-            return;
+        if (!Validation::validateNotEmpty($postId) || !Validation::checkPostById($postId)) {
+            $message = "Oops! Invalid Post ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
-    
-        if (!Validation::checkModuleById($moduleId)) {
-            echo "Error: Invalid Module ID.";
-            return;
+        
+        if (!Validation::validateNotEmpty($moduleId) || !Validation::checkModuleById($moduleId)) {
+            $message = "Oops! Invalid Module ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
-    
         // Retrieve current post data
         $post = $this->postDAO->getPostById($postId);
         $existingImage = $post->getPostImage();
@@ -143,10 +170,11 @@ class PostController {
 
         $postId = $_GET['id'] ?? null;
 
-        if (!$postId || !Validation::checkPostById($postId)) {
-            echo "Error: Invalid Post ID.";
-            return;
-        }
+        if (!Validation::validateNotEmpty($postId) || !Validation::checkPostById($postId)) {
+            $message = "Oops! Invalid Post ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }        
 
         $this->postDAO->deletePost($postId);
         header("Location: /forum/public/");
@@ -163,11 +191,20 @@ class PostController {
         $this->isLoggedIn();
         // post asset:
         $postId = $_GET['post_id'];
-        if (!$postId || !Validation::checkPostById($postId))
+
+        if (!Validation::validateNotEmpty($postId))
         {
-            echo 'bug is here';
-            
+            $message = "Please input the post's Id";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
+
+        if (!Validation::checkPostById($postId)) {
+            $message = "Oops! The post you're looking for doesn't exist.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+        
 
         $commentDAO = new CommentController();
         $comments = $commentDAO->getcomment($postId);
@@ -204,9 +241,10 @@ class PostController {
 
         $moduleId = $_GET['id'] ?? null;
 
-        if (!$moduleId || !Validation::checkModuleById($moduleId)) {
-            echo "Error: Invalid Module ID.";
-            return;
+        if (!Validation::validateNotEmpty($moduleId) || !Validation::checkModuleById($moduleId)) {
+            $message = "Oops! Invalid Module ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
         
         $posts = $this->postDAO->getPostsByModuleId($moduleId);

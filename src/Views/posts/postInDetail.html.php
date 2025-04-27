@@ -11,22 +11,37 @@ $title = $postTitle;
 <div class="post bg-white border-solid border-2 border-indigo-500 shadow-md rounded-lg my-8">
     <!-- <div><img src="/forum/public/assets/img/backButton.svg" alt=""></div> -->
     <div class="post-header flex p-3 items-center">
-        <a class="relative left-2"href="/forum/public/"><img src="/forum/public/assets/img/back_button_black.svg" alt="" class="size-12"></a>
-        <div class="flex items-center justify-start ml-6 w-full">
-            <a class="size-14 flex items-center justify-center bg-indigo-500 text-white rounded-full text-4xl font-bold" href="/forum/public/showProfile?id=<?=$post->getUserId()?>">
-                <?php if ($userImage) : ?>
-                    <img src="/forum/public/<?= htmlspecialchars($userImage) ?>" class="size-14 rounded-full object-cover" alt="User Profile">
-                <?php else : ?>
-                    <?= $firstLetter ?>
-                <?php endif; ?>
-            </a>
-            <div class='ml-3'>
-                <h3 class="text-slate-500 text-sm">
-                    <?= htmlspecialchars($username); ?>  • <?= htmlspecialchars(Utils::timeAgo($post->getPostedTime())); ?>
+    <a class="relative left-2" href="/forum/public/">
+        <img src="/forum/public/assets/img/back_button_black.svg" alt="" class="size-12">
+    </a>
+
+    <div class="flex justify-start ml-6 w-full">
+        <!-- Avatar -->
+        <a class="size-10 flex items-center justify-center bg-indigo-500 text-white rounded-full text-2xl font-bold" href="/forum/public/showProfile?id=<?= $post->getUserId() ?>">
+            <?php if ($userImage) : ?>
+                <img src="/forum/public/<?= htmlspecialchars($userImage) ?>" class="size-10 rounded-full object-cover" alt="User Profile">
+            <?php else : ?>
+                <?= $firstLetter ?>
+            <?php endif; ?>
+        </a>
+
+        <div class="flex flex-col justify-center ml-3">
+            <div class="flex flex-col">
+                <h3 class="text-slate-500 text-sm leading-tight">
+                    <?= htmlspecialchars($username); ?> • <?= htmlspecialchars(Utils::timeAgo($post->getPostedTime())); ?>
                 </h3>
-                <h2 class="m-0 text-3xl text-indigo-700 font-bold"><?= htmlspecialchars($postTitle) ?></h2>
+                <h4 class="text-slate-400 text-sm italic leading-tight">
+                    Module: <?= htmlspecialchars($post->getModuleName()); ?>
+                </h4>
             </div>
+
+            <h2 class="m-0 text-3xl text-indigo-700 font-bold mt-1">
+                <?= htmlspecialchars($postTitle) ?>
+            </h2>
         </div>
+    </div>
+
+
         <?php if ($currentUserId == $ownerId) :?>
             <div class="flex gap-4 justify-end items-center mr-5 mb-4 text-white font-semibold">
                 <a class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-1 w-14 h-8 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>"><img class=""src="/forum/public/assets/img/edit_white.svg" alt="">Edit</a>
@@ -63,7 +78,7 @@ $title = $postTitle;
             </div>
         </form>
     </div>
-    <div class="px-12 py-6 bg-white">
+    <div class="px-12 py-6 bg-white rounded-lg">
     <h3 class="text-2xl font-semibold text-indigo-700 mb-6">Comments</h3>
 
     <?php foreach ($comments as $comment) : ?>

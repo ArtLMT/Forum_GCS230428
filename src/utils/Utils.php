@@ -15,8 +15,9 @@ class Utils {
         // Allow only image file types
         $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
         if (!in_array($fileExtension, $allowedExtensions)) {
-            echo "Invalid file type.";
-            return null;
+            $message = "This type of file is not allowed";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
 
         // Generate a unique filename
