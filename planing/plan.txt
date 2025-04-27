@@ -15,7 +15,6 @@ Perhaps this's project structure should look like this
     │   │   │   ├── style.css
     │   │   ├── /js
     │   │       ├── script.js
-    │   │       ├── validation.js
     │   ├── /uploads
     │   │       ├──/postAsset # store post's images
     │   │       ├──/userAsset # store user's images

@@ -90,21 +90,6 @@ $isAdmin = $currentUser->getIsAdmin();
                         </div>
                     </div>
                 </div>
-                <script>
-                    const avatarButton = document.getElementById('avatar-button');
-                    const dropdownMenu = document.getElementById('avatar-dropdown');
-
-                    avatarButton.addEventListener('click', function (e) {
-                        e.stopPropagation();
-                        dropdownMenu.classList.toggle('hidden');
-                    });
-
-                    document.addEventListener('click', function () {
-                        if (!dropdownMenu.classList.contains('hidden')) {
-                            dropdownMenu.classList.add('hidden');
-                        }
-                    });
-                </script>
             </div>
         </nav>
     </header>
@@ -167,5 +152,6 @@ $isAdmin = $currentUser->getIsAdmin();
     <footer class="bg-indigo-700 text-white text-center p-2 mt-auto py-6 border-t border-solid border-indigo-800">
         <p>&copy; <?php echo date("Y"); ?> Forum Test. All rights reserved.</p>
     </footer>
+    <script src="/forum/public/assets/js/script.js"></script>
 </body>
 </html>

@@ -90,22 +90,6 @@ $totalFeedback = $AdminController->countTotalEmailMessage();
                         </div>
                     </div>
                 </div>
-                <script>
-                    const avatarButton = document.getElementById('avatar-button');
-                    const dropdownMenu = document.getElementById('avatar-dropdown');
-
-                    avatarButton.addEventListener('click', function (e) {
-                        e.stopPropagation(); // Prevent click from bubbling
-                        dropdownMenu.classList.toggle('hidden');
-                    });
-
-                    // Close dropdown when clicking outside
-                    document.addEventListener('click', function () {
-                        if (!dropdownMenu.classList.contains('hidden')) {
-                            dropdownMenu.classList.add('hidden');
-                        }
-                    });
-                </script>
             </div>
 
         </nav>
@@ -211,5 +195,6 @@ $totalFeedback = $AdminController->countTotalEmailMessage();
             </div>
         </div>
     </main>
+    <script src="/forum/public/assets/js/script.js"></script>
 </body>
 </html>
