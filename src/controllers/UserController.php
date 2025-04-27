@@ -63,7 +63,7 @@ class UserController {
             $errors['username'] = "Username is required.";
         }
 
-        if (!Validation::validateNotEmpty($email) || !Validation::validateEmail($email)) {
+        if (!Validation::validateNotEmpty($email)) {
             $errors['email'] = "A valid email is required.";
         }
 

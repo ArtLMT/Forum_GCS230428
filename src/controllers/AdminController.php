@@ -204,6 +204,31 @@ class AdminController {
             $username = $_POST['username'];
             $password = $_POST['password'];
             $email = $_POST['email'];
+
+            if (!Validation::validateNotEmpty($username)) {
+                $errors['username'] = "Username is required.";
+            }
+    
+            if (!Validation::validateNotEmpty($email)) {
+                $errors['email'] = "A valid email is required.";
+            }
+    
+            if (Validation::checkUserByEmail($email)) {
+                $errors['duplicateEmail'] = "This email is already used.";
+            }
+    
+            if (!Validation::validateNotEmpty($password)) {
+                $errors['password'] = "Password is required.";
+            } elseif (strlen($password) < 8) {
+                $errors['password'] = "Password must be at least 8 characters long.";
+            }
+    
+            if (!empty($errors)) {
+                SessionManager::set('errors', $errors);
+                header("Location: /forum/public/admin/createUser");
+                exit();
+            }
+
             $this->userDAO->createUser($username, $password, $email);
             header("Location: /forum/public/dashboard");
         }

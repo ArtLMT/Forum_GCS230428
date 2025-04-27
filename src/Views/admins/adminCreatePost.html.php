@@ -2,8 +2,6 @@
 ob_start(); // Start output buffering
 ?>
 
-<h2 class="text-center ">Create Post</h2>
-
 <form class="bg-white border-solid border-2 rounded-lg text-slate-800" action="/forum/public/admin/createPost" method="post" enctype="multipart/form-data">  
     <div class="m-4 flex flex-col items-center">    
         <label>Title:</label>
