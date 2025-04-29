@@ -48,17 +48,6 @@ class CommentDAOImpl extends BaseDAO {
         $this->executeQuery($query, $params);
     }
 
-    public function updateComment($commentId, $content) {
-        $query = "UPDATE comments
-                SET content = :content
-                WHERE comment_id = :comment_id";
-        $params = [
-            ':content' => $content,
-            ':comment_id' => $commentId
-        ];
-        $this->executeQuery($query, $params);
-    }
-
     public function getCommentById($commentId) {
         $query = " SELECT comment_id, content, user_id,post_id, create_date
                 FROM comments
@@ -83,11 +72,21 @@ class CommentDAOImpl extends BaseDAO {
         return $posts;
     }
 
-    public function deleteComment($commentId) {
-
+    public function updateComment($commentId, $content) {
+        $query = "UPDATE comments
+                SET content = :content
+                WHERE comment_id = :comment_id";
+        $params = [
+            ':content' => $content,
+            ':comment_id' => $commentId
+        ];
+        $this->executeQuery($query, $params);
     }
 
-    public function getAllComments() {
-
+    public function deleteComment($commentId)
+    {
+        $query = "DELETE FROM comments WHERE comment_id = :comment_id";
+        $this->executeQuery($query, [':comment_id' => $commentId]);
     }
+
 }

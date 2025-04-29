@@ -93,11 +93,31 @@ $title = $postTitle;
                 <?php endif; ?>
             </a>
 
-            <div>
+            <div class="w-full">
                 <p class="text-sm text-gray-500 font-medium mb-1"><?= $comment->getUsername() ?></p>
-                <p class="text-gray-700"><?= htmlspecialchars($comment->getContent()) ?></p>
+                <?php if (isset($_GET['edit']) && $_GET['edit'] == $comment->getCommentId()) : ?>
+                    <form action="/forum/public/updateComment" method="POST" class="space-y-2">
+                        <input type="hidden" name="comment_id" value="<?= $comment->getCommentId() ?>">
+                        <input type="hidden" name="post_id" value="<?= $post->getPostId() ?>">
+                        <textarea name="content" required class="w-full p-2 border rounded"><?= htmlspecialchars($comment->getContent()) ?></textarea>
+                        <div class="flex gap-3 mt-2">
+                            <button type="submit" class="px-4 py-1 bg-blue-600 text-white rounded">Save</button>
+                            <a href="/forum/public/postDetail?post_id=<?= $post->getPostId() ?>" class="px-4 py-1 bg-gray-400 text-white rounded">Cancel</a>
+                        </div>
+                    </form>
+                <?php else : ?>
+                    <p class="text-gray-700"><?= htmlspecialchars($comment->getContent()) ?></p>
+
+                    <?php if ($currentUserId == $comment->getUserId() || $currentUserIsAdmin) : ?>
+                        <div class="flex gap-3 mt-2 text-sm">
+                            <a href="/forum/public/postDetail?post_id=<?= $post->getPostId() ?>&edit=<?= $comment->getCommentId() ?>" class="text-blue-600 hover:underline">Edit</a>
+                            <a href="/forum/public/deleteComment?id=<?= htmlspecialchars($comment->getCommentId()) ?>" onclick="return confirm('Delete this comment?')" class="text-red-600 hover:underline">Delete</a>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
             </div>
         </div>
+
     <?php endforeach ?>
 </div>
 </div>

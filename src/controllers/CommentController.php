@@ -63,4 +63,38 @@ class CommentController {
         $comment = $this->commentDAO->getCommentById($commentId);
         return $comment;
     }
+
+    public function update()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            return;
+        }
+
+        $commentId = $_POST['comment_id'];
+        $postId = $_POST['post_id'];
+        $content = $_POST['content'];
+
+        $this->commentDAO->updateComment($commentId, $content);
+
+        header("Location: /forum/public/postDetail?post_id=$postId");
+        exit();
+    }
+
+    public function destroy()
+    {
+        $this->isLoggedIn();
+        $commentId = $_GET['id'] ?? null;
+
+        if (!$commentId || !$this->commentDAO->getCommentById($commentId)) {
+            echo "Invalid comment ID";
+            return;
+        }
+
+        $this->commentDAO->deleteComment($commentId);
+        header("Location: /forum/public/postDetail?post_id=$postId");
+        exit();
+    }
+
 }
