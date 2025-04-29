@@ -126,10 +126,12 @@ $isAdmin = $currentUser->getIsAdmin();
                     <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/give_feedback_black.svg" alt="feedbackbtn">
                     <p>Give Feedback</p>
                 </a>
-                <a class="flex items-center hover:bg-violet-100 py-2 px-4" href="/forum/public/messageList">
-                    <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/feedback_black.svg" alt="feedbacksbtn">
-                    <p>Feedback</p>
-                </a>
+                <?php if($isAdmin) : ?>
+                    <a class="flex items-center hover:bg-violet-100 py-2 px-4" href="/forum/public/messageList">
+                        <img class="w-5 h-5 mr-3" src="/forum/public/assets/img/feedback_black.svg" alt="feedbacksbtn">
+                        <p>Feedback</p>
+                    </a>
+                <?php endif; ?>
             </div>
             <div class="mt-auto mb-4">
                 <a class="group flex justify-start items-center w-full py-3 bg-rose-400 hover:bg-red-600 hover:text-white p-[10px] transition duration-400 ease-in-out transform" href="/forum/public/logout">
@@ -150,7 +152,7 @@ $isAdmin = $currentUser->getIsAdmin();
 
     <!-- Footer -->
     <footer class="bg-indigo-700 text-white text-center p-2 mt-auto py-6 border-t border-solid border-indigo-800">
-        <p>&copy; <?php echo date("Y"); ?> Forum Test. All rights reserved.</p>
+        <p>&copy; <?php echo date("Y"); ?> StudyRoom, a student forum. All rights reserved.</p>
     </footer>
     <script src="/forum/public/assets/js/script.js"></script>
 </body>

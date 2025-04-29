@@ -75,6 +75,21 @@ class CommentController {
         $commentId = $_POST['comment_id'];
         $postId = $_POST['post_id'];
         $content = $_POST['content'];
+        
+        if (!$commentId || !$this->commentDAO->getCommentById($commentId)) {
+            $message = "Oops! Invalid Comment ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+        
+        $comment = $this->commentDAO->getCommentById($commentId);
+        $currentUser = SessionManager::get('user');
+        $owner = $comment->getUserId();
+        if ($owner !== $currentUser->getUserId()) {
+            $message = "Oops! You're not authorized to do this.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
 
         $this->commentDAO->updateComment($commentId, $content);
 
@@ -88,8 +103,9 @@ class CommentController {
         $commentId = $_GET['id'] ?? null;
 
         if (!$commentId || !$this->commentDAO->getCommentById($commentId)) {
-            echo "Invalid comment ID";
-            return;
+            $message = "Oops! Invalid Comment ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
         }
 
         $this->commentDAO->deleteComment($commentId);
