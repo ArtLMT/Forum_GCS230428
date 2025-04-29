@@ -108,7 +108,7 @@ $totalFeedback = $AdminController->countTotalEmailMessage();
             <div class="mt-4">
                 <p class="text-xs px-4 py-2 text-gray-400 uppercase">Dashboard</p>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/dashboard">
-                    <img src="/forum/public/assets/img/home_white.svg" alt="" class="size-5 mr-3">
+                    <img src="/forum/public/assets/img/home_white.svg" alt="homebtn" class="size-5 mr-3">
                     <p>Overview</p>
                 </a>
             </div>
@@ -117,31 +117,31 @@ $totalFeedback = $AdminController->countTotalEmailMessage();
             <div class="mt-4">
                 <p class="text-xs px-4 py-2 text-gray-400 uppercase">Content Management</p>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/showPostList">
-                    <img class="size-5 mr-3" src="/forum/public/assets/img/post_white.svg" alt="">
+                    <img class="size-5 mr-3" src="/forum/public/assets/img/post_white.svg" alt="postbtn">
                     <p>Posts</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/showCreatePost">
-                    <img class="size-5 mr-3" src="/forum/public/assets/img/add_post_white.svg" alt="">
+                    <img class="size-5 mr-3" src="/forum/public/assets/img/add_post_white.svg" alt="addPostbtn">
                     <p>Add Posts</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/dashboard">
-                    <img class="size-5 mr-3" src="/forum/public/assets/img/users_white.svg" alt="">
+                    <img class="size-5 mr-3" src="/forum/public/assets/img/users_white.svg" alt="usersbtn">
                     <p>Users</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/createUser">
-                    <img class="size-5 mr-3" src="/forum/public/assets/img/add_user_white.svg" alt="">
+                    <img class="size-5 mr-3" src="/forum/public/assets/img/add_user_white.svg" alt="addUserbtn">
                     <p>Add User</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/showModuleList">
-                    <img class="size-5 mr-3"src="/forum/public/assets/img/module_white.svg" alt="">
+                    <img class="size-5 mr-3"src="/forum/public/assets/img/module_white.svg" alt="modulebtn">
                     <p>Modules</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/showCreateModule">
-                    <img class="size-5 mr-3"src="/forum/public/assets/img/module_white.svg" alt="">
+                    <img class="size-5 mr-3"src="/forum/public/assets/img/module_white.svg" alt="addmodulebtn">
                     <p>Create Modules</p>
                 </a>
                 <a class="flex items-center hover:bg-gray-700 py-2 px-4" href="/forum/public/admin/listFeedback">
-                    <img class="size-5 mr-3"src="/forum/public/assets/img/feedback_white.svg" alt="">
+                    <img class="size-5 mr-3"src="/forum/public/assets/img/feedback_white.svg" alt="Feedbackbtn">
                     <p>Feedbacks</p>
                 </a>
             </div>
@@ -163,28 +163,28 @@ $totalFeedback = $AdminController->countTotalEmailMessage();
                     <a class="flex items-center justify-center" href="/forum/public/dashboard">
                         <div class="size-[60px] rounded-full font-bold text-3xl bg-cyan-200 mx-5 flex items-center justify-center"><?=htmlspecialchars($totalUser)?></div>
                         <p class="w-[160px] text-center text-white">Users</p>
-                        <img class="size-12 justify-end"src="/forum/public/assets/img/users_white.svg" alt="">
+                        <img class="size-12 justify-end"src="/forum/public/assets/img/users_white.svg" alt="Usersbtn">
                     </a>
                 </div>
                 <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-gray-900 border-solid border-2 border-violet-500">
                     <a class="flex items-center justify-center" href="/forum/public/admin/showPostList">
                         <div class="size-[60px] rounded-full font-bold text-3xl bg-violet-200 mx-5 flex items-center justify-center"><?=htmlspecialchars($totalPost)?></div>
                         <p class="w-[160px] text-center text-white">Post</p>
-                        <img class="size-12 justify-end" src="/forum/public/assets/img/post_white.svg" alt="">
+                        <img class="size-12 justify-end" src="/forum/public/assets/img/post_white.svg" alt="Postsbtn">
                     </a>
                 </div>
                 <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-gray-900 border-solid border-2 border-emerald-400">
                     <a class="flex items-center justify-center" href="/forum/public/admin/showModuleList">
                         <div class="size-[60px] rounded-full font-bold text-3xl bg-emerald-200 mx-5 flex items-center justify-center"><?=htmlspecialchars($totalModule)?></div>
                         <p class="w-[160px] text-center text-white">Module</p>
-                        <img class="size-12 justify-end"src="/forum/public/assets/img/module_white.svg" alt="">
+                        <img class="size-12 justify-end"src="/forum/public/assets/img/module_white.svg" alt="Modulesbtn">
                     </a>
                 </div>
                 <div class="flex items-center w-[350px] h-[100px] rounded-xl bg-gray-900 border-solid border-2 border-orange-300">
                     <a class="flex items-center w-full" href="/forum/public/admin/listFeedback">
                         <div class="size-[60px] rounded-full font-bold text-3xl bg-orange-100 mx-5 flex items-center justify-center"><?= htmlspecialchars($totalFeedback)?></div>
-                        <p class="w-[160px] text-center text-white">Feedbacks</p>
-                        <img class="size-12 justify-end"src="/forum/public/assets/img/feedback_white.svg" alt="">
+                        <p class="w-[160px] text-center text-white">Messages</p>
+                        <img class="size-12 justify-end"src="/forum/public/assets/img/feedback_white.svg" alt="Feedbacksbtn">
                     </a>
                 </div>
             </div>

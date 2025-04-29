@@ -11,8 +11,9 @@ Perhaps this's project structure should look like this
     │   ├── /css
     │   │   ├── input.css
     │   ├── /assets
+    │   │   ├── /img
     │   │   ├── /css
-    │   │   │   ├── style.css
+    │   │   │   ├── input.css
     │   │   ├── /js
     │   │       ├── script.js
     │   ├── /uploads
@@ -25,7 +26,7 @@ Perhaps this's project structure should look like this
     │   ├──/style
     │   │   ├── tailwind.css
     │   ├── /controllers
-    │   │   ├── AuthController.php
+    │   │   ├── AdminController.php
     │   │   ├── AuthController.php
     │   │   ├── CommentController.php
     │   │   ├── EmailMessageController.php
@@ -46,14 +47,12 @@ Perhaps this's project structure should look like this
     │   │   │   ├── ModuleDAOImpl.php # Implementation of ModuleDAO
     │   │   │   ├── PostDAOImpl.php   # Implementation of PostDAO
     │   │   │   ├── UserDAOImpl.php   # Implementation of UserDAO
-    │   │   │   ├── VoteDAOImpl.php   # Implementation of VoteDAO
     │   │   ├── BaseDAO.php # Store function to execute sql
     │   ├── /models # only contain getter and setter
     │   │   ├── Comment.php     # Comment model
     │   │   ├── EmailMessage.php     # EmailMessage model
     │   │   ├── User.php        # User model
     │   │   ├── Post.php        # Post model
-    │   │   ├── Vote.php        # Vote model
     │   ├── / utils
     │   │   ├── Utils.php
     │   │   ├── Validation.php # Store validate method, currently only have validate if exits
@@ -61,6 +60,8 @@ Perhaps this's project structure should look like this
     │   ├── /views
     │       ├── /layout
     │       │   ├── layout.html.php # Layout of the website, have a container for other view file
+    │       │   ├── adminLayout.html.php # Layout of the website for Admin dashboard, have a container for other view file
+    │       │   ├── loginLayout.html.php # For login and sign In view
     │       ├── /auth
     │       │   ├── loginFrom.html.php 
     │       │   ├── signInForm.html.php
@@ -75,6 +76,7 @@ Perhaps this's project structure should look like this
     │       ├── /post
     │       │   ├── createPost.html.php
     │       │   ├── postList.html.php # Part of they layout, display all post as default
+    │       │   ├── postListByModule.html.php # Part of they layout, display all post fittered by modules
     │       │   ├── updatePost.html.php # UI to edit a post
     │       ├── /users
     │       │   ├── editUser.html.php

@@ -44,8 +44,8 @@ $title = $postTitle;
 
         <?php if ($currentUserId == $ownerId) :?>
             <div class="flex gap-4 justify-end items-center mr-5 mb-4 text-white font-semibold">
-                <a class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-1 w-14 h-8 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>"><img class=""src="/forum/public/assets/img/edit_white.svg" alt="">Edit</a>
-                <a class="flex justify-center bg-red-400 border-solid border-red-500 border-2 p-1 w-14 h-8 text-xs" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');"><img class="size-4" src="/forum/public/assets/img/deleteWhite.svg" alt="">Delete</a>
+                <a class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-1 w-14 h-8 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>"><img class=""src="/forum/public/assets/img/edit_white.svg" alt="edit">Edit</a>
+                <a class="flex justify-center bg-red-400 border-solid border-red-500 border-2 p-1 w-14 h-8 text-xs" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');"><img class="size-4" src="/forum/public/assets/img/deleteWhite.svg" alt="delete">Delete</a>
             </div>
         <?php endif; ?>
     </div>

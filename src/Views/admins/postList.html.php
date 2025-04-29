@@ -37,7 +37,7 @@ ob_start();
                     <div class="flex gap-4 justify-end items-center mr-5 mb-[1rem]">
                         <form action="/forum/public/admin/deletePost" method="POST" onsubmit="return confirm('Are you sure?');" class="bg-red-400 border-solid border-red-500 border-2 p-1 size-8 text-xs">
                             <input type="hidden" name="post_id" value="<?= htmlspecialchars($post->getPostId()) ?>">
-                            <button class="" type="submit"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt=""></button>
+                            <button class="" type="submit"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt="delete"></button>
                         </form>
                     </div>
                 </div>

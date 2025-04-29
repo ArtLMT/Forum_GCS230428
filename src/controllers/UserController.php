@@ -111,7 +111,7 @@ class UserController {
         $currentUser = SessionManager::get('user');
         $currentUserId = $currentUser->getUserId();
 
-        if ($userId !== $currentUserId)
+        if ($userId != $currentUserId)
         {
             $message = "Oops! You're not authorized to edit this user.";
             require_once __DIR__ . '/../views/error/displayError.html.php';
@@ -156,7 +156,7 @@ class UserController {
             $errors['username'] = "Username cannot be empty.";
         }
 
-        if (!Validation::validateNotEmpty($email) || !Validation::validateEmail($email)) {
+        if (!Validation::validateNotEmpty($email)) {
             $errors['email'] = "A valid email is required.";
         }
 
@@ -238,13 +238,18 @@ class UserController {
         $userImage = $user->getUserImage();
         $userName = $user->getUserName();
         $password = $user->getPassword();
-        $userMail = $user->getEmail();
+        
 
         $authController = new AuthController();
         $postControl = new PostController();
         $isOwner = $authController->isOwner($userId);
 
+        $postNumber = 0;
+
         $posts = $postControl->getPostByUserId($userId);
+        foreach ($posts as $post) {
+            $postNumber += 1;
+        }
 
         require_once __DIR__ . '/../views/users/profile.html.php';
     }

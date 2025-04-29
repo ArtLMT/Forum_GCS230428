@@ -41,7 +41,7 @@ ob_start();
                     <div class="flex justify-center items-center">
                         <form action="/forum/public/admin/deleteUser" method="POST" onsubmit="return confirm('Are you sure?');">
                             <input type="hidden" name="user_id" value="<?= htmlspecialchars($user->getUserId()) ?>">
-                            <button class=" flex justify-center bg-gray-400 hover:bg-red-400 px-2 py-1 rounded size-12" type="submit"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt=""></button>
+                            <button class=" flex justify-center bg-gray-400 hover:bg-red-400 px-2 py-1 rounded size-12" type="submit"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt="deletebtn"></button>
                         </form>
                     </div>
                     <div class="flex justify-center items-center">

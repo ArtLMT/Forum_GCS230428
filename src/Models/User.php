@@ -6,7 +6,7 @@ class User {
     private $username;
     private $password;
     private $email;
-    private $timestamp;
+    private $createDate;
     private $image_path;
     private $isAdmin;
     
@@ -15,7 +15,7 @@ class User {
         $password,  // Required
         $email,  // Required
         $userId = null, 
-        $timestamp = null,
+        $createDate = null,
         $image_path = null,
         $isAdmin = 0
     ) {
@@ -23,7 +23,7 @@ class User {
         $this->password = $password;
         $this->userId = $userId;
         $this->email = $email;
-        $this->timestamp = $timestamp;
+        $this->createDate = $createDate;
         $this->image_path = $image_path;
         $this->isAdmin = $isAdmin;
     }
@@ -68,14 +68,14 @@ class User {
         $this->email = $email;
     }
 
-    public function getTimeStamp() 
+    public function getCreateDate() 
     {
-        return $this->timestamp;
+        return $this->createDate;
     }
 
-    public function setTimeStamp($timestamp) 
+    public function setCreateDate($createDate) 
     {
-        $this->timestamp = $timestamp;
+        $this->createDate = $createDate;
     }
 
     public function getUserImage() 

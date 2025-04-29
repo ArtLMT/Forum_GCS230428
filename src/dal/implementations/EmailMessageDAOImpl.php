@@ -18,7 +18,7 @@ class EmailMessageDAOImpl extends BaseDAO implements EmailMessageDAO {
         $content,
         $userId
     ) {
-        $query = "INSERT INTO emails (title, content, user_id)
+        $query = "INSERT INTO email_messages (title, content, user_id)
                 VALUES (:title, :content, :user_id)";
         $params = [
             ':title' => $title,
@@ -31,7 +31,7 @@ class EmailMessageDAOImpl extends BaseDAO implements EmailMessageDAO {
     public function getAllMessage() 
     {
         $query = "SELECT e.email_id, e.user_id, e.title, e.content, e.create_date, u.image_path AS avatar , u.username AS username
-                FROM emails e
+                FROM email_messages e
                 INNER JOIN users u ON e.user_id = u.user_id
                 ORDER BY e.create_date DESC";
         $stmt = $this->executeQuery($query);
@@ -61,14 +61,14 @@ class EmailMessageDAOImpl extends BaseDAO implements EmailMessageDAO {
 
     public function deleteEmail($emailId)
     {
-        $query = "DELETE FROM emails
+        $query = "DELETE FROM email_messages
                 WHERE email_id = :email_id";
         $stmt = $this->executeQuery($query,[':email_id' => $emailId]);
     }
 
     public function getMessageById($emailId) 
     {
-        $query = "SELECT * FROM emails 
+        $query = "SELECT * FROM email_messages 
                 WHERE email_id = :email_id";
         $stmt = $this->executeQuery($query,[':email_id' => $emailId]);
         $data = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -77,7 +77,7 @@ class EmailMessageDAOImpl extends BaseDAO implements EmailMessageDAO {
 
     public function updateMessage($emailId, $title, $content)
     {
-        $query = "UPDATE emails
+        $query = "UPDATE email_messages
                 SET title = :title,
                     content = :content
                 WHERE email_id = :email_id";
@@ -91,7 +91,7 @@ class EmailMessageDAOImpl extends BaseDAO implements EmailMessageDAO {
 
     public function countMessages()
     {
-        $query = "SELECT COUNT(*) AS total FROM emails";
+        $query = "SELECT COUNT(*) AS total FROM email_messages";
 
         $stmt = $this->executeQuery($query);
         return $stmt->fetch(\PDO::FETCH_ASSOC)['total'];
@@ -100,7 +100,7 @@ class EmailMessageDAOImpl extends BaseDAO implements EmailMessageDAO {
     public function getEmailMessagePaginated($limit, $offset)
     {
         $query = "SELECT e.email_id, e.user_id, e.title, e.content, e.create_date, u.image_path AS avatar , u.username AS username
-                FROM emails e
+                FROM email_messages e
                 INNER JOIN users u ON e.user_id = u.user_id
                 ORDER BY e.create_date DESC LIMIT :limit OFFSET :offset";
 
@@ -111,13 +111,13 @@ class EmailMessageDAOImpl extends BaseDAO implements EmailMessageDAO {
 
         $datas = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        $emails = [];
+        $email_messages = [];
 
         foreach ($datas as $data) {
-            $emails[] = $this->getMessage($data);
+            $email_messages[] = $this->getMessage($data);
         }        
 
-        return $emails;
+        return $email_messages;
     }
 }
 ?>

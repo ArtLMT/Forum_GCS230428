@@ -1,12 +1,13 @@
 <?php 
 ob_start(); // Start output buffering
 use src\dal\implementations\PostDAOImpl;
-// use src\controllers\AuthController;
-// use src\utils\SessionManager;
+use src\utils\Utils;
 $postDAO = new PostDAOImpl();
 
 $title = $userName;
 // echo $userIsAdmin;
+// var_dump($user);
+// exit();
 ?>
 <!-- <h1 class="text-center text-3xl">This is profile page</h1> -->
 <div class="flex w-[120%] relative right-[10%] mx-auto rounded-lg my-[40px]"> 
@@ -20,13 +21,16 @@ $title = $userName;
         </div>
         <hr class="w-[85%] place-self-center my-8">
         <div class="flex flex-col items-center justify-center text-2xl">
-            <p class="text-3xl"><?=htmlspecialchars($user->getUsername()) ?>
+            <p class="text-3xl justify-center"><?=htmlspecialchars($user->getUsername()) ?>
                 <a class="ml-[10px] absolute color-black"href="/forum/public/updateUser?user_id=<?= htmlspecialchars($user->getUserId())?>">
-                    <img src="/forum/public/assets/img/edit_black.svg" alt="">
+                    <img src="/forum/public/assets/img/edit_black.svg" alt="editbutton">
                 </a>
             </p>
             <br>
-            <p class="text-2xl">Email: <?=htmlspecialchars($userMail)?></p>
+            <p>Have joined since <?=htmlspecialchars(Utils::timeAgo($user->getCreateDate())) ?></p>
+            <br>
+            <p> Have posted <?= htmlspecialchars($postNumber)?> posts.
+            </p>
             <br>    
         </div>
     </div>
@@ -58,8 +62,8 @@ $title = $userName;
                          <div class="flex gap-4 justify-end items-center mr-5 mb-[1rem] text-slate-700">
                             <a class="p-2 hover:italic hover:text-gray-900"href="/forum/public/postDetail?post_id=<?= $post->getPostId()?>">See more</a>
                             <?php if(($isOwner)) :?>
-                                 <a class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-1 size-8 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>"><img class=""src="/forum/public/assets/img/edit.svg" alt=""></a>
-                                 <a class="bg-red-400 border-solid border-red-500 border-2 p-1 size-8 text-xs" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt=""></a>
+                                 <a class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-1 size-8 text-xs" href="/forum/public/update?id=<?= htmlspecialchars($post->getPostId()) ?>"><img class=""src="/forum/public/assets/img/edit_white.svg" alt="edit"></a>
+                                 <a class="bg-red-400 border-solid border-red-500 border-2 p-1 size-8 text-xs" href="/forum/public/delete?id=<?= htmlspecialchars($post->getPostId()) ?>" onclick="return confirm('Are you sure?');"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt="delete"></a>
                             <?php endif; ?>
                          </div>
                     </div>

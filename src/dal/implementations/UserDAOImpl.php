@@ -19,7 +19,7 @@ class UserDAOImpl extends BaseDAO implements UserDAO {
             $row['password'],
             $row['email'],
             $row['user_id'],
-            $row['timestamp'] ?? $row['created_at'] ?? null,
+            $row['create_date'] ?? null,
             $row['image_path'] ?? null,
             $row['is_admin'] ?? 0
         );
