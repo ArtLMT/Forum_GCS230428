@@ -44,7 +44,7 @@ ob_start();
             </div>
     </div>
 <?php else : ?>
-    <p class="text-white text-3xl px-4 py-2 place-self-center">No users available.</p>
+    <p class="text-white text-3xl px-4 py-2 place-self-center">No Feedback available.</p>
 <?php endif; ?>
 
 <?php

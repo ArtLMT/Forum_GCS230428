@@ -149,7 +149,7 @@ class AdminController {
         $title = "List of feebacks";
 
         // Pagination setup
-        $limit = 3; // numbers of user will be taken
+        $limit = 8; // numbers of user will be taken
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get page number from URL, default to 1
         $offset = ($page - 1) * $limit; // Calculate where to start loading users from
     
