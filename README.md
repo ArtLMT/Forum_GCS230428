@@ -22,7 +22,7 @@
 ## 🧱 Project Structure
 
 ```
-/forum-website
+/forum
 ├── /public/
 │   ├── /css/
 │   ├── /assets/
