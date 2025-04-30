@@ -175,6 +175,7 @@ class AdminController {
         }
 
         $user = $this->userDAO->getUserById($userId);
+        $title = "Edit user";
         require_once __DIR__ . '/../views/admins/editUser.html.php';
     }
 
@@ -280,10 +281,10 @@ class AdminController {
             $username = $_POST['username'];
             // $password = $_POST['password'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $email = $_POST['email'];
             $removeImage = isset($_POST['remove_image']) ? true : false;
-
+            
             $user = $this->userDAO->getUserById($userId);
+            $email = $user->getEmail();
             $existingImage = $user->getUserImage();
 
      
@@ -298,6 +299,7 @@ class AdminController {
                 // If no new image was uploaded, keep the existing image
                 $imagePath = $existingImage;
             }
+
 
                 $this->userDAO->editUser($username, $password, $email, $userId, $imagePath);
                 header("Location: /forum/public/dashboard");

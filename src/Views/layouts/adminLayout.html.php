@@ -146,7 +146,7 @@ $totalFeedback = $AdminController->countTotalEmailMessage();
                 </a>
             </div>
             <!-- Logout (at the bottom) -->
-            <a class="flex items-center hover:bg-red-600 py-2 px-4 mt-auto mb-4" href="/forum/public/logout">
+            <a class="flex items-center hover:bg-red-600 py-2 px-4 mt-auto" href="/forum/public/logout">
                 <svg class="size-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                     <polyline points="16 17 21 12 16 7"/>

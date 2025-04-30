@@ -48,6 +48,7 @@ $formData = SessionManager::getOnce('form_data') ?? [];
                 <?php if (!empty($errors['password'])): ?>
                     <p class="text-red-500 text-sm mt-1"><?= htmlspecialchars($errors['password']) ?></p>
                 <?php endif; ?>
+                
             </div>
 
             <div>

@@ -24,5 +24,6 @@ SessionManager::start();
             </div>
         </div>
     </div>
+    <script src="/forum/public/assets/js/script.js"></script>
 </body>
 </html>

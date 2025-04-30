@@ -39,6 +39,7 @@ ob_start();
                     </p>
                     <p><?= htmlspecialchars($user->getEmail()) ?></p>
                     <div class="flex justify-center items-center">
+                        <a href="/forum/public/admin/editUser?user_id=<?= htmlspecialchars($user->getUserId()) ?>" class=" flex justify-center bg-blue-400 hover:bg-blue-500 px-2 py-1 rounded size-12"><img src="/forum/public/assets/img/edit_white.svg" alt="edit"></a>
                         <form action="/forum/public/admin/deleteUser" method="POST" onsubmit="return confirm('Are you sure?');">
                             <input type="hidden" name="user_id" value="<?= htmlspecialchars($user->getUserId()) ?>">
                             <button class=" flex justify-center bg-gray-400 hover:bg-red-400 px-2 py-1 rounded size-12" type="submit"><img class="" src="/forum/public/assets/img/deleteWhite.svg" alt="deletebtn"></button>
@@ -46,7 +47,7 @@ ob_start();
                     </div>
                     <div class="flex justify-center items-center">
                         <form method="POST" action="/forum/public/admin/updateUserRole" class="inline">
-                            <input type="hidden" name="user_id" value="<?= $user->getUserId(); ?>">
+                            <input type="hidden" name="user_id" value="<?= htmlspecialchars($user->getUserId()); ?>">
                             <input type="hidden" name="is_admin" value="<?= $user->getIsAdmin(); ?>">
                             
                             <?php if ($user->getIsAdmin()) : ?>

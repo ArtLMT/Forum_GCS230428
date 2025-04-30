@@ -11,3 +11,19 @@ document.addEventListener('click', function () {
         dropdownMenu.classList.add('hidden');
     }
 });
+
+function togglePassword() {
+    const input = document.getElementById("password");
+    const showIcon = document.getElementById("toggleIconShow");
+    const hideIcon = document.getElementById("toggleIconHide");
+
+    if (input.type === "password") {
+        input.type = "text";
+        showIcon.classList.add("hidden");
+        hideIcon.classList.remove("hidden");
+    } else {
+        input.type = "password";
+        hideIcon.classList.add("hidden");
+        showIcon.classList.remove("hidden");
+    }
+}
