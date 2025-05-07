@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2025 at 08:57 AM
+-- Generation Time: May 07, 2025 at 09:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -77,7 +77,9 @@ INSERT INTO `email_messages` (`email_id`, `user_id`, `title`, `content`, `create
 (5, 1, 'Check bugs', 'If this actually bugged, I would be sad', '2025-04-04 13:46:43'),
 (6, 1, 'The new UI is so much better', 'I can\'t believe that this website\'s ui have changed that much', '2025-04-17 09:24:46'),
 (7, 1, 'Test rename table', 'I rename emails to email_messages', '2025-04-28 04:53:38'),
-(8, 1, 'Test new Feedback', 'Nothing here, just testing again', '2025-04-28 07:11:42');
+(8, 1, 'Test new Feedback', 'Nothing here, just testing again', '2025-04-28 07:11:42'),
+(9, 2, 'No bug please', 'adadad', '2025-05-06 09:18:32'),
+(11, 2, 'Help me please', 'I need support from admim', '2025-05-06 10:06:02');
 
 -- --------------------------------------------------------
 
@@ -97,10 +99,12 @@ CREATE TABLE `modules` (
 
 INSERT INTO `modules` (`module_id`, `module_name`, `module_description`) VALUES
 (1, 'General', 'General topics!'),
-(2, 'OOP', 'Topics related to object-Oriented Programing'),
+(2, 'OOP', 'Topics related to object-Oriented Programing!'),
 (3, 'Web programing', 'Topics related to web programing'),
 (4, 'Fix bug', 'Help fixing errors'),
-(9, 'Test Module', 'just for testing23');
+(9, 'Test Module', 'just for testing'),
+(21, '111', '132edited'),
+(24, 'Test Module', '122');
 
 -- --------------------------------------------------------
 
@@ -143,7 +147,8 @@ INSERT INTO `posts` (`post_id`, `user_id`, `module_id`, `title`, `content`, `cre
 (30, 3, 3, 'Test again', 'sadada', '2025-04-06 10:30:12', NULL),
 (34, 1, 9, 'Test admin create post (It worked well, thankfully)', 'I\'m editing my post', '2025-04-14 15:04:15', NULL),
 (37, 2, 2, 'The benefit of OOP', 'OOP ensures modularity, reusability, and enhanced code structure by organising design around objects rather than functions. From improved security measures to streamlined code maintenance, the Advantages of Object Oriented Programming have made it a cornerstone in contemporary programming practices. (theknowledgeacademy.com)\r\n', '2025-04-27 08:31:07', 'uploads/postAsset/0ddd98353b8e18f1c11c5ba1093f6654.png'),
-(38, 26, 1, 'New post from new User', 'Hi everyone this is my first Post', '2025-04-28 07:00:11', NULL);
+(38, 26, 1, 'New post from new User', 'Hi everyone this is my first Post', '2025-04-28 07:00:11', NULL),
+(41, 32, 1, 'ewae', 'dad', '2025-05-06 10:07:47', 'uploads/postAsset/77f9b11af9338a030457fbac8e0da502.png');
 
 -- --------------------------------------------------------
 
@@ -166,12 +171,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `create_date`, `image_path`, `is_admin`) VALUES
-(1, 'firstUserEver', 'firstuser@example.com', '$2y$10$5cj1L801PkFYg2BpuXQdbORY5YgulG8Pt9nbDe1EAywx679IC7p.e', '2025-03-10 15:27:54', 'uploads/userAsset/73e992a66b6ac98fa4a27aa9a6116552.jpg', 1),
-(2, 'ARTLMT', 'thanhleminh098@gmail.com', '$2y$10$Knh/JvdPGgeX53MiMc6CLOEgF7dTHn3gmx8eLpPX9g0Nir7E12FT.', '2025-03-15 14:40:20', 'uploads/userAsset/6e5789451ef99f9ff80e2283cc8571f2.jpg', 0),
+(1, 'Admin', 'firstuser@example.com', '$2y$10$jNHv4qYQFpkSu5/OJXESvOyHr0n3GWkpTzLFxlPGCWBvm47.0n22e', '2025-03-10 15:27:54', 'uploads/userAsset/73e992a66b6ac98fa4a27aa9a6116552.jpg', 1),
+(2, 'ARTLMT222', 'thanhleminh098@gmail.com', '$2y$10$VSewzMwdcXZ/oFgvalTNBe/HRnD2aqn7LxubYp1G9CVVefvJu3kjG', '2025-03-15 14:40:20', 'uploads/userAsset/49792284d4957638bbaaed3fdd719071.png', 1),
 (3, 'John Doe', 'john@example.com', '$2y$10$YRZcgId2ydan8yj2Rrl6E.dza0JXiGF87qL5AgsN1EnQ1fXzDQ71S', '2025-03-23 07:44:46', NULL, 1),
 (9, 'TesterPlease', 'thanh@gmail.com', '$2y$10$kF/dreYbkNs8ZCchkpLijOigsf1JJ11zBFpaGA6ZspkrJYUvRDvSK', '2025-03-29 03:59:52', NULL, 0),
 (10, 'signinsystem', 'signinsystem@gmail.com', '$2y$10$Q3OrzV0C3xGbXFr6SlpJ.u52Oz7nqgvPLkZ6zQ2f3UpA6GnKEC7jK', '2025-03-30 10:48:11', NULL, 0),
-(11, 'testAdminCreateUser', 'testAdmin@gmail.com', '1', '2025-04-08 10:42:10', NULL, 0),
+(11, 'testAdminCreateUser', 'testAdmin@gmail.com', '$2y$10$8F0L/Yvt5tgM0t4RutjbQeiiYH919.N/TT6aui7IRZxDhNEW1rDAG', '2025-04-08 10:42:10', NULL, 0),
 (12, 'SpiderMan', 'Botui@gmail.com', '$2y$10$7CNnF5j1B7WbOH7jeP4N3OP/AmLxZ8nz7X8Y/crfNqkkPhd9L5oSW', '2025-04-08 10:44:16', NULL, 0),
 (13, 'Thanh2006', 'thanh2006@gmail.com', '$2y$10$EOmT9jCeHV4.o1Zxf/psH.0SckK0ccADTX/qQtg1a4AL0URmQo686', '2025-04-08 10:44:42', NULL, 0),
 (14, 'Cat', 'thanhtest@gmail.com', '$2y$10$bdvf2o/j4/Fk3lMU5XEE8ejsX/CibSTtmtOWvVLQALrqDafpuM6U2', '2025-04-08 10:47:35', NULL, 0),
@@ -183,7 +188,12 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `create_date`, 
 (23, 'testValidate', 'validate3@gmail.com', '$2y$10$LtIzrgD9y6unw2pYI6gkQOURDa0kJ0ivvpCeUsEKKj7YPH3XIYO4C', '2025-04-17 08:31:10', NULL, 0),
 (24, 'firstUserEver', 'firstuser1@example.com', '$2y$10$Xpzu2AsdhV4rXxDwZarnYeqD8kh.wASqYnyBo.GsiaVvBydNlyvNu', '2025-04-17 08:32:41', NULL, 0),
 (25, 'wtf', 'firstuser3@example.com', '$2y$10$pzfd7SBx/80TxO9oNfLUve/cj8DgdHsff7HxEgrWfAwKY3BXcrv1W', '2025-04-17 08:33:25', NULL, 0),
-(26, 'ImNewUserFr', 'newEmail12@gmail.com', '$2y$10$mS1a3PD1SurKJhmV709enO.PHa3tX8j5uFtJTA5K4osAS8Oi3hyIK', '2025-04-28 06:57:35', NULL, 0);
+(26, 'ImNewUserFr', 'newEmail12@gmail.com', '$2y$10$mS1a3PD1SurKJhmV709enO.PHa3tX8j5uFtJTA5K4osAS8Oi3hyIK', '2025-04-28 06:57:35', NULL, 0),
+(28, 'test', 'testnewagain1@gmail.com', '$2y$10$2R0idCX4loVdR1vlrjsyvOJus6M2zjIGdlsqOXFnjbbg7A38zODZG', '2025-05-06 08:15:50', NULL, 0),
+(30, 'Imnewagain132', 'thanhleminh0d98@gmail.com', '$2y$10$NuXnFJyu19gEg9vAZ.X4BOgLQyEyl674WnIBex4anRAJudPuflqZG', '2025-05-06 09:53:17', NULL, 0),
+(31, 'add user', 'ad@gmail.com', '123456789', '2025-05-06 09:57:35', NULL, 0),
+(32, 'newUser12345', 'thanhleminhTester@gmail.com', '$2y$10$z0Ato0FpoEl1/pOPJlgAjuIV9HvXi6LPdtxvHAQunULp3dGB2oN7.', '2025-05-06 10:06:30', NULL, 0),
+(33, 'jane_doe', 'thanhleminh@gmail.com', '$2y$10$gLDQdr/AODlh.eWUkAUKn.LH8c2N2nhNel1sldyi5LrBM25og6TPK', '2025-05-07 07:10:24', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -208,8 +218,7 @@ ALTER TABLE `email_messages`
 -- Indexes for table `modules`
 --
 ALTER TABLE `modules`
-  ADD PRIMARY KEY (`module_id`),
-  ADD UNIQUE KEY `module_name` (`module_name`);
+  ADD PRIMARY KEY (`module_id`);
 
 --
 -- Indexes for table `posts`
@@ -234,31 +243,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `email_messages`
 --
 ALTER TABLE `email_messages`
-  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Constraints for dumped tables

@@ -5,7 +5,7 @@ ob_start();
 <?php if (isset($module) && $module !== null): ?>
     <div class="max-w-xl mx-auto mt-6 p-6 bg-white rounded-2xl shadow-md space-y-6 bg-gray-50">
         <h2 class="text-2xl font-bold text-center text-gray-800">Edit Module Details</h2>
-        <form action="/forum/public/updateModule" method="post" class="space-y-5">
+        <form action="/forum/public/admin/updateModule" method="post" class="space-y-5">
             <input type="hidden" name="module_id" value="<?= htmlspecialchars($module->getModuleId()) ?>">
 
             <!-- Module Name -->

@@ -262,7 +262,7 @@ class AdminController {
 
         $moduleName = $_POST['module_name'];
         $moduleDescription = $_POST['module_description'];
-
+        
         $this->moduleDAO->createModule($moduleName, $moduleDescription);
         header('Location: /forum/public/admin/showModuleList');
     }

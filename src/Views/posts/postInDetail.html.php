@@ -111,7 +111,7 @@ $title = $postTitle;
                     <?php if ($currentUserId == $comment->getUserId()) : ?>
                         <div class="flex gap-3 mt-2 text-sm">
                             <a href="/forum/public/postDetail?post_id=<?= $post->getPostId() ?>&edit=<?= $comment->getCommentId() ?>" class="text-blue-600 hover:underline">Edit</a>
-                            <a href="/forum/public/deleteComment?id=<?= htmlspecialchars($comment->getCommentId()) ?>" onclick="return confirm('Delete this comment?')" class="text-red-600 hover:underline">Delete</a>
+                            <a href="/forum/public/deleteComment?post_id=<?= $post->getPostId() ?>&id=<?= htmlspecialchars($comment->getCommentId()) ?>" onclick="return confirm('Delete this comment?')" class="text-red-600 hover:underline">Delete</a>
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>

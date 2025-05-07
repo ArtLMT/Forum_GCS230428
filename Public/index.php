@@ -4,8 +4,8 @@ require_once __DIR__ . '/../autoload.php';
 use src\Router;
 
 $router = new Router();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
 // Post's routes
 $router->get('', 'PostController@index'); 
@@ -80,5 +80,9 @@ $router->post('admin/updateModule', 'AdminController@updateModule');
 $router->get('admin/listFeedback', 'AdminController@showFeedback');
 
 
-$router->dispatch();
+$route = $router->dispatch();
+if (!$route) {
+    $message = "Oops! The post you're looking for doesn't exist.";
+    echo $message;
+} 
 ?>

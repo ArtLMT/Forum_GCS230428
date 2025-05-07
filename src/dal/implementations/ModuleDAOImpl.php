@@ -53,7 +53,22 @@ class ModuleDAOImpl extends BaseDAO implements ModuleDAO {
         }
     
         return new Module($result['module_id'], $result['module_name'], $result['module_description']);
-    }    
+    }
+
+    public function getModuleByName($moduleName) 
+    {
+        $query = "SELECT * FROM modules WHERE module_name = :module_name";
+        $params = [':module_name' => $moduleName];
+        
+        $stmt = $this->executeQuery($query, $params);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+    
+        if (!$result) {
+            return null; // Return null if no module is found
+        }
+    
+        return new Module($result['module_id'], $result['module_name'], $result['module_description']);
+    }   
 
     public function getAllModules(): array
     {

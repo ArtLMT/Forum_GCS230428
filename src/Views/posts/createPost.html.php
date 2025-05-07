@@ -22,7 +22,7 @@ $title = "Create Post";
         
         
         <label>Image:</label>
-        <input type="file" name="image">
+        <input type="file" name="image" accept="image/*">
         
         <input class="flex justify-center bg-green-400 border-solid border-green-600 border-2 p-2 mt-2 rounded-2xl transition duration-400 ease-in-out transform hover:scale-105" type="submit" value="Create Post">
     </div>

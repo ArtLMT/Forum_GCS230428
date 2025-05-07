@@ -46,14 +46,18 @@ class Router {
                  $controller = new $controllerClass();
                  if (method_exists($controller, $methodName)) {
                      $controller->$methodName();
+                     return true;
                  } else {
-                     echo "Method '$methodName' not found in controller '$controllerClass'";
+                    return false;
+                    //  echo "Method '$methodName' not found in controller '$controllerClass'";
                  }
              } else {
-                 echo "Controller '$controllerClass' not found.";
+                return false;
+                //  echo "Controller '$controllerClass' not found.";
              }
         } else {
-             echo "404 Not Found - URI: '$uri'";
+            return false;
+            // echo "404 Not Found - URI: '$uri'";
         }
     }
 }

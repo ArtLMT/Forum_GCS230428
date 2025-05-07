@@ -27,12 +27,7 @@ $title = "List of feedbacks";
                 <?php 
                     $isOwner = $authController->isOwner($userId);
                 ?>
-                <?php if ($isOwner) : ?>
-                <div class="flex gap-4 justify-end text-center mr-5 mb-4">
-                    <a class="bg-green-400 border-solid border-green-700 border-2 p-1 w-14 text-xs" href="/forum/public/editMessage?id=<?= htmlspecialchars($message->getEmailMessageId()) ?>">Edit</a>
-                    <a class="bg-red-400 border-solid border-red-500 border-2 p-1 w-14 text-xs" href="/forum/public/deleteEmailMessage?id=<?= htmlspecialchars($message->getEmailMessageId()) ?>" onclick="return confirm('Are you sure?');">Delete</a>
-                </div>
-                <?php endif ?>
+
             </div>
         <?php endforeach ?>
     </div>

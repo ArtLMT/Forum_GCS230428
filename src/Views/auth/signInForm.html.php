@@ -6,7 +6,7 @@ $errors = SessionManager::getOnce('errors');
 ?>
 
 <div class="login-container">
-        <h2 class="text-center text-4xl font-bold mb-5 text-blue-500">Sign In</h2>
+        <h2 class="text-center text-4xl font-bold mb-5 text-blue-500">Sign Up</h2>
 
         <form class="space-y-5" action="/forum/public/signIn" method="POST" enctype="multipart/form-data">
             <div>

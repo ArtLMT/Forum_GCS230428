@@ -2,7 +2,7 @@
 ob_start(); // Start output buffering
 ?>
 
-<form class="bg-white border-solid border-2 rounded-lg" action="/forum/public/createModule" method="post">
+<form class="bg-white border-solid border-2 rounded-lg" action="/forum/public/admin/createModule" method="post">
     <div class="m-4 flex flex-col items-center">
         <label>Module Name:</label>
         <input class="px-3 bg-gray-300 text-gray-700 mb-4 w-[80%] rounded-xl" type="text" name="module_name" required>

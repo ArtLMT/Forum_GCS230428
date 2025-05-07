@@ -101,6 +101,7 @@ class CommentController {
     {
         $this->isLoggedIn();
         $commentId = $_GET['id'] ?? null;
+        $postId = $_GET['post_id'];
 
         if (!$commentId || !$this->commentDAO->getCommentById($commentId)) {
             $message = "Oops! Invalid Comment ID provided.";

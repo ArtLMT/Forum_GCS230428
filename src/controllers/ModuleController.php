@@ -67,6 +67,12 @@ class ModuleController {
             exit();
         }
 
+        if (Validation::checkModuleByName($moduleName)) {
+            $message = "Oops! Invalid Module ID provided.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+
         $this->moduleDAO->createModule($moduleName, $moduleDescription);
         header('Location: /forum/public/moduleLists');
         exit();
@@ -109,6 +115,12 @@ class ModuleController {
 
         if (!Validation::validateNotEmpty($moduleName) || !Validation::validateNotEmpty($moduleDescription)) {
             $message = "Module name and description cannot be empty.";
+            require_once __DIR__ . '/../views/error/displayError.html.php';
+            exit();
+        }
+
+        if (Validation::checkModuleByName($moduleName)) {
+            $message = "Oops! Invalid Module ID provided.";
             require_once __DIR__ . '/../views/error/displayError.html.php';
             exit();
         }
